@@ -16,7 +16,7 @@ export class StudentsService {
   constructor(private http: HttpClient) {}
 
   /* -------------------------------- get students ------------------------------- */
-  private getStudentApi(): Observable<Student[]> {
+  private getStudentsApi(): Observable<Student[]> {
     try {
       // get the data from the url
       return this.http.get<Student[]>(STUDENT_API, this.httpOptions).pipe(
@@ -35,7 +35,7 @@ export class StudentsService {
     var students: Student[];
     // call the promise of the API
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.getStudentApi().subscribe(
+      this.getStudentsApi().subscribe(
         (students) => resolve(students),
         (error) => reject(error)
       );
@@ -53,5 +53,47 @@ export class StudentsService {
 
     // return the students
     return students;
+  }
+
+  // get student api
+  private getStudentApi(id): Observable<Student> {
+    try {
+      // get the data from the url
+      return this.http
+        .get<Student>(STUDENT_API + '/' + id, this.httpOptions)
+        .pipe(
+          // access the JSON 'data'
+          map((data) => new Student(data['data']))
+        );
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+
+  // get student
+  public async getStudent(id): Promise<Student> {
+    // declare student variable
+    var student: Student;
+
+    // promise with resolve and reject of the API
+    let promise = new Promise<any>(async (resolve, reject) => {
+      this.getStudentApi(id).subscribe(
+        (student) => resolve(student),
+        (err) => reject(err)
+      );
+    });
+
+    // wait for the promise
+    await promise
+      .then((result) => {
+        student = result;
+        console.log('the value of the student called is ', student);
+      })
+      .catch((err) => {
+        console.log('error message ', err);
+      });
+
+    return student;
   }
 }

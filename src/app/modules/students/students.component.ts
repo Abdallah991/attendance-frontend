@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Student } from 'src/app/models/Student';
+import { StudentsService } from './services/students.service';
 
 @Component({
   selector: 'app-students',
@@ -6,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./students.component.scss'],
 })
 export class StudentsComponent implements OnInit {
-  constructor() {}
+  constructor(private SS: StudentsService, private AR: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    var students: Student[] = [];
+    this.AR.data.subscribe((response: any) => {
+      students = response.students;
+      console.log('the value of students ', students);
+    });
+
+    console.log(this.SS.getStudent(1));
+  }
 }

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { StudentsResolver } from './services/students.resolver';
 import { StudentsComponent } from './students.component';
 
 const routes: Routes = [
@@ -10,7 +11,7 @@ const routes: Routes = [
     component: StudentsComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: {
-      //  students: StudentsResolver
+      students: StudentsResolver,
     },
   },
 ];
