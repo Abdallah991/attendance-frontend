@@ -19,11 +19,10 @@ export class StudentsService {
   private getStudentApi(): Observable<Student[]> {
     try {
       // get the data from the url
-      return this.http
-        .get<Student[]>(STUDENT_API, this.httpOptions)
-        .pipe(
-          map((data) => data['data'].map((student) => new Student(student)))
-        );
+      return this.http.get<Student[]>(STUDENT_API, this.httpOptions).pipe(
+        // access the JSON 'data'
+        map((data) => data['data'].map((student) => new Student(student)))
+      );
     } catch (err) {
       console.log(err);
       return null;
