@@ -107,5 +107,9 @@
       }
     }
   },
-  "defaultProject": "attendance-frontend"
+  "cli": {
+    "cache": {
+      "enabled": false
+    }
+  }
 }

@@ -17,8 +17,12 @@ import { TableData } from 'src/app/interfaces/interfaces';
 export class TableComponent implements OnInit {
   // table columns
   @Input() columns: string[] = USER_HEADER;
+  @Input() actionButtons: boolean = false;
+
   //  table data
-  @Input() data: TableData[] = [{ id: '1', data: ['Name'] }];
+  @Input() data: TableData[] = [
+    { id: '1', data: [1, 'Abdallah', '12/10/2020', 'first'] },
+  ];
   // edit and delete emitters
   @Output() editClicked = new EventEmitter<string>();
   @Output() deleteClicked = new EventEmitter<string>();

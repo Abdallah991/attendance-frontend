@@ -3,17 +3,22 @@
     <thead>
       <tr>
         <th
-          class="header normal-case font-normal text-base"
+          class="bg-primary text-base-100 normal-case font-normal text-base"
           *ngFor="let column of columns"
         >
           {{ column || "NULL" }}
         </th>
-        <th class="header"></th>
+        <!-- if there is a button show -->
+        <th class="header" *ngIf="actionButtons"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let items of dataShown">
-        <td *ngFor="let item of items.data" [innerHTML]="item || 'NULL'"></td>
+        <td
+          class="text-secondary"
+          *ngFor="let item of items.data"
+          [innerHTML]="item || 'NULL'"
+        ></td>
         <td
           class="flex justify-evenly items-center"
           *ngIf="items.actionButtons"

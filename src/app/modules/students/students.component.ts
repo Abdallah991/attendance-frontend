@@ -17,7 +17,5 @@ export class StudentsComponent implements OnInit {
       students = response.students;
       console.log('the value of students ', students);
     });
-
-    console.log(this.SS.getStudent(1));
   }
 }
