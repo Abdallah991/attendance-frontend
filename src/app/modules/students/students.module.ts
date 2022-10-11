@@ -5,10 +5,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StudentsRoutingModule } from './students-routing.module';
 import { StudentsService } from './services/students.service';
 import { StudentsResolver } from './services/students.resolver';
+import { SharedModule } from 'src/app/components/shared.module';
 
 @NgModule({
   declarations: [StudentsComponent],
-  imports: [CommonModule, ReactiveFormsModule, StudentsRoutingModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    StudentsRoutingModule,
+    SharedModule,
+  ],
   providers: [StudentsService, StudentsResolver],
 })
 export class StudentsModule {}

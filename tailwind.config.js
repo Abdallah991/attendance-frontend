@@ -22,7 +22,39 @@ module.exports = {
   },
 
   plugins: [
+    require("@tailwindcss/forms"),
+    // require("@tailwindcss/typography"),
+    require("daisyui"),
     // require("@tailwindcss/typography"),
     // require("@tailwindcss/line-clamp"),
   ],
+
+  daisyui: {
+    styled: true,
+    themes: [
+      {
+        mytheme: {
+          primary: "#243746",
+          secondary: "#FFCD00",
+          accent: "#C3CDD5",
+          neutral: "#191D24",
+          "base-100": "#FFFFFF",
+          info: "#3ABFF8",
+          success: "#1FBE02",
+          warning: "#FBBD23",
+          error: "#F01F3F",
+          highlight: "#304555",
+        },
+        extend: {},
+      },
+      "dark",
+      "coffee",
+    ],
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+    prefix: "",
+    darkTheme: "mytheme",
+  },
 };
