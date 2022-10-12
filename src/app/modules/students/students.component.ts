@@ -18,7 +18,7 @@ export class StudentsComponent implements OnInit {
   data: TableData[] = [];
   // table columns
   columns: string[] = STUDENT_HEADER;
-
+  // ? ///////////////////////////////////////////
   ngOnInit(): void {
     var students: Student[] = [];
     this.AR.data.subscribe((response: any) => {

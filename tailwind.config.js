@@ -34,8 +34,10 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#1ACFC9",
-          secondary: "#06002E",
+          // primary: "#1ACFC9",
+          primary: "#06002E",
+          // secondary: "#06002E",
+          secondary: "#1ACFC9",
           accent: "#C3CDD5",
           neutral: "#191D24",
           "base-100": "#FFFFFF",
@@ -44,7 +46,7 @@ module.exports = {
           warning: "#FBBD23",
           error: "#F01F3F",
           highlight: "#304555",
-          tertiary: "#FFFFFF",
+          tertiary: "#000",
         },
         extend: {},
       },
