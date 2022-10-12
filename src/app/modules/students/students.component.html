@@ -1,3 +1,9 @@
-<h1 class="text-primary flex w-full justify-center">students works!</h1>
+<h1 class="flex w-full justify-center">Students Attendance</h1>
 
-<app-table></app-table>
+<div class="p-4 m-8">
+  <app-table
+    [columns]="columns"
+    [data]="data"
+    [actionButtons]="true"
+  ></app-table>
+</div>

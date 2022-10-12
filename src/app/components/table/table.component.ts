@@ -6,7 +6,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { USER_HEADER } from 'src/app/constants/headers';
+import { STUDENT_HEADER } from 'src/app/constants/headers';
 import { TableData } from 'src/app/interfaces/interfaces';
 
 @Component({
@@ -16,8 +16,8 @@ import { TableData } from 'src/app/interfaces/interfaces';
 })
 export class TableComponent implements OnInit {
   // table columns
-  @Input() columns: string[] = USER_HEADER;
-  @Input() actionButtons: boolean = false;
+  @Input() columns: string[] = STUDENT_HEADER;
+  @Input() actionButtons: boolean = true;
 
   //  table data
   @Input() data: TableData[] = [

@@ -11,7 +11,7 @@ export class ButtonComponent implements OnInit {
   //  button backgroun color
   @Input() public color: string = 'btn-ghost';
   // button text color
-  @Input() public textColor: string = 'text-white';
+  @Input() public textColor: string = 'text-base-100';
   // button disable value
   @Input() public disabled: boolean = false;
   //  button sizes

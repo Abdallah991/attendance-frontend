@@ -1,5 +1,5 @@
 export type TableData = {
-  id: string;
+  id: string | number;
   data: any[];
   actionButtons?: TableButtonOptions;
   rowStyle?: string[];
