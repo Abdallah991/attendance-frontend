@@ -1,1 +1,86 @@
-<p>side-nav works!</p>
+<div class="dashboardContainer" dir="ltr">
+  <div class="navigationBarContainer">
+    <div class="logo">
+      <img class="w-20 h-20" src="../../../assets/images/reboot.jpg" alt="" />
+    </div>
+    <div class="navigationContainer">
+      <div class="navigationBar">
+        <div class="navigationLink" *ngFor="let link of navigationMenu">
+          <a
+            routerLink="{{ link.link }}"
+            [ngClass]="[link.active ? 'active' : '']"
+          >
+            <div class="navLinkIcon">
+              <img
+                class="filter-white"
+                src="{{ link.iconPathInactive }}"
+                alt="{{ link.linkName }}"
+              />
+            </div>
+            <div class="hidden navLinkText lg:flex">
+              {{ link.linkName }}
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- logout icon -->
+      <div class="p-3 mb-8">
+        <a class="flex flex-row items-center gap-3">
+          <div class="navLinkIcon">
+            <img
+              class="filter-white w-[15px]"
+              src="../../../assets/icons/logout.svg"
+              alt="Logout"
+            />
+          </div>
+          <div
+            class="hidden navLinkText lg:flex text-base-100"
+            (click)="signOut()"
+          >
+            Logout
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="navigationPlatform"></div>
+  <div class="mainContainer">
+    <!-- <div class="dashboardHeader">
+      <div class="headerTitleBar">
+        <h1>Portions</h1>
+      </div>
+      <div class="headerContentBox">
+        <div class="accountContainer">
+          <div class="headerNotificationContainer">
+          </div>
+          <div class="flex flex-col accountInfoContainer group">
+            <div class="user-image">
+              <img [src]="userImageUrl" alt="Avatar" class="avatar" />
+            </div>
+            <span>
+              <div
+                class="z-50 bg-white hidden divide-y shadow-xl profile-menu group-hover:flex animate-slide"
+              >
+                <div class="flex flex-col user-info">
+                  <div class="flex items-center mx-auto menu-user-image">
+                    <img [src]="userImageUrl" alt="Avatar" class="avatar" />
+                  </div>
+                  <h4 class="pt-2 pb-1">Khalid Althawadi</h4>
+                  <p class="pb-2">Super Admin</p>
+                </div>
+                <div class="flex flex-col pt-3"></div>
+              </div>
+            </span>
+            <div class="h-4"></div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="dashboardContentBox">
+      <div class="spinner-container" *ngIf="loading">
+        <app-loader></app-loader>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

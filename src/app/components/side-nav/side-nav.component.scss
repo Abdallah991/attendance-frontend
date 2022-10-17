@@ -1,0 +1,215 @@
+.dashboardContainer {
+    display: flex;
+    flex-direction: row;
+  
+    .navigationBarContainer,
+    .navigationPlatform {
+      max-width: 230px;
+  
+      @apply w-[10%] lg:w-[20%];
+      @apply min-w-[100px]  #{!important};
+    }
+    .navigationBarContainer {
+      position: fixed;
+      @apply bg-primary h-full;
+    //   height: 100%;
+  
+      .logo {
+        display: flex;
+        justify-content: center;
+        padding: 5rem 0;
+      }
+      .navigationContainer {
+  
+        @apply flex flex-col justify-between items-start w-full h-2/3 lg:justify-between lg:items-start lg:pl-4 pl-4;
+        .navigationBar {
+          .navigationLink {
+            a {
+              color: white;
+              transition: ease all 0.2s;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              padding: 0.75rem;
+              @apply justify-center lg:justify-start;
+  
+              img {
+                @apply mx-auto lg:mx-0 opacity-60;
+                @apply transition duration-150 hover:opacity-60;
+              }
+  
+              .navLinkIcon {
+                width: 30px;
+                text-align: center;
+                @apply mx-auto lg:ml-0 lg:mr-3 lg:text-center text-start;
+              }
+            }
+  
+            a:hover {
+              color: #ffffff;
+            }
+  
+            a.active {
+              color: #ffffff;
+              @apply bg-base-100/10 my-auto rounded-2xl;
+              img {
+                opacity: 1;
+                
+              }
+            }
+          }
+          .logoutLink {
+            a {
+              color: white;
+              transition: ease all 0.2s;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              // padding-bottom: 1.5rem;
+              // margin-left: 0.75 !important;
+              @apply justify-center lg:justify-start;
+  
+              img {
+                @apply mx-auto lg:mx-0 opacity-60;
+                @apply transition duration-150 hover:opacity-60;
+              }
+  
+              .navLinkIcon {
+                width: 30px;
+                text-align: center;
+                @apply mx-auto lg:ml-0 lg:mr-3 lg:text-center text-start;
+              }
+            }
+  
+            a:hover {
+              color: #ffffff;
+            }
+  
+            a.active {
+              color: #ffffff;
+              img {
+                opacity: 1;
+                
+              }
+            }
+          }
+        }
+  
+        hr {
+          border: none;
+          height: 1px;
+          background: #867dcd;
+          width: 30%;
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+
+    // .logout {
+    //   display: flex;
+    //   height: 50vh;
+    //   margin-bottom: 0;
+    // }
+  
+    .mainContainer {
+      @apply mx-auto;
+      @apply lg:w-full w-[90%] max-w-[calc(100%-136px)]  lg:max-w-[calc(100%-230px)];
+
+      .dashboardHeader {
+        @apply flex flex-wrap-reverse items-center md:flex-row justify-end;
+  
+        @apply px-4 lg:px-16;
+        @apply py-12;
+        .headerTitleBar {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          @apply pb-4;
+        }
+  
+        .headerContentBox {
+          @apply mx-auto;
+          @apply lg:w-1/2;
+          @apply flex flex-row justify-end;
+  
+          .searchContainer {
+            flex: 1;
+            margin-right: 1rem;
+            @apply w-full;
+          }
+  
+          .accountContainer {
+            display: flex;
+            flex-direction: row;
+            @apply justify-between space-x-4;
+  
+            .headerNotificationContainer,
+            .accountInfoContainer {
+              width: 45%;
+              
+            }
+            .headerNotificationContainer {
+              .headerNotifications {
+                background: none;
+                display: block;
+  
+                button {
+                  @apply h-16 w-16;
+                  background: #ffffff;
+                  border: none;
+                  padding: 1rem;
+                  border-radius: 20px;
+                  cursor: pointer;
+                }
+              }
+            }
+            .accountInfoContainer {
+              @apply relative;
+              .user-image {
+                @apply rounded-full p-1 ;
+                @apply w-16 h-16;
+                img {
+                  @apply rounded-full object-cover w-full h-full;
+                }
+              }
+              .profile-menu {
+                @apply absolute right-3;
+                @apply  p-4 space-y-3 mt-4 rounded-xl w-60;
+                @apply flex-col;
+                .menu-user-image {
+                  @apply rounded-full p-[6px];
+                  @apply w-24 h-24;
+  
+                  img {
+                    @apply rounded-full object-cover w-full h-full;
+                  }
+                }
+                .user-info {
+                  h4 {
+                    @apply font-semibold text-center;
+                  }
+                  p {
+                    @apply  text-center;
+                  }
+                }
+                a {
+                  @apply p-2 w-full  rounded-lg cursor-pointer select-none text-lg;
+                }
+              }
+            }
+          }
+        }
+      }
+      .dashboardContentBox {
+        @apply py-12 lg:px-16 px-8;
+      }
+    }
+  }
+  
+  .spinner-container {
+  }
+
+  .filter-white{
+    filter: invert(99%) sepia(6%) saturate(180%) hue-rotate(254deg) brightness(113%) contrast(100%); 
+ }
+  

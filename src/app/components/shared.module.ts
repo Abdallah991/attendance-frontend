@@ -4,21 +4,21 @@ import { TableComponent } from './table/table.component';
 import { ButtonComponent } from './button/button.component';
 import { TextFieldComponent } from './text-field/text-field.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SideNavComponent } from './side-nav/side-nav.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
     TableComponent,
     ButtonComponent,
     TextFieldComponent,
-    SideNavComponent,
+    LoaderComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule],
   exports: [
     TableComponent,
     ButtonComponent,
     TextFieldComponent,
-    SideNavComponent,
+    LoaderComponent,
   ],
 })
 export class SharedModule {}
