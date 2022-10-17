@@ -6,6 +6,7 @@ const routes: Routes = [
   {
     path: '',
     component: SideNavComponent,
+    // TODO: Activate this auth gaurd, if token is not there direct the user to login
     // canActivate: [AuthGuard],
     children: [
       {
@@ -17,6 +18,11 @@ const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
 ];
 

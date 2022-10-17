@@ -1,1 +1,17 @@
-<p>text-field works!</p>
+<form [formGroup]="FGN" class="w-full">
+  <div class="w-full">
+    <span *ngIf="prefix" class="font-medium text-primary">{{ prefix }}</span>
+    <input
+      class="input !w-full !min-w-full input-bordered border-accent rounded-2xl"
+      [type]="inputType"
+      [placeholder]="label"
+      [formControlName]="FCN"
+      [attr.step]="step"
+      [attr.min]="min"
+      [attr.max]="max"
+      (change)="emitChange()"
+      [value]="preSetValue | date: 'yyyy-MM-dd'"
+      oninput="((min === 0 || min === '0')) ? this.value = Math.abs(this.value) : this.value = this.value"
+    />
+  </div>
+</form>

@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import { RouterModule, Routes } from '@angular/router';
+import { UsersComponent } from './users.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
+    component: UsersComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: {
-      // TODO: Add a guard
       // students: StudentsResolver,
     },
   },
@@ -20,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes), CommonModule, ReactiveFormsModule],
   exports: [RouterModule],
 })
-export class AuthRoutingModule {}
+export class UsersRoutingModule {}

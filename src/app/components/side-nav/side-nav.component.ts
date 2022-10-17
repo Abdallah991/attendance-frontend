@@ -1,3 +1,4 @@
+import { animate, transition } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import {
   Router,
@@ -8,6 +9,7 @@ import {
 } from '@angular/router';
 import { navigationMenu } from 'src/app/constants/navigation';
 
+transition('open <=> closed', [animate('1.5s')]);
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
@@ -40,5 +42,7 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  signOut() {}
+  signOut() {
+    this.router.navigateByUrl('/login');
+  }
 }
