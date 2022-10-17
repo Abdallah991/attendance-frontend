@@ -17,6 +17,12 @@ const routes: Routes = [
             (m) => m.StudentsModule
           ),
       },
+      {
+        // students routes
+        path: 'users',
+        loadChildren: () =>
+          import('./modules/users/users.module').then((m) => m.UsersModule),
+      },
     ],
   },
   {
