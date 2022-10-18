@@ -1,15 +1,15 @@
-<div class="overflow-x-auto shadow-lg rounded-xl">
+<div class="overflow-x-auto shadow-lg rounded-none">
   <table class="table w-full">
     <thead>
       <tr>
         <th
-          class="bg-primary text-base-100 normal-case font-normal text-base"
+          class="bg-primary text-base-100 normal-case font-normal text-base rounded-none"
           *ngFor="let column of columns"
         >
           {{ column || "NULL" }}
         </th>
         <!-- if there is a button show -->
-        <th class="bg-primary" *ngIf="actionButtons"></th>
+        <th class="bg-primary rounded-none" *ngIf="actionButtons"></th>
       </tr>
     </thead>
     <tbody>
@@ -46,21 +46,23 @@
   </table>
 </div>
 <div
-  class="btn-group mt-8 w-full flex justify-end rounded-3xl outline-none disabled:outline-none"
+  class="btn-group mt-8 w-full flex justify-end rounded-none outline-none disabled:outline-none disabled:rounded-none"
   *ngIf="showPagination"
 >
   <button
-    class="btn rounded-xl bg-primary outline-none disabled:outline-none"
+    class="btn rounded-none bg-primary outline-none disabled:outline-none"
     (click)="back()"
     [disabled]="disableBack"
   >
     «
   </button>
-  <button class="btn rounded-xl bg-primary outline-none disabled:outline-none">
+  <button
+    class="btn rounded-none bg-primary outline-none disabled:outline-none"
+  >
     {{ currentPage }}
   </button>
   <button
-    class="btn rounded-xl bg-primary outline-none disabled:outline-none"
+    class="btn rounded-none bg-primary outline-none disabled:outline-none disabled:rounded-none"
     (click)="forward()"
     [disabled]="disableForward"
   >
