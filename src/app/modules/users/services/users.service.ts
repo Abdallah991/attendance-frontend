@@ -1,24 +1,24 @@
-import { Injectable } from '@angular/core';
-import { STUDENT_API } from 'src/app/constants/api';
-import { Student } from 'src/app/models/Student';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { USER_API } from 'src/app/constants/api';
 import { httpOptions } from 'src/app/constants/constants';
+import { User } from 'src/app/models/User';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StudentsService {
+export class UsersService {
   constructor(private http: HttpClient) {}
 
-  //  get students API call
-  private getStudentsApi(): Observable<Student[]> {
+  //  get users API call
+  private getUsersApi(): Observable<User[]> {
     try {
       // get the data from the url
-      return this.http.get<Student[]>(STUDENT_API, httpOptions).pipe(
+      return this.http.get<User[]>(USER_API, httpOptions).pipe(
         // access the JSON 'data'
-        map((data) => data['data'].map((student) => new Student(student)))
+        map((data) => data['data'].map((user) => new User(user)))
       );
     } catch (err) {
       console.log(err);
@@ -26,14 +26,14 @@ export class StudentsService {
     }
   }
 
-  // get students call
-  public async getStudents(): Promise<Student[]> {
-    // declare students array
-    var students: Student[];
+  // get users call
+  public async getStudents(): Promise<User[]> {
+    // declare users array
+    var users: User[];
     // call the promise of the API
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.getStudentsApi().subscribe(
-        (students) => resolve(students),
+      this.getUsersApi().subscribe(
+        (users) => resolve(users),
         (error) => reject(error)
       );
     });
@@ -41,23 +41,23 @@ export class StudentsService {
     // promise if its resolved or rejected
     await promise
       .then((value) => {
-        students = value;
+        users = value;
       })
       .catch((err) => {
         console.log('error message ', err);
       });
 
-    // return the students
-    return students;
+    // return the users
+    return users;
   }
 
-  // get student API
-  private getStudentApi(id): Observable<Student> {
+  // get user API
+  private getUserApi(id): Observable<User> {
     try {
       // get the data from the url
-      return this.http.get<Student>(STUDENT_API + '/' + id, httpOptions).pipe(
+      return this.http.get<User>(USER_API + '/' + id, httpOptions).pipe(
         // access the JSON 'data'
-        map((data) => new Student(data['data']))
+        map((data) => new User(data['data']))
       );
     } catch (err) {
       console.log(err);
@@ -65,15 +65,15 @@ export class StudentsService {
     }
   }
 
-  // get student
-  public async getStudent(id): Promise<Student> {
-    // declare student variable
-    var student: Student;
+  // get user
+  public async getUser(id): Promise<User> {
+    // declare user variable
+    var user: User;
 
     // promise with resolve and reject of the API
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.getStudentApi(id).subscribe(
-        (student) => resolve(student),
+      this.getUserApi(id).subscribe(
+        (user) => resolve(user),
         (err) => reject(err)
       );
     });
@@ -81,13 +81,13 @@ export class StudentsService {
     // wait for the promise
     await promise
       .then((result) => {
-        student = result;
-        console.log('the value of the student called is ', student);
+        user = result;
+        console.log('the value of the student called is ', user);
       })
       .catch((err) => {
         console.log('error message ', err);
       });
 
-    return student;
+    return user;
   }
 }

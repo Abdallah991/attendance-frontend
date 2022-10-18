@@ -15,3 +15,6 @@ export const REGISTER_API = ROOTLINK + '/register';
 
 // 3-login API
 export const LOGIN_API = ROOTLINK + '/login';
+
+// 4- Users API
+export const USER_API = ROOTLINK + '/users';
