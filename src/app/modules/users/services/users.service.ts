@@ -27,7 +27,7 @@ export class UsersService {
   }
 
   // get users call
-  public async getStudents(): Promise<User[]> {
+  public async getUsers(): Promise<User[]> {
     // declare users array
     var users: User[];
     // call the promise of the API

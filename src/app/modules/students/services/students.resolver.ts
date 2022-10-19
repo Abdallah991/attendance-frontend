@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { of } from 'rxjs';
-import { catchError, first } from 'rxjs/operators';
 import { Student } from 'src/app/models/Student';
 import { StudentsService } from './students.service';
 
@@ -12,7 +10,7 @@ export class StudentsResolver implements Resolve<any> {
   constructor(private SS: StudentsService) {}
 
   resolve() {
-    // get all foods
+    // get all students
     return this.SS.getStudents()
       .then((result) => {
         var students: Student[] = result;

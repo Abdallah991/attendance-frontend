@@ -1,1 +1,9 @@
-<p>users works!</p>
+<h1 class="flex w-full justify-center text-xl">Users</h1>
+
+<div class="p-4 m-8">
+  <app-table
+    [columns]="columns"
+    [data]="data"
+    [actionButtons]="true"
+  ></app-table>
+</div>
