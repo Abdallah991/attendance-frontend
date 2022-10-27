@@ -8,6 +8,7 @@ import {
   NavigationError,
 } from '@angular/router';
 import { navigationMenu } from 'src/app/constants/navigation';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 transition('open <=> closed', [animate('1.5s')]);
 @Component({
@@ -21,7 +22,7 @@ export class SideNavComponent implements OnInit {
   loading = false;
   userImageUrl: string = '../../../assets/icons/logo.svg';
 
-  constructor(public router: Router) {
+  constructor(public router: Router, private AS: AuthService) {
     // incase of any router
     this.router.events.subscribe((ev) => {
       // show loader
@@ -42,7 +43,14 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  signOut() {
-    this.router.navigateByUrl('/login');
+  async signOut() {
+    await this.AS.logout()
+      .then((res) => {
+        console.log('success logout response: ', res);
+        this.router.navigateByUrl('/login');
+      })
+      .catch((err) => {
+        console.log('error logout response ', err);
+      });
   }
 }

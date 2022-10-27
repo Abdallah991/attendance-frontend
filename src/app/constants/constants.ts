@@ -1,5 +1,7 @@
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { getToken } from './globalMethods';
 
-export const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
+export const httpOptions = new HttpHeaders({
+  'Content-Type': 'application/json',
+  Authorization: 'Bearer ' + getToken(),
+});

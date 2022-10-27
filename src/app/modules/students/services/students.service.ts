@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { httpOptions } from 'src/app/constants/constants';
+import { getToken, getUser, getUserId } from 'src/app/constants/globalMethods';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +15,17 @@ export class StudentsService {
 
   //  get students API call
   private getStudentsApi(): Observable<Student[]> {
+    console.log('this is token ', getToken());
+    console.log('this is user ', getUser());
+    console.log('this is user id ', getUserId());
     try {
       // get the data from the url
-      return this.http.get<Student[]>(STUDENT_API, httpOptions).pipe(
-        // access the JSON 'data'
-        map((data) => data['data'].map((student) => new Student(student)))
-      );
+      return this.http
+        .get<Student[]>(STUDENT_API, { headers: httpOptions })
+        .pipe(
+          // access the JSON 'data'
+          map((data) => data['data'].map((student) => new Student(student)))
+        );
     } catch (err) {
       console.log(err);
       return null;
@@ -55,10 +61,12 @@ export class StudentsService {
   private getStudentApi(id): Observable<Student> {
     try {
       // get the data from the url
-      return this.http.get<Student>(STUDENT_API + '/' + id, httpOptions).pipe(
-        // access the JSON 'data'
-        map((data) => new Student(data['data']))
-      );
+      return this.http
+        .get<Student>(STUDENT_API + '/' + id, { headers: httpOptions })
+        .pipe(
+          // access the JSON 'data'
+          map((data) => new Student(data['data']))
+        );
     } catch (err) {
       console.log(err);
       return null;

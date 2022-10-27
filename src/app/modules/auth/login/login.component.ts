@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
       ? true
       : false;
 
-  login() {
-    // TODO: add the form validation
+  async login() {
+    // TODO: add the form validation condition
     this.loader = true;
 
     this.AS.login(

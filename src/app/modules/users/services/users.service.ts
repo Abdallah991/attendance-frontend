@@ -16,7 +16,7 @@ export class UsersService {
   private getUsersApi(): Observable<User[]> {
     try {
       // get the data from the url
-      return this.http.get<User[]>(USER_API, httpOptions).pipe(
+      return this.http.get<User[]>(USER_API, { headers: httpOptions }).pipe(
         // access the JSON 'data'
         map((data) => data['data'].map((user) => new User(user)))
       );
@@ -55,10 +55,12 @@ export class UsersService {
   private getUserApi(id): Observable<User> {
     try {
       // get the data from the url
-      return this.http.get<User>(USER_API + '/' + id, httpOptions).pipe(
-        // access the JSON 'data'
-        map((data) => new User(data['data']))
-      );
+      return this.http
+        .get<User>(USER_API + '/' + id, { headers: httpOptions })
+        .pipe(
+          // access the JSON 'data'
+          map((data) => new User(data['data']))
+        );
     } catch (err) {
       console.log(err);
       return null;

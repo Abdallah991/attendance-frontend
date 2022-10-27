@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LOGIN_API } from 'src/app/constants/api';
+import { LOGIN_API, LOGOUT_API } from 'src/app/constants/api';
 
 @Injectable({
   providedIn: 'root',
@@ -35,13 +35,13 @@ export class AuthService {
         // TODO: this depends on how to manage the session
         // TODO: Modify later
         LoginSuccessful = true;
-        console.log(response);
-        token = response.token;
+        console.log('response from backend', response.data);
+        token = response.data['token'];
 
-        sessionStorage.setItem('user', JSON.stringify(response.user));
-        localStorage.setItem('userID', response.user.id);
-        localStorage.setItem('signinToken', token);
-        return LoginSuccessful;
+        sessionStorage.setItem('user', JSON.stringify(response.data.users));
+        sessionStorage.setItem('userID', response.data.users.id);
+        sessionStorage.setItem('signinToken', token);
+        return response.data.token;
       })
       .catch((error) => {
         LoginSuccessful = false;
@@ -50,5 +50,30 @@ export class AuthService {
 
     // return the value of the call
     // return LoginSuccessful;
+  }
+
+  // Logout implementation
+  public async logout(): Promise<any> {
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Access-Control-Allow-Origin', '*');
+    let promise = new Promise<any>(async (resolve, reject) => {
+      this.http.post(LOGOUT_API, { headers }).subscribe(
+        (response) => {
+          resolve(response);
+        },
+        (error) => reject(error)
+      );
+    });
+
+    await promise
+      .then((response) => {
+        console.log('response from backend', response);
+
+        return response;
+      })
+      .catch((error) => {
+        return error;
+      });
   }
 }

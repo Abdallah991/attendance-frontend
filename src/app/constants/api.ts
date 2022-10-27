@@ -18,3 +18,7 @@ export const LOGIN_API = ROOTLINK + '/login';
 
 // 4- Users API
 export const USER_API = ROOTLINK + '/users';
+
+// 5- logout API
+
+export const LOGOUT_API = ROOTLINK + '/logout';
