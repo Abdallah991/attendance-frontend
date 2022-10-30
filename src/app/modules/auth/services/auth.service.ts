@@ -53,23 +53,27 @@ export class AuthService {
 
   // Logout implementation
   public async logout(): Promise<any> {
-    let promise = new Promise<any>(async (resolve, reject) => {
-      this.http.post(LOGOUT_API, { headers: httpOptions }).subscribe(
-        (response) => {
-          resolve(response);
-        },
-        (error) => reject(error)
-      );
-    });
-
-    await promise
-      .then((response) => {
-        console.log('response from backend', response);
-
-        return response;
-      })
-      .catch((error) => {
-        return error;
+    try {
+      let promise = new Promise<any>(async (resolve, reject) => {
+        this.http.post(LOGOUT_API, { headers: httpOptions }).subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => reject(error)
+        );
       });
+
+      await promise
+        .then((response) => {
+          console.log('response from backend', response);
+
+          return response;
+        })
+        .catch((error) => {
+          return error;
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

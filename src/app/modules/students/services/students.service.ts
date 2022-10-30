@@ -34,24 +34,34 @@ export class StudentsService {
 
   // get students call
   public async getStudents(): Promise<Student[]> {
-    // declare students array
-    var students: Student[];
-    // call the promise of the API
-    let promise = new Promise<any>(async (resolve, reject) => {
-      this.getStudentsApi().subscribe(
-        (students) => resolve(students),
-        (error) => reject(error)
-      );
-    });
-
-    // promise if its resolved or rejected
-    await promise
-      .then((value) => {
-        students = value;
-      })
-      .catch((err) => {
-        console.log('error message ', err);
+    try {
+      // declare students array
+      var students: Student[];
+      // call the promise of the API
+      let promise = new Promise<any>(async (resolve, reject) => {
+        this.getStudentsApi().subscribe(
+          (students) => resolve(students),
+          (error) => reject(error)
+        );
       });
+
+      // promise if its resolved or rejected
+      await promise
+        .then((value) => {
+          students = value;
+        })
+        .catch((err) => {
+          console.log('error message ', err);
+          if (err['status'] === 401) {
+            console.log('the error is authorization');
+            // this.getStudents();
+            // TODO: find a replacement for this method
+            window.location.reload();
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
 
     // return the students
     return students;

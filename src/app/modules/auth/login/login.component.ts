@@ -51,9 +51,10 @@ export class LoginComponent implements OnInit {
       .then((val) => {
         // that is it
         console.log('the login was ', val);
-        this.router.navigateByUrl('/students');
-
-        this.loader = false;
+        setTimeout(() => {
+          this.loader = false;
+          this.router.navigateByUrl('/students');
+        }, 2000);
       })
       .catch((err) => {
         console.log('the login was ', err);

@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: SideNavComponent,
     // TODO: Activate this auth gaurd, if token is not there direct the user to login
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         // students routes
