@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LOGIN_API, LOGOUT_API } from 'src/app/constants/api';
+import { httpOptions } from 'src/app/constants/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +19,9 @@ export class AuthService {
       email: email,
       password: password,
     };
-    const headers = new HttpHeaders()
-      .set('content-type', 'application/json')
-      .set('Access-Control-Allow-Origin', '*');
+
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.http.post(LOGIN_API, data, { headers }).subscribe(
+      this.http.post(LOGIN_API, data, { headers: httpOptions }).subscribe(
         (response) => {
           resolve(response);
         },
@@ -54,11 +53,8 @@ export class AuthService {
 
   // Logout implementation
   public async logout(): Promise<any> {
-    const headers = new HttpHeaders()
-      .set('content-type', 'application/json')
-      .set('Access-Control-Allow-Origin', '*');
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.http.post(LOGOUT_API, { headers }).subscribe(
+      this.http.post(LOGOUT_API, { headers: httpOptions }).subscribe(
         (response) => {
           resolve(response);
         },

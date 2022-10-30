@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   // form validation
+  // TODO: Adding a way to refresh the calls when there is a token
   isValid = (controlName) =>
     this.form.controls[controlName].touched &&
     this.form.controls[controlName].errors
