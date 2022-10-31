@@ -92,4 +92,59 @@ export class UsersService {
 
     return user;
   }
+
+  // delete user
+  // TODO: Test this
+  async deleteUser(id: number): Promise<any> {
+    // load the api
+    var url = USER_API + '/' + id;
+    // call the api
+    var newPost = await this.http
+      .delete<any>(url, { headers: httpOptions })
+      .subscribe(
+        (value) => {
+          return value;
+        },
+        (error) => {
+          // console log the error
+          console.log(error);
+        }
+      );
+  }
+
+  // update user
+  // TODO: Test this later
+  async updateUser(user: User): Promise<any> {
+    // load the api
+    var url = USER_API + '/' + user.id;
+    // call the api
+    this.http.put<any>(url, user, { headers: httpOptions }).subscribe(
+      (value) => {
+        return value;
+      },
+      (error) => {
+        console.log(error);
+        // console log the error
+      }
+    );
+    // deactivate the loader
+    return false;
+  }
+
+  // Add user
+  // TODO: Test this later
+  async addUser(user: User): Promise<any> {
+    this.http.post<any>(USER_API, user, { headers: httpOptions }).subscribe(
+      (value) => {
+        return value;
+      },
+      (error) => {
+        // console log the error
+        console.log(error);
+
+        return null;
+      }
+    );
+    return null;
+  }
 }
