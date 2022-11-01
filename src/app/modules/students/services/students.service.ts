@@ -110,8 +110,59 @@ export class StudentsService {
   }
 
   // delete student
+  // TODO: Test this
+  async deleteStudent(id: number): Promise<any> {
+    // load the api
+    var url = STUDENT_API + '/' + id;
+    // call the api
+    var newPost = await this.http
+      .delete<any>(url, { headers: httpOptions })
+      .subscribe(
+        (value) => {
+          return value;
+        },
+        (error) => {
+          // console log the error
+          console.log(error);
+        }
+      );
+  }
 
   // update student
+  // TODO: Test this later
+  async updateStudent(student: Student): Promise<any> {
+    // load the api
+    var url = STUDENT_API + '/' + student.id;
+    // call the api
+    this.http.put<any>(url, student, { headers: httpOptions }).subscribe(
+      (value) => {
+        return value;
+      },
+      (error) => {
+        console.log(error);
+        // console log the error
+      }
+    );
+    // deactivate the loader
+    return false;
+  }
 
   // Add student
+  // TODO: Test this later
+  async addStudent(student: Student): Promise<any> {
+    this.http
+      .post<any>(STUDENT_API, student, { headers: httpOptions })
+      .subscribe(
+        (value) => {
+          return value;
+        },
+        (error) => {
+          // console log the error
+          console.log(error);
+
+          return null;
+        }
+      );
+    return null;
+  }
 }
