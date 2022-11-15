@@ -1,4 +1,4 @@
-<div class="overflow-x-auto shadow-lg rounded-none">
+<div class="overflow-x-auto shadow-lg rounded-xl">
   <table class="table w-full">
     <thead>
       <tr>
@@ -46,23 +46,21 @@
   </table>
 </div>
 <div
-  class="btn-group mt-8 w-full flex justify-end rounded-none outline-none disabled:outline-none disabled:rounded-none"
+  class="btn-group mt-8 w-full flex justify-end rounded-xl outline-none disabled:outline-none disabled:rounded-xl"
   *ngIf="showPagination"
 >
   <button
-    class="btn rounded-none bg-primary outline-none disabled:outline-none"
+    class="btn rounded-xl bg-primary outline-none disabled:outline-none"
     (click)="back()"
     [disabled]="disableBack"
   >
     «
   </button>
-  <button
-    class="btn rounded-none bg-primary outline-none disabled:outline-none"
-  >
+  <button class="btn rounded-xl bg-primary outline-none disabled:outline-none">
     {{ currentPage }}
   </button>
   <button
-    class="btn rounded-none bg-primary outline-none disabled:outline-none disabled:rounded-none"
+    class="btn rounded-xl bg-primary outline-none disabled:outline-none disabled:rounded-xl"
     (click)="forward()"
     [disabled]="disableForward"
   >

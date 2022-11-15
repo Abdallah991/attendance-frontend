@@ -11,7 +11,7 @@
     }
     .navigationBarContainer {
       position: fixed;
-      @apply bg-primary h-full;
+      @apply bg-primary h-full rounded-r-xl;
     //   height: 100%;
   
       .logo {
@@ -31,11 +31,11 @@
               flex-direction: row;
               align-items: center;
               padding: 0.75rem;
-              @apply justify-center lg:justify-start;
+              @apply justify-center lg:justify-start ;
   
               img {
-                @apply mx-auto lg:mx-0 opacity-60;
-                @apply transition duration-150 hover:opacity-60;
+                @apply mx-auto lg:mx-0;
+                @apply transition duration-150;
               }
   
               .navLinkIcon {
@@ -53,7 +53,7 @@
               color: #ffffff;
               @apply bg-base-100/10 my-auto rounded-2xl;
               img {
-                opacity: 1;
+                // @apply opacity-100;
                 
               }
             }
@@ -70,14 +70,18 @@
               @apply justify-center lg:justify-start;
   
               img {
-                @apply mx-auto lg:mx-0 opacity-60;
-                @apply transition duration-150 hover:opacity-60;
+                @apply mx-auto lg:mx-0 ;
+                @apply transition duration-150 ;
               }
   
               .navLinkIcon {
                 width: 30px;
                 text-align: center;
                 @apply mx-auto lg:ml-0 lg:mr-3 lg:text-center text-start;
+              }
+
+              .navLinkText {
+                color: white !important;
               }
             }
   
@@ -88,7 +92,7 @@
             a.active {
               color: #ffffff;
               img {
-                opacity: 1;
+                // @apply opacity-100;
                 
               }
             }
@@ -210,6 +214,6 @@
   }
 
   .filter-white{
-    filter: invert(99%) sepia(6%) saturate(180%) hue-rotate(254deg) brightness(113%) contrast(100%); 
+    // filter: invert(99%) sepia(6%) saturate(180%) hue-rotate(254deg) brightness(113%) contrast(100%); 
  }
   

@@ -24,16 +24,19 @@
         </div>
       </div>
       <!-- logout icon -->
-      <div class="p-3 mb-8 cursor-pointer" (click)="signOut()">
+      <div
+        class="p-3 mb-12 cursor-pointer logoutLink text-base-100"
+        (click)="signOut()"
+      >
         <a class="flex flex-row items-center gap-3">
-          <div class="navLinkIcon">
+          <div class="logoutLink">
             <img
-              class="filter-white w-[15px]"
+              class="filter-white w-[30px]"
               src="../../../assets/icons/logout.svg"
               alt="Logout"
             />
           </div>
-          <div class="hidden navLinkText lg:flex text-base-100">Logout</div>
+          <div class="hidden lg:flex">Logout</div>
         </a>
       </div>
     </div>
