@@ -24,7 +24,9 @@ export class StudentsService {
         .get<Student[]>(STUDENT_API, { headers: httpOptions })
         .pipe(
           // access the JSON 'data'
-          map((data) => data['data'].map((student) => new Student(student)))
+          map((data) =>
+            data['data']['students'].map((student) => new Student(student))
+          )
         );
     } catch (err) {
       console.log(err);
@@ -75,7 +77,7 @@ export class StudentsService {
         .get<Student>(STUDENT_API + '/' + id, { headers: httpOptions })
         .pipe(
           // access the JSON 'data'
-          map((data) => new Student(data['data']))
+          map((data) => new Student(data['data']['student']))
         );
     } catch (err) {
       console.log(err);

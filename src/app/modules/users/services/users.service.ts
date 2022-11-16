@@ -18,7 +18,7 @@ export class UsersService {
       // get the data from the url
       return this.http.get<User[]>(USER_API, { headers: httpOptions }).pipe(
         // access the JSON 'data'
-        map((data) => data['data'].map((user) => new User(user)))
+        map((data) => data['data']['users'].map((user) => new User(user)))
       );
     } catch (err) {
       console.log(err);
@@ -59,7 +59,7 @@ export class UsersService {
         .get<User>(USER_API + '/' + id, { headers: httpOptions })
         .pipe(
           // access the JSON 'data'
-          map((data) => new User(data['data']))
+          map((data) => new User(data['data']['user']))
         );
     } catch (err) {
       console.log(err);
