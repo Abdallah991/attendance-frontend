@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { OverviewComponent } from './overview.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/components/shared.module';
-import { StudentsRoutingModule } from '../students/students-routing.module';
+import { OverviewRoutingModule } from './overview-routing.module';
 
 @NgModule({
   declarations: [OverviewComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    StudentsRoutingModule,
+    OverviewRoutingModule,
     SharedModule,
   ],
 })

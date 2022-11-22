@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this.form = this.fb.group({
       // TODO: change the email and password address
       email: ['abdallah.alathamneh@reboot01.com', Validators.required],
-      password: ['2021991_e', Validators.required],
+      password: ['123456', Validators.required],
     });
   }
 
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         console.log('the login was ', val);
         setTimeout(() => {
           this.loader = false;
-          this.router.navigateByUrl('/students');
+          this.router.navigateByUrl('/overview');
         }, 2000);
       })
       .catch((err) => {

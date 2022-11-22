@@ -36,7 +36,6 @@ export class AuthService {
         LoginSuccessful = true;
         console.log('response from backend', response.data);
         token = response.data['token'];
-
         sessionStorage.setItem('user', JSON.stringify(response.data.users));
         sessionStorage.setItem('userID', response.data.users.id);
         sessionStorage.setItem('signinToken', token);

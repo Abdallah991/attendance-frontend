@@ -37,7 +37,7 @@ export class StudentsComponent implements OnInit {
         // the data displayed in each row
         data: [
           res.id,
-          res.name,
+          res.firstName + ' ' + res.lastName,
           formatYYYYDDMM(new Date(res.createdAt)),
           'First',
         ],

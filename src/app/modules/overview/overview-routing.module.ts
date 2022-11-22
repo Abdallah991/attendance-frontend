@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { EventsComponent } from '../events/events.component';
 import { OverviewComponent } from './overview.component';
 
 const routes: Routes = [
