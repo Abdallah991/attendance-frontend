@@ -19,10 +19,24 @@ const routes: Routes = [
           ),
       },
       {
-        // students routes
+        // users routes
         path: 'users',
         loadChildren: () =>
           import('./modules/users/users.module').then((m) => m.UsersModule),
+      },
+      {
+        // overview routes
+        path: 'overview',
+        loadChildren: () =>
+          import('./modules/overview/overview.module').then(
+            (m) => m.OverviewModule
+          ),
+      },
+      {
+        // events routes
+        path: 'events',
+        loadChildren: () =>
+          import('./modules/events/events.module').then((m) => m.EventsModule),
       },
     ],
   },
