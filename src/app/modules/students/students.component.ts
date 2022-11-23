@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { formatYYYYDDMM } from 'src/app/constants/globalMethods';
 import { STUDENT_HEADER } from 'src/app/constants/headers';
 import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
@@ -12,7 +12,11 @@ import { StudentsService } from './services/students.service';
   styleUrls: ['./students.component.scss'],
 })
 export class StudentsComponent implements OnInit {
-  constructor(private SS: StudentsService, private AR: ActivatedRoute) {}
+  constructor(
+    private SS: StudentsService,
+    private AR: ActivatedRoute,
+    private router: Router
+  ) {}
 
   // table data
   data: TableData[] = [];
@@ -61,5 +65,9 @@ export class StudentsComponent implements OnInit {
         text: 'Delete',
       },
     };
+  }
+
+  addStudent() {
+    this.router.navigateByUrl('/students/add-student');
   }
 }

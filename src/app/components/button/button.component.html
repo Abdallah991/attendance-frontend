@@ -19,11 +19,11 @@
 >
   <div
     [ngClass]="!loader ? '' : 'hidden'"
-    class="flex items-center justify-center w-full"
+    class="flex items-center text-sm justify-center w-full"
   >
     <ng-content></ng-content>
 
-    {{ text }}
+    <p>{{ text }}</p>
   </div>
   <div
     [ngClass]="loader ? '' : 'hidden'"

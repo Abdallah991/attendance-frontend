@@ -1,6 +1,14 @@
-<h1 class="flex w-full justify-center text-xl">Students Attendance</h1>
+<div class="flex justify-between mt-8 p-4 w-full">
+  <h1 class="">Students</h1>
+  <app-button
+    text="Add Student"
+    [small]="true"
+    class="min-w-[100px]"
+    (onClick)="addStudent()"
+  ></app-button>
+</div>
 
-<div class="p-4 m-8">
+<div class="p-4">
   <app-table
     [columns]="columns"
     [data]="data"

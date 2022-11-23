@@ -1,1 +1,133 @@
-<p>edit-student works!</p>
+<div class="header">
+  <h1>{{ title }}</h1>
+  <div class="action-buttons">
+    <app-button
+      text="Add Student"
+      [small]="true"
+      class="min-w-[100px]"
+      (onClick)="addStudent()"
+      class="mr-2"
+    ></app-button>
+    <app-button
+      text="Cancel"
+      [small]="true"
+      class="min-w-[100px]"
+      (onClick)="cancel()"
+    ></app-button>
+  </div>
+</div>
+
+<div class="page">
+  <div class="columns">
+    <div class="input-feilds">
+      <app-text-field
+        prefix="First name"
+        label="First name"
+        [FGN]="studentForm"
+        FCN="firstName"
+        inputType="text"
+      ></app-text-field>
+      <div *ngIf="isValid('firstName')" class="errorMessage">
+        Please fill the student's first name!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Last name"
+        label="Last name"
+        [FGN]="studentForm"
+        FCN="lastName"
+        inputType="text"
+      ></app-text-field>
+      <div *ngIf="isValid('lastName')" class="errorMessage">
+        Please fill the student's last name!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Phone number"
+        label="Phone number"
+        [FGN]="studentForm"
+        FCN="phone"
+        inputType="phone"
+      ></app-text-field>
+      <div *ngIf="isValid('phone')" class="errorMessage">
+        Please fill the student's phone number!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Email"
+        label="Email"
+        [FGN]="studentForm"
+        FCN="email"
+        inputType="email"
+      ></app-text-field>
+      <div *ngIf="isValid('email')" class="errorMessage">
+        Please fill the student's email!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Gender"
+        label="Gender"
+        [FGN]="studentForm"
+        FCN="gender"
+        inputType="text"
+      ></app-text-field>
+      <div *ngIf="isValid('gender')" class="errorMessage">
+        Please fill the student's gender!
+      </div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Cohort"
+        label="Cohort"
+        [FGN]="studentForm"
+        FCN="cohort"
+        inputType="text"
+      ></app-text-field>
+      <div *ngIf="isValid('cohort')" class="errorMessage">
+        Please fill the student's cohort!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Birth date"
+        label="Birth date"
+        [FGN]="studentForm"
+        FCN="dob"
+        inputType="date"
+      ></app-text-field>
+      <div *ngIf="isValid('dob')" class="errorMessage">
+        Please fill the student's Birth date!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Supported By Tamkeen"
+        label="Supported By Tamkeen"
+        [FGN]="studentForm"
+        FCN="supportedByTamkeen"
+        inputType="text"
+      ></app-text-field>
+      <div *ngIf="isValid('supportedByTamkeen')" class="errorMessage">
+        Please fill the student's status!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Nationality"
+        label="Nationality"
+        [FGN]="studentForm"
+        FCN="nationality"
+        inputType="text"
+      ></app-text-field>
+      <div *ngIf="isValid('nationality')" class="errorMessage">
+        Please fill the student's Nationality!
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,7 @@ export class ButtonComponent implements OnInit {
   // button text
   @Input() public text: string = 'text';
   //  button backgroun color
-  @Input() public color: string = 'btn-ghost';
+  @Input() public color: string = 'btn-primary';
   // button text color
   @Input() public textColor: string = 'text-base-100';
   // button disable value

@@ -1,0 +1,19 @@
+
+
+.header {
+    @apply flex justify-between p-4 mt-4;
+}
+
+.action-buttons {
+    @apply flex flex-row;
+
+}
+
+.page {
+    @apply grid grid-cols-2 gap-8 p-4 mt-4;
+
+}
+
+.input-feilds {
+    @apply mt-4 text-sm;
+}
