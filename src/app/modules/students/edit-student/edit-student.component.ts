@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GENDERS } from 'src/app/constants/constants';
 import { StudentsService } from '../services/students.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { StudentsService } from '../services/students.service';
 export class EditStudentComponent implements OnInit {
   public title = 'Add Student';
   studentForm: FormGroup;
+  genders = GENDERS;
 
   constructor(
     private fb: FormBuilder,
@@ -59,4 +61,9 @@ export class EditStudentComponent implements OnInit {
     // TODO: disable buttons while doing that.
     // TODO: route back to students
   }
+
+  genderSelected(event) {}
+
+  cohortSelected(event) {}
+  supportedByTamkeen(event) {}
 }

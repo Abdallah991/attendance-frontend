@@ -1,0 +1,19 @@
+<form class="w-full">
+  <div class="w-full">
+    <span *ngIf="prefix" class="font-semibold text-sm">{{ prefix }}</span>
+
+    <select
+      class="select select-bordered border-accent rounded-2xl w-full font-normal"
+      (change)="emitChange($event)"
+    >
+      <option disabled selected>{{ placeholder }}</option>
+      <option
+        *ngFor="let value of data"
+        [value]="value.id"
+        [selected]="preSetValue == value.id"
+      >
+        {{ value.text }}
+      </option>
+    </select>
+  </div>
+</form>

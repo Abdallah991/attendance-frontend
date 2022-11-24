@@ -68,13 +68,14 @@
       </div>
     </div>
     <div class="input-feilds">
-      <app-text-field
-        prefix="Gender"
-        label="Gender"
+      <app-single-select
         [FGN]="studentForm"
         FCN="gender"
-        inputType="text"
-      ></app-text-field>
+        [data]="genders"
+        placeholder="Gender"
+        prefix="Gender"
+        (changed)="genderSelected($event)"
+      ></app-single-select>
       <div *ngIf="isValid('gender')" class="errorMessage">
         Please fill the student's gender!
       </div>
@@ -82,13 +83,14 @@
   </div>
   <div class="columns">
     <div class="input-feilds">
-      <app-text-field
-        prefix="Cohort"
-        label="Cohort"
+      <app-single-select
         [FGN]="studentForm"
         FCN="cohort"
-        inputType="text"
-      ></app-text-field>
+        [data]="genders"
+        placeholder="Cohort"
+        prefix="Cohort"
+        (changed)="cohortSelected($event)"
+      ></app-single-select>
       <div *ngIf="isValid('cohort')" class="errorMessage">
         Please fill the student's cohort!
       </div>
@@ -106,13 +108,14 @@
       </div>
     </div>
     <div class="input-feilds">
-      <app-text-field
-        prefix="Supported By Tamkeen"
-        label="Supported By Tamkeen"
+      <app-single-select
         [FGN]="studentForm"
         FCN="supportedByTamkeen"
-        inputType="text"
-      ></app-text-field>
+        [data]="genders"
+        prefix="Supported By Tamkeen"
+        placeholder="Supported By Tamkeen"
+        (changed)="supportedByTamkeen($event)"
+      ></app-single-select>
       <div *ngIf="isValid('supportedByTamkeen')" class="errorMessage">
         Please fill the student's status!
       </div>
