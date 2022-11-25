@@ -1,6 +1,8 @@
 <form [formGroup]="FGN" class="w-full">
   <div class="w-full">
-    <span *ngIf="prefix" class="font-semibold text-sm">{{ prefix }}</span>
+    <span *ngIf="prefix" class="font-semibold text-sm text-[#848484]">{{
+      prefix
+    }}</span>
     <input
       class="input !w-full !min-w-full input-bordered border-accent rounded-xl"
       [type]="inputType"

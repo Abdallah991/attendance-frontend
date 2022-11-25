@@ -20,5 +20,7 @@ export const LOGIN_API = ROOTLINK + '/login';
 export const USER_API = ROOTLINK + '/users';
 
 // 5- logout API
-
 export const LOGOUT_API = ROOTLINK + '/logout';
+
+// 6- Students API
+export const COHORT_API = ROOTLINK + '/cohorts';
