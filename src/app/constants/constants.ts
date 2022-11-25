@@ -12,3 +12,8 @@ export const GENDERS: SelectData[] = [
   { id: 'Female', text: 'Female' },
   { id: 'Rather not say', text: 'Rather not say' },
 ];
+
+export const SUPPORTED_BY_TAMKEEN: SelectData[] = [
+  { id: 'Yes', text: 'Yes' },
+  { id: 'No', text: 'No' },
+];

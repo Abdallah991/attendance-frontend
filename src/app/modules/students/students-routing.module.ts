@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { EditStudentComponent } from './edit-student/edit-student.component';
+import { CohortResolver } from './services/cohort.resolver';
 import { StudentsResolver } from './services/students.resolver';
 import { StudentsComponent } from './students.component';
 
@@ -22,6 +23,9 @@ const routes: Routes = [
     data: {
       type: 'create',
     },
+    resolve: {
+      cohorts: CohortResolver,
+    },
   },
   {
     path: 'edit-student',
@@ -33,6 +37,7 @@ const routes: Routes = [
     },
     resolve: {
       students: StudentsResolver,
+      cohorts: CohortResolver,
     },
   },
 ];

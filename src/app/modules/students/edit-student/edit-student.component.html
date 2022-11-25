@@ -86,7 +86,7 @@
       <app-single-select
         [FGN]="studentForm"
         FCN="cohort"
-        [data]="genders"
+        [data]="cohortsData"
         placeholder="Cohort"
         prefix="Cohort"
         (changed)="cohortSelected($event)"
@@ -111,7 +111,7 @@
       <app-single-select
         [FGN]="studentForm"
         FCN="supportedByTamkeen"
-        [data]="genders"
+        [data]="supportedByTamkeenData"
         prefix="Supported By Tamkeen"
         placeholder="Supported By Tamkeen"
         (changed)="supportedByTamkeen($event)"
