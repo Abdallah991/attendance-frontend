@@ -30,7 +30,6 @@ const routes: Routes = [
   },
   {
     path: 'edit-student/:studentId',
-    // TODO: add the component and the resolver
     component: EditStudentComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     data: {

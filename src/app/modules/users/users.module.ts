@@ -6,9 +6,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './users.component';
 import { UsersService } from './services/users.service';
 import { UsersResolver } from './services/users.resolver';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
-  declarations: [UsersComponent],
+  declarations: [UsersComponent, EditUserComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
