@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { EditStudentComponent } from './edit-student/edit-student.component';
 import { CohortResolver } from './services/cohort.resolver';
+import { EditStudentResolver } from './services/edit-student.resolver';
 import { StudentsResolver } from './services/students.resolver';
 import { StudentsComponent } from './students.component';
 
@@ -28,7 +29,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'edit-student',
+    path: 'edit-student/:studentId',
     // TODO: add the component and the resolver
     component: EditStudentComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
@@ -36,7 +37,7 @@ const routes: Routes = [
       type: 'view',
     },
     resolve: {
-      students: StudentsResolver,
+      student: EditStudentResolver,
       cohorts: CohortResolver,
     },
   },

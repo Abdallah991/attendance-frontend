@@ -6,6 +6,7 @@ import { TextFieldComponent } from './text-field/text-field.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoaderComponent } from './loader/loader.component';
 import { SingleSelectComponent } from './single-select/single-select.component';
+import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { SingleSelectComponent } from './single-select/single-select.component';
     TextFieldComponent,
     LoaderComponent,
     SingleSelectComponent,
+    SuccessDialogComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule],
   exports: [
@@ -22,6 +24,7 @@ import { SingleSelectComponent } from './single-select/single-select.component';
     TextFieldComponent,
     LoaderComponent,
     SingleSelectComponent,
+    SuccessDialogComponent,
   ],
 })
 export class SharedModule {}

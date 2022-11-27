@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, mapTo } from 'rxjs/operators';
 import { GENDERS, SUPPORTED_BY_TAMKEEN } from 'src/app/constants/constants';
 import { SelectData } from 'src/app/interfaces/interfaces';
 import { Cohort } from 'src/app/models/Cohort';
@@ -15,7 +14,8 @@ import { StudentsService } from '../services/students.service';
 })
 export class EditStudentComponent implements OnInit {
   // Title to toggle between add and edit
-  public title = 'Add Student';
+  title = 'Add Student';
+  buttonTitle = 'Add Student';
   studentForm: FormGroup;
   // single drop down options
   genders = GENDERS;
@@ -25,6 +25,18 @@ export class EditStudentComponent implements OnInit {
   type: 'view' | 'create';
   // studen
   student: Student = null;
+  // button loader
+  loader = false;
+  // confirmation dialog
+  dialogTitle = '';
+  message = '';
+  button = '';
+  // preset values
+  genderPresetValue;
+  tamkeenPreSetValue;
+  cohortPreSetValue;
+  // drop down disable
+  disabled = false;
 
   constructor(
     private fb: FormBuilder,
@@ -37,16 +49,19 @@ export class EditStudentComponent implements OnInit {
     this.studentForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      cohort: ['', Validators.required],
+      cohortId: ['', Validators.required],
       supportedByTamkeen: ['', Validators.required],
       email: ['', Validators.required],
-      password: [''],
+      // TODO: see how these can fit in later
+      // password: [''],
       dob: ['', Validators.required],
       phone: ['', Validators.required],
       gender: ['', Validators.required],
       nationality: ['', Validators.required],
-      studentLogs: [''],
+      // studentLogs: [''],
     });
+
+    this.fetchDataFromRouter();
   }
 
   ngOnInit(): void {}
@@ -68,17 +83,73 @@ export class EditStudentComponent implements OnInit {
   // 3- success dialog.
   // 4- failed dialog
 
-  addStudent() {
+  mutateStudent() {
     // TODO: show dialogu to confirm
     // TODO: add the student after dialog confirmed
     // TODO: disable buttons while doing that.
     // TODO: route back to students
+    this.loader = true;
+    if (this.type == 'create') {
+      this.addStudent();
+    } else {
+      this.editStudent();
+    }
+  }
+
+  addStudent() {
+    this.SS.addStudent(this.studentForm.value)
+      .then((val) => {
+        this.showSuccessDialog(
+          'Success!',
+          'The student has been added successfully',
+          'Dismiss'
+        );
+        this.loader = false;
+      })
+      .catch((err) => {
+        console.log('ERROR ', err);
+        this.showSuccessDialog('Failure!', 'There was an Error', 'Dismiss');
+      });
+  }
+
+  editStudent() {
+    var studentUpdateInput = {
+      id: this.student.id,
+      firstName: this.studentForm.controls.firstName.value,
+      lastName: this.studentForm.controls.lastName.value,
+      cohortId: this.studentForm.controls.cohortId.value,
+      supportedByTamkeen: this.studentForm.controls.supportedByTamkeen.value,
+      email: this.studentForm.controls.email.value,
+      dob: this.studentForm.controls.dob.value,
+      phone: this.studentForm.controls.phone.value,
+      gender: this.studentForm.controls.gender.value,
+      nationality: this.studentForm.controls.nationality.value,
+    };
+    this.SS.updateStudent(studentUpdateInput)
+      .then((val) => {
+        this.showSuccessDialog(
+          'Success!',
+          'The student has been updated successfully',
+          'Dismiss'
+        );
+        this.loader = false;
+      })
+      .catch((err) => {
+        console.log('ERROR ', err);
+        this.showSuccessDialog('Failure!', 'There was an Error', 'Dismiss');
+      });
   }
 
   // get the value of single select
-  genderSelected(event) {}
-  cohortSelected(event) {}
-  supportedByTamkeen(event) {}
+  genderSelected(event) {
+    this.studentForm.controls.gender.setValue(event);
+  }
+  cohortSelected(event) {
+    this.studentForm.controls.cohortId.setValue(event);
+  }
+  supportedByTamkeen(event) {
+    this.studentForm.controls.supportedByTamkeen.setValue(event);
+  }
 
   // fetch data from router
 
@@ -101,13 +172,51 @@ export class EditStudentComponent implements OnInit {
 
       if (this.type == 'view') {
         // get the food data
+        this.title = 'Edit Student';
+        this.buttonTitle = 'Edit Student';
         this.student = response.student;
+        console.log(response);
         // set the food info
         this.setStudentInfo();
+        //
       }
     });
   }
 
   // set student info to feilds
-  async setStudentInfo() {}
+  async setStudentInfo() {
+    this.studentForm.patchValue({
+      firstName: this.student.firstName,
+      lastName: this.student.lastName,
+      gender: this.student.gender,
+      phone: this.student.phone,
+      email: this.student.email,
+      supportedByTamkeen: this.student.supportedByTamkeen,
+      cohortId: this.student.cohortId,
+      dob: this.student.dob,
+      nationality: this.student.nationality,
+    });
+
+    this.cohortPreSetValue = this.student.cohortId;
+    this.genderPresetValue = this.student.gender;
+    this.tamkeenPreSetValue = this.student.supportedByTamkeen;
+
+    this.disabled = true;
+  }
+
+  // success dialog
+
+  //
+  // dialog work
+  // show dialoge
+  async showSuccessDialog(title, message, button) {
+    this.dialogTitle = title;
+    this.message = message;
+    this.button = button;
+    document.querySelector<HTMLElement>('#dialog')?.click();
+  }
+  // dismiss dialog implementation
+  navigateBack() {
+    this.router.navigateByUrl('/students');
+  }
 }

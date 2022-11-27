@@ -21,6 +21,8 @@ export class SingleSelectComponent implements OnInit {
   @Input() preSetValue: string | number;
   // selection event emitter
   @Input() prefix: string;
+  // Disable
+  @Input() disabled: boolean = false;
 
   @Output() changed = new EventEmitter<boolean>();
   constructor() {}

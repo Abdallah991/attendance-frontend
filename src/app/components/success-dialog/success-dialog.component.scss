@@ -1,0 +1,12 @@
+:host ::ng-deep mat-dialog-container {
+    @apply bg-white rounded-3xl #{!important};
+  }
+  
+  .mat-dialog-actions {
+    @apply justify-center;
+  }
+  
+  .divider {
+    @apply bg-gray-300 h-[1px] mt-8;
+  }
+  

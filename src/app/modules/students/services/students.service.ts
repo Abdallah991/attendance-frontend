@@ -132,7 +132,7 @@ export class StudentsService {
 
   // update student
   // TODO: Test this later
-  async updateStudent(student: Student): Promise<any> {
+  async updateStudent(student: any): Promise<any> {
     // load the api
     var url = STUDENT_API + '/' + student.id;
     // call the api

@@ -1,0 +1,22 @@
+<!-- Put this part before </body> tag -->
+<input type="checkbox" [id]="dialogId" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">{{ title }}</h3>
+    <p class="py-4">
+      {{ message }}
+    </p>
+    <div class="flex flex-row justify-center gap-2">
+      <div class="modal-action">
+        <label [for]="dialogId" class="btn" (click)="cancelClick()">{{
+          button
+        }}</label>
+      </div>
+      <div class="modal-action" *ngIf="twoButtons">
+        <label [for]="dialogId" class="btn" (click)="confirmClick()">{{
+          button2
+        }}</label>
+      </div>
+    </div>
+  </div>
+</div>

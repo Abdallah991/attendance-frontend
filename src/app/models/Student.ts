@@ -5,6 +5,8 @@ export class Student {
   firstName: string;
   lastName: string;
   cohort: Cohort;
+  cohortId: number;
+
   nationality: string;
   phone: string;
   gender: string;
@@ -21,6 +23,7 @@ export class Student {
     this.firstName = student.firstName;
     this.lastName = student.lastName;
     this.cohort = student.cohort;
+    this.cohortId = student.cohortId;
     this.nationality = student.nationality;
     this.gender = student.gender;
     this.phone = student.phone;
