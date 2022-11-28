@@ -77,17 +77,7 @@ export class EditStudentComponent implements OnInit {
     this.router.navigate(['/students']);
   }
 
-  // TODO:
-  // 1- drop down.
-  // 2- add student functionality
-  // 3- success dialog.
-  // 4- failed dialog
-
   mutateStudent() {
-    // TODO: show dialogu to confirm
-    // TODO: add the student after dialog confirmed
-    // TODO: disable buttons while doing that.
-    // TODO: route back to students
     this.loader = true;
     if (this.type == 'create') {
       this.addStudent();

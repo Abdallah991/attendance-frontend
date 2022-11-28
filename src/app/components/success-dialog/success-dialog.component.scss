@@ -1,5 +1,5 @@
 :host ::ng-deep mat-dialog-container {
-    @apply bg-white rounded-3xl #{!important};
+    @apply bg-base-100 rounded-3xl #{!important};
   }
   
   .mat-dialog-actions {
@@ -7,6 +7,6 @@
   }
   
   .divider {
-    @apply bg-gray-300 h-[1px] mt-8;
+    @apply bg-gray-light h-[1px] mt-8;
   }
   

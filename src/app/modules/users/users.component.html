@@ -1,9 +1,17 @@
-<h1 class="flex w-full justify-center text-xl">Users</h1>
-
-<div class="p-4 m-8">
+<div class="flex justify-between mt-8 p-4 w-full">
+  <h1 class="">Users</h1>
+  <app-button
+    text="Add User"
+    [small]="true"
+    class="min-w-[100px]"
+    (onClick)="addUser()"
+  ></app-button>
+</div>
+<div class="p-4">
   <app-table
     [columns]="columns"
     [data]="data"
     [actionButtons]="true"
+    (editClicked)="editUser($event)"
   ></app-table>
 </div>

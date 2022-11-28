@@ -72,7 +72,6 @@ export class StudentsComponent implements OnInit {
   }
 
   editStudent(event) {
-    console.log(event);
     this.router.navigateByUrl('/students/edit-student/' + event);
   }
 }

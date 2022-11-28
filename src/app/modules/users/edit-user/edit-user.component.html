@@ -1,1 +1,156 @@
-<p>edit-user works!</p>
+<div class="header">
+  <h1>{{ title }}</h1>
+  <div class="action-buttons gap-2">
+    <app-button
+      [text]="buttonTitle"
+      [small]="true"
+      class="min-w-[100px]"
+      (onClick)="mutateUser()"
+      [loader]="loader"
+      [disabled]="!usersForm.valid"
+    ></app-button>
+    <app-button
+      text="Cancel"
+      [small]="true"
+      class="min-w-[100px]"
+      (onClick)="cancel()"
+    ></app-button>
+  </div>
+</div>
+
+<app-success-dialog
+  dialogId="dialog"
+  [title]="dialogTitle"
+  [message]="message"
+  [button]="button"
+  (dismissed)="navigateBack()"
+></app-success-dialog>
+
+<div class="page">
+  <div class="columns">
+    <div class="input-feilds">
+      <app-text-field
+        prefix="First name"
+        label="First name"
+        [FGN]="usersForm"
+        FCN="firstName"
+        inputType="text"
+      ></app-text-field>
+      <div *ngIf="isValid('firstName')" class="errorMessage">
+        Please fill the user's first name!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Last name"
+        label="Last name"
+        [FGN]="usersForm"
+        FCN="lastName"
+        inputType="text"
+      ></app-text-field>
+      <div *ngIf="isValid('lastName')" class="errorMessage">
+        Please fill the user's last name!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Phone number"
+        label="Phone number"
+        [FGN]="usersForm"
+        FCN="phone"
+        inputType="phone"
+      ></app-text-field>
+      <div *ngIf="isValid('phone')" class="errorMessage">
+        Please fill the user's phone number!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Email"
+        label="Email"
+        [FGN]="usersForm"
+        FCN="email"
+        inputType="email"
+      ></app-text-field>
+      <div *ngIf="isValid('email')" class="errorMessage">
+        Please fill the user's email!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-single-select
+        [FGN]="usersForm"
+        FCN="gender"
+        [data]="genders"
+        placeholder="Gender"
+        prefix="Gender"
+        (changed)="genderSelected($event)"
+        [preSetValue]="genderPresetValue"
+      ></app-single-select>
+      <div *ngIf="isValid('gender')" class="errorMessage">
+        Please fill the user's gender!
+      </div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Position"
+        label="Position"
+        [FGN]="usersForm"
+        FCN="position"
+        inputType="text"
+      ></app-text-field>
+      <div *ngIf="isValid('position')" class="errorMessage">
+        Please fill the user's Position!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Join date"
+        label="Join date"
+        [FGN]="usersForm"
+        FCN="joinDate"
+        inputType="date"
+      ></app-text-field>
+      <div *ngIf="isValid('joinDate')" class="errorMessage">
+        Please fill the user's Join date!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Birth date"
+        label="Birth date"
+        [FGN]="usersForm"
+        FCN="dob"
+        inputType="date"
+      ></app-text-field>
+      <div *ngIf="isValid('dob')" class="errorMessage">
+        Please fill the user's Birth date!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Password"
+        label="Password"
+        [FGN]="usersForm"
+        FCN="password"
+        inputType="password"
+      ></app-text-field>
+      <div *ngIf="isValid('password')" class="errorMessage">
+        Please fill the user's Password!
+      </div>
+    </div>
+    <div class="input-feilds">
+      <app-text-field
+        prefix="Confirm Password"
+        label="Confrim Password"
+        [FGN]="usersForm"
+        FCN="confirmPassword"
+        inputType="password"
+      ></app-text-field>
+      <div *ngIf="isValid('confirmPassword')" class="errorMessage">
+        Please fill the user's Confirm Password!
+      </div>
+    </div>
+  </div>
+</div>

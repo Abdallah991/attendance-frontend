@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { USER_API } from 'src/app/constants/api';
+import { REGISTER_API, USER_API } from 'src/app/constants/api';
 import { httpOptions } from 'src/app/constants/constants';
 import { User } from 'src/app/models/User';
 
@@ -114,7 +114,7 @@ export class UsersService {
 
   // update user
   // TODO: Test this later
-  async updateUser(user: User): Promise<any> {
+  async updateUser(user: any): Promise<any> {
     // load the api
     var url = USER_API + '/' + user.id;
     // call the api
@@ -132,10 +132,10 @@ export class UsersService {
   }
 
   // Add user
-  // TODO: Test this later
-  async addUser(user: User): Promise<any> {
-    this.http.post<any>(USER_API, user, { headers: httpOptions }).subscribe(
+  async addUser(user: any): Promise<any> {
+    this.http.post<any>(REGISTER_API, user, { headers: httpOptions }).subscribe(
       (value) => {
+        console.log('the value of the register is ', value);
         return value;
       },
       (error) => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { formatYYYYDDMM } from 'src/app/constants/globalMethods';
 import { USER_HEADER } from 'src/app/constants/headers';
 import { TableData, TableButtonOptions } from 'src/app/interfaces/interfaces';
@@ -12,7 +12,11 @@ import { UsersService } from './services/users.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  constructor(private US: UsersService, private AR: ActivatedRoute) {}
+  constructor(
+    private US: UsersService,
+    private AR: ActivatedRoute,
+    private router: Router
+  ) {}
 
   // table data
   data: TableData[] = [];
@@ -61,5 +65,13 @@ export class UsersComponent implements OnInit {
         text: 'Delete',
       },
     };
+  }
+
+  addUser() {
+    this.router.navigateByUrl('/users/add-user');
+  }
+
+  editUser(event) {
+    this.router.navigateByUrl('/users/edit-user/' + event);
   }
 }

@@ -31,7 +31,7 @@ const routes: Routes = [
       type: 'view',
     },
     resolve: {
-      student: EditUserResolver,
+      user: EditUserResolver,
     },
   },
 ];
