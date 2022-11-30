@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GENDERS } from 'src/app/constants/constants';
+import { formatYYYYDDMM } from 'src/app/constants/globalMethods';
 import { User } from 'src/app/models/User';
 import { UsersService } from '../services/users.service';
 
@@ -44,7 +45,6 @@ export class EditUserComponent implements OnInit {
     this.usersForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      cohortId: ['', Validators.required],
       joinDate: ['', Validators.required],
       email: ['', Validators.required],
       position: ['', Validators.required],
@@ -148,6 +148,9 @@ export class EditUserComponent implements OnInit {
 
   // set student info to feilds
   async setUserInfo() {
+    // format the dates
+    var joinDate = formatYYYYDDMM(new Date(this.user.joinDate));
+    var dob = formatYYYYDDMM(new Date(this.user.dob));
     this.usersForm.patchValue({
       firstName: this.user.firstName,
       lastName: this.user.lastName,
@@ -156,12 +159,13 @@ export class EditUserComponent implements OnInit {
       email: this.user.email,
       password: this.user.password,
       confirmPassword: this.user.password,
-      joindate: this.user.joinDate,
-      dob: this.user.dob,
       position: this.user.position,
     });
 
+    // presetting the values
     this.genderPresetValue = this.user.gender;
+    this.usersForm.controls.joinDate.setValue(joinDate);
+    this.usersForm.controls.dob.setValue(dob);
 
     this.disabled = true;
   }

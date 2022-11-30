@@ -17,3 +17,9 @@ export const SUPPORTED_BY_TAMKEEN: SelectData[] = [
   { id: 'Yes', text: 'Yes' },
   { id: 'No', text: 'No' },
 ];
+
+// TODO : Create the APIs and models for it
+export const PERMISSIN: SelectData[] = [
+  { id: 'Admin', text: 'Admin' },
+  { id: 'Operation', text: 'No' },
+];

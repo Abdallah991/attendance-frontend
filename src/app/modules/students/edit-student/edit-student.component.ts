@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GENDERS, SUPPORTED_BY_TAMKEEN } from 'src/app/constants/constants';
+import { formatYYYYDDMM } from 'src/app/constants/globalMethods';
 import { SelectData } from 'src/app/interfaces/interfaces';
 import { Cohort } from 'src/app/models/Cohort';
 import { Student } from 'src/app/models/Student';
@@ -175,6 +176,9 @@ export class EditStudentComponent implements OnInit {
 
   // set student info to feilds
   async setStudentInfo() {
+    // date of birth formatting
+    var dob = formatYYYYDDMM(new Date(this.student.dob));
+
     this.studentForm.patchValue({
       firstName: this.student.firstName,
       lastName: this.student.lastName,
@@ -183,10 +187,11 @@ export class EditStudentComponent implements OnInit {
       email: this.student.email,
       supportedByTamkeen: this.student.supportedByTamkeen,
       cohortId: this.student.cohortId,
-      dob: this.student.dob,
       nationality: this.student.nationality,
     });
 
+    // setting the manula values
+    this.studentForm.controls.dob.setValue(dob);
     this.cohortPreSetValue = this.student.cohortId;
     this.genderPresetValue = this.student.gender;
     this.tamkeenPreSetValue = this.student.supportedByTamkeen;
