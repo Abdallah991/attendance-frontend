@@ -5,6 +5,7 @@
 // Staging Environemnt
 
 // Local Dev Environment
+// const ROOTLINK = 'http://10.1.10.6/api';
 const ROOTLINK = 'http://127.0.0.1:8000/api';
 
 // 1- Students API
