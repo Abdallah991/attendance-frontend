@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { candidates } from 'src/app/constants/api';
+// import { candidates } from 'src/app/constants/api';
 
 @Injectable({
   providedIn: 'root',
@@ -55,20 +55,20 @@ export class CsvService {
   get = async function () {
     const choosenData = [];
 
-    candidates.data.toad_result_view.forEach((userInfo) => {
-      var data = {
-        email: userInfo.user.attrs.email,
-        firstName: userInfo.user.attrs.firstName,
-        lastName: userInfo.user.attrs.lastName,
-        phone: userInfo.user.attrs.Phone,
-        country: userInfo.user.attrs.country,
-        dob: userInfo.user.attrs.dateOfBirth,
-        gender: userInfo.user.attrs.gender,
-        score: userInfo.score.toFixed(2),
-        attempts: userInfo.attempts,
-      };
-      choosenData.push(data);
-    });
+    // candidates.data.toad_result_view.forEach((userInfo) => {
+    //   var data = {
+    //     email: userInfo.user.attrs.email,
+    //     firstName: userInfo.user.attrs.firstName,
+    //     lastName: userInfo.user.attrs.lastName,
+    //     phone: userInfo.user.attrs.Phone,
+    //     country: userInfo.user.attrs.country,
+    //     dob: userInfo.user.attrs.dateOfBirth,
+    //     gender: userInfo.user.attrs.gender,
+    //     score: userInfo.score.toFixed(2),
+    //     attempts: userInfo.attempts,
+    //   };
+    //   choosenData.push(data);
+    // });
 
     // JavaScript object
     // TODO: get the number of the applicants
