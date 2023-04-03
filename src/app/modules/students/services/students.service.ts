@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { STUDENT_API } from 'src/app/constants/api';
+import { BIO_ATTENDANCE_API, STUDENT_API } from 'src/app/constants/api';
 import { Student } from 'src/app/models/Student';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { httpOptions } from 'src/app/constants/constants';
+import { httpOptions, httpOptionsBioTime } from 'src/app/constants/constants';
 import { getToken, getUser, getUserId } from 'src/app/constants/globalMethods';
 
 @Injectable({
@@ -167,6 +167,54 @@ export class StudentsService {
       );
     return null;
   }
-}
 
-// TODO: console log attendance from bio time
+  // TODO: console log attendance from bio time
+  // get attendance information
+  public async getAttendance(): Promise<any> {
+    try {
+      // declare data array
+      var data: any[];
+      // call the promise of the API
+      let promise = new Promise<any>(async (resolve, reject) => {
+        this.getAttendanceApi().subscribe(
+          (data) => resolve(data),
+          (error) => reject(error)
+        );
+      });
+
+      // promise if its resolved or rejected
+      await promise
+        .then((value) => {
+          data = value;
+        })
+        .catch((err) => {
+          console.log('error message ', err);
+          if (err['status'] === 401) {
+            console.log('the error is authorization');
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
+
+    // return the attendance
+    console.log('Attendnace', data);
+    return data;
+  }
+
+  // get student API
+  private getAttendanceApi(): Observable<any> {
+    try {
+      // get the data from the url
+      return this.http
+        .get<any>(BIO_ATTENDANCE_API, { headers: httpOptionsBioTime })
+        .pipe(
+          // access the JSON 'data'
+          map((data) => data)
+        );
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  }
+}

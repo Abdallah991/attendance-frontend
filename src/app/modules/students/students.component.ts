@@ -25,6 +25,10 @@ export class StudentsComponent implements OnInit {
 
   ngOnInit(): void {
     var students: Student[] = [];
+    //! remove ater, only for testing
+    this.SS.getAttendance().then((value) => {
+      console.log('inside the page ', value);
+    });
     this.AR.data.subscribe((response: any) => {
       students = response.students;
       console.log('the value of students ', students);
