@@ -26,6 +26,7 @@ export class StudentsComponent implements OnInit {
   ngOnInit(): void {
     var students: Student[] = [];
     //! remove ater, only for testing
+    // commenting
     this.SS.getAttendance().then((value) => {
       console.log('inside the page ', value);
     });
