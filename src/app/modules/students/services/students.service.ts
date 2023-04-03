@@ -168,3 +168,5 @@ export class StudentsService {
     return null;
   }
 }
+
+// TODO: console log attendance from bio time
