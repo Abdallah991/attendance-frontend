@@ -15,6 +15,7 @@ export class StudentsService {
 
   //  get students API call
   private getStudentsApi(): Observable<Student[]> {
+    // TODO: remove the console logs later
     console.log('this is token ', getToken());
     console.log('this is user ', getUser());
     console.log('this is user id ', getUserId());

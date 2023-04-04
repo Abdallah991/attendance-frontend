@@ -30,4 +30,5 @@ export const bioTimeToken =
 export const httpOptionsBioTime = new HttpHeaders({
   'Content-Type': 'application/json',
   Authorization: 'Bearer ' + bioTimeToken,
+  'Access-Control-Allow-Origin': '*',
 });
