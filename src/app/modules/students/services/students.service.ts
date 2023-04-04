@@ -16,9 +16,9 @@ export class StudentsService {
   //  get students API call
   private getStudentsApi(): Observable<Student[]> {
     // TODO: remove the console logs later
-    console.log('this is token ', getToken());
-    console.log('this is user ', getUser());
-    console.log('this is user id ', getUserId());
+    // console.log('this is token ', getToken());
+    // console.log('this is user ', getUser());
+    // console.log('this is user id ', getUserId());
     try {
       // get the data from the url
       return this.http
@@ -187,6 +187,7 @@ export class StudentsService {
       await promise
         .then((value) => {
           data = value;
+          console.log('The value is ', data);
         })
         .catch((err) => {
           console.log('error message ', err);
