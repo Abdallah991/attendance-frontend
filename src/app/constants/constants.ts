@@ -1,6 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { SelectData } from '../interfaces/interfaces';
-import { getToken } from './globalMethods';
+import { get01Token, getToken } from './globalMethods';
 
 export const httpOptions = new HttpHeaders({
   'Content-Type': 'application/json',
@@ -31,4 +31,9 @@ export const httpOptionsBioTime = new HttpHeaders({
   'Content-Type': 'application/json',
   Authorization: 'Bearer ' + bioTimeToken,
   'Access-Control-Allow-Origin': '*',
+});
+
+export const http01Options = new HttpHeaders({
+  'Content-Type': 'application/json',
+  Authorization: 'Bearer ' + get01Token(),
 });

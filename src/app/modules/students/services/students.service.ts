@@ -5,13 +5,34 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { httpOptions, httpOptionsBioTime } from 'src/app/constants/constants';
-import { getToken, getUser, getUserId } from 'src/app/constants/globalMethods';
+// import { getToken, getUser, getUserId } from 'src/app/constants/globalMethods';
+import { Apollo, gql, QueryRef } from 'apollo-angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentsService {
-  constructor(private http: HttpClient) {}
+  private userOnly: QueryRef<{ users: any }>;
+
+  constructor(private http: HttpClient, private apollo: Apollo) {
+    this.userOnly = this.apollo.watchQuery({
+      query: gql`
+        query getUserInfo {
+          user {
+            email
+            firstName
+            lastName
+            phone: attrs(path: "Phone")
+            email
+            sessions {
+              final_score
+              updated_at
+            }
+          }
+        }
+      `,
+    });
+  }
 
   //  get students API call
   private getStudentsApi(): Observable<Student[]> {
@@ -204,7 +225,7 @@ export class StudentsService {
     return data;
   }
 
-  // get student API
+  // get attendance API
   private getAttendanceApi(): Observable<any> {
     try {
       // get the data from the url
@@ -219,4 +240,42 @@ export class StudentsService {
       return null;
     }
   }
+
+  // TODO: test 01 graphql
+  async getUsers(): Promise<any> {
+    const result = await this.userOnly.refetch();
+    return result.data;
+  }
+  // // get applicants information
+  // private async getApplicantsData() {
+  //   try {
+  //     let query = `query getUserInfo {
+
+  //       user
+  //      {
+  //        email
+  //        firstName
+  //        lastName
+  //        phone:attrs(path:"Phone")
+  //        email
+  //        sessions {
+  //          final_score
+  //          updated_at
+  //        }
+  //      }
+
+  //        }`;
+  //     let response: any = await API.graphql(graphqlOperation(query));
+  //     console.log(response);
+  //     return response.data?.getAdminUser;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  // getAdminUser = (id: string): Observable<AdminUser> =>
+  //   from(this.getAdminUserByID(id)).pipe(
+  //     map((res) => res),
+  //     first()
+  //   );
 }

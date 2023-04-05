@@ -27,7 +27,7 @@ export class StudentsComponent implements OnInit {
     var students: Student[] = [];
     //! remove ater, only for testing
     // commenting
-    this.SS.getAttendance().then((value) => {
+    this.SS.getUsers().then((value) => {
       console.log('inside the page ', value);
     });
     this.AR.data.subscribe((response: any) => {

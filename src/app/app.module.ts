@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './components/shared.module';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { StudentsModule } from './modules/students/students.module';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [AppComponent, SideNavComponent],
@@ -18,6 +19,7 @@ import { StudentsModule } from './modules/students/students.module';
     HttpClientModule,
     SharedModule,
     ApolloModule,
+    GraphQLModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
