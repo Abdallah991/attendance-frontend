@@ -188,18 +188,6 @@ export class StudentsService {
       return null;
     }
   }
-  // ! important
 
-  // return an observable users can subscribe to
-  public getAllPlatfomUsers(): Observable<any> {
-    var data = this.apollo
-      .watchQuery<any>({
-        query: GET_USERS,
-      })
-      .valueChanges.pipe(map((result) => result.data.user));
-    return data;
-  }
-
-  //! check if this needs to be unsubscribed
   ngOnDestroy() {}
 }

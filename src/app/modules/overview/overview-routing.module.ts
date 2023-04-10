@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { OverviewComponent } from './overview.component';
+import { CandidatesResolver } from './services/candidates.resolver';
 
 const routes: Routes = [
   {
@@ -11,7 +12,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: {
       // TODO: add resolvers
-      // students: StudentsResolver,
+      candidates: CandidatesResolver,
     },
   },
 ];

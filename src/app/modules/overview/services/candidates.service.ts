@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
-import { Subscription } from 'rxjs';
+import { Apollo } from 'apollo-angular';
+import { Observable, from } from 'rxjs';
+import { first, map } from 'rxjs/operators';
+import { GET_USERS } from 'src/app/constants/queries';
 
 @Injectable({
   providedIn: 'root',
@@ -9,22 +11,19 @@ export class CandidatesService {
   loading: boolean;
   posts: any;
 
-  private querySubscription: Subscription;
-
   constructor(private apollo: Apollo) {}
 
-  public getUsers() {
-    // this.querySubscription = this.apollo
-    // .watchQuery<any>({
-    //   query: GET_POSTS
-    // })
-    // .valueChanges.subscribe(({ data, loading }) => {
-    //   this.loading = loading
-    //   this.posts = data.posts
-    // })
+  // return an observable users can subscribe to
+  public getAllPlatfomUsers(): Observable<any> {
+    var data = from(
+      this.apollo.watchQuery<any>({
+        query: GET_USERS,
+      }).valueChanges
+    ).pipe(
+      map((result) => result.data.user),
+      first()
+    );
+    return data;
   }
-
-  ngOnDestroy() {
-    this.querySubscription.unsubscribe();
-  }
+  ngOnDestroy() {}
 }

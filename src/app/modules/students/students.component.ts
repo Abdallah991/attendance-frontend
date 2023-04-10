@@ -5,6 +5,7 @@ import { STUDENT_HEADER } from 'src/app/constants/headers';
 import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
 import { Student } from 'src/app/models/Student';
 import { StudentsService } from './services/students.service';
+import { CandidatesService } from '../overview/services/candidates.service';
 
 @Component({
   selector: 'app-students',
@@ -15,14 +16,14 @@ import { StudentsService } from './services/students.service';
 // We use the gql tag to parse our query string into a query document
 export class StudentsComponent implements OnInit {
   constructor(
-    private SS: StudentsService,
+    private CS: CandidatesService,
     private AR: ActivatedRoute,
     private router: Router
   ) {
     //! remove ater, only for testing
-    this.SS.getAllPlatfomUsers().subscribe((users) => {
+    this.CS.getAllPlatfomUsers().subscribe((users) => {
       // Array of users
-      console.log('the value of the call is ', users[1]);
+      console.log('We have ', users.length + ' users');
     });
   }
 
@@ -32,11 +33,11 @@ export class StudentsComponent implements OnInit {
   columns: string[] = STUDENT_HEADER;
   ngOnInit(): void {
     // get all the studnets from the resolver
-    this.AR.data.subscribe((response: any) => {
-      var students = response.students;
-      console.log('the value of students ', students);
-      this.data = this.constructTableData(students);
-    });
+    // this.AR.data.subscribe((response: any) => {
+    //   var students = response.students;
+    //   console.log('the value of students ', students);
+    //   this.data = this.constructTableData(students);
+    // });
   }
 
   // make table data
