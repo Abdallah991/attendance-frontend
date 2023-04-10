@@ -11,27 +11,29 @@ import { StudentsService } from './services/students.service';
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss'],
 })
+
+// We use the gql tag to parse our query string into a query document
 export class StudentsComponent implements OnInit {
   constructor(
     private SS: StudentsService,
     private AR: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    //! remove ater, only for testing
+    this.SS.getAllPlatfomUsers().subscribe((users) => {
+      // Array of users
+      console.log('the value of the call is ', users[1]);
+    });
+  }
 
   // table data
   data: TableData[] = [];
   // table columns
   columns: string[] = STUDENT_HEADER;
-
   ngOnInit(): void {
-    var students: Student[] = [];
-    //! remove ater, only for testing
-    // commenting
-    this.SS.getUsers().then((value) => {
-      console.log('inside the page ', value);
-    });
+    // get all the studnets from the resolver
     this.AR.data.subscribe((response: any) => {
-      students = response.students;
+      var students = response.students;
       console.log('the value of students ', students);
       this.data = this.constructTableData(students);
     });

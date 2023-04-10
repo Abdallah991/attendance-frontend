@@ -4,35 +4,17 @@ import { Student } from 'src/app/models/Student';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { httpOptions, httpOptionsBioTime } from 'src/app/constants/constants';
-// import { getToken, getUser, getUserId } from 'src/app/constants/globalMethods';
-import { Apollo, gql, QueryRef } from 'apollo-angular';
+// Appolo libraries
+import { Apollo } from 'apollo-angular';
+import { GET_USERS } from 'src/app/constants/queries';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentsService {
-  private userOnly: QueryRef<{ users: any }>;
-
-  constructor(private http: HttpClient, private apollo: Apollo) {
-    this.userOnly = this.apollo.watchQuery({
-      query: gql`
-        query getUserInfo {
-          user {
-            email
-            firstName
-            lastName
-            phone: attrs(path: "Phone")
-            email
-            sessions {
-              final_score
-              updated_at
-            }
-          }
-        }
-      `,
-    });
-  }
+  constructor(private http: HttpClient, private apollo: Apollo) {}
 
   //  get students API call
   private getStudentsApi(): Observable<Student[]> {
@@ -54,41 +36,6 @@ export class StudentsService {
       console.log(err);
       return null;
     }
-  }
-
-  // get students call
-  public async getStudents(): Promise<Student[]> {
-    try {
-      // declare students array
-      var students: Student[];
-      // call the promise of the API
-      let promise = new Promise<any>(async (resolve, reject) => {
-        this.getStudentsApi().subscribe(
-          (students) => resolve(students),
-          (error) => reject(error)
-        );
-      });
-
-      // promise if its resolved or rejected
-      await promise
-        .then((value) => {
-          students = value;
-        })
-        .catch((err) => {
-          console.log('error message ', err);
-          if (err['status'] === 401) {
-            console.log('the error is authorization');
-            // this.getStudents();
-            // TODO: find a replacement for this method
-            window.location.reload();
-          }
-        });
-    } catch (err) {
-      console.log(err);
-    }
-
-    // return the students
-    return students;
   }
 
   // get student API
@@ -190,6 +137,7 @@ export class StudentsService {
     return null;
   }
 
+  // ! important
   // TODO: console log attendance from bio time
   // get attendance information
   public async getAttendance(): Promise<any> {
@@ -240,42 +188,18 @@ export class StudentsService {
       return null;
     }
   }
+  // ! important
 
-  // TODO: test 01 graphql
-  async getUsers(): Promise<any> {
-    const result = await this.userOnly.refetch();
-    return result.data;
+  // return an observable users can subscribe to
+  public getAllPlatfomUsers(): Observable<any> {
+    var data = this.apollo
+      .watchQuery<any>({
+        query: GET_USERS,
+      })
+      .valueChanges.pipe(map((result) => result.data.user));
+    return data;
   }
-  // // get applicants information
-  // private async getApplicantsData() {
-  //   try {
-  //     let query = `query getUserInfo {
 
-  //       user
-  //      {
-  //        email
-  //        firstName
-  //        lastName
-  //        phone:attrs(path:"Phone")
-  //        email
-  //        sessions {
-  //          final_score
-  //          updated_at
-  //        }
-  //      }
-
-  //        }`;
-  //     let response: any = await API.graphql(graphqlOperation(query));
-  //     console.log(response);
-  //     return response.data?.getAdminUser;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
-  // getAdminUser = (id: string): Observable<AdminUser> =>
-  //   from(this.getAdminUserByID(id)).pipe(
-  //     map((res) => res),
-  //     first()
-  //   );
+  //! check if this needs to be unsubscribed
+  ngOnDestroy() {}
 }

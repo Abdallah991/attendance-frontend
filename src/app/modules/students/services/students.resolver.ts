@@ -11,14 +11,14 @@ export class StudentsResolver implements Resolve<any> {
 
   resolve() {
     // get all students
-    return this.SS.getStudents()
-      .then((result) => {
-        var students: Student[] = result;
-        return students;
-      })
-      .catch((err) => {
-        console.log(err);
-        return null;
-      });
+    // return this.SS.getStudents()
+    //   .then((result) => {
+    //     var students: Student[] = result;
+    //     return students;
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     return null;
+    //   });
   }
 }
