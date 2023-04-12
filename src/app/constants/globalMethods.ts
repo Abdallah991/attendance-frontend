@@ -1,6 +1,7 @@
 import { formatDate } from '@angular/common';
 import { User } from '../models/User';
 import { platformToken } from './api';
+import moment from 'moment';
 
 //  format date
 export const formatYYYYDDMM = (date: Date): string =>
@@ -17,3 +18,13 @@ export const getUser = (): User => JSON.parse(sessionStorage.getItem('user'));
 
 // get UserId
 export const getUserId = (): string => sessionStorage.getItem('userID');
+//! date functions
+// get current Date
+export const getCurrentDate = (): string =>
+  moment().format('YYYY-MM-DD') + 'T00:00:00.000Z';
+// get the date before 7 days
+export const getDate7Days = (): string =>
+  moment().subtract(7, 'days').format('YYYY-MM-DD') + 'T00:00:00.000Z';
+// get the date of tomorrow
+export const getDateTomorrow = (): string =>
+  moment().add(1, 'days').format('YYYY-MM-DD') + 'T00:00:00.000Z';

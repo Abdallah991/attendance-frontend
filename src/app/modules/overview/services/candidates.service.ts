@@ -25,5 +25,18 @@ export class CandidatesService {
     );
     return data;
   }
+
+  // return an observable users can subscribe to
+  public getAllPlatfomUsersLastWeek(query: any): Observable<any> {
+    var data = from(
+      this.apollo.watchQuery<any>({
+        query: query,
+      }).valueChanges
+    ).pipe(
+      map((result) => result.data.user),
+      first()
+    );
+    return data;
+  }
   ngOnDestroy() {}
 }

@@ -15,17 +15,7 @@ import { CandidatesService } from '../overview/services/candidates.service';
 
 // We use the gql tag to parse our query string into a query document
 export class StudentsComponent implements OnInit {
-  constructor(
-    private CS: CandidatesService,
-    private AR: ActivatedRoute,
-    private router: Router
-  ) {
-    //! remove ater, only for testing
-    this.CS.getAllPlatfomUsers().subscribe((users) => {
-      // Array of users
-      console.log('We have ', users.length + ' users');
-    });
-  }
+  constructor(private AR: ActivatedRoute, private router: Router) {}
 
   // table data
   data: TableData[] = [];
