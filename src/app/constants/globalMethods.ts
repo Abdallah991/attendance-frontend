@@ -28,3 +28,12 @@ export const getDate7Days = (): string =>
 // get the date of tomorrow
 export const getDateTomorrow = (): string =>
   moment().add(1, 'days').format('YYYY-MM-DD') + 'T00:00:00.000Z';
+
+// get yesterday's date
+export const getDateYesterday = (): string =>
+  moment().subtract(1, 'days').format('YYYY-MM-DD') + 'T00:00:00.000Z';
+
+export const toTimestamp = (strDate) => {
+  const dt = Date.parse(strDate);
+  return dt / 1000;
+};

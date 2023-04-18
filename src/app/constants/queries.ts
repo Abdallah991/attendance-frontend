@@ -1,5 +1,4 @@
 import { gql } from 'apollo-angular';
-import { getCurrentDate, getDate7Days, getDateTomorrow } from './globalMethods';
 
 //? List of queries
 // 1- get all users
@@ -10,10 +9,11 @@ export const GET_USERS = gql`
       firstName
       lastName
       phone: attrs(path: "Phone")
+      createdAt
       email
       sessions {
         final_score
-        updated_at
+        createdAt
       }
     }
   }
@@ -21,35 +21,26 @@ export const GET_USERS = gql`
 
 // 2- get applicants last week
 //! the dates have to be dynamic
-export const GET_USERS_SIGNED_RANGED_7 = gql`
-  query users {
-    user(
-      where: {
-        createdAt: {
-          _gte: ${getDate7Days()} ,
-          _lte: ${getCurrentDate()}
-        }
-      }
-    ) {
+export const GET_USERS_SIGNED_RANGED = gql`
+  query users($currentDate: timestamptz!, $previousDate: timestamptz!) {
+    user(where: { createdAt: { _gte: $previousDate, _lte: $currentDate } }) {
       id
       attrs
+      createdAt
+      sessions {
+        final_score
+        createdAt
+      }
     }
   }
 `;
 
 // 3- get applicants applied in the last 24 hours.
-export const GET_USERS_SIGNED_RANGED_1 = gql`
-  query users {
-    user(
-      where: {
-        createdAt: {
-          _gte: ${getCurrentDate()} ,
-          _lte: ${getDateTomorrow()}
-        }
-      }
-    ) {
-      id
-      attrs
-    }
-  }
-`;
+// export const GET_USERS_SIGNED_RANGED_1 = gql`
+//   query users {
+//     user(where: { createdAt: { _gte: $currentDate, _lte: $tomorrowDate } }) {
+//       id
+//       attrs
+//     }
+//   }
+// `;

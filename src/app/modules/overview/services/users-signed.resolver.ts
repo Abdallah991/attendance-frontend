@@ -3,7 +3,7 @@ import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { CandidatesService } from './candidates.service';
 import { catchError, first } from 'rxjs/operators';
-import { GET_USERS_SIGNED_RANGED_7 } from 'src/app/constants/queries';
+import { getCurrentDate, getDate7Days } from 'src/app/constants/globalMethods';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,10 @@ export class UsersSignedResolver implements Resolve<boolean> {
 
   resolve(): Observable<any> {
     // get all students
-    return this.CS.getAllPlatfomUsersLastWeek(GET_USERS_SIGNED_RANGED_7).pipe(
+    return this.CS.getAllUsersWithDateRange(
+      getDate7Days(),
+      getCurrentDate()
+    ).pipe(
       catchError((error) => {
         return of('No data');
       }),

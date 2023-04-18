@@ -7,7 +7,6 @@ import {
 } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 import { setContext } from '@apollo/client/link/context';
-import { http01Options } from './constants/constants';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformToken } from './constants/api';
