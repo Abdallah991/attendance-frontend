@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { CandidatesService } from './candidates.service';
+import { CandidatesService } from './overview.service';
 import { catchError, first } from 'rxjs/operators';
 import { getCurrentDate, getDate7Days } from 'src/app/constants/globalMethods';
 

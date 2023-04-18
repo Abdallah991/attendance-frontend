@@ -25,8 +25,7 @@ export const PERMISSIN: SelectData[] = [
   { id: 'Operation', text: 'No' },
 ];
 
-export const bioTimeToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6IkFiZGFsbGFoIiwiZXhwIjoxNjgxMTEzMzMzLCJlbWFpbCI6ImFiZGFsbGFoLmFsYXRoYW1uZWhAcmVib290MDEuY29tIiwib3JpZ19pYXQiOjE2ODA1MDg1MzN9.vdjmAdVkf9mKRpla1l-TL-rSTUjwjy2lfh18OM2v43o';
+export const bioTimeToken = '48e111ccd207225fff4b28cc5f7e6d68acf6b479';
 
 export const httpOptionsBioTime = new HttpHeaders({
   'Content-Type': 'application/json',

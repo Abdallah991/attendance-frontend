@@ -5,7 +5,7 @@ import { STUDENT_HEADER } from 'src/app/constants/headers';
 import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
 import { Student } from 'src/app/models/Student';
 import { StudentsService } from './services/students.service';
-import { CandidatesService } from '../overview/services/candidates.service';
+import { CandidatesService } from '../overview/services/overview.service';
 
 @Component({
   selector: 'app-students',

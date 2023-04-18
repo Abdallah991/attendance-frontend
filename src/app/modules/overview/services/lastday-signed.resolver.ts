@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
-import { CandidatesService } from './candidates.service';
+import { CandidatesService } from './overview.service';
 import {
   getDateTomorrow,
   getDateYesterday,

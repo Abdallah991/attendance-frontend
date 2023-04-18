@@ -2,21 +2,18 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { OverviewComponent } from './overview.component';
-import { CandidatesResolver } from './services/overview.resolver';
-import { UsersSignedResolver } from './services/users-signed.resolver';
-import { LastdaySignedResolver } from './services/lastday-signed.resolver';
+import { CandidatesComponent } from './candidates.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: OverviewComponent,
+    component: CandidatesComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: {
       // TODO: add resolvers
-      candidates: CandidatesResolver,
-      signedUsers: UsersSignedResolver,
-      latestSignedUsers: LastdaySignedResolver,
+      //   candidates: CandidatesResolver,
+      //   signedUsers: UsersSignedResolver,
+      //   latestSignedUsers: LastdaySignedResolver,
     },
   },
 ];
@@ -25,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes), CommonModule, ReactiveFormsModule],
   exports: [RouterModule],
 })
-export class OverviewRoutingModule {}
+export class CandidatesRoutingModule {}
