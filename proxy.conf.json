@@ -1,0 +1,6 @@
+{
+    "/api": {
+    "target": "http://10.1.50.4",
+    "secure": false
+    }
+    }

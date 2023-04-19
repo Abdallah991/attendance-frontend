@@ -38,6 +38,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/events/events.module').then((m) => m.EventsModule),
       },
+      {
+        // candidates routes
+        path: 'candidates',
+        loadChildren: () =>
+          import('./modules/candidates/candidates.module').then(
+            (m) => m.CandidatesModule
+          ),
+      },
     ],
   },
   {

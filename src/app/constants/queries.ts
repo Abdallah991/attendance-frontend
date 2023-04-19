@@ -13,7 +13,6 @@ export const GET_USERS = gql`
       email
       sessions {
         final_score
-        createdAt
       }
     }
   }
@@ -22,14 +21,13 @@ export const GET_USERS = gql`
 // 2- get applicants last week
 //! the dates have to be dynamic
 export const GET_USERS_SIGNED_RANGED = gql`
-  query users($currentDate: timestamptz!, $previousDate: timestamptz!) {
+  query allUsers($currentDate: timestamptz!, $previousDate: timestamptz!) {
     user(where: { createdAt: { _gte: $previousDate, _lte: $currentDate } }) {
       id
       attrs
       createdAt
       sessions {
         final_score
-        createdAt
       }
     }
   }

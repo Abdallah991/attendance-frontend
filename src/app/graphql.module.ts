@@ -1,49 +1,27 @@
 import { NgModule } from '@angular/core';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
-import {
-  ApolloClientOptions,
-  InMemoryCache,
-  ApolloLink,
-} from '@apollo/client/core';
+import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
-import { setContext } from '@apollo/client/link/context';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
 import { platformToken } from './constants/api';
 
 const uri = 'https://learn.reboot01.com/api/graphql-engine/v1/graphql'; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
-  // define the cache
-  const cache = new InMemoryCache({});
-  // create http
-  const http = httpLink.create({
-    uri: uri,
-  });
-
+  const basic = setContext((operation, context) => ({
+    headers: {
+      Accept: 'charset=utf-8',
+    },
+  }));
   return {
-    assumeImmutableResults: true,
-    cache,
-    link: ApolloLink.from([basicContext, http]),
-    defaultOptions: {
-      watchQuery: {
-        errorPolicy: 'all',
-      },
+    link: httpLink.create({ uri }),
+    cache: new InMemoryCache(),
+    headers: {
+      Authorization: 'Bearer ' + platformToken,
+      'Content-Type': 'application/json',
     },
   };
 }
 
-const basicContext = setContext((_, { headers }) => {
-  // set the context
-  return {
-    headers: {
-      authorization: 'Bearer ' + platformToken,
-      'Content-Type': 'application/json',
-    },
-  };
-});
-
 @NgModule({
-  imports: [BrowserModule, HttpClientModule, ApolloModule],
   exports: [ApolloModule],
   providers: [
     {
@@ -54,3 +32,8 @@ const basicContext = setContext((_, { headers }) => {
   ],
 })
 export class GraphQLModule {}
+function setContext(
+  arg0: (operation: any, context: any) => { headers: { Accept: string } }
+) {
+  throw new Error('Function not implemented.');
+}

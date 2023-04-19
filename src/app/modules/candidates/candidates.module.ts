@@ -3,9 +3,15 @@ import { CommonModule } from '@angular/common';
 import { CandidatesComponent } from './candidates.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/components/shared.module';
+import { CandidatesRoutingModule } from './candidates-routing.module';
 
 @NgModule({
   declarations: [CandidatesComponent],
-  imports: [CommonModule, SharedModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
+    CandidatesRoutingModule,
+  ],
 })
 export class CandidatesModule {}

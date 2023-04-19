@@ -1,7 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { SelectData } from '../interfaces/interfaces';
-import { get01Token, getToken } from './globalMethods';
-import { platformToken } from './api';
+import { getToken } from './globalMethods';
+import { bioTimeToken, platformToken } from './api';
 
 export const httpOptions = new HttpHeaders({
   'Content-Type': 'application/json',
@@ -25,12 +25,10 @@ export const PERMISSIN: SelectData[] = [
   { id: 'Operation', text: 'No' },
 ];
 
-export const bioTimeToken = '48e111ccd207225fff4b28cc5f7e6d68acf6b479';
-
 export const httpOptionsBioTime = new HttpHeaders({
   'Content-Type': 'application/json',
-  Authorization: 'Bearer ' + bioTimeToken,
-  'Access-Control-Allow-Origin': '*',
+  Authorization: 'Token ' + bioTimeToken,
+  // 'Access-Control-Allow-Origin': '*',
 });
 
 export const http01Options = new HttpHeaders({
