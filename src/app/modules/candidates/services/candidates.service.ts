@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BIO_ATTENDANCE_API } from 'src/app/constants/api';
+import { BIO_ATTENDANCE_API, DEPARTMENT_API } from 'src/app/constants/api';
 import { httpOptionsBioTime } from 'src/app/constants/constants';
 
 @Injectable({
@@ -15,17 +15,23 @@ export class CandidatesService {
   private getDepartmentsAPI(): Observable<any> {
     try {
       // get the data from the url
-      return this.http
-        .get<any[]>(BIO_ATTENDANCE_API, { headers: httpOptionsBioTime })
+      var http = this.http
+        .get<any>(DEPARTMENT_API, { headers: httpOptionsBioTime })
         .pipe(map((data) => data));
+      http.subscribe((data) => {
+        console.log(data);
+      });
+      console.log(http);
+      return http;
     } catch (err) {
+      console.log(err);
       // disable the loader and return if there is an error
       return null;
     }
   }
 
   // get departments
-  public async getDepartments(): Promise<any[]> {
+  public async getDepartments(): Promise<any> {
     // call the promise of the API
     let promise = new Promise<any>(async (resolve, reject) => {
       this.getDepartmentsAPI().subscribe(
