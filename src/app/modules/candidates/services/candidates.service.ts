@@ -2,7 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BIO_ATTENDANCE_API, DEPARTMENT_API } from 'src/app/constants/api';
+import {
+  ATTENDNACE_API,
+  BIO_ATTENDANCE_API,
+  DEPARTMENT_API,
+} from 'src/app/constants/api';
 import { httpOptionsBioTime } from 'src/app/constants/constants';
 
 @Injectable({
@@ -12,12 +16,10 @@ export class CandidatesService {
   constructor(private http: HttpClient) {}
 
   // get departments api
-  private getDepartmentsAPI(): Observable<any> {
+  getCandidatesAPI(): Observable<any> {
     try {
       // get the data from the url
-      var http = this.http
-        .get<any>(DEPARTMENT_API, { headers: httpOptionsBioTime })
-        .pipe(map((data) => data));
+      var http = this.http.get<any>(ATTENDNACE_API).pipe(map((data) => data));
       http.subscribe((data) => {
         console.log(data);
       });
@@ -31,10 +33,10 @@ export class CandidatesService {
   }
 
   // get departments
-  public async getDepartments(): Promise<any> {
+  public async getCandidates(): Promise<any> {
     // call the promise of the API
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.getDepartmentsAPI().subscribe(
+      this.getCandidatesAPI().subscribe(
         (roles) => resolve(roles),
         (error) => reject(error)
       );
@@ -43,6 +45,7 @@ export class CandidatesService {
     // promise if its resolved or rejected
     await promise
       .then((value) => {
+        console.log(value);
         return value;
       })
       .catch((err) => {

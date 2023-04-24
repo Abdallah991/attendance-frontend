@@ -51,8 +51,8 @@
 >
   <button
     class="btn rounded-xl bg-primary outline-none disabled:outline-none"
-    (click)="back()"
-    [disabled]="disableBack"
+    (click)="backButton()"
+    [disabled]="BACKWARD"
   >
     «
   </button>
@@ -61,8 +61,8 @@
   </button>
   <button
     class="btn rounded-xl bg-primary outline-none disabled:outline-none disabled:rounded-xl"
-    (click)="forward()"
-    [disabled]="disableForward"
+    (click)="nextButton()"
+    [disabled]="FORWARD"
   >
     »
   </button>

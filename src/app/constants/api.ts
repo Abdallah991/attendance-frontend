@@ -16,10 +16,11 @@ export const USER_API = ROOTLINK + '/users';
 export const LOGOUT_API = ROOTLINK + '/logout';
 // 6- Students API
 export const COHORT_API = ROOTLINK + '/cohorts';
+// 7- Attendnace API
+export const ATTENDNACE_API = ROOTLINK + '/attendance';
 //
-//
-//? Bio time APIs
-// TODO: Connect it when its set up.
+
+// TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer
 export const BIO_ATTENDANCE_API = 'http://10.1.50.4:80';
 // 1- Department API
@@ -28,6 +29,7 @@ export const DEPARTMENT_API =
 //
 //? 01 platform Token and API
 //! the token is taken from ../api/auth/token
+// TODO: Remove API and Token
 // API for candidates
 export const platformToken =
   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMCIsImlhdCI6MTY4MTg4ODcxNiwiaXAiOiIxMC4xLjIwMS4xMDQsIDE3Mi4xOC4wLjIiLCJleHAiOjE2ODIzMjA3MTYsImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJ1c2VyIiwiYWRtaW5fcmVhZF9vbmx5Il0sIngtaGFzdXJhLWNhbXB1c2VzIjoie30iLCJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJhZG1pbl9yZWFkX29ubHkiLCJ4LWhhc3VyYS11c2VyLWlkIjoiMTAiLCJ4LWhhc3VyYS10b2tlbi1pZCI6IjNmNWMzMGMzLTc2NTgtNDhiNS1hYTljLTE4ZjllNjI1OTM4YiJ9fQ.A9AGoCdgPlBKiCepupyvlOD_psEr3N1t2BbHwh-sG8s';
