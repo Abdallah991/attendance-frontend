@@ -1,69 +1,76 @@
-<div class="overflow-x-auto shadow-lg rounded-xl">
-  <table class="table w-full">
-    <thead>
-      <tr>
-        <th
-          class="bg-primary text-base-100 normal-case font-normal rounded-none"
-          *ngFor="let column of columns"
-        >
-          {{ column || "NULL" }}
-        </th>
-        <!-- if there is a button show -->
-        <th class="bg-primary rounded-none" *ngIf="actionButtons"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let items of dataShown">
-        <td
-          class="text-tertiary"
-          *ngFor="let item of items.data"
-          [innerHTML]="item || 'NULL'"
-        ></td>
-        <td class="flex justify-evenly items-center" *ngIf="actionButtons">
-          <app-button
-            color="btn-primary"
-            textColor="text-base-100"
-            *ngIf="items.actionButtons?.edit?.isActive"
-            [xSmall]="true"
-            text="Edit"
-            (onClick)="clickEdit(items.id)"
-            [text]="items.actionButtons?.edit.text"
-            class="min-w-[100px]"
-          ></app-button>
-          <app-button
-            color="btn-outline"
-            textColor="text-base-100"
-            *ngIf="items.actionButtons?.delete?.isActive"
-            [xSmall]="true"
-            text="Delete"
-            (onClick)="clickDelete(items.id)"
-            [text]="items.actionButtons?.delete.text"
-            class="min-w-[100px]"
-          ></app-button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div *ngIf="!loader">
+  <div class="overflow-x-auto shadow-lg rounded-xl">
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th
+            class="bg-primary text-base-100 normal-case font-normal rounded-none"
+            *ngFor="let column of columns"
+          >
+            {{ column || "NULL" }}
+          </th>
+          <!-- if there is a button show -->
+          <th class="bg-primary rounded-none" *ngIf="actionButtons"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let items of data">
+          <td
+            class="text-tertiary"
+            *ngFor="let item of items.data"
+            [innerHTML]="item || 'NULL'"
+          ></td>
+          <td class="flex justify-evenly items-center" *ngIf="actionButtons">
+            <app-button
+              color="btn-primary"
+              textColor="text-base-100"
+              *ngIf="items.actionButtons?.edit?.isActive"
+              [xSmall]="true"
+              text="Edit"
+              (onClick)="clickEdit(items.id)"
+              [text]="items.actionButtons?.edit.text"
+              class="min-w-[100px]"
+            ></app-button>
+            <app-button
+              color="btn-outline"
+              textColor="text-base-100"
+              *ngIf="items.actionButtons?.delete?.isActive"
+              [xSmall]="true"
+              text="Delete"
+              (onClick)="clickDelete(items.id)"
+              [text]="items.actionButtons?.delete.text"
+              class="min-w-[100px]"
+            ></app-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    class="btn-group mt-8 w-full flex justify-end rounded-xl outline-none disabled:outline-none disabled:rounded-xl"
+    *ngIf="showPagination"
+  >
+    <button
+      class="btn rounded-xl bg-primary outline-none disabled:outline-none"
+      (click)="backButton()"
+      [disabled]="disableBackward"
+    >
+      «
+    </button>
+    <button
+      class="btn rounded-xl bg-primary outline-none disabled:outline-none"
+    >
+      {{ currentPage }}
+    </button>
+    <button
+      class="btn rounded-xl bg-primary outline-none disabled:outline-none disabled:rounded-xl"
+      (click)="nextButton()"
+      [disabled]="disableForward"
+    >
+      »
+    </button>
+  </div>
 </div>
-<div
-  class="btn-group mt-8 w-full flex justify-end rounded-xl outline-none disabled:outline-none disabled:rounded-xl"
-  *ngIf="showPagination"
->
-  <button
-    class="btn rounded-xl bg-primary outline-none disabled:outline-none"
-    (click)="backButton()"
-    [disabled]="BACKWARD"
-  >
-    «
-  </button>
-  <button class="btn rounded-xl bg-primary outline-none disabled:outline-none">
-    {{ currentPage }}
-  </button>
-  <button
-    class="btn rounded-xl bg-primary outline-none disabled:outline-none disabled:rounded-xl"
-    (click)="nextButton()"
-    [disabled]="FORWARD"
-  >
-    »
-  </button>
+<div class="p-4" *ngIf="loader">
+  <app-loader></app-loader>
 </div>

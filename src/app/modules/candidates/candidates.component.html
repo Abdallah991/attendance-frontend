@@ -7,6 +7,7 @@
       (onClick)="addUser()"
     ></app-button> -->
 </div>
+
 <div class="p-4">
   <app-table
     [columns]="columns"
@@ -16,5 +17,10 @@
     [numberOfPages]="numberOfPages"
     [showPagination]="true"
     [currentPage]="currentPage"
+    (forward)="forawrdPagination($event)"
+    (backward)="backwardPagination($event)"
+    [disableForward]="disableForward"
+    [disableBackward]="disableBackward"
+    [loader]="loader"
   ></app-table>
 </div>

@@ -32,8 +32,15 @@ export class TableComponent implements OnInit {
   @Input() numberOfPages: number;
   // show pagination
   @Input() showPagination: boolean = false;
+  // disable pagination forward
+  @Input() disableForward: boolean = true;
+  // disable paginationbackward
+  @Input() disableBackward: boolean = false;
   // currentPage
   @Input() currentPage: number = 1;
+  // pagination laoder
+  @Input() loader: boolean = false;
+
   @Output() forward = new EventEmitter<number>();
   @Output() backward = new EventEmitter<number>();
 
@@ -43,8 +50,9 @@ export class TableComponent implements OnInit {
     // Pagination
     // get the number of pages
     // pagination action
-    this.paginateAction();
+    // this.paginateAction();
     // console.log(this.data);
+    // this.dataShown = this.data;
   }
 
   // edit click implementation
@@ -56,9 +64,9 @@ export class TableComponent implements OnInit {
   // search functionality
   // pagination variables
   // currentPage = 1;
-  FORWARD = true;
-  BACKWARD = false;
-  dataShown: TableData[] = [];
+  // disableForward = true;
+  // disableBackward = false;
+  // dataShown: TableData[] = [];
 
   // on change, fire search function
   ngOnChanges(changes: SimpleChanges) {
@@ -81,28 +89,50 @@ export class TableComponent implements OnInit {
   }
   // pagination back action
   backButton() {
+    if (this.currentPage >= 2) {
+      this.currentPage--;
+    }
+    // if (this.currentPage > 2) {
+    //   this.currentPage--;
+    // }
     this.backward.emit(this.currentPage);
+    // this.dataShown = this.data;
     this.paginateAction();
   }
 
   // pagination forward action
   nextButton() {
+    if (this.currentPage >= 1) {
+      this.currentPage++;
+    }
+    // console.log(this.currentPage);
     this.forward.emit(this.currentPage);
     this.paginateAction();
+    // this.dataShown = this.data;
   }
 
   // pagination click action
   paginateAction() {
-    // // data shown formula
-    this.dataShown = this.data;
-    // this.dataShown = this.data.slice(
-    //   (this.currentPage - 1) * 10,
-    //   this.currentPage * 10 - 1
-    // );
-    // disable buttons conditions on change
-    this.FORWARD = this.numberOfPages > this.currentPage ? false : true;
-    this.BACKWARD = this.currentPage > 1 ? false : true;
-    this.showPagination = true;
+    switch (this.currentPage) {
+      // first page
+      case 1:
+        this.disableBackward = true;
+        if (this.currentPage == this.numberOfPages) {
+          this.disableForward = true;
+        } else {
+          this.disableForward = false;
+        }
+        break;
+      // case of the current page being equal to the number of pages
+      case this.numberOfPages:
+        this.disableForward = true;
+        this.disableBackward = false;
+        break;
+      // every time
+      default:
+        this.disableForward = false;
+        this.disableBackward = false;
+    }
   }
 
   // search functionality

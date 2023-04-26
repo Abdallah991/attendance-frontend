@@ -5,19 +5,21 @@
 //!Staging Environemnt
 const ROOTLINK = 'http://127.0.0.1:8000/api';
 // 1- Students API
-export const STUDENT_API = ROOTLINK + '/students';
+export const STUDENT_API = ROOTLINK + '/students/';
 // 2- Register API
-export const REGISTER_API = ROOTLINK + '/register';
+export const REGISTER_API = ROOTLINK + '/register/';
 // 3-login API
-export const LOGIN_API = ROOTLINK + '/login';
+export const LOGIN_API = ROOTLINK + '/login/';
 // 4- Users API
-export const USER_API = ROOTLINK + '/users';
+export const USER_API = ROOTLINK + '/users/';
 // 5- logout API
-export const LOGOUT_API = ROOTLINK + '/logout';
+export const LOGOUT_API = ROOTLINK + '/logout/';
 // 6- Students API
-export const COHORT_API = ROOTLINK + '/cohorts';
+export const COHORT_API = ROOTLINK + '/cohorts/';
 // 7- Attendnace API
-export const ATTENDNACE_API = ROOTLINK + '/attendance';
+export const ATTENDNACE_API = ROOTLINK + '/attendance/';
+// 8- Candidates API
+export const CANDIDATE_API = ROOTLINK + '/candidate/';
 //
 
 // TODO: Remove API and TOKEN
@@ -32,7 +34,7 @@ export const DEPARTMENT_API =
 // TODO: Remove API and Token
 // API for candidates
 export const platformToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMCIsImlhdCI6MTY4MTg4ODcxNiwiaXAiOiIxMC4xLjIwMS4xMDQsIDE3Mi4xOC4wLjIiLCJleHAiOjE2ODIzMjA3MTYsImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJ1c2VyIiwiYWRtaW5fcmVhZF9vbmx5Il0sIngtaGFzdXJhLWNhbXB1c2VzIjoie30iLCJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJhZG1pbl9yZWFkX29ubHkiLCJ4LWhhc3VyYS11c2VyLWlkIjoiMTAiLCJ4LWhhc3VyYS10b2tlbi1pZCI6IjNmNWMzMGMzLTc2NTgtNDhiNS1hYTljLTE4ZjllNjI1OTM4YiJ9fQ.A9AGoCdgPlBKiCepupyvlOD_psEr3N1t2BbHwh-sG8s';
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMCIsImlhdCI6MTY4MjUxMjgyMCwiaXAiOiIxMC4xLjIwMS4xMDQsIDE3Mi4xOC4wLjIiLCJleHAiOjE2ODI5NDQ4MjAsImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJ1c2VyIiwiYWRtaW5fcmVhZF9vbmx5Il0sIngtaGFzdXJhLWNhbXB1c2VzIjoie30iLCJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJhZG1pbl9yZWFkX29ubHkiLCJ4LWhhc3VyYS11c2VyLWlkIjoiMTAiLCJ4LWhhc3VyYS10b2tlbi1pZCI6IjYzNmYyZjM2LTAyNTYtNDdhNS1iZWRjLTlhMTQ2ZDdlMmU1MyJ9fQ.05I2n6FDmsWTTUs3YB2MFkq9cnzsLEQRQTzpjetUcSA';
 
 export const bioTimeToken = '48e111ccd207225fff4b28cc5f7e6d68acf6b479';
 // Platfom graph ql API
