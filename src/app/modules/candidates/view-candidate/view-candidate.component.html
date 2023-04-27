@@ -1,0 +1,38 @@
+<div class="p-4">
+  <h1>Candidate</h1>
+  <div class="mt-2">
+    <h2 class="text-xl font-bold">{{ candidate.full_name }}</h2>
+  </div>
+  <div class="flex flex-row flex-wrap mt-4 flex-4 align-center">
+    <h1>Attendance Records</h1>
+    <h2 class="text-[#848484] align-text-top">
+      attended {{ attendance.length }} times
+    </h2>
+  </div>
+  <div class="mt-2">
+    <ul>
+      <li *ngFor="let record of attendance">
+        <div class="flex flex-row flex-wrap">
+          <h2>
+            {{ formateDate(record["punch_time"]).date
+            }}<span class="text-[#848484] font-thin pl-2">
+              {{ formateDate(record["punch_time"]).time }}</span
+            >
+          </h2>
+          <h2
+            class="ml-8 text-[#13ce66]"
+            *ngIf="record['terminal_alias'] === 'InnoRe'"
+          >
+            Innovation Realm
+          </h2>
+          <h2
+            class="ml-8 text-[#ff7849]"
+            *ngIf="record['terminal_alias'] === 'HelloWorld'"
+          >
+            Hello World
+          </h2>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

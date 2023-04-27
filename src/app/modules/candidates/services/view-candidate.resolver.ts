@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { CandidatesService } from './candidates.service';
 import { catchError, first } from 'rxjs/operators';
@@ -7,12 +7,15 @@ import { catchError, first } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class CandidatesResolver implements Resolve<any> {
+export class ViewCandidateResolver implements Resolve<any> {
   constructor(private CS: CandidatesService) {}
 
-  resolve(): Observable<any> {
-    // get all students
-    return this.CS.getCandidates().pipe(
+  resolve(route: ActivatedRouteSnapshot): Observable<any> {
+    let candidateId = route.params.candidateId;
+    console.log('the candidates emp_code ', candidateId);
+
+    // get all candidate
+    return this.CS.getCandidateById(candidateId).pipe(
       catchError((error) => {
         return of('No data');
       }),

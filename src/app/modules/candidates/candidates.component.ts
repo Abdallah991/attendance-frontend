@@ -60,16 +60,23 @@ export class CandidatesComponent implements OnInit {
       console.log(this.numberOfPages);
       this.data = this.constructTableData(this.candidates);
     });
+
+    this.CS.searchCandidate('what');
   }
 
   // make table data
   constructTableData(candidates: any[]): TableData[] {
     return candidates.map((res) => {
+      // console.log(res);
       return {
         // the id, to return back for edit or delete events
         id: res['emp_code'],
         // the data displayed in each row
-        data: [res['id'], res['full_name'], res['department']['dept_name']],
+        data: [
+          res['emp_code'],
+          res['full_name'],
+          res['department']['dept_name'],
+        ],
         // the action buttons
         actionButtons: this.constructTableButton(),
       };
@@ -161,6 +168,6 @@ export class CandidatesComponent implements OnInit {
   }
 
   viewCandidate(id) {
-    this.router.navigateByUrl('/ candidates/view-candidate/' + id);
+    this.router.navigateByUrl('/candidates/view-candidate/' + id);
   }
 }

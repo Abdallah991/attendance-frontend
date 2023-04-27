@@ -20,7 +20,8 @@ export const COHORT_API = ROOTLINK + '/cohorts/';
 export const ATTENDNACE_API = ROOTLINK + '/attendance/';
 // 8- Candidates API
 export const CANDIDATE_API = ROOTLINK + '/candidate/';
-//
+// 9- Candidate Info API
+export const CANDIDATE_INFO_API = ROOTLINK + '/candidate-info/';
 
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer

@@ -7,6 +7,9 @@ import moment from 'moment';
 export const formatYYYYDDMM = (date: Date): string =>
   formatDate(date, 'yyyy-MM-dd', 'en');
 
+export const formatYYYYDDMMHHMM = (date: Date): string =>
+  formatDate(date, 'yyyy-MM-dd HH:mm', 'en');
+
 // get token
 export const getToken = (): string => sessionStorage.getItem('signinToken');
 
