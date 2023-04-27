@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { getCurrentDate } from 'src/app/constants/globalMethods';
-import { GET_USERS, GET_USERS_SIGNED_RANGED } from 'src/app/constants/queries';
+// import { GET_USERS, GET_USERS_SIGNED_RANGED } from 'src/app/constants/queries';
 
 @Injectable({
   providedIn: 'root',

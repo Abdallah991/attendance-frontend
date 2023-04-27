@@ -7,13 +7,14 @@ import { map } from 'rxjs/operators';
 
 import { httpOptions } from 'src/app/constants/constants';
 // Appolo libraries
-import { Apollo } from 'apollo-angular';
+// import { Apollo } from 'apollo-angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentsService {
-  constructor(private http: HttpClient, private apollo: Apollo) {}
+  constructor(private http: HttpClient) //  private apollo: Apollo
+  {}
 
   //  get students API call
   private getStudentsApi(): Observable<Student[]> {
