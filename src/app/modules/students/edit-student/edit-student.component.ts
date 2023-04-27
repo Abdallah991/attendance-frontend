@@ -6,7 +6,7 @@ import { formatYYYYDDMM } from 'src/app/constants/globalMethods';
 import { SelectData } from 'src/app/interfaces/interfaces';
 import { Cohort } from 'src/app/models/Cohort';
 import { Student } from 'src/app/models/Student';
-import { StudentsService } from '../services/students.service';
+// import { StudentsService } from '../services/students.service';
 
 @Component({
   selector: 'app-edit-student',
@@ -41,7 +41,7 @@ export class EditStudentComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private SS: StudentsService,
+    // private SS: StudentsService,
     private router: Router,
     private AR: ActivatedRoute
   ) {
@@ -88,19 +88,19 @@ export class EditStudentComponent implements OnInit {
   }
 
   addStudent() {
-    this.SS.addStudent(this.studentForm.value)
-      .then((val) => {
-        this.showSuccessDialog(
-          'Success!',
-          'The student has been added successfully',
-          'Dismiss'
-        );
-        this.loader = false;
-      })
-      .catch((err) => {
-        console.log('ERROR ', err);
-        this.showSuccessDialog('Failure!', 'There was an Error', 'Dismiss');
-      });
+    // this.SS.addStudent(this.studentForm.value)
+    //   .then((val) => {
+    //     this.showSuccessDialog(
+    //       'Success!',
+    //       'The student has been added successfully',
+    //       'Dismiss'
+    //     );
+    //     this.loader = false;
+    //   })
+    //   .catch((err) => {
+    //     console.log('ERROR ', err);
+    //     this.showSuccessDialog('Failure!', 'There was an Error', 'Dismiss');
+    //   });
   }
 
   editStudent() {
@@ -116,19 +116,19 @@ export class EditStudentComponent implements OnInit {
       gender: this.studentForm.controls.gender.value,
       nationality: this.studentForm.controls.nationality.value,
     };
-    this.SS.updateStudent(studentUpdateInput)
-      .then((val) => {
-        this.showSuccessDialog(
-          'Success!',
-          'The student has been updated successfully',
-          'Dismiss'
-        );
-        this.loader = false;
-      })
-      .catch((err) => {
-        console.log('ERROR ', err);
-        this.showSuccessDialog('Failure!', 'There was an Error', 'Dismiss');
-      });
+    // this.SS.updateStudent(studentUpdateInput)
+    //   .then((val) => {
+    //     this.showSuccessDialog(
+    //       'Success!',
+    //       'The student has been updated successfully',
+    //       'Dismiss'
+    //     );
+    //     this.loader = false;
+    //   })
+    //   .catch((err) => {
+    //     console.log('ERROR ', err);
+    //     this.showSuccessDialog('Failure!', 'There was an Error', 'Dismiss');
+    //   });
   }
 
   // get the value of single select

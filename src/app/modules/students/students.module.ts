@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StudentsComponent } from './students.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StudentsRoutingModule } from './students-routing.module';
-import { StudentsService } from './services/students.service';
+// import { StudentsService } from './services/students.service';
 import { StudentsResolver } from './services/students.resolver';
 import { SharedModule } from 'src/app/components/shared.module';
 import { EditStudentComponent } from './edit-student/edit-student.component';
@@ -16,6 +16,9 @@ import { EditStudentComponent } from './edit-student/edit-student.component';
     StudentsRoutingModule,
     SharedModule,
   ],
-  providers: [StudentsService, StudentsResolver],
+  providers: [
+    // StudentsService,
+    StudentsResolver,
+  ],
 })
 export class StudentsModule {}
