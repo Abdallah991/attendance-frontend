@@ -13,14 +13,14 @@ export class UsersSignedResolver implements Resolve<boolean> {
 
   resolve(): Observable<any> {
     // get all students
-    return this.OS.getAllUsersWithDateRange(
-      getDate7Days(),
-      getCurrentDate()
-    ).pipe(
-      catchError((error) => {
-        return of('No data');
-      }),
-      first()
-    );
+    // return this.OS.getAllUsersWithDateRange(
+    //   getDate7Days(),
+    //   getCurrentDate()
+    // ).pipe(
+    //   catchError((error) => {
+    return of('No data');
+    //   }),
+    //   first()
+    // );
   }
 }

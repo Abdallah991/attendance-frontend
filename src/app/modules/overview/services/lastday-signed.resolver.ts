@@ -16,14 +16,14 @@ export class LastdaySignedResolver implements Resolve<boolean> {
 
   resolve(): Observable<any> {
     // get all students
-    return this.OS.getAllUsersWithDateRange(
-      getDateYesterday(),
-      getDateTomorrow()
-    ).pipe(
-      catchError((error) => {
-        return of('No data');
-      }),
-      first()
-    );
+    // return this.OS.getAllUsersWithDateRange(
+    //   getDateYesterday(),
+    //   getDateTomorrow()
+    // ).pipe(
+    //   catchError((error) => {
+    return of('No data');
+    //   }),
+    //   first()
+    // );
   }
 }

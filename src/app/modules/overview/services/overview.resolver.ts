@@ -8,16 +8,17 @@ import { catchError, first } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class OverviewResolver implements Resolve<any> {
-  constructor(private OS: OverviewService) {}
+  // constructor(private OS: OverviewService) {}
 
   resolve(): Observable<any> {
-    // get all students
-    return this.OS.getAllPlatfomUsers().pipe(
-      catchError((error) => {
-        console.log(error);
-        return of('No data');
-      }),
-      first()
-    );
+    //   // get all students
+    //   return this.OS.getAllPlatfomUsers().pipe(
+    //     catchError((error) => {
+    //       console.log(error);
+    return of('No data');
+    //     }),
+    //     first()
+    //   );
+    // return 'No data';
   }
 }
