@@ -14,7 +14,7 @@ export class ViewCandidateResolver implements Resolve<any> {
     let candidateId = route.params.candidateId;
     console.log('the candidates emp_code ', candidateId);
 
-    // get all candidate
+    // get candidate by Id
     return this.CS.getCandidateById(candidateId).pipe(
       catchError((error) => {
         return of('No data');

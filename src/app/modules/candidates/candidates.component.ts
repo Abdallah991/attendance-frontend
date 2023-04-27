@@ -32,10 +32,7 @@ export class CandidatesComponent implements OnInit {
   currentPage: number = 1;
   // pagination loader
   loader: boolean = false;
-  // // next Link
-  // nextLink: string = '';
-  // // previous Link
-  // previousLink: string = '';
+  // disable pagination for the table
   disableForward = false;
   disableBackward = true;
 
@@ -45,19 +42,12 @@ export class CandidatesComponent implements OnInit {
         return response.candidates.data[_];
       });
 
-      // log the response for testing
-      // console.log('the response is  ', response.candidates);
-      // next and previous links
-      // this.nextLink = response.candidates.next;
-      // this.previousLink = response.candidates.previous;
-      // get the pages number
       // get the pages number, next page and previous
       this.numberOfPages = response.candidates['pages'];
       this.nextPage = response.candidates.next.split('=')[1];
       this.previousPage = response.candidates.previous?.split('=')[1];
-      // this.nextLink = console.log(this.nextPage);
-      console.log(this.previousPage);
-      console.log(this.numberOfPages);
+
+      // construct the table
       this.data = this.constructTableData(this.candidates);
     });
 

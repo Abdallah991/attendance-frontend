@@ -79,6 +79,7 @@ export class CandidatesService {
     }
   }
 
+  // TODO: search candidates
   searchCandidate(searchValue) {
     try {
       // get the data from the url

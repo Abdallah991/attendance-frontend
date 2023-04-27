@@ -14,7 +14,7 @@ export class CandidateAttendanceResolver implements Resolve<any> {
     let candidateId = route.params.candidateId;
     console.log('the candidates emp_code ', candidateId);
 
-    // get all candidate
+    // get all candidate attendnace record
     return this.CS.getAttendanceForCandidate(candidateId).pipe(
       catchError((error) => {
         return of('No data');

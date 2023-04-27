@@ -1,6 +1,5 @@
 import { formatDate } from '@angular/common';
 import { User } from '../models/User';
-import { platformToken } from './api';
 import moment from 'moment';
 
 //  format date
@@ -14,14 +13,13 @@ export const formatYYYYDDMMHHMM = (date: Date): string =>
 export const getToken = (): string => sessionStorage.getItem('signinToken');
 
 // get 01 token
-export const get01Token = (): string => platformToken;
 
 // get User
 export const getUser = (): User => JSON.parse(sessionStorage.getItem('user'));
 
 // get UserId
 export const getUserId = (): string => sessionStorage.getItem('userID');
-//! date functions
+//? date functions
 // get current Date
 export const getCurrentDate = (): string =>
   moment().format('YYYY-MM-DD') + 'T00:00:00.000Z';

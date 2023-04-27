@@ -5,10 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { httpOptions, httpOptionsBioTime } from 'src/app/constants/constants';
+import { httpOptions } from 'src/app/constants/constants';
 // Appolo libraries
 import { Apollo } from 'apollo-angular';
-import { GET_USERS } from 'src/app/constants/queries';
 
 @Injectable({
   providedIn: 'root',
@@ -177,12 +176,10 @@ export class StudentsService {
   private getAttendanceApi(): Observable<any> {
     try {
       // get the data from the url
-      return this.http
-        .get<any>(BIO_ATTENDANCE_API, { headers: httpOptionsBioTime })
-        .pipe(
-          // access the JSON 'data'
-          map((data) => data)
-        );
+      return this.http.get<any>(BIO_ATTENDANCE_API).pipe(
+        // access the JSON 'data'
+        map((data) => data)
+      );
     } catch (err) {
       console.log(err);
       return null;
