@@ -6,6 +6,7 @@ import { SharedModule } from './components/shared.module';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { StudentsModule } from './modules/students/students.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, SideNavComponent],
@@ -16,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

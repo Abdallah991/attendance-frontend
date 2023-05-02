@@ -19,6 +19,7 @@ export const COHORT_API = ROOTLINK + '/cohorts/';
 // 7- Attendnace API
 export const ATTENDNACE_API = ROOTLINK + '/attendance/';
 // 8- Candidates API
+//! this api must have emp_code with it to work
 export const CANDIDATE_API = ROOTLINK + '/candidate/';
 // 9- Candidate Info API
 export const CANDIDATE_INFO_API = ROOTLINK + '/candidate-info/';
