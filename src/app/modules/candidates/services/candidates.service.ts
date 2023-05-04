@@ -80,25 +80,16 @@ export class CandidatesService {
   }
 
   // TODO: search candidates
-  searchCandidate(searchValue) {
-    try {
-      // get the data from the url
-      var http = this.http
-        .post<any>(ATTENDNACE_API, {})
-        .pipe(map((data) => data));
-      http.subscribe((data) => {
-        console.log(data);
-      });
-      console.log(http);
-      http.subscribe((value) => {
-        console.log(value, 'post request');
-      });
-      return http;
-    } catch (err) {
-      console.log(err);
-      // disable the loader and return if there is an error
-      return null;
-    }
+  searchCandidate(searchValue): any[] {
+    //! search api call
+    //TODO: remove dummy code
+    console.log('the search value is ', searchValue);
+    var results = ['ahmed', 'Sameer', 'jasmine'];
+    // api call
+    return results;
+
+    // setTimeout(() => {
+    // }, 2000);
   }
 
   searchArray(searchValue) {}

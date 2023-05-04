@@ -3,6 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CANDIDATES_HEADER } from 'src/app/constants/headers';
 import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
 import { CandidatesService } from './services/candidates.service';
+import {
+  FormBuilder,
+  FormGroup,
+  UntypedFormArray,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-candidates',
@@ -13,8 +19,13 @@ export class CandidatesComponent implements OnInit {
   constructor(
     private AR: ActivatedRoute,
     private CS: CandidatesService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.candidateForm = this.fb.group({
+      searchInput: ['', Validators.required],
+    });
+  }
 
   candidates = [];
   // table data
@@ -35,6 +46,8 @@ export class CandidatesComponent implements OnInit {
   // disable pagination for the table
   disableForward = false;
   disableBackward = true;
+  candidateForm: FormGroup;
+  searchValues: any[] = [];
 
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
@@ -159,5 +172,16 @@ export class CandidatesComponent implements OnInit {
 
   viewCandidate(id) {
     this.router.navigateByUrl('/candidates/view-candidate/' + id);
+  }
+
+  search() {
+    var searchValue = this.candidateForm.controls.searchInput.value;
+    console.log('search value is ' + searchValue);
+    // TODO: put back like promise syntax
+    // this.CS.searchCandidate(searchValue).then((result) => {
+    //   console.log('the results in the page are: ' + result);
+    //   this.searchValues = searchValue;
+    // });
+    this.searchValues = this.CS.searchCandidate(searchValue);
   }
 }

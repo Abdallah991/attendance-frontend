@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoaderComponent } from './loader/loader.component';
 import { SingleSelectComponent } from './single-select/single-select.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { SearchDropDownComponent } from './search-drop-down/search-drop-down.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
     LoaderComponent,
     SingleSelectComponent,
     SuccessDialogComponent,
+    SearchDropDownComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule],
   exports: [
@@ -25,6 +27,7 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
     LoaderComponent,
     SingleSelectComponent,
     SuccessDialogComponent,
+    SearchDropDownComponent,
   ],
 })
 export class SharedModule {}

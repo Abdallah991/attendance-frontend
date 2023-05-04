@@ -2,7 +2,14 @@
   <h1 class="">Candidates</h1>
 </div>
 <div class="p-4">
-  <app-table
+  <search-drop-down
+    [FGN]="candidateForm"
+    FCN="searchInput"
+    (itemClicked)="viewCandidate($event)"
+    (searchClicked)="search()"
+    [results]="searchValues"
+  ></search-drop-down>
+  <!-- <app-table
     [columns]="columns"
     [data]="data"
     [actionButtons]="true"
@@ -15,5 +22,5 @@
     [disableForward]="disableForward"
     [disableBackward]="disableBackward"
     [loader]="loader"
-  ></app-table>
+  ></app-table> -->
 </div>
