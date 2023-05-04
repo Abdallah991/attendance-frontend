@@ -1,15 +1,21 @@
-<div class="flex justify-between mt-8 p-4 w-full">
+<div class="flex justify-between mt-4 p-4 w-full">
   <h1 class="">Candidates</h1>
 </div>
 <div class="p-4">
-  <search-drop-down
-    [FGN]="candidateForm"
-    FCN="searchInput"
-    (itemClicked)="viewCandidate($event)"
-    (searchClicked)="search()"
-    [results]="searchValues"
-  ></search-drop-down>
-  <!-- <app-table
+  <div class="mb-4">
+    <search-drop-down
+      [FGN]="candidateForm"
+      FCN="searchInput"
+      (itemClicked)="viewCandidate($event)"
+      (searchClicked)="search()"
+      [loader]="searchLoader"
+      [showResults]="showResults"
+      [results]="searchValues"
+      (cancel)="cancelSearch()"
+    ></search-drop-down>
+  </div>
+  <app-table
+    *ngIf="!showResults"
     [columns]="columns"
     [data]="data"
     [actionButtons]="true"
@@ -22,5 +28,5 @@
     [disableForward]="disableForward"
     [disableBackward]="disableBackward"
     [loader]="loader"
-  ></app-table> -->
+  ></app-table>
 </div>

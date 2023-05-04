@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { SelectData } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'search-drop-down',
@@ -14,10 +15,13 @@ export class SearchDropDownComponent implements OnInit {
   @Input()
   FCN!: string;
   @Input() searchValue: string = '';
-  @Output() itemClicked = new EventEmitter<string>();
+  @Output() itemClicked = new EventEmitter<any>();
   @Output() searchClicked = new EventEmitter<string>();
+  @Output() cancel = new EventEmitter<string>();
 
-  @Input() results = ['ahmed', 'Sameer', 'jasmine'];
+  @Input() results: SelectData[] = [];
+  @Input() showResults: boolean = false;
+  @Input() loader: boolean = false;
 
   constructor() {}
 
@@ -29,5 +33,13 @@ export class SearchDropDownComponent implements OnInit {
     // TODO: add implmntation if needed
     console.log('search clicked!');
     this.searchClicked.emit(this.searchValue);
+  }
+
+  cancelSearchMode() {
+    this.cancel.emit();
+  }
+
+  studentClicked($event) {
+    this.itemClicked.emit($event['id']);
   }
 }

@@ -49,12 +49,43 @@
     </svg>
     <span class="sr-only">Search</span>
   </button>
+  <button (click)="cancelSearchMode()" type="submit" class="ml-2">
+    <!-- ! add the loader here -->
+    <!-- <svg
+      class="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="../../assets/icons/cancel.svg"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      ></path>
+    </svg> -->
+    <img src="../../../assets/icons/cancel.svg" class="w-8 h-8" />
+    <span class="sr-only">Cancel</span>
+  </button>
 </form>
-<div class="w-full flex flex-col justify-center align-baseline">
+<div
+  class="w-full flex flex-col justify-center align-baseline"
+  *ngIf="showResults"
+>
+  <!-- *ngIf="showResults && !loader" -->
+
   <div
     class="border-solid border-[1px] border-primary rounded-lg pl-10"
     *ngFor="let result of results"
+    (click)="studentClicked(result)"
   >
-    {{ result }}
+    {{ result.text }}
   </div>
+</div>
+<div
+  class="w-full flex flex-col justify-center align-baseline"
+  *ngIf="!showResults && loader"
+>
+  <app-loader></app-loader>
 </div>

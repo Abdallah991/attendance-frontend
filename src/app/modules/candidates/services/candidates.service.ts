@@ -6,6 +6,7 @@ import {
   ATTENDNACE_API,
   CANDIDATE_API,
   CANDIDATE_INFO_API,
+  SEARCH_API,
 } from 'src/app/constants/api';
 
 @Injectable({
@@ -79,45 +80,22 @@ export class CandidatesService {
     }
   }
 
-  // TODO: search candidates
-  searchCandidate(searchValue): any[] {
-    //! search api call
-    //TODO: remove dummy code
-    console.log('the search value is ', searchValue);
-    var results = ['ahmed', 'Sameer', 'jasmine'];
-    // api call
-    return results;
-
-    // setTimeout(() => {
-    // }, 2000);
+  // search candidate from biotime
+  async searchCandidate(searchValue): Promise<any> {
+    try {
+      // get the data from the url
+      // pass the search value as an argument
+      var response = this.http
+        .get<any>(SEARCH_API + '?searchValue=' + searchValue)
+        .pipe(map((data) => data));
+      // return an observable
+      return response;
+    } catch (err) {
+      //  catch the error and return an error
+      console.log(err);
+      return {
+        error: err,
+      };
+    }
   }
-
-  searchArray(searchValue) {}
-
-  // get departments
-  // public async getCandidates(): Promise<any> {
-  //   // call the promise of the API
-  //   let promise = new Promise<any>(async (resolve, reject) => {
-  //     this.getCandidatesAPI().subscribe(
-  //       (roles) => resolve(roles),
-  //       (error) => reject(error)
-  //     );
-  //   });
-
-  //   // promise if its resolved or rejected
-  //   await promise
-  //     .then((value) => {
-  //       console.log(value);
-  //       return value;
-  //     })
-  //     .catch((err) => {
-  //       // console log the error
-
-  //       // deactivate the loader
-  //       console.log(err);
-  //     });
-
-  //   // return the roles
-  //   return null;
-  // }
 }

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CANDIDATES_HEADER } from 'src/app/constants/headers';
-import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
+import {
+  SelectData,
+  TableButtonOptions,
+  TableData,
+} from 'src/app/interfaces/interfaces';
 import { CandidatesService } from './services/candidates.service';
 import {
   FormBuilder,
@@ -47,7 +51,10 @@ export class CandidatesComponent implements OnInit {
   disableForward = false;
   disableBackward = true;
   candidateForm: FormGroup;
-  searchValues: any[] = [];
+  searchValues: SelectData[] = [];
+  // search loader
+  searchLoader: boolean = false;
+  showResults: boolean = false;
 
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
@@ -63,8 +70,6 @@ export class CandidatesComponent implements OnInit {
       // construct the table
       this.data = this.constructTableData(this.candidates);
     });
-
-    this.CS.searchCandidate('what');
   }
 
   // make table data
@@ -174,14 +179,33 @@ export class CandidatesComponent implements OnInit {
     this.router.navigateByUrl('/candidates/view-candidate/' + id);
   }
 
+  // search button implementation
   search() {
+    this.searchLoader = true;
     var searchValue = this.candidateForm.controls.searchInput.value;
-    console.log('search value is ' + searchValue);
     // TODO: put back like promise syntax
-    // this.CS.searchCandidate(searchValue).then((result) => {
-    //   console.log('the results in the page are: ' + result);
-    //   this.searchValues = searchValue;
-    // });
-    this.searchValues = this.CS.searchCandidate(searchValue);
+    console.log('valuefrom the form', searchValue);
+
+    this.CS.searchCandidate(searchValue).then((result) => {
+      result.subscribe((candidate) => {
+        console.log(candidate);
+
+        candidate['data'].forEach((item) => {
+          this.searchValues.push({
+            id: item['emp_code'],
+            text: item['full_name'],
+          });
+        });
+        this.searchLoader = false;
+        this.showResults = true;
+        console.log(this.searchValues);
+        // TODO: display the search results from the component
+      });
+    });
+  }
+
+  cancelSearch() {
+    this.searchLoader = false;
+    this.showResults = false;
   }
 }
