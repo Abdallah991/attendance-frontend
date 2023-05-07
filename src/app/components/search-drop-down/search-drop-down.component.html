@@ -76,16 +76,13 @@
   <!-- *ngIf="showResults && !loader" -->
 
   <div
-    class="border-solid border-[1px] border-primary rounded-lg pl-10"
+    class="border-solid border-[1px] border-[#8492a6] rounded-lg pl-10 m-[2px]"
     *ngFor="let result of results"
     (click)="studentClicked(result)"
   >
     {{ result.text }}
   </div>
 </div>
-<div
-  class="w-full flex flex-col justify-center align-baseline"
-  *ngIf="!showResults && loader"
->
+<div class="w-full flex flex-col justify-center align-baseline" *ngIf="loader">
   <app-loader></app-loader>
 </div>

@@ -182,26 +182,38 @@ export class CandidatesComponent implements OnInit {
   // search button implementation
   search() {
     this.searchLoader = true;
+    this.searchValues = [];
     var searchValue = this.candidateForm.controls.searchInput.value;
-    // TODO: put back like promise syntax
-    console.log('valuefrom the form', searchValue);
+    console.log('the value of the search is ', searchValue);
+    if (searchValue != undefined && searchValue != '' && searchValue != null) {
+      // TODO: put back like promise syntax
+      // TODO: show no results when there is no results
+      console.log('valuefrom the form', searchValue);
 
-    this.CS.searchCandidate(searchValue).then((result) => {
-      result.subscribe((candidate) => {
-        console.log(candidate);
+      this.CS.searchCandidate(searchValue).then((result) => {
+        result.subscribe((candidate) => {
+          console.log(candidate);
 
-        candidate['data'].forEach((item) => {
-          this.searchValues.push({
-            id: item['emp_code'],
-            text: item['full_name'],
+          candidate['data'].forEach((item) => {
+            this.searchValues.push({
+              id: item['emp_code'],
+              text: item['full_name'],
+            });
           });
+          this.searchLoader = false;
+          this.showResults = true;
+          console.log(this.searchValues);
+          // TODO: display the search results from the component
         });
-        this.searchLoader = false;
-        this.showResults = true;
-        console.log(this.searchValues);
-        // TODO: display the search results from the component
       });
-    });
+
+      if (this.searchValues.length == 0) {
+        this.showResults = false;
+      }
+    } else {
+      this.searchLoader = false;
+      this.showResults = false;
+    }
   }
 
   cancelSearch() {

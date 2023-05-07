@@ -19,8 +19,21 @@ export class SearchDropDownComponent implements OnInit {
   @Output() searchClicked = new EventEmitter<string>();
   @Output() cancel = new EventEmitter<string>();
 
-  @Input() results: SelectData[] = [];
-  @Input() showResults: boolean = false;
+  @Input() results: SelectData[] = [
+    {
+      id: 1,
+      text: 'Mohammed',
+    },
+    {
+      id: 2,
+      text: 'Mohammed',
+    },
+    {
+      id: 3,
+      text: 'Mohammed',
+    },
+  ];
+  @Input() showResults: boolean = true;
   @Input() loader: boolean = false;
 
   constructor() {}
