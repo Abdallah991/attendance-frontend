@@ -11,14 +11,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        // students routes
-        path: 'students',
-        loadChildren: () =>
-          import('./modules/students/students.module').then(
-            (m) => m.StudentsModule
-          ),
-      },
-      {
         // users routes
         path: 'users',
         loadChildren: () =>
@@ -32,12 +24,7 @@ const routes: Routes = [
             (m) => m.OverviewModule
           ),
       },
-      {
-        // events routes
-        path: 'events',
-        loadChildren: () =>
-          import('./modules/events/events.module').then((m) => m.EventsModule),
-      },
+
       {
         // candidates routes
         path: 'candidates',
