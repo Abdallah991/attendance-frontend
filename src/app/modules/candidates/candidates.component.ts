@@ -7,12 +7,7 @@ import {
   TableData,
 } from 'src/app/interfaces/interfaces';
 import { CandidatesService } from './services/candidates.service';
-import {
-  FormBuilder,
-  FormGroup,
-  UntypedFormArray,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-candidates',
@@ -58,14 +53,12 @@ export class CandidatesComponent implements OnInit {
 
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
-      this.candidates = Object.keys(response.candidates.data).map(function (_) {
-        return response.candidates.data[_];
-      });
+      this.candidates = response.candidates.data.students;
 
       // get the pages number, next page and previous
-      this.numberOfPages = response.candidates['pages'];
-      this.nextPage = response.candidates.next.split('=')[1];
-      this.previousPage = response.candidates.previous?.split('=')[1];
+      // this.numberOfPages = response.candidates['pages'];
+      // this.nextPage = response.candidates.next.split('=')[1];
+      // this.previousPage = response.candidates.previous?.split('=')[1];
 
       // construct the table
       this.data = this.constructTableData(this.candidates);
@@ -75,16 +68,12 @@ export class CandidatesComponent implements OnInit {
   // make table data
   constructTableData(candidates: any[]): TableData[] {
     return candidates.map((res) => {
-      // console.log(res);
+      console.log(res);
       return {
         // the id, to return back for edit or delete events
-        id: res['emp_code'],
+        id: res['id'],
         // the data displayed in each row
-        data: [
-          res['emp_code'],
-          res['full_name'],
-          res['department']['dept_name'],
-        ],
+        data: [res['id'], res['firstName'] + ' ' + res['lastName'], 'Student'],
         // the action buttons
         actionButtons: this.constructTableButton(),
       };

@@ -7,6 +7,7 @@ import {
   CANDIDATE_API,
   CANDIDATE_INFO_API,
   SEARCH_API,
+  STUDENT_API,
 } from 'src/app/constants/api';
 
 @Injectable({
@@ -19,7 +20,7 @@ export class CandidatesService {
   getCandidates(): Observable<any> {
     try {
       // get the data from the url
-      var http = this.http.get<any>(ATTENDNACE_API).pipe(map((data) => data));
+      var http = this.http.get<any>(STUDENT_API).pipe(map((data) => data));
       http.subscribe((data) => {
         console.log(data);
       });
@@ -70,7 +71,7 @@ export class CandidatesService {
     try {
       // get the data from the url
       var response = this.http
-        .get<any>(CANDIDATE_INFO_API + id)
+        .get<any>(STUDENT_API + id)
         .pipe(map((data) => data));
 
       return response;

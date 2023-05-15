@@ -11,7 +11,7 @@ export const navigationMenu = [
     iconPathInactive: '../../assets/icons/students.svg',
     iconPathActive: '../../assets/icons/students.svg',
     active: false,
-    linkName: 'Candidates',
+    linkName: 'Students',
   },
   {
     link: '/events',

@@ -11,23 +11,23 @@ export class ViewCandidateComponent implements OnInit {
   [x: string]: any;
   constructor(private AR: ActivatedRoute) {}
 
-  candidate = null;
+  student = null;
   attendance: [] = [];
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
-      this.candidate = response.candidate.data[0];
-      this.attendance = response.attendance.data;
-      console.log(this.candidate);
-      console.log(this.attendance);
+      this.student = response.candidate.data['student'];
+      // this.attendance = response.attendance.data;
+      console.log(this.student);
+      // console.log(this.attendance);
     });
   }
 
-  formateDate = (value) => {
-    var date = formatYYYYDDMMHHMM(value);
-    var array = date.split(' ');
-    return {
-      date: array[0],
-      time: array[1],
-    };
-  };
+  // formateDate = (value) => {
+  //   var date = formatYYYYDDMMHHMM(value);
+  //   var array = date.split(' ');
+  //   return {
+  //     date: array[0],
+  //     time: array[1],
+  //   };
+  // };
 }
