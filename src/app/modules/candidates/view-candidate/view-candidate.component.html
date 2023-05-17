@@ -2,12 +2,27 @@
   <h1>{{ student.firstName }} {{ student.lastName }}</h1>
   <div class="mt-2">
     <h2 class="text-xl font-bold">{{ student.id }}</h2>
+    <h2 class="text-xl font-bold">{{ student.platformId }}</h2>
   </div>
   <div class="flex flex-row flex-wrap mt-4 flex-4 align-center">
-    <h1>Attendance Records</h1>
+    <!-- <h1>Attendance Records</h1> -->
     <!-- <h2 class="text-[#848484] align-text-top">
       attended {{ attendance.length }} times
     </h2> -->
+  </div>
+  <div class="p-4">
+    <div class="p-4">
+      <h1 class="mb-2">Acadamic Qualification:</h1>
+      <h3>{{ student.acadamicQualification }}</h3>
+    </div>
+    <div class="p-4">
+      <h1 class="mb-2">Acadamic Specialization:</h1>
+      <h3>{{ student.acadamicSpecialization }}</h3>
+    </div>
+    <div class="p-4">
+      <h1 class="mb-2">Email:</h1>
+      <h3>{{ student.email }}</h3>
+    </div>
   </div>
   <div class="mt-2">
     <ul>

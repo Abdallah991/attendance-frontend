@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { formatYYYYDDMMHHMM } from 'src/app/constants/globalMethods';
 
 @Component({
   selector: 'app-view-candidate',
@@ -21,13 +20,4 @@ export class ViewCandidateComponent implements OnInit {
       // console.log(this.attendance);
     });
   }
-
-  // formateDate = (value) => {
-  //   var date = formatYYYYDDMMHHMM(value);
-  //   var array = date.split(' ');
-  //   return {
-  //     date: array[0],
-  //     time: array[1],
-  //   };
-  // };
 }

@@ -209,4 +209,8 @@ export class CandidatesComponent implements OnInit {
     this.searchLoader = false;
     this.showResults = false;
   }
+
+  addStudents() {
+    // TODO: add student form
+  }
 }
