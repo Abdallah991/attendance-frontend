@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { GENDERS } from 'src/app/constants/constants';
 import { Student } from 'src/app/models/Student';
 import { CandidatesService } from '../services/candidates.service';
@@ -14,7 +19,7 @@ export class AddStudentComponent implements OnInit {
   // Title to toggle between add and edit
   title = 'Add Student';
   buttonTitle = 'Add Student';
-  usersForm: FormGroup;
+  studentForm: UntypedFormGroup;
   // single drop down options
   genders = GENDERS;
   // type of form
@@ -41,18 +46,23 @@ export class AddStudentComponent implements OnInit {
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     // form
-    this.usersForm = this.fb.group({
+    this.studentForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      joinDate: ['', Validators.required],
-      email: ['', Validators.required],
-      position: ['', Validators.required],
+      joinDate: [''],
+      email: [''],
       // TODO: see how these can fit in later
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      dob: ['', Validators.required],
-      phone: ['', Validators.required],
-      gender: ['', Validators.required],
+      dob: [''],
+      phone: [''],
+      gender: [''],
+      platformId: ['', Validators.required],
+      studentId: ['', Validators.required],
+      nationality: [''],
+      acadamicQualification: [''],
+      acadamicSpecialization: [''],
+      scholarship: [''],
+      cohortId: [''],
+
       // studentLogs: [''],
     });
 
@@ -64,25 +74,25 @@ export class AddStudentComponent implements OnInit {
   async mutateUser() {
     this.loader = true;
     if (this.type == 'create') {
-      this.addUser();
+      this.addStudent();
     } else {
-      this.editUser();
+      this.viewStudent();
     }
   }
 
   // add user to the system implementation
-  async addUser() {
+  async addStudent() {
     // TODO: Check if the passwords match then allow the users registration
     var userInput = {
-      firstName: this.usersForm.controls.firstName.value,
-      lastName: this.usersForm.controls.lastName.value,
-      joinDate: this.usersForm.controls.joinDate.value,
-      password: this.usersForm.controls.password.value,
-      email: this.usersForm.controls.email.value,
-      dob: this.usersForm.controls.dob.value,
-      phone: this.usersForm.controls.phone.value,
-      gender: this.usersForm.controls.gender.value,
-      position: this.usersForm.controls.position.value,
+      firstName: this.studentForm.controls.firstName.value,
+      lastName: this.studentForm.controls.lastName.value,
+      joinDate: this.studentForm.controls.joinDate.value,
+      password: this.studentForm.controls.password.value,
+      email: this.studentForm.controls.email.value,
+      dob: this.studentForm.controls.dob.value,
+      phone: this.studentForm.controls.phone.value,
+      gender: this.studentForm.controls.gender.value,
+      position: this.studentForm.controls.position.value,
     };
     // this.CS.addUser(userInput)
     //   .then((val) => {
@@ -100,18 +110,18 @@ export class AddStudentComponent implements OnInit {
   }
 
   // edit user to the system implementation
-  async editUser() {
+  async viewStudent() {
     // TODO: Check if the passwords match then allow the users registration
-    var userInput = {
-      firstName: this.usersForm.controls.firstName.value,
-      lastName: this.usersForm.controls.lastName.value,
-      joinDate: this.usersForm.controls.joinDate.value,
-      password: this.usersForm.controls.password.value,
-      email: this.usersForm.controls.email.value,
-      dob: this.usersForm.controls.dob.value,
-      phone: this.usersForm.controls.phone.value,
-      gender: this.usersForm.controls.gender.value,
-      position: this.usersForm.controls.position.value,
+    var studentInput = {
+      firstName: this.studentForm.controls.firstName.value,
+      lastName: this.studentForm.controls.lastName.value,
+      joinDate: this.studentForm.controls.joinDate.value,
+      password: this.studentForm.controls.password.value,
+      email: this.studentForm.controls.email.value,
+      dob: this.studentForm.controls.dob.value,
+      phone: this.studentForm.controls.phone.value,
+      gender: this.studentForm.controls.gender.value,
+      position: this.studentForm.controls.position.value,
     };
     // this.CS.updateUser(userInput)
     //   .then((val) => {
@@ -134,8 +144,8 @@ export class AddStudentComponent implements OnInit {
       this.type = response.type;
       if (this.type == 'view') {
         // get the food data
-        this.title = 'Edit User';
-        this.buttonTitle = 'Edit User';
+        // this.title = ' User';
+        // this.buttonTitle = 'Edit User';
         // this.user = response.user;
         console.log(response);
         // set the food info
@@ -178,13 +188,13 @@ export class AddStudentComponent implements OnInit {
 
   // set the gender value to the form when selected
   genderSelected(event) {
-    this.usersForm.controls.gender.setValue(event);
+    this.studentForm.controls.gender.setValue(event);
   }
 
   // form Validation return value
   isValid = (controlName) =>
-    this.usersForm.controls[controlName].touched &&
-    this.usersForm.controls[controlName].errors
+    this.studentForm.controls[controlName].touched &&
+    this.studentForm.controls[controlName].errors
       ? true
       : false;
 

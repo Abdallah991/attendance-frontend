@@ -13,13 +13,13 @@ export const navigationMenu = [
     active: false,
     linkName: 'Students',
   },
-  {
-    link: '/events',
-    iconPathInactive: '../../assets/icons/events.svg',
-    iconPathActive: '../../assets/icons/events.svg',
-    active: false,
-    linkName: 'Events',
-  },
+  // {
+  //   link: '/events',
+  //   iconPathInactive: '../../assets/icons/events.svg',
+  //   iconPathActive: '../../assets/icons/events.svg',
+  //   active: false,
+  //   linkName: 'Events',
+  // },
   {
     link: '/users',
     iconPathInactive: '../../assets/icons/users.svg',
