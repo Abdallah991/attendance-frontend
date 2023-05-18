@@ -1,3 +1,5 @@
+import { Role } from './Role';
+
 export class User {
   id: number;
   firstName: string;
@@ -5,7 +7,7 @@ export class User {
   email: string;
   rememberToken: string;
   password: string;
-  joinDate: string;
+  joinDate: string | Date;
   phone: string;
   gender: string;
   position: string;
@@ -14,6 +16,8 @@ export class User {
   permission: string;
   createdAt: string;
   updatedAt: string;
+  // TODO: remove unnecessary data
+  roleId: number | Role;
 
   constructor(user: User) {
     this.id = user.id;

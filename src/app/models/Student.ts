@@ -1,19 +1,23 @@
 import { Cohort } from './Cohort';
 
 export class Student {
+  // TODO:
   id: number;
+  platformId: string;
   firstName: string;
   lastName: string;
   cohort: Cohort;
   cohortId: number;
-
   nationality: string;
   phone: string;
   gender: string;
   supportedByTamkeen: string;
+  acadamicQualification: string;
+  acadamicSpecialization: string;
+  scholarship: string;
   password: string;
   email: string;
-  dob: string;
+  dob: string | Date;
   fcmToken: string;
   createdAt: string;
   updatedAt: string;
@@ -34,5 +38,8 @@ export class Student {
     this.fcmToken = student.fcmToken;
     this.createdAt = student.createdAt;
     this.updatedAt = student.updatedAt;
+    this.platformId = student.platformId;
+    this.acadamicQualification = student.acadamicQualification;
+    this.acadamicSpecialization = student.acadamicSpecialization;
   }
 }

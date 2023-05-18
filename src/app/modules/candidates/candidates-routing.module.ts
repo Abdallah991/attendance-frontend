@@ -7,6 +7,7 @@ import { CandidatesResolver } from './services/candidates.resolver';
 import { ViewCandidateComponent } from './view-candidate/view-candidate.component';
 import { ViewCandidateResolver } from './services/view-candidate.resolver';
 import { CandidateAttendanceResolver } from './services/candidate-attendance.resolver';
+import { AddStudentComponent } from './add-student/add-student.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
       candidate: ViewCandidateResolver,
       attendance: CandidateAttendanceResolver,
     },
+  },
+  {
+    path: 'add-student',
+    component: AddStudentComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
   },
 ];
 

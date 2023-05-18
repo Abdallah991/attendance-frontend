@@ -9,9 +9,10 @@ import { CandidatesResolver } from './services/candidates.resolver';
 import { ViewCandidateComponent } from './view-candidate/view-candidate.component';
 import { ViewCandidateResolver } from './services/view-candidate.resolver';
 import { CandidateAttendanceResolver } from './services/candidate-attendance.resolver';
+import { AddStudentComponent } from './add-student/add-student.component';
 
 @NgModule({
-  declarations: [CandidatesComponent, ViewCandidateComponent],
+  declarations: [CandidatesComponent, ViewCandidateComponent, AddStudentComponent],
   imports: [
     CommonModule,
     SharedModule,

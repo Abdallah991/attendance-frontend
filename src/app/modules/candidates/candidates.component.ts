@@ -212,5 +212,6 @@ export class CandidatesComponent implements OnInit {
 
   addStudents() {
     // TODO: add student form
+    this.router.navigateByUrl('/candidates/add-student');
   }
 }
