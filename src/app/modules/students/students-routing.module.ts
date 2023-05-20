@@ -2,36 +2,40 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { CandidatesComponent } from './candidates.component';
-import { CandidatesResolver } from './services/candidates.resolver';
-import { ViewCandidateComponent } from './view-candidate/view-candidate.component';
-import { ViewCandidateResolver } from './services/view-candidate.resolver';
-import { CandidateAttendanceResolver } from './services/candidate-attendance.resolver';
+import { StudentsComponent } from './students.component';
+import { StudentsResolver } from './services/students.resolver';
+import { ViewStudentComponent } from './view-student/view-student.component';
+import { ViewStudentResolver } from './services/view-student.resolver';
+import { StudentAttendanceResolver } from './services/student-attendance.resolver';
 import { AddStudentComponent } from './add-student/add-student.component';
+import { CohortsResolver } from '../cohorts/services/cohorts.resolver';
 
 const routes: Routes = [
   {
     path: '',
-    component: CandidatesComponent,
+    component: StudentsComponent,
     // to be able to add the value
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: {
-      candidates: CandidatesResolver,
+      students: StudentsResolver,
     },
   },
   {
-    path: 'view-candidate/:candidateId',
-    component: ViewCandidateComponent,
+    path: 'view-student/:studentId',
+    component: ViewStudentComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: {
-      candidate: ViewCandidateResolver,
-      attendance: CandidateAttendanceResolver,
+      student: ViewStudentResolver,
+      // attendance: StudentAttendanceResolver,
     },
   },
   {
     path: 'add-student',
     component: AddStudentComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    resolve: {
+      cohorts: CohortsResolver,
+    },
   },
 ];
 
@@ -39,4 +43,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes), CommonModule, ReactiveFormsModule],
   exports: [RouterModule],
 })
-export class CandidatesRoutingModule {}
+export class StudentsRoutingModule {}

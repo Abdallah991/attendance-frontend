@@ -6,18 +6,18 @@ import {
   TableButtonOptions,
   TableData,
 } from 'src/app/interfaces/interfaces';
-import { CandidatesService } from './services/candidates.service';
+import { StudentsService } from './services/students.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-candidates',
-  templateUrl: './candidates.component.html',
-  styleUrls: ['./candidates.component.scss'],
+  templateUrl: './students.component.html',
+  styleUrls: ['./students.component.scss'],
 })
-export class CandidatesComponent implements OnInit {
+export class StudentsComponent implements OnInit {
   constructor(
     private AR: ActivatedRoute,
-    private CS: CandidatesService,
+    private SS: StudentsService,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -26,7 +26,7 @@ export class CandidatesComponent implements OnInit {
     });
   }
 
-  candidates = [];
+  students = [];
   // table data
   data: TableData[] = [];
   // table columns
@@ -53,7 +53,7 @@ export class CandidatesComponent implements OnInit {
 
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
-      this.candidates = response.candidates.data.students;
+      this.students = response.students.data.students;
 
       // get the pages number, next page and previous
       // this.numberOfPages = response.candidates['pages'];
@@ -61,7 +61,7 @@ export class CandidatesComponent implements OnInit {
       // this.previousPage = response.candidates.previous?.split('=')[1];
 
       // construct the table
-      this.data = this.constructTableData(this.candidates);
+      this.data = this.constructTableData(this.students);
     });
   }
 
@@ -104,7 +104,7 @@ export class CandidatesComponent implements OnInit {
     this.loader = true;
 
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.CS.getCandidatesPagination($page).subscribe(
+      this.SS.getCandidatesPagination($page).subscribe(
         (roles) => resolve(roles),
         (error) => reject(error)
       );
@@ -114,11 +114,11 @@ export class CandidatesComponent implements OnInit {
     await promise
       .then((value) => {
         // console.log(value);
-        this.candidates = Object.keys(value.data).map(function (_) {
+        this.students = Object.keys(value.data).map(function (_) {
           return value.data[_];
         });
-        console.log('candidates after the pagination ', this.candidates);
-        this.data = this.constructTableData(this.candidates);
+        console.log('students after the pagination ', this.students);
+        this.data = this.constructTableData(this.students);
         this.disableForward = false;
         this.loader = false;
       })
@@ -138,7 +138,7 @@ export class CandidatesComponent implements OnInit {
     this.loader = true;
 
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.CS.getCandidatesPagination($page).subscribe(
+      this.SS.getCandidatesPagination($page).subscribe(
         (roles) => resolve(roles),
         (error) => reject(error)
       );
@@ -148,11 +148,11 @@ export class CandidatesComponent implements OnInit {
     await promise
       .then((value) => {
         // console.log(value);
-        this.candidates = Object.keys(value.data).map(function (_) {
+        this.students = Object.keys(value.data).map(function (_) {
           return value.data[_];
         });
-        console.log('candidates after the pagination ', this.candidates);
-        this.data = this.constructTableData(this.candidates);
+        console.log('students after the pagination ', this.students);
+        this.data = this.constructTableData(this.students);
         this.disableBackward = false;
         this.loader = false;
       })
@@ -165,7 +165,7 @@ export class CandidatesComponent implements OnInit {
   }
 
   viewCandidate(id) {
-    this.router.navigateByUrl('/candidates/view-candidate/' + id);
+    this.router.navigateByUrl('/students/view-student/' + id);
   }
 
   // search button implementation
@@ -179,7 +179,7 @@ export class CandidatesComponent implements OnInit {
       // TODO: show no results when there is no results
       console.log('valuefrom the form', searchValue);
 
-      this.CS.searchCandidate(searchValue).then((result) => {
+      this.SS.searchCandidate(searchValue).then((result) => {
         result.subscribe((candidate) => {
           console.log(candidate);
 
@@ -212,6 +212,6 @@ export class CandidatesComponent implements OnInit {
 
   addStudents() {
     // TODO: add student form
-    this.router.navigateByUrl('/candidates/add-student');
+    this.router.navigateByUrl('/students/add-student');
   }
 }

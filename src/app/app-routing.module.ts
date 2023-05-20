@@ -27,10 +27,10 @@ const routes: Routes = [
 
       {
         // candidates routes
-        path: 'candidates',
+        path: 'students',
         loadChildren: () =>
-          import('./modules/candidates/candidates.module').then(
-            (m) => m.CandidatesModule
+          import('./modules/students/students.module').then(
+            (m) => m.StudentsModule
           ),
       },
     ],

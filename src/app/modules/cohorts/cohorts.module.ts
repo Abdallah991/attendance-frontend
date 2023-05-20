@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/components/shared.module';
 import { CohortsRoutingModule } from './cohorts-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CohortsService } from './services/cohorts.service';
+import { CohortsResolver } from './services/cohorts.resolver';
 
 @NgModule({
   declarations: [CohortsComponent],
@@ -14,6 +15,6 @@ import { CohortsService } from './services/cohorts.service';
     SharedModule,
     CohortsRoutingModule,
   ],
-  providers: [CohortsService],
+  providers: [CohortsService, CohortsResolver],
 })
 export class CohortsModule {}

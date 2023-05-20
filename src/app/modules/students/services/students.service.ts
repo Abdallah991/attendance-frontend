@@ -12,7 +12,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class CandidatesService {
+export class StudentsService {
   constructor(private http: HttpClient) {}
 
   // get departments api

@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { CandidatesService } from './candidates.service';
+import { StudentsService } from './students.service';
 import { catchError, first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ViewCandidateResolver implements Resolve<any> {
-  constructor(private CS: CandidatesService) {}
+export class ViewStudentResolver implements Resolve<any> {
+  constructor(private SS: StudentsService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    let candidateId = route.params.candidateId;
-    console.log('the candidates emp_code ', candidateId);
+    let studentId = route.params.studentId;
+
+    console.log('the value of the student id ', studentId);
 
     // get candidate by Id
-    return this.CS.getCandidateById(candidateId).pipe(
+    return this.SS.getCandidateById(studentId).pipe(
       catchError((error) => {
         return of('No data');
       }),

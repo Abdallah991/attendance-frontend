@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-candidate',
-  templateUrl: './view-candidate.component.html',
-  styleUrls: ['./view-candidate.component.scss'],
+  templateUrl: './view-student.component.html',
+  styleUrls: ['./view-student.component.scss'],
 })
-export class ViewCandidateComponent implements OnInit {
+export class ViewStudentComponent implements OnInit {
   [x: string]: any;
   constructor(private AR: ActivatedRoute) {}
 
@@ -14,7 +14,7 @@ export class ViewCandidateComponent implements OnInit {
   attendance: [] = [];
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
-      this.student = response.candidate.data['student'];
+      this.student = response.student.data['student'];
       // this.attendance = response.attendance.data;
       console.log(this.student);
       // console.log(this.attendance);

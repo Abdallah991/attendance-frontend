@@ -38,13 +38,16 @@
         FCN="acadamicSpecialization"
         inputType="text"
       ></app-text-field>
-      <app-text-field
+      <app-single-select
         prefix="Cohort"
         label="Cohort"
         [FGN]="studentForm"
         FCN="cohortId"
-        inputType="number"
-      ></app-text-field>
+        placeholder="Select Cohort"
+        [data]="cohortsSelectedData"
+        preSetValue="1"
+        [disabled]="true"
+      ></app-single-select>
     </div>
     <div class="col-span-1 w-1/2 flex flex-col">
       <b

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Student } from 'src/app/models/Student';
-import { CandidatesService } from '../services/candidates.service';
+import { StudentsService } from '../services/students.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SelectData } from 'src/app/interfaces/interfaces';
+import { Cohort } from 'src/app/models/Cohort';
 
 @Component({
   selector: 'app-add-student',
@@ -15,7 +16,8 @@ export class AddStudentComponent implements OnInit {
   title = 'Add Student';
   studentForm: UntypedFormGroup;
   // single drop down options
-  cohorts: SelectData[] = [];
+  cohortsSelectedData: SelectData[] = [];
+  cohorts: Cohort[] = [];
   // student
   student: Student = null;
   // button loader
@@ -29,7 +31,7 @@ export class AddStudentComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private CS: CandidatesService,
+    private SS: StudentsService,
     private router: Router,
     private AR: ActivatedRoute
   ) {
@@ -40,7 +42,19 @@ export class AddStudentComponent implements OnInit {
       platformId: ['', Validators.required],
       studentId: ['', Validators.required],
       acadamicSpecialization: ['', Validators.required],
-      cohortId: ['', Validators.required],
+      cohortId: [1, Validators.required],
+    });
+
+    // get cohort data from resolver
+    this.AR.data.subscribe((data) => {
+      this.cohorts = data.cohorts.data.cohorts;
+      // map cohort object to drop down list
+      this.cohortsSelectedData = this.cohorts.map((cohort) => {
+        return {
+          id: cohort.id,
+          text: cohort.name,
+        };
+      });
     });
   }
 
@@ -50,24 +64,26 @@ export class AddStudentComponent implements OnInit {
   async addStudent() {
     // TODO: Check if the passwords match then allow the users registration
     var studentInput = {
-      firstName: this.studentForm.controls.firstName.value,
       lastName: this.studentForm.controls.lastName.value,
-      joinDate: this.studentForm.controls.joinDate.value,
-      password: this.studentForm.controls.password.value,
-      email: this.studentForm.controls.email.value,
-      dob: this.studentForm.controls.dob.value,
-      phone: this.studentForm.controls.phone.value,
-      gender: this.studentForm.controls.gender.value,
-      position: this.studentForm.controls.position.value,
+      id: this.studentForm.controls.studentId.value,
+      platformId: this.studentForm.controls.platformId.value,
+      firstName: this.studentForm.controls.firstName.value,
+      acadamicSpecialization:
+        this.studentForm.controls.acadamicSpecialization.value,
+      cohortId: this.studentForm.controls.cohortId.value,
     };
+
+    console.log('the value of the form is ', studentInput);
+
+    // this.CS.
   }
   // cancel button implementation
   async cancel() {
-    this.router.navigate(['/candidates']);
+    this.router.navigate(['/students']);
   }
 
   async navigateBack() {
-    this.router.navigateByUrl('/candidates');
+    this.router.navigateByUrl('/students');
   }
 
   // set the gender value to the form when selected
