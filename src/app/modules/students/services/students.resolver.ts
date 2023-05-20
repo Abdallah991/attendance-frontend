@@ -12,7 +12,7 @@ export class StudentsResolver implements Resolve<any> {
 
   resolve(): Observable<any> {
     // get all students
-    return this.SS.getCandidates().pipe(
+    return this.SS.getStudents().pipe(
       catchError((error) => {
         return of('No data');
       }),

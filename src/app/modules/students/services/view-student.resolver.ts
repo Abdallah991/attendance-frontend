@@ -16,7 +16,7 @@ export class ViewStudentResolver implements Resolve<any> {
     console.log('the value of the student id ', studentId);
 
     // get candidate by Id
-    return this.SS.getCandidateById(studentId).pipe(
+    return this.SS.getStudentById(studentId).pipe(
       catchError((error) => {
         return of('No data');
       }),

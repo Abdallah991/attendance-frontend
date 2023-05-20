@@ -99,35 +99,33 @@ export class StudentsComponent implements OnInit {
   // click forward implementaton
   // accepts the number of page
   async forawrdPagination($page) {
+    // TODO: Implement the search
     // disable the forward button to not spam the api
-    this.disableForward = true;
-    this.loader = true;
-
-    let promise = new Promise<any>(async (resolve, reject) => {
-      this.SS.getCandidatesPagination($page).subscribe(
-        (roles) => resolve(roles),
-        (error) => reject(error)
-      );
-    });
-
-    // promise if its resolved or rejected
-    await promise
-      .then((value) => {
-        // console.log(value);
-        this.students = Object.keys(value.data).map(function (_) {
-          return value.data[_];
-        });
-        console.log('students after the pagination ', this.students);
-        this.data = this.constructTableData(this.students);
-        this.disableForward = false;
-        this.loader = false;
-      })
-      .catch((err) => {
-        // console log the error
-
-        // deactivate the loader
-        console.log(err);
-      });
+    // this.disableForward = true;
+    // this.loader = true;
+    // let promise = new Promise<any>(async (resolve, reject) => {
+    //   this.SS.getCandidatesPagination($page).subscribe(
+    //     (roles) => resolve(roles),
+    //     (error) => reject(error)
+    //   );
+    // });
+    // // promise if its resolved or rejected
+    // await promise
+    //   .then((value) => {
+    //     // console.log(value);
+    //     this.students = Object.keys(value.data).map(function (_) {
+    //       return value.data[_];
+    //     });
+    //     console.log('students after the pagination ', this.students);
+    //     this.data = this.constructTableData(this.students);
+    //     this.disableForward = false;
+    //     this.loader = false;
+    //   })
+    //   .catch((err) => {
+    //     // console log the error
+    //     // deactivate the loader
+    //     console.log(err);
+    //   });
   }
 
   // click backward implementaton
@@ -136,32 +134,33 @@ export class StudentsComponent implements OnInit {
     console.log($page);
     this.disableBackward = true;
     this.loader = true;
+    // TODO: check pagination later
 
-    let promise = new Promise<any>(async (resolve, reject) => {
-      this.SS.getCandidatesPagination($page).subscribe(
-        (roles) => resolve(roles),
-        (error) => reject(error)
-      );
-    });
+    // let promise = new Promise<any>(async (resolve, reject) => {
+    //   this.SS.getCandidatesPagination($page).subscribe(
+    //     (roles) => resolve(roles),
+    //     (error) => reject(error)
+    //   );
+    // });
 
     // promise if its resolved or rejected
-    await promise
-      .then((value) => {
-        // console.log(value);
-        this.students = Object.keys(value.data).map(function (_) {
-          return value.data[_];
-        });
-        console.log('students after the pagination ', this.students);
-        this.data = this.constructTableData(this.students);
-        this.disableBackward = false;
-        this.loader = false;
-      })
-      .catch((err) => {
-        // console log the error
+    // await promise
+    //   .then((value) => {
+    //     // console.log(value);
+    //     this.students = Object.keys(value.data).map(function (_) {
+    //       return value.data[_];
+    //     });
+    //     console.log('students after the pagination ', this.students);
+    //     this.data = this.constructTableData(this.students);
+    //     this.disableBackward = false;
+    //     this.loader = false;
+    //   })
+    //   .catch((err) => {
+    //     // console log the error
 
-        // deactivate the loader
-        console.log(err);
-      });
+    //     // deactivate the loader
+    //     console.log(err);
+    //   });
   }
 
   viewCandidate(id) {
@@ -170,39 +169,37 @@ export class StudentsComponent implements OnInit {
 
   // search button implementation
   search() {
-    this.searchLoader = true;
-    this.searchValues = [];
-    var searchValue = this.candidateForm.controls.searchInput.value;
-    console.log('the value of the search is ', searchValue);
-    if (searchValue != undefined && searchValue != '' && searchValue != null) {
-      // TODO: put back like promise syntax
-      // TODO: show no results when there is no results
-      console.log('valuefrom the form', searchValue);
-
-      this.SS.searchCandidate(searchValue).then((result) => {
-        result.subscribe((candidate) => {
-          console.log(candidate);
-
-          candidate['data'].forEach((item) => {
-            this.searchValues.push({
-              id: item['emp_code'],
-              text: item['full_name'],
-            });
-          });
-          this.searchLoader = false;
-          this.showResults = true;
-          console.log(this.searchValues);
-          // TODO: display the search results from the component
-        });
-      });
-
-      if (this.searchValues.length == 0) {
-        this.showResults = false;
-      }
-    } else {
-      this.searchLoader = false;
-      this.showResults = false;
-    }
+    // TODO: search functionality for the students
+    // this.searchLoader = true;
+    // this.searchValues = [];
+    // var searchValue = this.candidateForm.controls.searchInput.value;
+    // console.log('the value of the search is ', searchValue);
+    // if (searchValue != undefined && searchValue != '' && searchValue != null) {
+    //   // TODO: put back like promise syntax
+    //   // TODO: show no results when there is no results
+    //   console.log('valuefrom the form', searchValue);
+    //   this.SS.searchStudent(searchValue).then((result) => {
+    //     result.subscribe((candidate) => {
+    //       console.log(candidate);
+    //       candidate['data'].forEach((item) => {
+    //         this.searchValues.push({
+    //           id: item['emp_code'],
+    //           text: item['full_name'],
+    //         });
+    //       });
+    //       this.searchLoader = false;
+    //       this.showResults = true;
+    //       console.log(this.searchValues);
+    //       // TODO: display the search results from the component
+    //     });
+    //   });
+    //   if (this.searchValues.length == 0) {
+    //     this.showResults = false;
+    //   }
+    // } else {
+    //   this.searchLoader = false;
+    //   this.showResults = false;
+    // }
   }
 
   cancelSearch() {

@@ -15,8 +15,8 @@ import {
 export class StudentsService {
   constructor(private http: HttpClient) {}
 
-  // get departments api
-  getCandidates(): Observable<any> {
+  // get students api
+  getStudents(): Observable<any> {
     try {
       // get the data from the url
       var http = this.http.get<any>(STUDENT_API).pipe(map((data) => data));
@@ -33,40 +33,40 @@ export class StudentsService {
   }
 
   // get departments api
-  getCandidatesPagination(page): Observable<any> {
-    try {
-      // get the data from the url
-      var response = this.http
-        .get<any>(ATTENDNACE_API + page)
-        .pipe(map((data) => data));
+  // getCandidatesPagination(page): Observable<any> {
+  //   try {
+  //     // get the data from the url
+  //     var response = this.http
+  //       .get<any>(ATTENDNACE_API + page)
+  //       .pipe(map((data) => data));
 
-      return response;
-    } catch (err) {
-      console.log(err);
-      return null;
-    }
-  }
+  //     return response;
+  //   } catch (err) {
+  //     console.log(err);
+  //     return null;
+  //   }
+  // }
 
-  getAttendanceForCandidate(candidateId): Observable<any> {
-    try {
-      // get the data from the url
-      var response = this.http
-        .get<any>(CANDIDATE_API + candidateId)
-        .pipe(map((data) => data));
+  // getAttendanceForCandidate(candidateId): Observable<any> {
+  //   try {
+  //     // get the data from the url
+  //     var response = this.http
+  //       .get<any>(CANDIDATE_API + candidateId)
+  //       .pipe(map((data) => data));
 
-      response.subscribe((value) => {
-        console.log(value);
-      });
+  //     response.subscribe((value) => {
+  //       console.log(value);
+  //     });
 
-      return response;
-    } catch (err) {
-      console.log(err);
-      return null;
-    }
-  }
+  //     return response;
+  //   } catch (err) {
+  //     console.log(err);
+  //     return null;
+  //   }
+  // }
 
   // get candidate by id api
-  getCandidateById(id): Observable<any> {
+  getStudentById(id): Observable<any> {
     try {
       // get the data from the url
       var response = this.http
@@ -81,7 +81,7 @@ export class StudentsService {
   }
 
   // search candidate from biotime
-  async searchCandidate(searchValue): Promise<any> {
+  async searchStudent(searchValue): Promise<any> {
     try {
       // get the data from the url
       // pass the search value as an argument
