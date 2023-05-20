@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import {
   ATTENDNACE_API,
   CANDIDATE_API,
-  CANDIDATE_INFO_API,
   SEARCH_API,
   STUDENT_API,
 } from 'src/app/constants/api';
