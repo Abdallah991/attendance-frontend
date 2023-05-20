@@ -1,8 +1,8 @@
-<div class="p-4">
-  <h1>Add Student</h1>
+<div class="p-6">
+  <h1>{{ title }}</h1>
 
-  <div class="flex col-span-2 mt-2 w-full">
-    <div class="col-span-1 w-1/2 justify-start">
+  <div class="flex mt-8 w-full gap-4">
+    <div class="w-1/2 flex flex-col gap-4">
       <app-text-field
         prefix="Student ID"
         label="Student ID"
@@ -46,15 +46,39 @@
         inputType="number"
       ></app-text-field>
     </div>
-    <div class="col-span-1 w-1/2 justify-center">
-      instructions
-      <br />
-      Doing the
-      <br />
-      doing on
-      <br />
-      you can do it
-      <br />
+    <div class="col-span-1 w-1/2 flex flex-col">
+      <b
+        >Please Add the students who enrolled in the cohort only, follow these
+        please:</b
+      >
+      <div class="text-base font-thin text-[#848484]">
+        <br />
+        1. The Student's ID is our assigned ID e.g Mohammed Alsammak ID is
+        23011004.
+        <br />
+        2. The Platfom ID is 01's generated ID e.g Mohammed Alsammak's is
+        malsamma.
+        <br />
+        3. Make sure you get a success message when you add a Student to the
+        Cohort.
+        <br />
+      </div>
     </div>
+  </div>
+  <div class="action-buttons gap-2 mt-6 w-full flex justify-center">
+    <app-button
+      [text]="title"
+      [medium]="true"
+      class="min-w-[100px]"
+      (onClick)="addStudent()"
+      [loader]="loader"
+      [disabled]="!studentForm.valid"
+    ></app-button>
+    <app-button
+      text="Cancel"
+      [medium]="true"
+      class="min-w-[100px]"
+      (onClick)="cancel()"
+    ></app-button>
   </div>
 </div>
