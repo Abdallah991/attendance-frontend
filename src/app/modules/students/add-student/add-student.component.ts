@@ -20,12 +20,14 @@ export class AddStudentComponent implements OnInit {
   cohorts: Cohort[] = [];
   // student
   student: Student = null;
-  // button loader
-  loader = false;
+  // loader of button
+  addLoader: boolean = false;
   // confirmation dialog
-  dialogTitle = '';
-  message = '';
-  button = '';
+  dialogTitle =
+    this.student?.firstName + ' ' + this.student?.lastName + ' Has been Added!';
+  message = 'One Extra Rebooter';
+  button = 'Done';
+  button2 = 'Add Another';
   // preset values
   cohortPreSetValue = 1;
 
@@ -62,7 +64,8 @@ export class AddStudentComponent implements OnInit {
 
   // add user to the system implementation
   async addStudent() {
-    // TODO: Check if the passwords match then allow the users registration
+    this.addLoader = true;
+    this.studentForm.disable();
     var studentInput = {
       lastName: this.studentForm.controls.lastName.value,
       id: this.studentForm.controls.studentId.value,
@@ -74,16 +77,47 @@ export class AddStudentComponent implements OnInit {
     };
 
     console.log('the value of the form is ', studentInput);
+    try {
+      this.SS.addStudent(studentInput).subscribe((student) => {
+        console.log('the response value is ', student);
+        this.studentForm.enable();
+        this.addLoader = false;
+        this.studentForm.reset();
+        this.student = new Student(student.data.student);
+        this.dialogTitle =
+          this.student.firstName +
+          ' ' +
+          this.student?.lastName +
+          ' Has been Added!';
+        this.showSuccessDialog();
+        // TODO:
+
+        // TODO: show success dialog
+        // TODO: redirect to students table
+      });
+    } catch (err) {
+      // TODO: show error dialog
+      console.log(err);
+      this.studentForm.enable();
+      this.addLoader = false;
+      // TODO: API implementation
+      this.showFailDialog();
+    }
 
     // this.CS.
   }
   // cancel button implementation
-  async cancel() {
-    this.router.navigate(['/students']);
-  }
+  // async cancel() {
+  //   this.router.navigate(['/students']);
+  // }
 
   async navigateBack() {
     this.router.navigateByUrl('/students');
+  }
+
+  async dismiss() {
+    // dismiss dialog
+    // DO nothing
   }
 
   // set the gender value to the form when selected
@@ -100,10 +134,18 @@ export class AddStudentComponent implements OnInit {
       : false;
 
   // show success dialog
-  async showSuccessDialog(title, message, button) {
-    this.dialogTitle = title;
-    this.message = message;
-    this.button = button;
+  async showSuccessDialog() {
+    // this.dialogTitle = title;
+    // this.message = message;
+    // this.button = button;
+
+    document.querySelector<HTMLElement>('#dialog')?.click();
+  }
+
+  async showFailDialog() {
+    // this.dialogTitle = title;
+    // this.message = message;
+    // this.button = button;
     document.querySelector<HTMLElement>('#dialog')?.click();
   }
 

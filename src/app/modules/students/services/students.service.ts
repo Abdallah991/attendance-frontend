@@ -1,13 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-  ATTENDNACE_API,
-  CANDIDATE_API,
-  SEARCH_API,
-  STUDENT_API,
-} from 'src/app/constants/api';
+import { SEARCH_API, STUDENT_API } from 'src/app/constants/api';
 
 @Injectable({
   providedIn: 'root',
@@ -63,7 +58,20 @@ export class StudentsService {
   //     console.log(err);
   //     return null;
   //   }
-  // }
+  //
+
+  addStudent(student: any): Observable<any> {
+    try {
+      var response = this.http
+        .post(STUDENT_API, student)
+        .pipe(map((data) => data));
+      console.log('Observable value is ', response);
+      return response;
+    } catch (err) {
+      console.log(err);
+      return of(err);
+    }
+  }
 
   // get candidate by id api
   getStudentById(id): Observable<any> {

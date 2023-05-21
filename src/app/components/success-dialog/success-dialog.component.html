@@ -9,12 +9,12 @@
     <div class="flex flex-row justify-center gap-2">
       <div class="modal-action">
         <label [for]="dialogId" class="btn" (click)="cancelClick()">{{
-          button
+          dismiss
         }}</label>
       </div>
       <div class="modal-action" *ngIf="twoButtons">
         <label [for]="dialogId" class="btn" (click)="confirmClick()">{{
-          button2
+          action
         }}</label>
       </div>
     </div>

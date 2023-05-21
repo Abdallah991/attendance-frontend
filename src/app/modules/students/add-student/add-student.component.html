@@ -8,7 +8,7 @@
         label="Student ID"
         [FGN]="studentForm"
         FCN="studentId"
-        inputType="text"
+        inputType="number"
       ></app-text-field>
       <app-text-field
         prefix="Platform ID"
@@ -74,14 +74,24 @@
       [medium]="true"
       class="min-w-[100px]"
       (onClick)="addStudent()"
-      [loader]="loader"
+      [loader]="addLoader"
       [disabled]="!studentForm.valid"
     ></app-button>
     <app-button
       text="Cancel"
       [medium]="true"
       class="min-w-[100px]"
-      (onClick)="cancel()"
+      (onClick)="navigateBack()"
     ></app-button>
   </div>
+  <app-success-dialog
+    dialogId="dialog"
+    [title]="dialogTitle"
+    [message]="message"
+    [dismiss]="button"
+    [action]="button2"
+    (dismissed)="navigateBack()"
+    (confirm)="dismiss()"
+    [twoButtons]="true"
+  ></app-success-dialog>
 </div>

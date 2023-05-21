@@ -10,8 +10,8 @@ export class SuccessDialogComponent implements OnInit {
   @Input() dialogId: string;
   @Input() title: string = 'Congratulations random Interner user!';
   // dialog buttons
-  @Input() button: string = 'Dismiss';
-  @Input() button2: string = 'Confirm';
+  @Input() dismiss: string = 'Dismiss';
+  @Input() action: string = 'Confirm';
   // dialog controller
   @Input() twoButtons: boolean = false;
   // message
@@ -27,11 +27,13 @@ export class SuccessDialogComponent implements OnInit {
 
   //  confirm dialog emitter
   confirmClick() {
+    // console.log('right');
     this.confirm.emit(true);
   }
 
   // cancel dialog emitter
   cancelClick() {
+    // console.log('left');
     this.dismissed.emit(true);
   }
 }
