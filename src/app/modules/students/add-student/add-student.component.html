@@ -17,6 +17,9 @@
         FCN="platformId"
         inputType="text"
       ></app-text-field>
+      <div class="erroMessage" *ngIf="platformIdError">
+        please fill correct platform ID
+      </div>
       <app-text-field
         prefix="First name"
         label="First name"

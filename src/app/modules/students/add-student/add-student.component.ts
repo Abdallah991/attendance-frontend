@@ -23,13 +23,14 @@ export class AddStudentComponent implements OnInit {
   // loader of button
   addLoader: boolean = false;
   // confirmation dialog
-  dialogTitle =
-    this.student?.firstName + ' ' + this.student?.lastName + ' Has been Added!';
-  message = 'One Extra Rebooter';
-  button = 'Done';
-  button2 = 'Add Another';
+  dialogTitle = '';
+  message = 'One Extra Rebooter!!';
+  button = 'Back';
+  button2 = 'Dismiss';
   // preset values
   cohortPreSetValue = 1;
+  // platformID error
+  platformIdError = false;
 
   constructor(
     private fb: FormBuilder,
@@ -65,6 +66,7 @@ export class AddStudentComponent implements OnInit {
   // add user to the system implementation
   async addStudent() {
     this.addLoader = true;
+    this.platformIdError = false;
     this.studentForm.disable();
     var studentInput = {
       lastName: this.studentForm.controls.lastName.value,
@@ -77,45 +79,43 @@ export class AddStudentComponent implements OnInit {
     };
 
     console.log('the value of the form is ', studentInput);
-    try {
-      this.SS.addStudent(studentInput).subscribe((student) => {
-        console.log('the response value is ', student);
+    await this.SS.addStudent(studentInput)
+      .then((student) => {
+        // if the api call is successful
+        this.student = new Student(student.data.student);
+        console.log('the response value is ', this.student);
+        this.studentForm.reset();
         this.studentForm.enable();
         this.addLoader = false;
-        this.studentForm.reset();
-        this.student = new Student(student.data.student);
         this.dialogTitle =
           this.student.firstName +
           ' ' +
           this.student?.lastName +
           ' Has been Added!';
-        this.showSuccessDialog();
-        // TODO:
-
-        // TODO: show success dialog
-        // TODO: redirect to students table
+        this.showDialog();
+      })
+      .catch((err) => {
+        console.log('the error value is ', err);
+        this.dialogTitle =
+          'There is no user with platform ID of ' + studentInput.platformId;
+        this.message = 'Make sure you have the correct ID';
+        this.showDialog();
+        this.studentForm.enable();
+        // this.platformIdError = true;
+      })
+      .finally(() => {
+        console.log('finally has been executed!');
+        this.addLoader = false;
       });
-    } catch (err) {
-      // TODO: show error dialog
-      console.log(err);
-      this.studentForm.enable();
-      this.addLoader = false;
-      // TODO: API implementation
-      this.showFailDialog();
-    }
-
-    // this.CS.
   }
-  // cancel button implementation
-  // async cancel() {
-  //   this.router.navigate(['/students']);
-  // }
 
   async navigateBack() {
     this.router.navigateByUrl('/students');
   }
 
   async dismiss() {
+    this.studentForm.reset();
+    this.studentForm.enable();
     // dismiss dialog
     // DO nothing
   }
@@ -127,27 +127,19 @@ export class AddStudentComponent implements OnInit {
   }
 
   // form Validation return value
-  isValid = (controlName) =>
-    this.studentForm.controls[controlName].touched &&
-    this.studentForm.controls[controlName].errors
-      ? true
-      : false;
+  // TODO: Add when needed
+  // isValid = (controlName) =>
+  //   this.studentForm.controls[controlName].touched &&
+  //   this.studentForm.controls[controlName].errors
+  //     ? true
+  //     : false;
 
-  // show success dialog
-  async showSuccessDialog() {
+  // Fail and error dialog
+  async showDialog() {
     // this.dialogTitle = title;
     // this.message = message;
     // this.button = button;
 
     document.querySelector<HTMLElement>('#dialog')?.click();
   }
-
-  async showFailDialog() {
-    // this.dialogTitle = title;
-    // this.message = message;
-    // this.button = button;
-    document.querySelector<HTMLElement>('#dialog')?.click();
-  }
-
-  // TODO: Show Fail dailog
 }

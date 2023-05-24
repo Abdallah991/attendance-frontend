@@ -20,6 +20,7 @@ export class SuccessDialogComponent implements OnInit {
   //  event emitters
   @Output() dismissed = new EventEmitter<boolean>();
   @Output() confirm = new EventEmitter<boolean>();
+  // !
 
   constructor() {}
 

@@ -23,54 +23,42 @@ export class StudentsService {
     } catch (err) {
       console.log(err);
       // disable the loader and return if there is an error
-      return null;
+      return err;
     }
   }
 
-  // get departments api
-  // getCandidatesPagination(page): Observable<any> {
-  //   try {
-  //     // get the data from the url
-  //     var response = this.http
-  //       .get<any>(ATTENDNACE_API + page)
-  //       .pipe(map((data) => data));
+  public deleteStudent(id: number): Promise<any> {
+    let promise = new Promise<any>(async (resolve, reject) => {
+      this.http.delete<any>(STUDENT_API + id).subscribe(
+        (value) => {
+          resolve(value);
+        },
+        (error) => {
+          console.log('the api call failed: ', error);
+          reject(error);
+        }
+      );
+    });
+    // deactivate the loader
+    console.log('the value of the promise ');
+    return promise;
+  }
 
-  //     return response;
-  //   } catch (err) {
-  //     console.log(err);
-  //     return null;
-  //   }
-  // }
-
-  // getAttendanceForCandidate(candidateId): Observable<any> {
-  //   try {
-  //     // get the data from the url
-  //     var response = this.http
-  //       .get<any>(CANDIDATE_API + candidateId)
-  //       .pipe(map((data) => data));
-
-  //     response.subscribe((value) => {
-  //       console.log(value);
-  //     });
-
-  //     return response;
-  //   } catch (err) {
-  //     console.log(err);
-  //     return null;
-  //   }
-  //
-
-  addStudent(student: any): Observable<any> {
-    try {
-      var response = this.http
-        .post(STUDENT_API, student)
-        .pipe(map((data) => data));
-      console.log('Observable value is ', response);
-      return response;
-    } catch (err) {
-      console.log(err);
-      return of(err);
-    }
+  public async addStudent(student: any): Promise<any> {
+    let promise = new Promise<any>(async (resolve, reject) => {
+      this.http.post<any>(STUDENT_API, student).subscribe(
+        (value) => {
+          resolve(value);
+        },
+        (error) => {
+          console.log('the api call failed: ', error);
+          reject(error);
+        }
+      );
+    });
+    // deactivate the loader
+    console.log('the value of the promise ');
+    return promise;
   }
 
   // get candidate by id api
@@ -80,7 +68,6 @@ export class StudentsService {
       var response = this.http
         .get<any>(STUDENT_API + id)
         .pipe(map((data) => data));
-
       return response;
     } catch (err) {
       console.log(err);

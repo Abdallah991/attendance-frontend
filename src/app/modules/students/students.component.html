@@ -10,7 +10,7 @@
     class="min-w-[100px]"
   ></app-button>
 </div>
-<div class="p-4">
+<div class="p-4" *ngIf="!loader">
   <div class="mb-4">
     <search-drop-down
       [FGN]="candidateForm"
@@ -28,8 +28,9 @@
     [data]="data"
     [actionButtons]="true"
     (editClicked)="viewCandidate($event)"
+    (deleteClicked)="deleteStudent($event)"
     [numberOfPages]="numberOfPages"
-    [showPagination]="true"
+    [showPagination]="false"
     [currentPage]="currentPage"
     (forward)="forawrdPagination($event)"
     (backward)="backwardPagination($event)"
@@ -38,3 +39,17 @@
     [loader]="loader"
   ></app-table>
 </div>
+<div *ngIf="loader">
+  <app-loader></app-loader>
+</div>
+
+<app-success-dialog
+  dialogId="dialog"
+  [title]="dialogTitle"
+  [message]="message"
+  [dismiss]="button"
+  [action]="button2"
+  (dismissed)="dismiss()"
+  (confirm)="confirmDelete()"
+  [twoButtons]="true"
+></app-success-dialog>

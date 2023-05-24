@@ -50,17 +50,22 @@ export class StudentsComponent implements OnInit {
   // search loader
   searchLoader: boolean = false;
   showResults: boolean = false;
+  // confirmation dialog
+  dialogTitle = 'Are you sure you want to delete this Student?';
+  message = 'This action is permanent';
+  button = 'Dismiss';
+  button2 = 'Confirm';
+  // delete student id
+  deleteId = null;
 
   ngOnInit(): void {
+    this.getTableData();
+  }
+
+  // TODO: make sure that this function works properly and loads the data
+  getTableData() {
     this.AR.data.subscribe((response: any) => {
       this.students = response.students.data.students;
-
-      // get the pages number, next page and previous
-      // this.numberOfPages = response.candidates['pages'];
-      // this.nextPage = response.candidates.next.split('=')[1];
-      // this.previousPage = response.candidates.previous?.split('=')[1];
-
-      // construct the table
       this.data = this.constructTableData(this.students);
     });
   }
@@ -86,11 +91,11 @@ export class StudentsComponent implements OnInit {
       // edit button
       edit: {
         isActive: true,
-        text: 'Details',
+        text: 'View',
       },
       // delete button
       delete: {
-        isActive: false,
+        isActive: true,
         text: 'Delete',
       },
     };
@@ -211,4 +216,31 @@ export class StudentsComponent implements OnInit {
     // TODO: add student form
     this.router.navigateByUrl('/students/add-student');
   }
+
+  confirmDelete() {
+    this.loader = true;
+    this.SS.deleteStudent(this.deleteId)
+      .then((res) => {
+        console.log('the user deleted is ', res.data.student);
+        this.deleteId = null;
+        this.getTableData();
+        this.loader = false;
+      })
+      .catch((err) => {
+        console.log('the api failed :', err);
+        this.deleteId = null;
+      });
+  }
+
+  deleteStudent($event) {
+    this.deleteId = $event;
+    console.log($event);
+    this.showDialog();
+  }
+
+  async showDialog() {
+    document.querySelector<HTMLElement>('#dialog')?.click();
+  }
+
+  dismiss() {}
 }
