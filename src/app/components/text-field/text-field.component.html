@@ -11,8 +11,10 @@
       [attr.step]="step"
       [attr.min]="min"
       [attr.max]="max"
+      [minlength]="min"
+      [maxlength]="max"
       (change)="emitChange()"
-      [value]="preSetValue | date: 'yyyy-MM-dd'"
+      [value]="preSetValue | date : 'yyyy-MM-dd'"
       oninput="((min === 0 || min === '0')) ? this.value = Math.abs(this.value) : this.value = this.value"
     />
   </div>

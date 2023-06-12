@@ -42,10 +42,11 @@ export class AddStudentComponent implements OnInit {
     this.studentForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      cpr: ['', Validators.required, , Validators.min(9), Validators.max(11)],
       platformId: ['', Validators.required],
       studentId: ['', Validators.required],
       acadamicSpecialization: ['', Validators.required],
-      cohortId: [1, Validators.required],
+      cohortId: [this.cohortPreSetValue, Validators.required],
     });
 
     // get cohort data from resolver
@@ -73,6 +74,7 @@ export class AddStudentComponent implements OnInit {
       id: this.studentForm.controls.studentId.value,
       platformId: this.studentForm.controls.platformId.value,
       firstName: this.studentForm.controls.firstName.value,
+      cpr: this.studentForm.controls.cpr.value,
       acadamicSpecialization:
         this.studentForm.controls.acadamicSpecialization.value,
       cohortId: this.studentForm.controls.cohortId.value,
@@ -85,40 +87,33 @@ export class AddStudentComponent implements OnInit {
         this.student = new Student(student.data.student);
         console.log('the response value is ', this.student);
         this.studentForm.reset();
-        this.studentForm.enable();
-        this.addLoader = false;
         this.dialogTitle =
           this.student.firstName +
           ' ' +
           this.student?.lastName +
           ' Has been Added!';
-        this.showDialog();
       })
       .catch((err) => {
         console.log('the error value is ', err);
         this.dialogTitle =
           'There is no user with platform ID of ' + studentInput.platformId;
         this.message = 'Make sure you have the correct ID';
-        this.showDialog();
-        this.studentForm.enable();
-        // this.platformIdError = true;
       })
       .finally(() => {
         console.log('finally has been executed!');
+        this.studentForm.enable();
         this.addLoader = false;
+        this.studentForm.controls.cohortId.setValue(this.cohortPreSetValue);
+        this.showDialog();
       });
   }
 
   async navigateBack() {
+    console.log(this.studentForm);
     this.router.navigateByUrl('/students');
   }
 
-  async dismiss() {
-    this.studentForm.reset();
-    this.studentForm.enable();
-    // dismiss dialog
-    // DO nothing
-  }
+  async dismiss() {}
 
   // set the gender value to the form when selected
   cohortSelected(event: number) {
@@ -128,18 +123,14 @@ export class AddStudentComponent implements OnInit {
 
   // form Validation return value
   // TODO: Add when needed
-  // isValid = (controlName) =>
-  //   this.studentForm.controls[controlName].touched &&
-  //   this.studentForm.controls[controlName].errors
-  //     ? true
-  //     : false;
+  isValid = (controlName) =>
+    this.studentForm.controls[controlName].touched &&
+    this.studentForm.controls[controlName].errors
+      ? true
+      : false;
 
   // Fail and error dialog
   async showDialog() {
-    // this.dialogTitle = title;
-    // this.message = message;
-    // this.button = button;
-
     document.querySelector<HTMLElement>('#dialog')?.click();
   }
 }

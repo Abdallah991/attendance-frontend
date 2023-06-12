@@ -48,6 +48,7 @@ export class StudentsService {
     let promise = new Promise<any>(async (resolve, reject) => {
       this.http.post<any>(STUDENT_API, student).subscribe(
         (value) => {
+          console.log(value);
           resolve(value);
         },
         (error) => {
@@ -75,22 +76,21 @@ export class StudentsService {
     }
   }
 
-  // search candidate from biotime
+  // search students
   async searchStudent(searchValue): Promise<any> {
-    try {
-      // get the data from the url
-      // pass the search value as an argument
-      var response = this.http
-        .get<any>(SEARCH_API + '?searchValue=' + searchValue)
-        .pipe(map((data) => data));
-      // return an observable
-      return response;
-    } catch (err) {
-      //  catch the error and return an error
-      console.log(err);
-      return {
-        error: err,
-      };
-    }
+    let promise = new Promise<any>(async (resolve, reject) => {
+      this.http.get<any>(SEARCH_API + searchValue).subscribe(
+        (value) => {
+          console.log(value);
+          resolve(value);
+        },
+        (error) => {
+          console.log('the api call failed: ', error);
+          reject(error);
+        }
+      );
+    });
+    // return promise
+    return promise;
   }
 }

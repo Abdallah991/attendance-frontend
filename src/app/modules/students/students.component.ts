@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CANDIDATES_HEADER } from 'src/app/constants/headers';
+import { STUDENT_HEADER } from 'src/app/constants/headers';
 import {
   SelectData,
   TableButtonOptions,
@@ -30,7 +30,7 @@ export class StudentsComponent implements OnInit {
   // table data
   data: TableData[] = [];
   // table columns
-  columns: string[] = CANDIDATES_HEADER;
+  columns: string[] = STUDENT_HEADER;
   // ? pagination variables
   // number of pages
   numberOfPages: number = 1;
@@ -40,6 +40,8 @@ export class StudentsComponent implements OnInit {
   previousPage: number = 1;
   // number of pages
   currentPage: number = 1;
+  // Show add button if no students have been added
+  showAddButton: boolean = false;
   // pagination loader
   loader: boolean = false;
   // disable pagination for the table
@@ -66,7 +68,12 @@ export class StudentsComponent implements OnInit {
   getTableData() {
     this.AR.data.subscribe((response: any) => {
       this.students = response.students.data.students;
-      this.data = this.constructTableData(this.students);
+      console.log('Yess this is how it works: ', this.students);
+      if (this.students.length > 0) {
+        this.data = this.constructTableData(this.students);
+      } else {
+        this.showAddButton = true;
+      }
     });
   }
 
@@ -78,7 +85,13 @@ export class StudentsComponent implements OnInit {
         // the id, to return back for edit or delete events
         id: res['id'],
         // the data displayed in each row
-        data: [res['id'], res['firstName'] + ' ' + res['lastName'], 'Student'],
+        data: [
+          res['id'],
+          res['firstName'] + ' ' + res['lastName'],
+          res['cohortId'],
+          res['email'],
+          res['platformId'],
+        ],
         // the action buttons
         actionButtons: this.constructTableButton(),
       };
@@ -175,36 +188,44 @@ export class StudentsComponent implements OnInit {
   // search button implementation
   search() {
     // TODO: search functionality for the students
-    // this.searchLoader = true;
-    // this.searchValues = [];
-    // var searchValue = this.candidateForm.controls.searchInput.value;
-    // console.log('the value of the search is ', searchValue);
-    // if (searchValue != undefined && searchValue != '' && searchValue != null) {
-    //   // TODO: put back like promise syntax
-    //   // TODO: show no results when there is no results
-    //   console.log('valuefrom the form', searchValue);
-    //   this.SS.searchStudent(searchValue).then((result) => {
-    //     result.subscribe((candidate) => {
-    //       console.log(candidate);
-    //       candidate['data'].forEach((item) => {
-    //         this.searchValues.push({
-    //           id: item['emp_code'],
-    //           text: item['full_name'],
-    //         });
-    //       });
-    //       this.searchLoader = false;
-    //       this.showResults = true;
-    //       console.log(this.searchValues);
-    //       // TODO: display the search results from the component
-    //     });
-    //   });
-    //   if (this.searchValues.length == 0) {
-    //     this.showResults = false;
-    //   }
-    // } else {
-    //   this.searchLoader = false;
-    //   this.showResults = false;
-    // }
+    this.searchLoader = true;
+    this.searchValues = [];
+    var searchValue = this.candidateForm.controls.searchInput.value;
+    console.log('the value of the search is ', searchValue);
+    if (searchValue != undefined && searchValue != '' && searchValue != null) {
+      // TODO: put back like promise syntax
+      // TODO: show no results when there is no results
+      console.log('valuefrom the form', searchValue);
+      var searchInput = {
+        searchValue: searchValue,
+      };
+      this.SS.searchStudent(searchInput)
+        .then((student) => {
+          // result.subscribe((student) => {
+          console.log(student);
+          //   student['data'].forEach((item) => {
+          //     this.searchValues.push({N
+          //       id: item.platformId,
+          //       text: item.firstName + ' ' + item.lastName,
+          //     // });
+          //   });
+          //   this.searchLoader = false;
+          //   this.showResults = true;
+          //   console.log(this.searchValues);
+          //   // TODO: display the search results from the component
+          // });
+        })
+        .catch((err) => {
+          console.log('Erro response :', err);
+        });
+      //   if (this.searchValues.length == 0) {2201991
+
+      //     this.showResults = false;
+      //   }
+      // } else {
+      //   this.searchLoader = false;
+      //   this.showResults = false;
+    }
   }
 
   cancelSearch() {

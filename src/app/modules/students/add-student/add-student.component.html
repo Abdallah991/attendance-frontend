@@ -35,6 +35,18 @@
         inputType="text"
       ></app-text-field>
       <app-text-field
+        prefix="CPR"
+        label="CPR"
+        [FGN]="studentForm"
+        FCN="cpr"
+        [min]="9"
+        [max]="11"
+        inputType="text"
+      ></app-text-field>
+      <div class="erroMessage" *ngIf="isValid('cpr')">
+        please fill CPR number containing at least 9 digits
+      </div>
+      <app-text-field
         prefix="Acadamic Specilaization"
         label="Acadamic Specilaization"
         [FGN]="studentForm"

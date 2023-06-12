@@ -23,7 +23,7 @@
   >
     <ng-content></ng-content>
 
-    <p>{{ text }}</p>
+    <p [ngClass]="[wide ? 'text-lg' : 'text-xs']">{{ text }}</p>
   </div>
   <div
     [ngClass]="loader ? '' : 'hidden'"

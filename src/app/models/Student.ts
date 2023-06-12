@@ -9,6 +9,7 @@ export class Student {
   cohort: Cohort;
   cohortId: number;
   nationality: string;
+  cpr: string;
   phone: string;
   gender: string;
   supportedByTamkeen: string;
@@ -29,6 +30,7 @@ export class Student {
     this.cohort = student.cohort;
     this.cohortId = student.cohortId;
     this.nationality = student.nationality;
+    this.cpr = student.cpr;
     this.gender = student.gender;
     this.phone = student.phone;
     this.supportedByTamkeen = student.supportedByTamkeen;
