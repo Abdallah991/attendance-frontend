@@ -1,15 +1,27 @@
 <div class="flex justify-between mt-4 p-4 w-full">
   <h1 *ngIf="!showAddButton">Students</h1>
-  <app-button
-    color="btn-primary"
-    textColor="text-base-100"
-    [small]="true"
-    text="Edit"
-    (onClick)="addStudents()"
-    text="Add Student"
-    class="min-w-[100px]"
-    *ngIf="!showAddButton"
-  ></app-button>
+  <div class="flex flex-row gap-4">
+    <app-button
+      color="btn-primary"
+      textColor="text-base-100"
+      [small]="true"
+      (onClick)="syncAttendanceData()"
+      text="Sync Attedance Data"
+      class="min-w-[100px]"
+      [disabled]="true"
+      class="cursor-not-allowed"
+    ></app-button>
+    <app-button
+      color="btn-primary"
+      textColor="text-base-100"
+      [small]="true"
+      text="Edit"
+      (onClick)="addStudents()"
+      text="Add Student"
+      class="min-w-[100px]"
+      *ngIf="!showAddButton"
+    ></app-button>
+  </div>
 </div>
 <div class="p-4" *ngIf="!loader">
   <div class="mb-4">

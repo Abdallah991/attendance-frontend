@@ -208,5 +208,8 @@ export class StudentsComponent implements OnInit {
     document.querySelector<HTMLElement>('#dialog')?.click();
   }
 
+  // TODO: Invoke sync attendace api
+  async syncAttendanceData() {}
+
   dismiss() {}
 }
