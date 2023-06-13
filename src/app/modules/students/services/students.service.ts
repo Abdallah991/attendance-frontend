@@ -79,9 +79,8 @@ export class StudentsService {
   // search students
   async searchStudent(searchValue): Promise<any> {
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.http.get<any>(SEARCH_API + searchValue).subscribe(
+      this.http.post<any>(SEARCH_API, searchValue).subscribe(
         (value) => {
-          console.log(value);
           resolve(value);
         },
         (error) => {

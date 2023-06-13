@@ -21,7 +21,7 @@ export class StudentsComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder
   ) {
-    this.candidateForm = this.fb.group({
+    this.searchForm = this.fb.group({
       searchInput: ['', Validators.required],
     });
   }
@@ -47,7 +47,7 @@ export class StudentsComponent implements OnInit {
   // disable pagination for the table
   disableForward = false;
   disableBackward = true;
-  candidateForm: FormGroup;
+  searchForm: FormGroup;
   searchValues: SelectData[] = [];
   // search loader
   searchLoader: boolean = false;
@@ -89,7 +89,7 @@ export class StudentsComponent implements OnInit {
           res['id'],
           res['firstName'] + ' ' + res['lastName'],
           res['cohortId'],
-          res['email'],
+          res['cpr'],
           res['platformId'],
         ],
         // the action buttons
@@ -115,35 +115,8 @@ export class StudentsComponent implements OnInit {
   }
 
   // click forward implementaton
-  // accepts the number of page
   async forawrdPagination($page) {
     // TODO: Implement the search
-    // disable the forward button to not spam the api
-    // this.disableForward = true;
-    // this.loader = true;
-    // let promise = new Promise<any>(async (resolve, reject) => {
-    //   this.SS.getCandidatesPagination($page).subscribe(
-    //     (roles) => resolve(roles),
-    //     (error) => reject(error)
-    //   );
-    // });
-    // // promise if its resolved or rejected
-    // await promise
-    //   .then((value) => {
-    //     // console.log(value);
-    //     this.students = Object.keys(value.data).map(function (_) {
-    //       return value.data[_];
-    //     });
-    //     console.log('students after the pagination ', this.students);
-    //     this.data = this.constructTableData(this.students);
-    //     this.disableForward = false;
-    //     this.loader = false;
-    //   })
-    //   .catch((err) => {
-    //     // console log the error
-    //     // deactivate the loader
-    //     console.log(err);
-    //   });
   }
 
   // click backward implementaton
@@ -153,32 +126,6 @@ export class StudentsComponent implements OnInit {
     this.disableBackward = true;
     this.loader = true;
     // TODO: check pagination later
-
-    // let promise = new Promise<any>(async (resolve, reject) => {
-    //   this.SS.getCandidatesPagination($page).subscribe(
-    //     (roles) => resolve(roles),
-    //     (error) => reject(error)
-    //   );
-    // });
-
-    // promise if its resolved or rejected
-    // await promise
-    //   .then((value) => {
-    //     // console.log(value);
-    //     this.students = Object.keys(value.data).map(function (_) {
-    //       return value.data[_];
-    //     });
-    //     console.log('students after the pagination ', this.students);
-    //     this.data = this.constructTableData(this.students);
-    //     this.disableBackward = false;
-    //     this.loader = false;
-    //   })
-    //   .catch((err) => {
-    //     // console log the error
-
-    //     // deactivate the loader
-    //     console.log(err);
-    //   });
   }
 
   viewCandidate(id) {
@@ -190,33 +137,25 @@ export class StudentsComponent implements OnInit {
     // TODO: search functionality for the students
     this.searchLoader = true;
     this.searchValues = [];
-    var searchValue = this.candidateForm.controls.searchInput.value;
-    console.log('the value of the search is ', searchValue);
+    var searchValue = this.searchForm.controls.searchInput.value;
     if (searchValue != undefined && searchValue != '' && searchValue != null) {
       // TODO: put back like promise syntax
       // TODO: show no results when there is no results
-      console.log('valuefrom the form', searchValue);
       var searchInput = {
         searchValue: searchValue,
       };
       this.SS.searchStudent(searchInput)
         .then((student) => {
-          // result.subscribe((student) => {
           console.log(student);
-          //   student['data'].forEach((item) => {
-          //     this.searchValues.push({N
-          //       id: item.platformId,
-          //       text: item.firstName + ' ' + item.lastName,
-          //     // });
-          //   });
-          //   this.searchLoader = false;
-          //   this.showResults = true;
-          //   console.log(this.searchValues);
-          //   // TODO: display the search results from the component
-          // });
+          this.students = student;
+          this.data = this.constructTableData(this.students);
         })
         .catch((err) => {
           console.log('Erro response :', err);
+        })
+        .finally(() => {
+          this.searchLoader = false;
+          console.log('finally ran!');
         });
       //   if (this.searchValues.length == 0) {2201991
 
@@ -225,12 +164,18 @@ export class StudentsComponent implements OnInit {
       // } else {
       //   this.searchLoader = false;
       //   this.showResults = false;
+    } else {
+      this.getTableData();
+      this.searchLoader = false;
     }
   }
 
+  // TODO:
   cancelSearch() {
+    this.getTableData();
     this.searchLoader = false;
     this.showResults = false;
+    this.searchForm.controls.searchInput.setValue(null);
   }
 
   addStudents() {

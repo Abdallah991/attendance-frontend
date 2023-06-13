@@ -25,7 +25,7 @@ export const CANDIDATE_API = ROOTLINK + '/candidate/';
 export const CANDIDATE_INFO_API = ROOTLINK + '/candidate-info/';
 
 // 9- Search API
-export const SEARCH_API = ROOTLINK + '/search/1';
+export const SEARCH_API = ROOTLINK + '/search/';
 
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer
