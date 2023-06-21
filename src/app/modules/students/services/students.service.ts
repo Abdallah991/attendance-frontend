@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SEARCH_API, STUDENT_API } from 'src/app/constants/api';
+import { ATTENDNACE_API, SEARCH_API, STUDENT_API } from 'src/app/constants/api';
 
 @Injectable({
   providedIn: 'root',
@@ -91,5 +91,20 @@ export class StudentsService {
     });
     // return promise
     return promise;
+  }
+
+  // attendance per Student
+  // get candidate by id api
+  getAttendanceById(id): Observable<any> {
+    try {
+      // get the data from the url
+      var response = this.http
+        .get<any>(ATTENDNACE_API + id)
+        .pipe(map((data) => data));
+      return response;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
   }
 }

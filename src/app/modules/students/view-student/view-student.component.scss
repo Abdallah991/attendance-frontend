@@ -1,3 +1,29 @@
 h2 {
-    @apply pl-2;
+    @apply pl-2 text-xl;
+}
+
+h1 {
+    @apply pl-2
+}
+
+h3 {
+    @apply pl-2
+}
+
+p {
+    @apply text-lg text-gray pl-2 mt-2
+}
+
+.data-container {
+    @apply mt-4 flex flex-row justify-start align-middle flex-wrap w-full p-4
+
+}
+
+.data-attendance {
+    @apply mt-4 flex flex-col justify-start flex-wrap w-full p-4
+
+}
+
+.box {
+    @apply basis-1/4
 }

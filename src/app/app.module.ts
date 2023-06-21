@@ -6,6 +6,7 @@ import { SharedModule } from './components/shared.module';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+// import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent, SideNavComponent],

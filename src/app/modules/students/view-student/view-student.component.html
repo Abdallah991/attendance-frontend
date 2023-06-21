@@ -1,53 +1,113 @@
-<div class="p-4">
-  <h1>{{ student.firstName }} {{ student.lastName }}</h1>
-  <div class="mt-2">
-    <h2 class="text-xl font-bold">{{ student.id }}</h2>
-    <h2 class="text-xl font-bold">{{ student.platformId }}</h2>
-  </div>
-  <div class="flex flex-row flex-wrap mt-4 flex-4 align-center">
-    <!-- <h1>Attendance Records</h1> -->
-    <!-- <h2 class="text-[#848484] align-text-top">
-      attended {{ attendance.length }} times
-    </h2> -->
-  </div>
-  <div class="p-4">
-    <div class="p-4">
-      <h1 class="mb-2">Acadamic Qualification:</h1>
-      <h3>{{ student.acadamicQualification }}</h3>
-    </div>
-    <div class="p-4">
-      <h1 class="mb-2">Acadamic Specialization:</h1>
-      <h3>{{ student.acadamicSpecialization }}</h3>
-    </div>
-    <div class="p-4">
-      <h1 class="mb-2">Email:</h1>
-      <h3>{{ student.email }}</h3>
+<div class="p-8">
+  <div class="flex flex-row justify-between">
+    <h1>{{ student.firstName }} {{ student.lastName }}</h1>
+    <div class="flex flex-row gap-4">
+      <app-button
+        color="btn-primary"
+        textColor="text-base-100"
+        [small]="true"
+        (onClick)="copyEmail()"
+        text="Copy Email"
+        class="min-w-[100px]"
+        class="cursor-not-allowed"
+      ></app-button>
+      <app-button
+        color="btn-primary"
+        textColor="text-base-100"
+        [small]="true"
+        (onClick)="copyPlatformId()"
+        text="Copy Platform ID"
+        class="min-w-[100px]"
+        *ngIf="!showAddButton"
+      ></app-button>
     </div>
   </div>
-  <div class="mt-2">
-    <ul>
-      <!-- <li *ngFor="let record of attendance">
-        <div class="flex flex-row flex-wrap">
-          <h2>
-            {{ formateDate(record["punch_time"]).date
-            }}<span class="text-[#848484] font-thin pl-2">
-              {{ formateDate(record["punch_time"]).time }}</span
-            >
-          </h2>
-          <h2
-            class="ml-8 text-[#13ce66]"
-            *ngIf="record['terminal_alias'] === 'InnoRe'"
-          >
-            Innovation Realm
-          </h2>
-          <h2
-            class="ml-8 text-[#ff7849]"
-            *ngIf="record['terminal_alias'] === 'HelloWorld'"
-          >
-            Hello World
-          </h2>
-        </div>
-      </li> -->
-    </ul>
+  <div class="data-container">
+    <div class="box">
+      <h2>Student ID</h2>
+      <p>{{ student.id }}</p>
+    </div>
+    <div class="box">
+      <h2>Platform ID</h2>
+      <p>{{ student.platformId }}</p>
+    </div>
+    <div class="box">
+      <h2>Email</h2>
+      <p>{{ student.email }}</p>
+    </div>
+    <div class="box">
+      <h2>CPR</h2>
+      <p>{{ student.cpr }}</p>
+    </div>
+  </div>
+  <div class="data-container">
+    <div class="box">
+      <h2>Cohort</h2>
+      <p>{{ cohort.name }}</p>
+    </div>
+    <div class="box">
+      <h2>School</h2>
+      <p>{{ cohort.school }}</p>
+    </div>
+    <div class="box">
+      <h2>Year</h2>
+      <p>{{ cohort.year }}</p>
+    </div>
+    <div class="box">
+      <h2>Date of Birth</h2>
+      <p>{{ timeFormatter(student.dob) }}</p>
+    </div>
+  </div>
+  <div class="data-container">
+    <div class="box">
+      <h2>Academic Qualification</h2>
+      <p>{{ student.acadamicQualification }}</p>
+    </div>
+    <div class="box">
+      <h2>Academic Specialization</h2>
+      <p>{{ student.acadamicSpecialization }}</p>
+    </div>
+  </div>
+  <div class="data-attendance">
+    <h2>Times Attended the campus</h2>
+    <h1>{{ attendnaceRecords }}</h1>
+  </div>
+  <div class="data-attendance">
+    <h2 class="mb-2">Records</h2>
+    <div *ngFor="let record of attendance">
+      <div class="flex flex-row gap-4">
+        <h3>{{ timeFormatter(record["punch_time"]) }}</h3>
+        <h3>{{ record["terminal_alias"] }}</h3>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- toaster -->
+<!-- ! can add this to components -->
+<div class="fixed bottom-10 right-4 duration-500 ease-in" *ngIf="toaster">
+  <div
+    id="toast-simple"
+    class="flex items-center w-full max-w-xs p-4 space-x-4 text-white bg-green opacity-70 divide-x divide-white-200 rounded-lg shadow dark:text-white-400 dark:divide-white-700 space-x dark:bg-white-800"
+    role="alert"
+  >
+    <svg
+      aria-hidden="true"
+      class="w-5 h-5"
+      fill="white"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        clip-rule="evenodd"
+      ></path>
+    </svg>
+
+    <div class="pl-4 text-base-100 text-sm font-normal">
+      Copied to Clipboard
+    </div>
+  </div>
+</div>
+<!-- toaster -->

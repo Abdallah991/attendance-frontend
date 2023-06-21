@@ -13,15 +13,15 @@ export class StudentAttendanceResolver implements Resolve<any> {
   resolve(
     route: ActivatedRouteSnapshot // : Observable<any>
   ) {
-    let candidateId = route.params.candidateId;
-    console.log('the student Id is ', candidateId);
+    let studentId = route.params.studentId;
+    console.log('the student Id is ', studentId);
 
-    // get all candidate attendnace record
-    // return this.SS.getAttendanceForCandidate(candidateId).pipe(
-    //   catchError((error) => {
-    //     return of('No data');
-    //   }),
-    //   first()
-    // );
+    // get all student's attendnace record
+    return this.SS.getAttendanceById(studentId).pipe(
+      catchError((error) => {
+        return of('No data');
+      }),
+      first()
+    );
   }
 }

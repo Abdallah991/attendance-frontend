@@ -26,7 +26,8 @@ const routes: Routes = [
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: {
       student: ViewStudentResolver,
-      // attendance: StudentAttendanceResolver,
+      cohorts: CohortsResolver,
+      attendance: StudentAttendanceResolver,
     },
   },
   {
