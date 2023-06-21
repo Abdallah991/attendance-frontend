@@ -16,6 +16,7 @@ export class ViewStudentComponent implements OnInit {
   student: Student = null;
   attendance: [] = [];
   attendanceFormat: any = {};
+  attendanceTable: any[] = [];
   attendnaceRecords = NaN;
   cohort: Cohort = null;
   toaster = false;
@@ -23,18 +24,29 @@ export class ViewStudentComponent implements OnInit {
     this.AR.data.subscribe((response: any) => {
       this.student = response.student.data.student;
       this.cohort = response.cohorts.data.cohorts[0];
+      // Attendnace data
       this.attendance = response.attendance.data;
+      // Attendnace frequency
       this.attendnaceRecords = response.attendance.count;
-      console.log(this.attendance);
+      // console.log(this.attendance);
 
       this.attendance.forEach((item) => {
-        if (!this.attendanceFormat[item['punch_time']]) {
-          this.attendanceFormat[item['punch_time']] = 1;
+        if (!this.attendanceFormat[formatYYYYDDMM(item['punch_time'])]) {
+          this.attendanceFormat[formatYYYYDDMM(item['punch_time'])] = 1;
         } else {
-          this.attendanceFormat[item['punch_time']]++;
+          this.attendanceFormat[formatYYYYDDMM(item['punch_time'])]++;
         }
       });
-      console.log(this.attendanceFormat);
+      // Attendnace dates and frequency on each day
+      // formate into an array
+      Object.keys(this.attendanceFormat).forEach((item) => {
+        this.attendanceTable.push({
+          date: item,
+          frequency: this.attendanceFormat[item],
+        });
+      });
+
+      console.log(this.attendanceTable);
       // !Information to be added plus the attendance.
       // 1- cohort
       // 2- rank
