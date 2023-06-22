@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       // TODO: change the email and password address
-      // email: ['abdallah.alathamneh@reboot01.com', Validators.required],
-      // password: ['123456', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
