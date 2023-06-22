@@ -99,7 +99,7 @@ export class StudentsService {
     try {
       // get the data from the url
       var response = this.http
-        .get<any>(ATTENDNACE_API + id)
+        .get<any>(ATTENDNACE_API + '/' + id)
         .pipe(map((data) => data));
       return response;
     } catch (err) {
