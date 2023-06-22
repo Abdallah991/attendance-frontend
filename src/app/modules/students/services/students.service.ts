@@ -29,7 +29,7 @@ export class StudentsService {
 
   public deleteStudent(id: number): Promise<any> {
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.http.delete<any>(STUDENT_API + id).subscribe(
+      this.http.delete<any>(STUDENT_API + '/' + id).subscribe(
         (value) => {
           resolve(value);
         },
@@ -67,7 +67,7 @@ export class StudentsService {
     try {
       // get the data from the url
       var response = this.http
-        .get<any>(STUDENT_API + id)
+        .get<any>(STUDENT_API + '/' + id)
         .pipe(map((data) => data));
       return response;
     } catch (err) {

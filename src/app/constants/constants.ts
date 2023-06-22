@@ -5,6 +5,9 @@ import { getToken } from './globalMethods';
 export const httpOptions = new HttpHeaders({
   'Content-Type': 'application/json',
   Authorization: 'Bearer ' + getToken(),
+  // 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+  // 'Access-Control-Allow-Methods': 'POST',
+  // 'Access-Control-Allow-Origin': '*',
 });
 
 export const GENDERS: SelectData[] = [
