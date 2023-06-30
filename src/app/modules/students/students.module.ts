@@ -12,6 +12,7 @@ import { StudentAttendanceResolver } from './services/student-attendance.resolve
 import { AddStudentComponent } from './add-student/add-student.component';
 import { CohortsService } from '../cohorts/services/cohorts.service';
 import { CohortsResolver } from '../cohorts/services/cohorts.resolver';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [StudentsComponent, ViewStudentComponent, AddStudentComponent],
@@ -20,6 +21,7 @@ import { CohortsResolver } from '../cohorts/services/cohorts.resolver';
     SharedModule,
     ReactiveFormsModule,
     StudentsRoutingModule,
+    FullCalendarModule,
   ],
   providers: [
     StudentsService,

@@ -16,9 +16,9 @@ export class StudentsService {
       // get the data from the url
       var http = this.http.get<any>(STUDENT_API).pipe(map((data) => data));
       http.subscribe((data) => {
-        console.log(data);
+        // console.log(data);
       });
-      console.log(http);
+      // console.log(http);
       return http;
     } catch (err) {
       console.log(err);
@@ -40,7 +40,7 @@ export class StudentsService {
       );
     });
     // deactivate the loader
-    console.log('the value of the promise ');
+    // console.log('the value of the promise ');
     return promise;
   }
 
@@ -48,7 +48,7 @@ export class StudentsService {
     let promise = new Promise<any>(async (resolve, reject) => {
       this.http.post<any>(STUDENT_API, student).subscribe(
         (value) => {
-          console.log(value);
+          // console.log(value);
           resolve(value);
         },
         (error) => {

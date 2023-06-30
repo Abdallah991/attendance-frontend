@@ -41,6 +41,7 @@ export class TableComponent implements OnInit {
   // pagination laoder
   @Input() loader: boolean = false;
 
+  // ?  pagination
   @Output() forward = new EventEmitter<number>();
   @Output() backward = new EventEmitter<number>();
 

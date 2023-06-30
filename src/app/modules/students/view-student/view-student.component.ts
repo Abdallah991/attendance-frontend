@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { formatYYYYDDMM } from 'src/app/constants/globalMethods';
 import { Cohort } from 'src/app/models/Cohort';
 import { Student } from 'src/app/models/Student';
+// Calender imports
+import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 @Component({
   selector: 'app-view-candidate',
@@ -10,8 +13,15 @@ import { Student } from 'src/app/models/Student';
   styleUrls: ['./view-student.component.scss'],
 })
 export class ViewStudentComponent implements OnInit {
-  [x: string]: any;
-  constructor(private AR: ActivatedRoute) {}
+  // Caleder configuration
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    plugins: [dayGridPlugin],
+    buttonText: {
+      today: 'Today',
+    },
+  };
+  constructor(private AR: ActivatedRoute, private renderer: Renderer2) {}
 
   student: Student = null;
   attendance: [] = [];
@@ -20,6 +30,7 @@ export class ViewStudentComponent implements OnInit {
   attendnaceRecords = NaN;
   cohort: Cohort = null;
   toaster = false;
+
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
       this.student = response.student.data.student;
@@ -37,30 +48,19 @@ export class ViewStudentComponent implements OnInit {
           this.attendanceFormat[formatYYYYDDMM(item['punch_time'])]++;
         }
       });
+      // console.log(this.attendanceFormat);
       // Attendnace dates and frequency on each day
       // formate into an array
       Object.keys(this.attendanceFormat).forEach((item) => {
         this.attendanceTable.push({
           date: item,
+          title: 'Present',
+          color: '#06002E',
           frequency: this.attendanceFormat[item],
         });
       });
-
-      console.log(this.attendanceTable);
-      // !Information to be added plus the attendance.
-      // 1- cohort
-      // 2- rank
-      // 3- cpr
-      // 4- dob
-      // 5- nationality
-      // 6- Scholarship
-      // TODO: 7- Attendance
-      // 8- school
-      // 9- name
-      // 10- id
-      // 11- platform id
-      // 12- email
-      // TODO: 13- copy email, username or id shortcuts
+      this.calendarOptions.events = this.attendanceTable;
+      // console.log(this.attendanceTable);
     });
   }
 

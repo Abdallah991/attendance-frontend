@@ -16,9 +16,9 @@ export class CohortsService {
       // get the data from the url
       var http = this.http.get<any>(COHORT_API).pipe(map((data) => data));
       http.subscribe((data) => {
-        console.log(data);
+        // console.log(data);
       });
-      console.log(http);
+      // console.log(http);
       return http;
     } catch (err) {
       console.log(err);
