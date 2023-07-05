@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LOGIN_API, LOGOUT_API } from 'src/app/constants/api';
+import { LOGIN_API, LOGOUT_API, PASSWORD_API } from 'src/app/constants/api';
 import { httpOptions } from 'src/app/constants/constants';
+import { getUser } from 'src/app/constants/globalMethods';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +13,7 @@ export class AuthService {
   // retrieves email and password then sends a http request if successful
   // returns a token
   public async login(email, password): Promise<any> {
-    var LoginSuccessful = false;
     var token;
-
     var data = {
       email: email,
       password: password,
@@ -25,29 +24,34 @@ export class AuthService {
         (response) => {
           resolve(response);
         },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+
+    return promise;
+  }
+
+  // change password
+  public async changePassword(oldPassword, newPassword): Promise<any> {
+    var data = {
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+      // get value of the user
+      id: getUser().id,
+    };
+
+    let promise = new Promise<any>(async (resolve, reject) => {
+      this.http.post(PASSWORD_API, data, { headers: httpOptions }).subscribe(
+        (response) => {
+          resolve(response);
+        },
         (error) => reject(error)
       );
     });
 
-    await promise
-      .then((response) => {
-        // TODO: this depends on how to manage the session
-        // TODO: Modify later
-        LoginSuccessful = true;
-        console.log('response from backend', response.data);
-        token = response.data['token'];
-        sessionStorage.setItem('user', JSON.stringify(response.data.users));
-        sessionStorage.setItem('userID', response.data.users.id);
-        sessionStorage.setItem('signinToken', token);
-        return response.data.token;
-      })
-      .catch((error) => {
-        LoginSuccessful = false;
-        return LoginSuccessful;
-      });
-
-    // return the value of the call
-    // return LoginSuccessful;
+    return promise;
   }
 
   // Logout implementation

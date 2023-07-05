@@ -55,4 +55,8 @@ export class SideNavComponent implements OnInit {
         console.log('error logout response ', err);
       });
   }
+
+  async changePassword() {
+    this.router.navigateByUrl('/change-password');
+  }
 }

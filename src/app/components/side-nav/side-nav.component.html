@@ -28,56 +28,42 @@
         </div>
       </div>
       <!-- logout icon -->
-      <div
-        class="p-3 mb-12 cursor-pointer logoutLink text-base-100"
-        (click)="signOut()"
-      >
-        <a class="flex flex-row items-center gap-3">
-          <div class="logoutLink">
-            <img
-              class="filter-white w-[30px]"
-              src="../../../assets/icons/logout.svg"
-              alt="Logout"
-            />
-          </div>
-          <div class="hidden lg:flex">Logout</div>
-        </a>
+      <div>
+        <div
+          class="p-2 cursor-pointer text-base-100"
+          (click)="changePassword()"
+        >
+          <a class="flex flex-row items-center gap-3">
+            <div class="logoutLink">
+              <img
+                class="filter-white w-[30px] min-h-[20]"
+                src="../../../assets/icons/password.svg"
+                alt="Logout"
+              />
+            </div>
+            <div class="hidden lg:flex mt-2">Reset Password</div>
+          </a>
+        </div>
+        <div
+          class="p-3 mb-12 cursor-pointer logoutLink text-base-100"
+          (click)="signOut()"
+        >
+          <a class="flex flex-row items-center gap-3">
+            <div class="logoutLink">
+              <img
+                class="filter-white w-[30px]"
+                src="../../../assets/icons/logout.svg"
+                alt="Logout"
+              />
+            </div>
+            <div class="hidden lg:flex">Logout</div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
   <div class="navigationPlatform"></div>
   <div class="mainContainer">
-    <!-- <div class="dashboardHeader">
-      <div class="headerTitleBar">
-        <h1>Portions</h1>
-      </div>
-      <div class="headerContentBox">
-        <div class="accountContainer">
-          <div class="headerNotificationContainer">
-          </div>
-          <div class="flex flex-col accountInfoContainer group">
-            <div class="user-image">
-              <img [src]="userImageUrl" alt="Avatar" class="avatar" />
-            </div>
-            <span>
-              <div
-                class="z-50 bg-white hidden divide-y shadow-xl profile-menu group-hover:flex animate-slide"
-              >
-                <div class="flex flex-col user-info">
-                  <div class="flex items-center mx-auto menu-user-image">
-                    <img [src]="userImageUrl" alt="Avatar" class="avatar" />
-                  </div>
-                  <h4 class="pt-2 pb-1">Khalid Althawadi</h4>
-                  <p class="pb-2">Super Admin</p>
-                </div>
-                <div class="flex flex-col pt-3"></div>
-              </div>
-            </span>
-            <div class="h-4"></div>
-          </div>
-        </div>
-      </div>
-    </div> -->
     <div class="dashboardContentBox">
       <div class="spinner-container" *ngIf="loading">
         <app-loader></app-loader>

@@ -57,6 +57,9 @@ export class ViewStudentComponent implements OnInit {
           title: 'Present',
           color: '#06002E',
           frequency: this.attendanceFormat[item],
+          interactive: true,
+          // url: 'Abdallah',
+          // start: '2019-08-12T10:30:00',
         });
       });
       this.calendarOptions.events = this.attendanceTable;

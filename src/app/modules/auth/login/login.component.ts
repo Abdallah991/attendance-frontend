@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -9,6 +9,13 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  // Listen to all keybaord events
+  @HostListener('window:keyup', ['$event']) keyUp(e: KeyboardEvent) {
+    // When form is valid and clicked Enter
+    if (e['code'] === 'Enter' && this.form.valid) {
+      this.login();
+    }
+  }
   // title
   title: string = 'Login';
   // form
@@ -17,6 +24,10 @@ export class LoginComponent implements OnInit {
   errorMsg = null;
   // loader
   loader = false;
+  // dialog variables
+  dialogTitle = 'Email or Password are Incorrect';
+  message = 'Please try to enter your credengtials again!!';
+  button2 = 'Dismiss';
 
   constructor(
     private fb: FormBuilder,
@@ -24,7 +35,6 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.form = this.fb.group({
-      // TODO: change the email and password address
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
@@ -32,8 +42,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // form validation
-  // TODO: Adding a way to refresh the calls when there is a token
   isValid = (controlName) =>
     this.form.controls[controlName].touched &&
     this.form.controls[controlName].errors
@@ -41,7 +49,7 @@ export class LoginComponent implements OnInit {
       : false;
 
   async login() {
-    // TODO: add the form validation condition
+    var token;
     this.loader = true;
 
     this.AS.login(
@@ -51,15 +59,31 @@ export class LoginComponent implements OnInit {
       .then((val) => {
         // that is it
         // console.log('the login was ', val);
-        setTimeout(() => {
-          this.loader = false;
-          this.router.navigateByUrl('/students');
-        }, 2000);
+        token = val.data['token'];
+        // setting the user value
+        sessionStorage.setItem('user', JSON.stringify(val.data.users));
+        // setting the user id
+        sessionStorage.setItem('userID', val.data.users.id);
+        // setting the token
+        sessionStorage.setItem('signinToken', token);
+        // navigate to students page upon success
+        this.router.navigateByUrl('/students');
+        this.loader = false;
       })
       .catch((err) => {
         console.log('the login was ', err);
         this.loader = false;
+        this.showDialog();
       });
-    // implement the login logic
+  }
+
+  // ? dialog
+  // Fail and error dialog
+  async showDialog() {
+    document.querySelector<HTMLElement>('#dialog')?.click();
+  }
+  // dismiss dialog
+  async dismiss() {
+    // TODO: clear credentials if needed
   }
 }
