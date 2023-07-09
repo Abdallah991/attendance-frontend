@@ -80,12 +80,10 @@ export class AddStudentComponent implements OnInit {
       cohortId: this.studentForm.controls.cohortId.value,
     };
 
-    // console.log('the value of the form is ', studentInput);
     await this.SS.addStudent(studentInput)
       .then((student) => {
         // if the api call is successful
         this.student = new Student(student.data.student);
-        // console.log('the response value is ', this.student);
         this.studentForm.reset();
         this.dialogTitle =
           this.student.firstName +
@@ -100,7 +98,6 @@ export class AddStudentComponent implements OnInit {
         this.message = 'Make sure you have the correct ID';
       })
       .finally(() => {
-        // console.log('finally has been executed!');
         this.studentForm.enable();
         this.addLoader = false;
         this.studentForm.controls.cohortId.setValue(this.cohortPreSetValue);
@@ -109,7 +106,6 @@ export class AddStudentComponent implements OnInit {
   }
 
   async navigateBack() {
-    // console.log(this.studentForm);
     this.router.navigateByUrl('/students');
   }
 
@@ -117,7 +113,6 @@ export class AddStudentComponent implements OnInit {
 
   // set the gender value to the form when selected
   cohortSelected(event: number) {
-    // console.log(event);
     this.studentForm.controls.cohortId.setValue(event);
   }
 

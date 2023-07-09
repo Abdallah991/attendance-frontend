@@ -68,7 +68,6 @@ export class StudentsComponent implements OnInit {
   getTableData() {
     this.AR.data.subscribe((response: any) => {
       this.students = response.students.data.students;
-      // console.log('Yess this is how it works: ', this.students);
       if (this.students.length > 0) {
         this.data = this.constructTableData(this.students);
       } else {
@@ -80,7 +79,6 @@ export class StudentsComponent implements OnInit {
   // make table data
   constructTableData(candidates: any[]): TableData[] {
     return candidates.map((res) => {
-      // console.log(res);
       return {
         // the id, to return back for edit or delete events
         id: res['id'],
@@ -122,7 +120,6 @@ export class StudentsComponent implements OnInit {
   // click backward implementaton
   // accepts the number of page
   async backwardPagination($page) {
-    // console.log($page);
     this.disableBackward = true;
     this.loader = true;
     // TODO: check pagination later
@@ -146,24 +143,15 @@ export class StudentsComponent implements OnInit {
       };
       this.SS.searchStudent(searchInput)
         .then((student) => {
-          console.log(student);
           this.students = student;
           this.data = this.constructTableData(this.students);
         })
         .catch((err) => {
-          // console.log('Erro response :', err);
+          console.log('Erro response :', err);
         })
         .finally(() => {
           this.searchLoader = false;
-          // console.log('finally ran!');
         });
-      //   if (this.searchValues.length == 0) {2201991
-
-      //     this.showResults = false;
-      //   }
-      // } else {
-      //   this.searchLoader = false;
-      //   this.showResults = false;
     } else {
       this.getTableData();
       this.searchLoader = false;
@@ -187,20 +175,18 @@ export class StudentsComponent implements OnInit {
     this.loader = true;
     this.SS.deleteStudent(this.deleteId)
       .then((res) => {
-        // console.log('the user deleted is ', res.data.student);
         this.deleteId = null;
         this.getTableData();
         this.loader = false;
       })
       .catch((err) => {
-        // console.log('the api failed :', err);
+        console.log('the api failed :', err);
         this.deleteId = null;
       });
   }
 
   deleteStudent($event) {
     this.deleteId = $event;
-    // console.log($event);
     this.showDialog();
   }
 

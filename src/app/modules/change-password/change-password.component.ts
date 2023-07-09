@@ -45,7 +45,6 @@ export class ChangePasswordComponent implements OnInit {
       this.form.controls.newPassword.value
     )
       .then((val) => {
-        console.log(val);
         this.dialogTitle = 'Your password has been updated!';
         this.message = 'Next time you login use your new password!!';
         this.button2 = 'Back';

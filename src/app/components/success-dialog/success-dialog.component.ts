@@ -28,13 +28,11 @@ export class SuccessDialogComponent implements OnInit {
 
   //  confirm dialog emitter
   confirmClick() {
-    // console.log('right');
     this.confirm.emit(true);
   }
 
   // cancel dialog emitter
   cancelClick() {
-    // console.log('left');
     this.dismissed.emit(true);
   }
 }

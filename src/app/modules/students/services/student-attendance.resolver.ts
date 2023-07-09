@@ -14,7 +14,6 @@ export class StudentAttendanceResolver implements Resolve<any> {
     route: ActivatedRouteSnapshot // : Observable<any>
   ) {
     let studentId = route.params.studentId;
-    console.log('the student Id is ', studentId);
 
     // get all student's attendnace record
     return this.SS.getAttendanceById(studentId).pipe(

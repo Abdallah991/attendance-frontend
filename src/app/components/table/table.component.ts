@@ -47,27 +47,13 @@ export class TableComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    // Pagination
-    // get the number of pages
-    // pagination action
-    // this.paginateAction();
-    // console.log(this.data);
-    // this.dataShown = this.data;
-  }
+  ngOnInit(): void {}
 
   // edit click implementation
   clickEdit = (id) => this.editClicked.emit(id);
 
   // delete click implementation
   clickDelete = (id) => this.deleteClicked.emit(id);
-
-  // search functionality
-  // pagination variables
-  // currentPage = 1;
-  // disableForward = true;
-  // disableBackward = false;
-  // dataShown: TableData[] = [];
 
   // on change, fire search function
   ngOnChanges(changes: SimpleChanges) {
@@ -106,7 +92,6 @@ export class TableComponent implements OnInit {
     if (this.currentPage >= 1) {
       this.currentPage++;
     }
-    // console.log(this.currentPage);
     this.forward.emit(this.currentPage);
     this.paginateAction();
     // this.dataShown = this.data;
@@ -149,25 +134,6 @@ export class TableComponent implements OnInit {
           // account for uppercase characters
           var dataToLowerCase = String(data).toLowerCase();
           if (dataToLowerCase.includes(valueLowerCase)) {
-            // Add only unique items
-            // if the array is empty, add the item
-            // if (this.dataShown.length == 0) {
-            //   this.dataShown.push(items);
-            // } else {
-            //   // if the array is not empty
-            //   var found = false;
-            //   // check if it exist
-            //   this.dataShown.forEach((element) => {
-            //     // if element exist
-            //     if (element.id === items.id) {
-            //       found = true;
-            //     }
-            //   });
-            // if element dont, add it
-            // if (!found) {
-            //   this.dataShown.push(items);
-            // }
-            // }
           }
         }
       }

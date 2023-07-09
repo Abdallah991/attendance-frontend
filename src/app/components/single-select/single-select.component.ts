@@ -31,7 +31,6 @@ export class SingleSelectComponent implements OnInit {
 
   // on selection click
   emitChange = (event) => {
-    console.log(event.target.value);
     this.changed.emit(event.target.value);
   };
 }

@@ -47,7 +47,6 @@ export class SideNavComponent implements OnInit {
   async signOut() {
     await this.AS.logout()
       .then((res) => {
-        console.log('success logout response: ', res);
         sessionStorage.setItem('signinToken', '');
         this.router.navigateByUrl('/login');
       })

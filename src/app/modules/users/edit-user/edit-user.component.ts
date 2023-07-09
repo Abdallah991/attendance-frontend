@@ -138,7 +138,6 @@ export class EditUserComponent implements OnInit {
         this.title = 'Edit User';
         this.buttonTitle = 'Edit User';
         this.user = response.user;
-        console.log(response);
         // set the food info
         this.setUserInfo();
         //

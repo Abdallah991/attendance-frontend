@@ -19,7 +19,6 @@ export class OverviewComponent implements OnInit {
       this.platfomrUsers = response.candidates.length;
       this.signedUsers7days = response.signedUsers.length;
       this.signedUsers1days = response.latestSignedUsers.length;
-      console.log('the nuymber of latest users is ', response);
     });
   }
 

@@ -68,8 +68,6 @@ export class AuthService {
 
       await promise
         .then((response) => {
-          console.log('response from backend', response);
-
           return response;
         })
         .catch((error) => {
