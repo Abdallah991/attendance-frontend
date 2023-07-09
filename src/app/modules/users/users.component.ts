@@ -27,7 +27,6 @@ export class UsersComponent implements OnInit {
     var users: User[] = [];
     this.AR.data.subscribe((response: any) => {
       users = response.users;
-      console.log('the value of users ', users);
       this.data = this.constructTableData(users);
     });
   }

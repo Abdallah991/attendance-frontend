@@ -9,6 +9,7 @@ import { ViewStudentResolver } from './services/view-student.resolver';
 import { StudentAttendanceResolver } from './services/student-attendance.resolver';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { CohortsResolver } from '../cohorts/services/cohorts.resolver';
+import { VacationsResolver } from './services/vacations.resolver';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
       student: ViewStudentResolver,
       cohorts: CohortsResolver,
       attendance: StudentAttendanceResolver,
+      vacations: VacationsResolver,
     },
   },
   {

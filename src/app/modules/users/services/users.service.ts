@@ -84,7 +84,6 @@ export class UsersService {
     await promise
       .then((result) => {
         user = result;
-        console.log('the value of the student called is ', user);
       })
       .catch((err) => {
         console.log('error message ', err);

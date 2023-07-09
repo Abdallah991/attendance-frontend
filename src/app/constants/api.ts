@@ -30,6 +30,9 @@ export const SEARCH_API = ROOTLINK + '/search';
 // 10-Change Passowrd
 export const PASSWORD_API = ROOTLINK + '/password';
 
+// 11-Vacations
+export const VACATION_API = ROOTLINK + '/vacations';
+
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer
 export const BIO_ATTENDANCE_API = 'http://10.1.50.4:80';

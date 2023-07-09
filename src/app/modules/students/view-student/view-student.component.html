@@ -72,7 +72,10 @@
     <h1>{{ attendnaceRecords }}</h1>
   </div>
   <div class="data-attendance">
-    <full-calendar [options]="calendarOptions"></full-calendar>
+    <full-calendar
+      [options]="calendarOptions"
+      [events]="eventsPromise | async"
+    ></full-calendar>
 
     <!-- <h2 class="mb-2">Records</h2> -->
     <!-- <div class="flex flex-row justify-start h-6">
