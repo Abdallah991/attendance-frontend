@@ -39,7 +39,7 @@ export class ViewStudentComponent implements OnInit {
       this.attendance = response.attendance.data;
       // Attendnace frequency
       this.attendnaceRecords = response.attendance.count;
-      // console.log(this.attendance);
+      console.log(this.attendance);
 
       this.attendance.forEach((item) => {
         if (!this.attendanceFormat[formatYYYYDDMM(item['punch_time'])]) {
@@ -63,7 +63,7 @@ export class ViewStudentComponent implements OnInit {
         });
       });
       this.calendarOptions.events = this.attendanceTable;
-      // console.log(this.attendanceTable);
+      console.log(this.attendanceTable);
     });
   }
 

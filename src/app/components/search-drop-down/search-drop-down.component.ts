@@ -43,8 +43,6 @@ export class SearchDropDownComponent implements OnInit {
   clickItem = (id) => this.itemClicked.emit(id);
 
   searhcValue() {
-    // TODO: add implmntation if needed
-    console.log('search clicked!');
     this.searchClicked.emit(this.searchValue);
   }
 
