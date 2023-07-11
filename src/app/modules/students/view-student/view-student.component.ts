@@ -77,6 +77,7 @@ export class ViewStudentComponent implements OnInit {
       for (let properties in this.attendanceFormat) {
         this.attendnaceRecords++;
       }
+
       // format into an array for full calender
       Object.keys(this.attendanceFormat).forEach((item) => {
         this.attendanceTable.push({
@@ -87,7 +88,6 @@ export class ViewStudentComponent implements OnInit {
       });
       // Add the vacations to full calender
       this.vacations.forEach((item) => {
-        console.log(item);
         this.attendanceTable.push({
           start: item['startDate'],
           end: item['endDate'],
@@ -95,6 +95,10 @@ export class ViewStudentComponent implements OnInit {
           title: 'Vacation',
         });
       });
+      // TODO: calculate time of students for each day
+      // console.log('value of attendance', this.attendance);
+      // console.log('value of attendance format', this.attendanceFormat);
+      // console.log('value of attendance table', this.attendanceTable);
       // one time
       this.calendarOptions.events = this.attendanceTable;
     });

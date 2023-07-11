@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
       this.form.controls.password.value
     )
       .then((val) => {
-        // that is it
         token = val.data['token'];
         // setting the user value
         sessionStorage.setItem('user', JSON.stringify(val.data.users));
@@ -68,6 +67,9 @@ export class LoginComponent implements OnInit {
         // navigate to students page upon success
         this.router.navigateByUrl('/students');
         this.loader = false;
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       })
       .catch((err) => {
         console.log('the login was ', err);
