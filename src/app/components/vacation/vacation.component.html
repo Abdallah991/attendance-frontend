@@ -1,0 +1,67 @@
+<div class="flex flex-col items-center justify-center flex-wrap">
+  <h1>Add {{ student.firstName }} {{ student.lastName }} Vacation</h1>
+  <div class="flex flex-row w-full gap-4 justify-center items-center flex-wrap">
+    <div class="grow">
+      <h2 class="!mb-0 !pb-0 text-gray">Student ID</h2>
+      <h3>{{ student.id }}</h3>
+    </div>
+    <div class="grow">
+      <h2 class="!mb-0 !pb-0 text-gray">platform ID</h2>
+      <h3>{{ student.platformId }}</h3>
+    </div>
+  </div>
+  <div class="flex flex-row w-full gap-4 justify-center items-center flex-wrap">
+    <app-date-picker
+      [label]="startDateTitle"
+      [FGN]="form"
+      FCN="startDate"
+      (onChange)="startDate($event)"
+      class="grow"
+    ></app-date-picker>
+    <app-date-picker
+      [label]="endDateTitle"
+      [FGN]="form"
+      FCN="endDate"
+      (onChange)="startDate($event)"
+      class="grow"
+    ></app-date-picker>
+  </div>
+  <app-text-field
+    prefix="Description"
+    label="Description"
+    [FGN]="form"
+    FCN="description"
+    inputType="text"
+    class="w-full"
+  ></app-text-field>
+  <div
+    class="flex flex-row w-full gap-4 justify-center items-center flex-wrap mt-4"
+  >
+    <div class="grow">
+      <h2 class="!mb-0 !pb-0 text-gray">Author</h2>
+      <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+    </div>
+    <div class="grow">
+      <h2 class="!mb-0 !pb-0 text-gray">Position</h2>
+      <h3>{{ user.position }}</h3>
+    </div>
+  </div>
+
+  <div
+    class="flex flex-row w-full gap-4 justify-center items-center flex-wrap mt-4"
+  >
+    <app-button
+      text="Confirm"
+      [medium]="true"
+      class="min-w-[100px]"
+      (onClick)="addVacation()"
+      [disabled]="!form.valid"
+    ></app-button>
+    <app-button
+      text="Cancel"
+      [medium]="true"
+      class="min-w-[100px]"
+      (onClick)="cancel()"
+    ></app-button>
+  </div>
+</div>

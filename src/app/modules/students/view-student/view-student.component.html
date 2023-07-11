@@ -2,7 +2,7 @@
   <div class="flex flex-row justify-between">
     <h1>{{ student.firstName }} {{ student.lastName }}</h1>
     <div class="flex flex-row gap-4">
-      <app-button
+      <!-- <app-button
         color="btn-primary"
         textColor="text-base-100"
         [small]="true"
@@ -18,7 +18,7 @@
         (onClick)="copyPlatformId()"
         text="Copy Platform ID"
         class="min-w-[100px]"
-      ></app-button>
+      ></app-button> -->
     </div>
   </div>
   <div class="data-container">
@@ -71,11 +71,9 @@
     <h2>Times Attended the campus</h2>
     <h1>{{ attendnaceRecords }}</h1>
   </div>
+
   <div class="data-attendance">
-    <full-calendar
-      [options]="calendarOptions"
-      [events]="eventsPromise | async"
-    ></full-calendar>
+    <full-calendar [options]="calendarOptions"></full-calendar>
 
     <!-- <h2 class="mb-2">Records</h2> -->
     <!-- <div class="flex flex-row justify-start h-6">

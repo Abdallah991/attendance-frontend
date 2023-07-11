@@ -1,12 +1,15 @@
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { formatYYYYDDMM } from 'src/app/constants/globalMethods';
 import { Cohort } from 'src/app/models/Cohort';
 import { Student } from 'src/app/models/Student';
 // Calender imports
-import { CalendarOptions, EventInput } from '@fullcalendar/core'; // useful for typechecking
+import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { MatDialog } from '@angular/material/dialog';
+import { VacationComponent } from 'src/app/components/vacation/vacation.component';
+import { VacationsService } from '../services/vacations.service';
 
 @Component({
   selector: 'app-view-candidate',
@@ -14,8 +17,6 @@ import interactionPlugin from '@fullcalendar/interaction';
   styleUrls: ['./view-student.component.scss'],
 })
 export class ViewStudentComponent implements OnInit {
-  eventsPromise: Promise<EventInput>;
-
   // Caleder configuration
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -29,7 +30,14 @@ export class ViewStudentComponent implements OnInit {
       today: 'Today',
     },
   };
-  constructor(private AR: ActivatedRoute, private renderer: Renderer2) {}
+
+  // dialog form group
+  // form: FormGroup;
+  constructor(
+    private AR: ActivatedRoute,
+    public dialog: MatDialog,
+    private VS: VacationsService
+  ) {}
 
   // student data
   student: Student = null;
@@ -69,10 +77,6 @@ export class ViewStudentComponent implements OnInit {
       for (let properties in this.attendanceFormat) {
         this.attendnaceRecords++;
       }
-      // ? testing
-      // console.log(this.attendanceFormat);
-      // console.log(this.attendnaceRecords);
-
       // format into an array for full calender
       Object.keys(this.attendanceFormat).forEach((item) => {
         this.attendanceTable.push({
@@ -99,7 +103,6 @@ export class ViewStudentComponent implements OnInit {
   // ! TODO: copy email to clipboard
   copyEmail() {
     navigator.clipboard.writeText(this.student.email);
-    // alert('Copied');
     this.toaster = true;
     setTimeout(() => {
       this.toaster = false;
@@ -122,11 +125,54 @@ export class ViewStudentComponent implements OnInit {
   handleDateClick(arg) {
     // TODO: add a modal to be able to add a Vacation or maybe Attendance
     console.log(arg);
+    // TODO: Scrolling happened because dialog ruins the side nav style
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+    // set time out for dialog to appear
+    setTimeout(() => {
+      //  show dialog
+      const dialogRef = this.dialog.open(VacationComponent, {
+        height: '58vh',
+        width: '70vw',
+        data: { student: this.student, startDate: arg.dateStr },
+      });
+      // what happens afer dialog finishes
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('The dialog was closed', result);
+        this.attendanceTable = [
+          this.attendanceFormat,
+          {
+            start: result['startDate'],
+            end: result['endDate'],
+            color: '#FF002E',
+            title: 'Vacation',
+          },
+        ];
+        this.addVacation(result);
+      });
+    }, 700);
   }
+
   handleEventClick(arg) {
     // TODO: add event view, two types ATTENDANCE and VACATIONS
     // show event details
     console.log(arg.event);
     // this.deleteEventTitle = arg.event._def.title;
+  }
+
+  // API post and modifying the calender
+  addVacation(vacation) {
+    // add vacation to the attendance table
+    this.VS.addVacation(vacation)
+      .then((val) => {
+        console.log(val);
+        this.calendarOptions.events = [...this.attendanceTable];
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }

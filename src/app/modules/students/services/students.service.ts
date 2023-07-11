@@ -27,6 +27,7 @@ export class StudentsService {
     }
   }
 
+  //
   public deleteStudent(id: number): Promise<any> {
     let promise = new Promise<any>(async (resolve, reject) => {
       this.http
