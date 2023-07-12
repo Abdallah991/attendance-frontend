@@ -1,31 +1,32 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { first, map } from 'rxjs/operators';
-import { getCurrentDate } from 'src/app/constants/globalMethods';
+import { STATISTICS_API } from 'src/app/constants/api';
+import { httpOptions } from 'src/app/constants/constants';
 // import { GET_USERS, GET_USERS_SIGNED_RANGED } from 'src/app/constants/queries';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OverviewService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  // return an observable users can subscribe to
-  public getAllPlatfomUsers() {
-    // try {
-    // var data = from(
-    //   this.apolloProvider.watchQuery({
-    //     query: GET_USERS,
-    //     // variables: {
-    //     //   authorId: 12,
-    //     // },
-    //   }).valueChanges
-    // ).pipe(map((res) => res['data']['user'], first()));
-    // return data;
-    // } catch (error) {
-    //   console.log('the error is ', error);
-    //   return from(error);
-    // }
+  // return an observable of students progress
+  public getStudentsProgress(): Observable<any> {
+    try {
+      // get the data from the url
+      var http = this.http
+        .get<any>(STATISTICS_API, { headers: httpOptions })
+        .pipe(map((data) => data));
+      http.subscribe((data) => {
+        console.log(data);
+      });
+      return http;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
   }
 
   // return an observable users can subscribe to

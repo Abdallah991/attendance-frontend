@@ -1,9 +1,9 @@
 /* ---------------------------------- APIs ---------------------------------- */
 //? Link to either your local or the server's
 //!Production
-const ROOTLINK = 'http://10.1.10.6/api';
+// const ROOTLINK = 'http://10.1.10.6/api';
 //!Staging Environemnt
-// const ROOTLINK = 'http://127.0.0.1:8000/api';
+const ROOTLINK = 'http://127.0.0.1:8000/api';
 // 1- Students API
 export const STUDENT_API = ROOTLINK + '/students';
 // 2- Register API
@@ -32,6 +32,8 @@ export const PASSWORD_API = ROOTLINK + '/password';
 
 // 11-Vacations
 export const VACATION_API = ROOTLINK + '/vacations';
+// 12-statistics
+export const STATISTICS_API = ROOTLINK + '/students-progress';
 
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer

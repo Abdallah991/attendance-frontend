@@ -16,9 +16,7 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
-      this.platfomrUsers = response.candidates.length;
-      this.signedUsers7days = response.signedUsers.length;
-      this.signedUsers1days = response.latestSignedUsers.length;
+      console.log(response);
     });
   }
 
