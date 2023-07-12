@@ -14,7 +14,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: {
       // TODO: add resolvers
-      candidates: OverviewResolver,
+      students: OverviewResolver,
       signedUsers: UsersSignedResolver,
       latestSignedUsers: LastdaySignedResolver,
     },

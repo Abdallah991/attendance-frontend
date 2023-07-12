@@ -77,8 +77,8 @@ export class StudentsComponent implements OnInit {
   }
 
   // make table data
-  constructTableData(candidates: any[]): TableData[] {
-    return candidates.map((res) => {
+  constructTableData(students: any[]): TableData[] {
+    return students.map((res) => {
       return {
         // the id, to return back for edit or delete events
         id: res['id'],
