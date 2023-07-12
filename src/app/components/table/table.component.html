@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th
-            class="bg-primary text-base-100 normal-case font-normal rounded-none"
+            class="bg-primary text-base-100 normal-case font-normal rounded-none text-center"
             *ngFor="let column of columns"
           >
             {{ column || "NULL" }}
@@ -16,7 +16,7 @@
       <tbody>
         <tr *ngFor="let items of data">
           <td
-            class="text-tertiary"
+            class="text-tertiary text-center"
             *ngFor="let item of items.data"
             [innerHTML]="item || 'NULL'"
           ></td>

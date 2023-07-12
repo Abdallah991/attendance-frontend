@@ -65,6 +65,7 @@ export class ViewStudentComponent implements OnInit {
       this.cohort = response.cohorts.data.cohorts[0];
       // Attendnace data
       this.attendance = response.attendance.data;
+      console.log(this.attendance);
       // frequency counter to see how many times the students punches
       this.attendance.forEach((item) => {
         if (!this.attendanceFormat[formatYYYYDDMM(item['punch_time'])]) {
@@ -73,6 +74,7 @@ export class ViewStudentComponent implements OnInit {
           this.attendanceFormat[formatYYYYDDMM(item['punch_time'])]++;
         }
       });
+      console.log(this.attendanceFormat);
       // looping over object to get the attendance number
       for (let properties in this.attendanceFormat) {
         this.attendnaceRecords++;

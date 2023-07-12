@@ -48,9 +48,10 @@ export class OverviewComponent implements OnInit {
       // sort students on transactions attribute
       if (this.students.length > 0) {
         var sortedStudents = this.students.sort(
-          ({ transaction: a }, { transaction: b }) => b - a
+          ({ level: a }, { level: b }) => b - a
         );
         this.students = sortedStudents;
+        console.log(this.students);
         this.data = this.constructTableData(this.students);
       }
     });
@@ -59,6 +60,7 @@ export class OverviewComponent implements OnInit {
   // make table data
   constructTableData(students: any[]): TableData[] {
     return students.map((res) => {
+      console.log(res);
       return {
         // the id, to return back for edit or delete events
         id: res['id'],
@@ -67,8 +69,9 @@ export class OverviewComponent implements OnInit {
           res['login'],
           res['firstName'] + ' ' + res['lastName'],
           res['progressAt'],
-          res['down'],
-          res['up'],
+          res['up'] ? res['up'] : '0',
+          res['down'] ? res['down'] : '0',
+          res['level'] ? res['level'] : '0',
         ],
         // the action buttons
         actionButtons: this.constructTableButton(),

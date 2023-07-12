@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
         this.loader = false;
         setTimeout(() => {
           window.location.reload();
-        }, 500);
+        }, 1000);
       })
       .catch((err) => {
         console.log('the login was ', err);
