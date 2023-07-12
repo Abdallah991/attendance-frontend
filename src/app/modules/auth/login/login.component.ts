@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
         // setting the token
         sessionStorage.setItem('signinToken', token);
         // navigate to students page upon success
-        this.router.navigateByUrl('/students');
+        this.router.navigateByUrl('/overview');
         this.loader = false;
         setTimeout(() => {
           window.location.reload();
