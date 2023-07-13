@@ -27,6 +27,10 @@ export const PERMISSIN: SelectData[] = [
   { id: 'Operation', text: 'No' },
 ];
 
+// modes
+export const EDIT = 'EDIT';
+export const ADD = 'ADD';
+
 // export const httpOptionsBioTime = new HttpHeaders({
 //   'Content-Type': 'application/json',
 //   Authorization: 'Token ' + bioTimeToken,

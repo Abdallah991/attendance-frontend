@@ -67,9 +67,6 @@ export class LoginComponent implements OnInit {
         // navigate to students page upon success
         this.router.navigateByUrl('/overview');
         this.loader = false;
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
       })
       .catch((err) => {
         console.log('the login was ', err);

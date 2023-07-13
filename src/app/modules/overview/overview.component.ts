@@ -51,7 +51,6 @@ export class OverviewComponent implements OnInit {
           ({ level: a }, { level: b }) => b - a
         );
         this.students = sortedStudents;
-        console.log(this.students);
         this.data = this.constructTableData(this.students);
       }
     });
@@ -60,7 +59,6 @@ export class OverviewComponent implements OnInit {
   // make table data
   constructTableData(students: any[]): TableData[] {
     return students.map((res) => {
-      console.log(res);
       return {
         // the id, to return back for edit or delete events
         id: res['id'],

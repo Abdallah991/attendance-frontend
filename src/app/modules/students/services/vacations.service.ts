@@ -74,4 +74,23 @@ export class VacationsService {
       return null;
     }
   }
+  // edit vacation
+  editVacation(vacation): Promise<any> {
+    let promise = new Promise<any>(async (resolve, reject) => {
+      this.http
+        .put<any>(VACATION_API + '/' + vacation['id'], vacation, {
+          headers: httpOptions,
+        })
+        .subscribe(
+          (value) => {
+            resolve(value);
+          },
+          (error) => {
+            console.log('the api call failed: ', error);
+            reject(error);
+          }
+        );
+    });
+    return promise;
+  }
 }

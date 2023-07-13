@@ -10,6 +10,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { MatDialog } from '@angular/material/dialog';
 import { VacationComponent } from 'src/app/components/vacation/vacation.component';
 import { VacationsService } from '../services/vacations.service';
+import { ADD, EDIT } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-view-candidate',
@@ -36,7 +37,8 @@ export class ViewStudentComponent implements OnInit {
   constructor(
     private AR: ActivatedRoute,
     public dialog: MatDialog,
-    private VS: VacationsService
+    private VS: VacationsService,
+    private router: Router
   ) {}
 
   // student data
@@ -65,8 +67,9 @@ export class ViewStudentComponent implements OnInit {
       this.cohort = response.cohorts.data.cohorts[0];
       // Attendnace data
       this.attendance = response.attendance.data;
-      console.log(this.attendance);
       // frequency counter to see how many times the students punches
+      // TODO:add the time when there is multiple occurences
+      // TODO: set a default time when there is on occurance
       this.attendance.forEach((item) => {
         if (!this.attendanceFormat[formatYYYYDDMM(item['punch_time'])]) {
           this.attendanceFormat[formatYYYYDDMM(item['punch_time'])] = 1;
@@ -74,8 +77,7 @@ export class ViewStudentComponent implements OnInit {
           this.attendanceFormat[formatYYYYDDMM(item['punch_time'])]++;
         }
       });
-      console.log(this.attendanceFormat);
-      // looping over object to get the attendance number
+      // looping over object to get the attendance days
       for (let properties in this.attendanceFormat) {
         this.attendnaceRecords++;
       }
@@ -91,63 +93,60 @@ export class ViewStudentComponent implements OnInit {
       // Add the vacations to full calender
       this.vacations.forEach((item) => {
         this.attendanceTable.push({
+          id: item['id'],
           start: item['startDate'],
           end: item['endDate'],
           color: '#FF002E',
           title: 'Vacation',
         });
       });
-      // TODO: calculate time of students for each day
-      // console.log('value of attendance', this.attendance);
-      // console.log('value of attendance format', this.attendanceFormat);
-      // console.log('value of attendance table', this.attendanceTable);
+
       // one time
       this.calendarOptions.events = this.attendanceTable;
     });
   }
 
-  // ! TODO: copy email to clipboard
-  copyEmail() {
-    navigator.clipboard.writeText(this.student.email);
-    this.toaster = true;
-    setTimeout(() => {
-      this.toaster = false;
-    }, 3000);
-  }
+  // ! Disabled: copy email to clipboard
+  // copyEmail() {
+  //   navigator.clipboard.writeText(this.student.email);
+  //   this.toaster = true;
+  //   setTimeout(() => {
+  //     this.toaster = false;
+  //   }, 3000);
+  // }
 
-  // ! TODO: copy platformId to clipboard
-  copyPlatformId() {
-    navigator.clipboard.writeText(this.student.platformId);
-    this.toaster = true;
-    setTimeout(() => {
-      this.toaster = false;
-    }, 3000);
-  }
+  // ! Disabled: copy platformId to clipboard
+  // copyPlatformId() {
+  //   navigator.clipboard.writeText(this.student.platformId);
+  //   this.toaster = true;
+  //   setTimeout(() => {
+  //     this.toaster = false;
+  //   }, 3000);
+  // }
 
+  // time formatter for date birth
   timeFormatter(date) {
     return formatYYYYDDMM(date);
   }
 
+  // add vacation
   handleDateClick(arg) {
-    // TODO: add a modal to be able to add a Vacation or maybe Attendance
-    console.log(arg);
-    // TODO: Scrolling happened because dialog ruins the side nav style
     window.scroll({
       top: 0,
       left: 0,
       behavior: 'smooth',
     });
-    // set time out for dialog to appear
+    // set time out for dialog to appear to not distrubt the UI
     setTimeout(() => {
       //  show dialog
       const dialogRef = this.dialog.open(VacationComponent, {
         height: '58vh',
         width: '70vw',
-        data: { student: this.student, startDate: arg.dateStr },
+        // add mode data
+        data: { student: this.student, startDate: arg.dateStr, mode: ADD },
       });
-      // what happens afer dialog finishes
+      // what happens after dialog closed
       dialogRef.afterClosed().subscribe((result) => {
-        console.log('The dialog was closed', result);
         this.attendanceTable = [
           this.attendanceFormat,
           {
@@ -157,28 +156,79 @@ export class ViewStudentComponent implements OnInit {
             title: 'Vacation',
           },
         ];
-        this.addVacation(result);
+        this.mutateVacation(result);
       });
     }, 700);
   }
 
+  // edit vacation when clicking on vacation
   handleEventClick(arg) {
-    // TODO: add event view, two types ATTENDANCE and VACATIONS
-    // show event details
-    console.log(arg.event);
-    // this.deleteEventTitle = arg.event._def.title;
+    // get the vacation id from the event
+    var vacationId = arg.event._def.publicId;
+    // convert vacation id to number so it matches the value in the array
+    // get the value from the vacation array
+    var vacation = this.vacations.filter(
+      (vacation) => vacation['id'] === Number(vacationId)
+    )[0];
+    // only when a vacation event clicked
+    if (vacation != undefined) {
+      // show vacation pop up with vacation data
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+      // set time out for dialog to appear
+      setTimeout(() => {
+        //  show dialog
+        const dialogRef = this.dialog.open(VacationComponent, {
+          height: '58vh',
+          width: '70vw',
+          // edit mode data
+          data: { student: this.student, vacation: vacation, mode: EDIT },
+        });
+        // what happens after dialog closed
+        dialogRef.afterClosed().subscribe((result) => {
+          this.attendanceTable = [
+            this.attendanceFormat,
+            {
+              start: result['startDate'],
+              end: result['endDate'],
+              color: '#FF002E',
+              title: 'Vacation',
+            },
+          ];
+          this.mutateVacation(result);
+        });
+      }, 700);
+    }
+    // as closed and filled with information, update the vacation on the backend
+    // update the UI calender, can be done be running the resolvers after the api call is done
   }
 
   // API post and modifying the calender
-  addVacation(vacation) {
+  mutateVacation(vacation) {
     // add vacation to the attendance table
-    this.VS.addVacation(vacation)
-      .then((val) => {
-        console.log(val);
-        this.calendarOptions.events = [...this.attendanceTable];
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (vacation.mode == ADD) {
+      this.VS.addVacation(vacation)
+        .then((val) => {
+          this.calendarOptions.events = [...this.attendanceTable];
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      // TODO: write edit vacation logic
+      this.VS.editVacation(vacation)
+        .then((val) => {
+          // re-run the resolvers
+          this.router.navigate([], {
+            queryParams: { _nonce: new Date().getTime() },
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 }
