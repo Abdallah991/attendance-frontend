@@ -22,11 +22,6 @@ export class OverviewService {
       http.subscribe((data) => {});
       return http;
     } catch (err) {
-      console.log(err);
-      console.log(httpOptions);
-      console.log(httpOptions.getAll);
-      //! test this on production
-      window.location.reload();
       return err;
     }
   }

@@ -45,13 +45,19 @@ export class OverviewComponent implements OnInit {
   getTableData() {
     this.AR.data.subscribe((response: any) => {
       this.students = response.students;
+
       // sort students on transactions attribute
-      if (this.students.length > 0) {
-        var sortedStudents = this.students.sort(
-          ({ level: a }, { level: b }) => b - a
-        );
-        this.students = sortedStudents;
-        this.data = this.constructTableData(this.students);
+      try {
+        if (this.students.length > 0) {
+          var sortedStudents = this.students.sort(
+            ({ level: a }, { level: b }) => b - a
+          );
+          this.students = sortedStudents;
+          this.data = this.constructTableData(this.students);
+        }
+      } catch (e) {
+        // handle token not being retrieved
+        window.location.reload();
       }
     });
   }
