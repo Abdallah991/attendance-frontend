@@ -36,6 +36,12 @@ export class OverviewComponent implements OnInit {
   showResults: boolean = false;
   // pagination loader
   loader: boolean = false;
+  // login sorter controller
+  loginAscendingController: boolean = true;
+  // level ascending order
+  levelAscendingController: boolean = true;
+  // platform id aascending order
+  platformAscendingController: boolean = true;
 
   ngOnInit(): void {
     this.getTableData();
@@ -45,19 +51,17 @@ export class OverviewComponent implements OnInit {
   getTableData() {
     this.AR.data.subscribe((response: any) => {
       this.students = response.students;
+      console.log(response);
 
       // sort students on transactions attribute
       try {
         if (this.students.length > 0) {
-          var sortedStudents = this.students.sort(
-            ({ level: a }, { level: b }) => b - a
-          );
-          this.students = sortedStudents;
-          this.data = this.constructTableData(this.students);
+          this.sortOnAudits(false);
         }
       } catch (e) {
+        console.log(e);
         // handle token not being retrieved
-        window.location.reload();
+        // window.location.reload();
       }
     });
   }
@@ -105,5 +109,58 @@ export class OverviewComponent implements OnInit {
 
   downloadCsv() {
     this.CSVS.get();
+  }
+
+  sortOnLevel(controller) {
+    var sortedStudents = [];
+    var students = this.students;
+    if (controller) {
+      sortedStudents = students.sort(({ level: a }, { level: b }) => a - b);
+    } else {
+      sortedStudents = students.sort(({ level: a }, { level: b }) => b - a);
+    }
+    this.data = this.constructTableData(sortedStudents);
+  }
+
+  sortOnLogin(controller) {
+    var sortedStudents = [];
+    var students = this.students;
+    if (controller) {
+      sortedStudents = students.sort((a, b) => {
+        if (a['login'] > b['login']) {
+          return -1;
+        }
+        if (a['login'] < b['login']) {
+          return 1;
+        }
+        return 0;
+      });
+    } else {
+      sortedStudents = students.sort((a, b) => {
+        if (a['login'] < b['login']) {
+          return -1;
+        }
+        if (a['login'] > b['login']) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+    this.data = this.constructTableData(sortedStudents);
+  }
+
+  sortOnAudits(controller) {
+    var sortedStudents = [];
+    var students = this.students;
+    if (controller) {
+      sortedStudents = students.sort(
+        ({ transaction: a }, { transaction: b }) => a - b
+      );
+    } else {
+      sortedStudents = students.sort(
+        ({ transaction: a }, { transaction: b }) => b - a
+      );
+    }
+    this.data = this.constructTableData(sortedStudents);
   }
 }

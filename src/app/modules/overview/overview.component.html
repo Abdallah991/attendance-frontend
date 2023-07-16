@@ -1,6 +1,33 @@
 <div class="p-4">
   <h1>Overview:</h1>
 
+  <div class="p-4 flex flex-row gap-2">
+    <!-- ! check if I can add change button as sortable and NOT create a new one -->
+    <app-sorter-button
+      color="'btn-primary'"
+      textColor="text-base-100"
+      [small]="true"
+      (onClick)="sortOnLogin($event)"
+      text="Platform ID"
+      class="min-w-[100px]"
+    ></app-sorter-button>
+    <app-sorter-button
+      color="btn-primary"
+      textColor="text-base-100"
+      [small]="true"
+      (onClick)="sortOnLevel($event)"
+      text="Level"
+      class="min-w-[100px]"
+    ></app-sorter-button>
+    <app-sorter-button
+      color="btn-primary"
+      textColor="text-base-100"
+      [small]="true"
+      (onClick)="sortOnAudits($event)"
+      text="Audits"
+      class="min-w-[100px]"
+    ></app-sorter-button>
+  </div>
   <div class="p-6 flex flex-col">
     <app-table
       *ngIf="!showResults"

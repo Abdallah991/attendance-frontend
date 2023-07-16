@@ -15,6 +15,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { SorterButtonComponent } from './sorter-button/sorter-button.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     SearchDropDownComponent,
     VacationComponent,
     DatePickerComponent,
+    SorterButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +49,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     SuccessDialogComponent,
     SearchDropDownComponent,
     DatePickerComponent,
+    SorterButtonComponent,
   ],
 })
 export class SharedModule {}
