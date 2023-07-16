@@ -51,7 +51,6 @@ export class OverviewComponent implements OnInit {
   getTableData() {
     this.AR.data.subscribe((response: any) => {
       this.students = response.students;
-      console.log(response);
 
       // sort students on transactions attribute
       try {

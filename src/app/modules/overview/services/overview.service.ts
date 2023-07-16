@@ -19,9 +19,7 @@ export class OverviewService {
       var http = this.http
         .get<any>(STATISTICS_API, { headers: httpOptions })
         .pipe(map((data) => data));
-      http.subscribe((data) => {
-        console.log(data);
-      });
+      http.subscribe((data) => {});
       return http;
     } catch (err) {
       return err;
