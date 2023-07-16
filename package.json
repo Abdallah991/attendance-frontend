@@ -26,6 +26,7 @@
     "@fullcalendar/interaction": "^6.1.8",
     "@fullcalendar/list": "^6.1.8",
     "@fullcalendar/timegrid": "^6.1.8",
+    "chart.js": "^4.3.0",
     "csv-maker": "^1.0.1",
     "daisyui": "^2.31.0",
     "graphql": "^16.6.0",

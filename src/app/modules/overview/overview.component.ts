@@ -8,6 +8,7 @@ import {
 } from 'src/app/interfaces/interfaces';
 import { PROGRESS_HEADER } from 'src/app/constants/headers';
 import { FormGroup } from '@angular/forms';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-overview',
@@ -22,6 +23,10 @@ export class OverviewComponent implements OnInit {
     private router: Router
   ) {}
 
+  // charts
+  chart: any = [];
+  // ! find a way to hide and show these charts
+  showCharts: boolean = true;
   // students
   students: [] = [];
   // table data
@@ -56,23 +61,28 @@ export class OverviewComponent implements OnInit {
       try {
         if (this.students.length > 0) {
           this.sortOnAudits(false);
+          this.createChart();
         }
       } catch (e) {
         console.log(e);
         // handle token not being retrieved
-        // window.location.reload();
+        // ! this is will trigger crappy behavior when the platform token gets expired
+        window.location.reload();
       }
     });
   }
 
   // make table data
   constructTableData(students: any[]): TableData[] {
+    var sequence = 0;
     return students.map((res) => {
+      sequence++;
       return {
         // the id, to return back for edit or delete events
         id: res['id'],
         // the data displayed in each row
         data: [
+          sequence,
           res['login'],
           res['firstName'] + ' ' + res['lastName'],
           res['progressAt'],
@@ -161,5 +171,66 @@ export class OverviewComponent implements OnInit {
       );
     }
     this.data = this.constructTableData(sortedStudents);
+  }
+
+  // TODO: set up different chart methods here
+  createChart() {
+    var studentsCharts: any = {};
+    this.students.forEach((item) => {
+      // console.log(item['progressAt']);
+      if (!studentsCharts[item['progressAt']]) {
+        studentsCharts[item['progressAt']] = 1;
+      } else {
+        studentsCharts[item['progressAt']]++;
+      }
+    });
+    // use frequency counter to get to the bottom of these values
+    // export the keys to the chart
+    // TODO: Try to set the labels as the keys witha loop so you can have it automized
+    this.chart = new Chart('canvas', {
+      type: 'bar',
+      data: {
+        // names of projects
+        labels: [
+          'web-export-file',
+          'web-dockerize',
+          'web-stylize',
+          'web',
+          'justify',
+          'fs',
+          'output',
+          'color',
+          'art',
+          'reloaded',
+          "Didn't submit",
+        ],
+        datasets: [
+          {
+            label: 'Students Project Progress',
+            data: [
+              studentsCharts['ascii-art-web-export-file'],
+              studentsCharts['ascii-art-web-dockerize'],
+              studentsCharts['ascii-art-web-stylize'],
+              studentsCharts['ascii-art-web'],
+              studentsCharts['ascii-art-justify'],
+              studentsCharts['ascii-art-fs'],
+              studentsCharts['ascii-art-output'],
+              studentsCharts['ascii-art-color'],
+              studentsCharts['ascii-art'],
+              studentsCharts['go-reloaded'],
+              studentsCharts['-'],
+            ],
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
   }
 }
