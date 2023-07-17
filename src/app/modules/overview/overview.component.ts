@@ -25,6 +25,8 @@ export class OverviewComponent implements OnInit {
 
   // charts
   chart: any = [];
+  // audit Chart
+  auditChart: any = [];
   // ! find a way to hide and show these charts
   showCharts: boolean = true;
   // students
@@ -61,7 +63,9 @@ export class OverviewComponent implements OnInit {
       try {
         if (this.students.length > 0) {
           this.sortOnAudits(false);
+          //  TODO: make a button to switch between this audit with animation
           this.createChart();
+          this.createAuditChart();
         }
       } catch (e) {
         console.log(e);
@@ -184,41 +188,80 @@ export class OverviewComponent implements OnInit {
         studentsCharts[item['progressAt']]++;
       }
     });
+    // get the x-axis labels dynamically
+    var labels = [];
+    for (let label in studentsCharts) {
+      labels.push(label);
+    }
+    var values = [];
+    for (let value in studentsCharts) {
+      values.push(studentsCharts[value]);
+    }
+    console.log(studentsCharts);
+    console.log(labels);
+    console.log(values);
     // use frequency counter to get to the bottom of these values
     // export the keys to the chart
-    // TODO: Try to set the labels as the keys witha loop so you can have it automized
     this.chart = new Chart('canvas', {
       type: 'bar',
       data: {
         // names of projects
-        labels: [
-          'web-export-file',
-          'web-dockerize',
-          'web-stylize',
-          'web',
-          'justify',
-          'fs',
-          'output',
-          'color',
-          'art',
-          'reloaded',
-          "Didn't submit",
-        ],
+        labels: labels,
         datasets: [
           {
-            label: 'Students Project Progress',
+            label: 'Students',
+            data: values,
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+          x: {
+            ticks: {
+              autoSkip: false,
+              maxRotation: 90,
+              minRotation: 90,
+            },
+          },
+        },
+      },
+    });
+  }
+
+  createAuditChart() {
+    // TODO: Audit Chart
+    var studentsAuditsCharts: any = {
+      aboveFive: 0,
+      aboveOne: 0,
+      zero: 0,
+    };
+    this.students.forEach((item) => {
+      // console.log(item['progressAt']);
+      if (item['transaction'] > 5) {
+        studentsAuditsCharts['aboveFive']++;
+      } else if (item['transaction'] > 1) {
+        studentsAuditsCharts['aboveOne']++;
+      } else {
+        studentsAuditsCharts['zero']++;
+      }
+    });
+    //
+    this.auditChart = new Chart('auditCanvas', {
+      type: 'bar',
+      data: {
+        // names of projects
+        labels: ['More Than 5 Audits', 'More than 1 audit', 'No Audits'],
+        datasets: [
+          {
+            label: 'Audits',
             data: [
-              studentsCharts['ascii-art-web-export-file'],
-              studentsCharts['ascii-art-web-dockerize'],
-              studentsCharts['ascii-art-web-stylize'],
-              studentsCharts['ascii-art-web'],
-              studentsCharts['ascii-art-justify'],
-              studentsCharts['ascii-art-fs'],
-              studentsCharts['ascii-art-output'],
-              studentsCharts['ascii-art-color'],
-              studentsCharts['ascii-art'],
-              studentsCharts['go-reloaded'],
-              studentsCharts['-'],
+              studentsAuditsCharts['aboveFive'],
+              studentsAuditsCharts['aboveOne'],
+              studentsAuditsCharts['zero'],
             ],
             borderWidth: 2,
           },
