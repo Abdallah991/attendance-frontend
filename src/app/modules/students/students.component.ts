@@ -78,12 +78,15 @@ export class StudentsComponent implements OnInit {
 
   // make table data
   constructTableData(students: any[]): TableData[] {
+    var sequence = 0;
     return students.map((res) => {
+      sequence++;
       return {
         // the id, to return back for edit or delete events
         id: res['id'],
         // the data displayed in each row
         data: [
+          sequence,
           res['id'],
           res['firstName'] + ' ' + res['lastName'],
           res['cohortId'],

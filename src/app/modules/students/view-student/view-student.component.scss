@@ -1,5 +1,5 @@
 h2 {
-    @apply pl-2 text-xl;
+    @apply text-xl;
 }
 
 h1 {
@@ -11,7 +11,7 @@ h3 {
 }
 
 p {
-    @apply text-lg text-gray pl-2 mt-2
+    @apply text-sm text-gray pl-2 mt-2
 }
 
 .data-container {
@@ -20,7 +20,7 @@ p {
 }
 
 .data-attendance {
-    @apply mt-4 flex flex-col justify-start flex-wrap w-full p-4
+    @apply mt-1 flex flex-col justify-between flex-wrap w-full p-4
 
 }
 
