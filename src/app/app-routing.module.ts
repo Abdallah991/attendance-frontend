@@ -34,6 +34,14 @@ const routes: Routes = [
           ),
       },
       {
+        // APPLICANTS routes
+        path: 'applicants',
+        loadChildren: () =>
+          import('./modules/applicants/applicants.module').then(
+            (m) => m.ApplicantsModule
+          ),
+      },
+      {
         path: 'change-password',
         loadChildren: () =>
           import('./modules/change-password/change-password.module').then(

@@ -31,15 +31,49 @@ export const PERMISSIN: SelectData[] = [
 export const EDIT = 'EDIT';
 export const ADD = 'ADD';
 
-// export const httpOptionsBioTime = new HttpHeaders({
-//   'Content-Type': 'application/json',
-//   Authorization: 'Token ' + bioTimeToken,
-//   // 'Access-Control-Allow-Origin': '*',
-// });
+// application status pass or fail
+export const APPLICANTS_STATUS: SelectData[] = [
+  { id: 'pass', text: 'pass' },
+  { id: 'fail', text: 'fail' },
+  { id: 'all', text: 'all' },
+];
+// grades from
+export const GRADES_START: SelectData[] = [
+  { id: 'all', text: 'all' },
+  { id: 0, text: '0' },
+  { id: 5, text: '5' },
+  { id: 10, text: '10' },
+  { id: 15, text: '15' },
+  { id: 20, text: '20' },
+  { id: 25, text: '25' },
+  { id: 30, text: '30' },
+  { id: 35, text: '35' },
+  { id: 40, text: '40' },
+  { id: 45, text: '45' },
+  { id: 50, text: '50' },
+];
 
-// export const http01Options = new HttpHeaders({
-//   'Content-Type': 'application/json',
-//   Authorization: 'Bearer ' + platformToken,
-//   // Content-Type: 'charset=utf-8',
-//   // 'Access-Control-Allow-Origin': '*',
-// });
+// grades to
+export const GRADES_END: SelectData[] = [
+  { id: 'all', text: 'all' },
+  { id: 20, text: '20' },
+  { id: 25, text: '25' },
+  { id: 30, text: '30' },
+  { id: 35, text: '35' },
+  { id: 40, text: '40' },
+  { id: 45, text: '45' },
+  { id: 50, text: '50' },
+  { id: 55, text: '55' },
+  { id: 60, text: '60' },
+  { id: 65, text: '65' },
+  { id: 70, text: '70' },
+  { id: 75, text: '75' },
+  { id: 80, text: '80' },
+  { id: 85, text: '85' },
+];
+
+// sorting
+export const APPLICANTS_SORT: SelectData[] = [
+  { id: 'ascending', text: 'ascending' },
+  { id: 'descending', text: 'descending' },
+];

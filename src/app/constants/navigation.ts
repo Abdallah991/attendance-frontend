@@ -1,3 +1,4 @@
+
 export const navigationMenu = [
   {
     link: '/overview',
@@ -27,4 +28,13 @@ export const navigationMenu = [
     active: false,
     linkName: 'Users',
   },
+  {
+    link: '/applicants/status',
+    iconPathInactive: '../../assets/icons/students.svg',
+    iconPathActive: '../../assets/icons/students.svg',
+    active: false,
+    linkName: 'Applicants',
+  },
 ];
+
+

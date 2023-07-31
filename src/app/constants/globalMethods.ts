@@ -6,6 +6,10 @@ import moment from 'moment';
 export const formatYYYYDDMM = (date: Date): string =>
   formatDate(date, 'yyyy-MM-dd', 'en');
 
+//  format date
+export const formatYYYYMM = (date: Date): string =>
+  formatDate(date, 'yyyy-MM', 'en');
+
 export const formatYYYYDDMMHHMM = (date: Date): string =>
   formatDate(date, 'yyyy-MM-dd HH:mm', 'en');
 

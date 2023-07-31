@@ -1,0 +1,45 @@
+<div class="p-4">
+  <h1>Applicants</h1>
+  <div class="flex flex-row gap-4 felx-wrap">
+    <app-table
+      [columns]="columns"
+      [data]="data"
+      [actionButtons]="false"
+      [showPagination]="false"
+      (editClicked)="viewApplicant($event)"
+      [showPagination]="false"
+      [loader]="loader"
+    ></app-table>
+    <div>
+      <h1>Applicants Stats:</h1>
+      <!-- style this in a better way -->
+      <div>
+        <app-date-picker
+          label="Start Date"
+          [FGN]="form"
+          FCN="startDate"
+          (onChange)="startDate($event)"
+        ></app-date-picker>
+        <app-date-picker
+          label="End Date"
+          [FGN]="form"
+          FCN="endDate"
+          (onChange)="endDate($event)"
+        ></app-date-picker>
+      </div>
+      <h2>Applicants Passed</h2>
+      <h1 class="text-green">{{ passed }}</h1>
+      <h2>Applicants Failed</h2>
+      <h1 class="text-orange">{{ failed }}</h1>
+      <h1
+        class="underline flex self-end justify-end"
+        (click)="navigateToStatus()"
+      >
+        More>>
+      </h1>
+    </div>
+  </div>
+  <div class="px-4">
+    <canvas id="canvas">{{ chart }}</canvas>
+  </div>
+</div>

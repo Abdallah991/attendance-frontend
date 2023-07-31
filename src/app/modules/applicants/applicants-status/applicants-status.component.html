@@ -1,0 +1,110 @@
+<div class="p-4">
+  <div class="flex flex-row justify-between">
+  <h1>Applicants Status</h1>
+  <app-button
+      color="btn-primary"
+      textColor="text-base-100"
+      [small]="true"
+      (onClick)="syncApplicantsData()"
+      text="Sync Applicants Data"
+      class="min-w-[100px]"
+      class="cursor-not-allowed"
+      [loader] ="loader"
+    ></app-button>
+  </div>
+  <div>
+    <!-- style this in a better way -->
+    <div class="flex w-full felx-col justify-start gap-12 flex-wrap mt-4 mb-4">
+      <div>
+        <h3 class="!mb-0">Passed</h3>
+        <h1 class="text-green !mb-0">{{ passed }}</h1>
+      </div>
+      <div>
+        <h3 class="!mb-0">Failed</h3>
+        <h1 class="text-orange !mb-0">{{ failed }}</h1>
+      </div>
+
+      <div>
+        <h3 class="!mb-0">Total</h3>
+        <h1 class="text-orange !mb-0">{{ totalApplicants }}</h1>
+      </div>
+    </div>
+    <div class="flex w-full felx-col justify-start gap-4 flex-wrap mt-4">
+      <app-date-picker
+        label="Start Date"
+        [FGN]="form"
+        FCN="startDate"
+        (onChange)="startDate($event)"
+      ></app-date-picker>
+      <app-date-picker
+        label="End Date"
+        [FGN]="form"
+        FCN="endDate"
+        (onChange)="endDate($event)"
+      ></app-date-picker>
+    </div>
+    <div class="flex w-full felx-col justify-start gap-4 flex-wrap mt-4 mb-4">
+      <app-single-select
+        [FGN]="form"
+        FCN="applicantsStatus"
+        [data]="applicationStatus"
+        placeholder="status"
+        prefix="Status"
+        (changed)="status($event)"
+        class="basis-1/8"
+        [preSetValue]="statusPreSet"
+      ></app-single-select>
+      <app-single-select
+        [FGN]="form"
+        FCN="applicantsGradeStart"
+        [data]="applicantsGradeStart"
+        placeholder="grade range"
+        prefix="Starting Grade"
+        (changed)="gradeStart($event)"
+        class="basis-1/8"
+        [preSetValue]="gradeStartPreSet"
+      ></app-single-select>
+      <app-single-select
+        [FGN]="form"
+        FCN="applicantsGradeEnd"
+        [data]="applicantsGradeEnd"
+        placeholder="grade range"
+        prefix="End Grade"
+        (changed)="gradeEnd($event)"
+        class="basis-1/8"
+        [preSetValue]="gradeEndPreSet"
+      ></app-single-select>
+      <app-single-select
+        [FGN]="form"
+        FCN="applicantsSorter"
+        [data]="applicantsSorter"
+        placeholder="sort"
+        prefix="Sort"
+        (changed)="sort($event)"
+        class="basis-1/8"
+        [preSetValue]="sortPreSet"
+      ></app-single-select>
+      <app-button
+      color="btn-primary"
+      textColor="text-base-100"
+      [medium]="true"
+      (onClick)="resetFilters()"
+      text="Reset Filters"
+      class="min-w-[100px]"
+      [loader] ="loader"
+      class="basis-1/8 self-end"
+    ></app-button>
+    </div>
+
+    <div>
+      <app-table
+        [columns]="columns"
+        [data]="data"
+        [actionButtons]="true"
+        [showPagination]="false"
+        (editClicked)="viewApplicant($event)"
+        [showPagination]="false"
+      ></app-table>
+    </div>
+  </div>
+</div>

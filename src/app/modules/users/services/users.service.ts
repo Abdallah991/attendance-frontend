@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { REGISTER_API, USER_API } from 'src/app/constants/api';
+import { REGISTER_API, ROLES_API, USER_API } from 'src/app/constants/api';
 import { httpOptions } from 'src/app/constants/constants';
 import { User } from 'src/app/models/User';
 
@@ -145,5 +145,23 @@ export class UsersService {
       }
     );
     return null;
+  }
+
+  // get roles
+  getRoles(): Observable<any> {
+    try {
+      // get the data from the url
+      var http = this.http
+        .get<any>(ROLES_API, { headers: httpOptions })
+        .pipe(map((data) => data));
+      http.subscribe((val) => {
+        console.log(val);
+      });
+      return http;
+    } catch (err) {
+      console.log(err);
+      // disable the loader and return if there is an error
+      return err;
+    }
   }
 }

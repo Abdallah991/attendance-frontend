@@ -6,6 +6,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditUserResolver } from './services/edit-user.resolver';
 import { UsersResolver } from './services/users.resolver';
 import { UsersComponent } from './users.component';
+import { RolesResolver } from './services/roles.resolver';
 
 const routes: Routes = [
   {
@@ -22,6 +23,9 @@ const routes: Routes = [
     data: {
       type: 'create',
     },
+    resolve: {
+      roles: RolesResolver,
+    },
   },
   {
     path: 'edit-user/:userId',
@@ -32,6 +36,7 @@ const routes: Routes = [
     },
     resolve: {
       user: EditUserResolver,
+      roles: RolesResolver,
     },
   },
 ];
