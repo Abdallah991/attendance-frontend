@@ -26,6 +26,8 @@ export class SorterButtonComponent implements OnInit {
   @Input() public active: boolean = false;
   // sortDirection
   public ascending: boolean = true;
+  // show sort
+  @Input() public show: boolean = false;
 
   //  click event emitter value
   @Output() onClick = new EventEmitter<any>();
@@ -36,6 +38,7 @@ export class SorterButtonComponent implements OnInit {
 
   //  button click event emitter
   onPress = (event) => {
+    this.show = true;
     this.ascending = !this.ascending;
     this.onClick.emit(this.ascending);
   };

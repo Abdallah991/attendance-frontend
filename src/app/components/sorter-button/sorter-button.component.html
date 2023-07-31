@@ -22,12 +22,11 @@
     class="flex items-center text-sm justify-center w-full"
   >
     <ng-content></ng-content>
-
     <p *ngIf="ascending" [ngClass]="[wide ? 'text-lg' : 'text-xs']">
-      {{ text }} ↑
+      {{ text }} <span *ngIf="show">↑</span>
     </p>
     <p *ngIf="!ascending" [ngClass]="[wide ? 'text-lg' : 'text-xs']">
-      {{ text }} ↓
+      {{ text }} <span *ngIf="show">↓</span>
     </p>
   </div>
   <div
