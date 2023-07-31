@@ -30,8 +30,8 @@ export const navigationMenu = [
   },
   {
     link: '/applicants/status',
-    iconPathInactive: '../../assets/icons/students.svg',
-    iconPathActive: '../../assets/icons/students.svg',
+    iconPathInactive: '../../assets/icons/money.svg',
+    iconPathActive: '../../assets/icons/money.svg',
     active: false,
     linkName: 'Applicants',
   },

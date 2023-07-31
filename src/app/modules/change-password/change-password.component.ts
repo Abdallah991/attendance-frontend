@@ -25,8 +25,11 @@ export class ChangePasswordComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       oldPassword: ['', Validators.required],
-      newPassword: ['', Validators.required],
-    });
+      newPassword: ['',[Validators.required, Validators.minLength(6)]],
+      confirmNewPassword: ['', [Validators.required, Validators.minLength(6)]],
+
+      // * Adding a custome validator to check both values match
+    }, { validator: this.matchValues('newPassword', 'confirmNewPassword') });
   }
 
   ngOnInit(): void {}
@@ -77,5 +80,20 @@ export class ChangePasswordComponent implements OnInit {
       this.form.controls.oldPassword.setValue('');
       this.form.controls.newPassword.setValue('');
     }
+  }
+
+
+  // * Check both passed form controls equal in value
+   matchValues(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+  
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mismatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
   }
 }
