@@ -78,7 +78,6 @@ export class ApplicantsStatusComponent implements OnInit {
     this.form.controls.applicantsGradeStart.setValue(gradeStart);
     this.form.controls.applicantsGradeEnd.setValue(gradeEnd);
     this.form.controls.applicantsSorter.setValue(sort);
-
   }
 
   // applicants between two dates
@@ -112,7 +111,6 @@ export class ApplicantsStatusComponent implements OnInit {
   // tomorrow date
   tomorrowDate = formatYYYYDDMM(new Date());
 
-
   ngOnInit(): void {
     // get the table data
     this.getTableData();
@@ -134,6 +132,7 @@ export class ApplicantsStatusComponent implements OnInit {
       // get the keys of the object passed
       var objectKeys = Object.keys(this.applicants);
       // for each object
+      // console.log(this.applicants);
       objectKeys.forEach((key) => {
         // add to the latest applicant array
         this.latestApplicants.push(this.applicants[key]);
@@ -164,7 +163,15 @@ export class ApplicantsStatusComponent implements OnInit {
     return applicants.map((res) => {
       sequence++;
       // convert progresses to json // get the last progress //get the last word of that progress
-      var progresses = JSON.parse(res['progresses']).pop()?.path.split('/').pop();
+      var progresses = JSON.parse(res['progresses'])
+        .pop()
+        ?.path.split('/')
+        .pop();
+      var registration = JSON.parse(res['registrations'])
+        .pop()
+        ?.registration?.path.split('/')
+        .pop();
+      console.log(registration);
       return {
         // the id, to return back for edit or delete events
         id: res['platformId'],
@@ -178,9 +185,11 @@ export class ApplicantsStatusComponent implements OnInit {
           res['phone'],
           res['email'],
           // These elements to be updated
-          res['status'],
-          res['updatedBy'] ? res['updatedBy'] : '-',
+          // res['status'],
+          // res['updatedBy'] ? res['updatedBy'] : '-',
           progresses ? progresses : '-',
+          // progresses ? progresses : '-',
+          registration ? registration : '-',
         ],
         // the action buttons
         actionButtons: this.constructTableButton(),
@@ -192,7 +201,7 @@ export class ApplicantsStatusComponent implements OnInit {
     return {
       // edit button
       edit: {
-        isActive: true,
+        isActive: false,
         text: 'Attending',
       },
       // delete button
@@ -207,37 +216,32 @@ export class ApplicantsStatusComponent implements OnInit {
   viewApplicant($event) {}
   // ? triggering the resolver and reconstructing the table
   status($event) {
-    this.form.controls.applicantsStatus.setValue($event)
+    this.form.controls.applicantsStatus.setValue($event);
     this.updateRoute();
-    
   }
 
   sort($event) {
-    this.form.controls.applicantsSorter.setValue($event)
+    this.form.controls.applicantsSorter.setValue($event);
     this.updateRoute();
   }
 
   endDate($event) {
-    this.form.controls.endDate.setValue($event)
+    this.form.controls.endDate.setValue($event);
     this.updateRoute();
-    
   }
 
   startDate($event) {
-    this.form.controls.startDate.setValue($event)
+    this.form.controls.startDate.setValue($event);
     this.updateRoute();
-
   }
 
   gradeStart($event) {
-    this.form.controls.applicantsGradeStart.setValue($event)
+    this.form.controls.applicantsGradeStart.setValue($event);
     this.updateRoute();
-
-    
   }
 
   gradeEnd($event) {
-    this.form.controls.applicantsGradeEnd.setValue($event)
+    this.form.controls.applicantsGradeEnd.setValue($event);
     this.updateRoute();
   }
 
@@ -254,24 +258,22 @@ export class ApplicantsStatusComponent implements OnInit {
     });
   }
 
-
   resetFilters() {
-    this.form.controls.applicantsGradeEnd.setValue('all')
-    this.form.controls.applicantsGradeStart.setValue('all')
-    this.form.controls.startDate.setValue('2023-05-14')
-    this.form.controls.endDate.setValue(this.tomorrowDate)
+    this.form.controls.applicantsGradeEnd.setValue('all');
+    this.form.controls.applicantsGradeStart.setValue('all');
+    this.form.controls.startDate.setValue('2023-05-14');
+    this.form.controls.endDate.setValue(this.tomorrowDate);
     this.form.controls.applicantsSorter.setValue('descending');
     this.form.controls.applicantsStatus.setValue('all');
     this.updateRoute();
-
   }
 
   syncApplicantsData() {
     this.loader = true;
-    this.AS.syncApplicants(this.tomorrowDate).subscribe(value => {
-      console.log(value)
+    this.AS.syncApplicants(this.tomorrowDate).subscribe((value) => {
+      console.log(value);
       this.loader = false;
-    })
+    });
   }
 
   // ! very important

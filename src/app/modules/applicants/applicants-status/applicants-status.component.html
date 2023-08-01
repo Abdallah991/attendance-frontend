@@ -1,7 +1,7 @@
 <div class="p-4">
   <div class="flex flex-row justify-between">
-  <h1>Applicants Status</h1>
-  <app-button
+    <h1>Applicants Status</h1>
+    <app-button
       color="btn-primary"
       textColor="text-base-100"
       [small]="true"
@@ -9,7 +9,7 @@
       text="Sync Applicants Data"
       class="min-w-[100px]"
       class="cursor-not-allowed"
-      [loader] ="loader"
+      [loader]="loader"
     ></app-button>
   </div>
   <div>
@@ -85,22 +85,22 @@
         [preSetValue]="sortPreSet"
       ></app-single-select>
       <app-button
-      color="btn-primary"
-      textColor="text-base-100"
-      [medium]="true"
-      (onClick)="resetFilters()"
-      text="Reset Filters"
-      class="min-w-[100px]"
-      [loader] ="loader"
-      class="basis-1/8 self-end"
-    ></app-button>
+        color="btn-primary"
+        textColor="text-base-100"
+        [medium]="true"
+        (onClick)="resetFilters()"
+        text="Reset Filters"
+        class="min-w-[100px]"
+        [loader]="loader"
+        class="basis-1/8 self-end"
+      ></app-button>
     </div>
 
     <div>
       <app-table
         [columns]="columns"
         [data]="data"
-        [actionButtons]="true"
+        [actionButtons]="false"
         [showPagination]="false"
         (editClicked)="viewApplicant($event)"
         [showPagination]="false"

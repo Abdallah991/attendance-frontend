@@ -24,9 +24,10 @@ export const APPLICANTS_STATUS_HEADER = [
   'At',
   'Phone Number',
   'Email',
-  'Status',
-  'By Staff',
+  // 'Status',
+  // 'By Staff',
   'Progress',
+  'registration',
 ];
 export const PROGRESS_HEADER = [
   'Sequence',
