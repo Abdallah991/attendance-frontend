@@ -19,15 +19,15 @@ export const APPLICANTS_HEADER = [
 export const APPLICANTS_STATUS_HEADER = [
   'Sequence',
   'Name',
-  'platformId',
+  'Platform ID',
   'Score',
   'At',
   'Phone Number',
   'Email',
-  // 'Status',
+  'Call Status',
   // 'By Staff',
   'Progress',
-  'registration',
+  // 'Registration',
 ];
 export const PROGRESS_HEADER = [
   'Sequence',

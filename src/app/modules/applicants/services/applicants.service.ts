@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { APPLICANTS_API, APPLICANTS_SYNC_API } from 'src/app/constants/api';
+import {
+  APPLICANTS_API,
+  APPLICANTS_SYNC_API,
+  APPLICANTS_UPDATE_API,
+  CHECK_IN_API,
+} from 'src/app/constants/api';
 import { httpOptions } from 'src/app/constants/constants';
 
 @Injectable({
@@ -20,7 +25,7 @@ export class ApplicantsService {
       var http = this.http
         .post<any>(APPLICANTS_API, data, { headers: httpOptions })
         .pipe(map((data) => data));
-     
+
       return http;
     } catch (err) {
       console.log(err);
@@ -33,20 +38,50 @@ export class ApplicantsService {
   syncApplicants(endDate: string): Observable<any> {
     try {
       // get the data from the url
-
       var data = {
-        endDate: endDate
-      }
-
+        endDate: endDate,
+      };
       console.log(data);
       var http = this.http
         .post<any>(APPLICANTS_SYNC_API, data, { headers: httpOptions })
         .pipe(map((data) => data));
-     
+
       return http;
     } catch (err) {
       console.log(err);
-      // disable the loader and return if there is an error
+      return err;
+    }
+  }
+
+  // get checkin count api
+  checkInCount(): Observable<any> {
+    try {
+      // get the data from the url
+
+      var http = this.http
+        .get<any>(CHECK_IN_API, { headers: httpOptions })
+        .pipe(map((data) => data));
+
+      return http;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  // get checkin count api
+  updateApplicant(platfromId: string): Observable<any> {
+    try {
+      // get the data from the url
+      var data = {
+        platformId: platfromId,
+      };
+      var http = this.http
+        .post<any>(APPLICANTS_UPDATE_API, data, { headers: httpOptions })
+        .pipe(map((data) => data));
+      return http;
+    } catch (err) {
+      console.log(err);
       return err;
     }
   }

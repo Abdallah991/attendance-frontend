@@ -149,4 +149,21 @@ export class TableComponent implements OnInit {
     // remove pagination
     this.showPagination = false;
   }
+
+  checkString(item) {
+    switch (item) {
+      case 'Registered to check-in':
+        return 'text-green';
+
+      case 'At administration':
+      case 'At games':
+        return 'text-orange';
+
+      case 'Registered to bh-module':
+      case 'Registered to bh-piscine':
+      case 'Registered to quad':
+        return 'text-gray-light';
+    }
+    return '';
+  }
 }

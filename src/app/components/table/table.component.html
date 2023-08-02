@@ -17,6 +17,7 @@
         <tr *ngFor="let items of data">
           <td
             class="text-tertiary text-center"
+            [ngClass]="checkString(item)"
             *ngFor="let item of items.data"
             [innerHTML]="item || 'NULL'"
           ></td>

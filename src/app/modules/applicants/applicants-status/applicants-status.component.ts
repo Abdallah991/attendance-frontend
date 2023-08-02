@@ -69,11 +69,12 @@ export class ApplicantsStatusComponent implements OnInit {
       applicantsSorter: [sort, Validators.required],
     });
 
+    // preset values for the filtering and search
     this.gradeStartPreSet = gradeStart;
     this.gradeEndPreSet = this.gradeEndPreSet;
     this.statusPreSet = status;
     this.sortPreSet = sort;
-
+    // set the values for filtering and search accordingly
     this.form.controls.applicantsStatus.setValue(status);
     this.form.controls.applicantsGradeStart.setValue(gradeStart);
     this.form.controls.applicantsGradeEnd.setValue(gradeEnd);
@@ -88,6 +89,7 @@ export class ApplicantsStatusComponent implements OnInit {
   passed = 0;
   failed = 0;
   totalApplicants = 0;
+  registeredToCheckIn = 0;
   columns = APPLICANTS_STATUS_HEADER;
   // data table
   data: TableData[] = [];
@@ -114,6 +116,7 @@ export class ApplicantsStatusComponent implements OnInit {
   ngOnInit(): void {
     // get the table data
     this.getTableData();
+    this.getCheckInCount();
   }
 
   getTableData() {
@@ -127,7 +130,7 @@ export class ApplicantsStatusComponent implements OnInit {
       this.totalApplicants = 0;
       // latest applicants
       this.latestApplicants = [];
-      // get the applicants from the resolver call
+      // * get the applicants from the resolver call
       this.applicants = response.applicants;
       // get the keys of the object passed
       var objectKeys = Object.keys(this.applicants);
@@ -150,9 +153,6 @@ export class ApplicantsStatusComponent implements OnInit {
 
       // construct table
       this.totalApplicants = this.passed + this.failed;
-      console.log(this.passed);
-      console.log(this.failed);
-      console.log(this.totalApplicants);
       this.data = this.constructTableData(this.latestApplicants.reverse());
     });
   }
@@ -171,7 +171,15 @@ export class ApplicantsStatusComponent implements OnInit {
         .pop()
         ?.registration?.path.split('/')
         .pop();
-      console.log(registration);
+      var progress = '-';
+      if (registration) {
+        progress = 'Registered to ' + registration;
+      } else if (progresses != undefined) {
+        progress = 'At ' + progresses;
+      } else {
+        progress = '-';
+      }
+      // console.log(registration);
       return {
         // the id, to return back for edit or delete events
         id: res['platformId'],
@@ -185,11 +193,11 @@ export class ApplicantsStatusComponent implements OnInit {
           res['phone'],
           res['email'],
           // These elements to be updated
-          // res['status'],
+          res['status'],
           // res['updatedBy'] ? res['updatedBy'] : '-',
-          progresses ? progresses : '-',
+          progress,
           // progresses ? progresses : '-',
-          registration ? registration : '-',
+          // registration ? registration : '-',
         ],
         // the action buttons
         actionButtons: this.constructTableButton(),
@@ -201,8 +209,8 @@ export class ApplicantsStatusComponent implements OnInit {
     return {
       // edit button
       edit: {
-        isActive: false,
-        text: 'Attending',
+        isActive: true,
+        text: 'Called',
       },
       // delete button
       delete: {
@@ -212,9 +220,7 @@ export class ApplicantsStatusComponent implements OnInit {
     };
   }
 
-  // implementation to update the values
-  viewApplicant($event) {}
-  // ? triggering the resolver and reconstructing the table
+  // ? triggering the resolver and reconstructing the table of drop downs or date selection
   status($event) {
     this.form.controls.applicantsStatus.setValue($event);
     this.updateRoute();
@@ -245,7 +251,8 @@ export class ApplicantsStatusComponent implements OnInit {
     this.updateRoute();
   }
 
-  updateRoute() {
+  // update the route depending on applicant value
+  updateRoute($updatedApplicant?) {
     this.router.navigate([], {
       queryParams: {
         startDate: formatYYYYDDMM(this.form.controls.startDate.value),
@@ -254,10 +261,12 @@ export class ApplicantsStatusComponent implements OnInit {
         gradeStart: this.form.controls.applicantsGradeStart.value,
         gradeEnd: this.form.controls.applicantsGradeEnd.value,
         sort: this.form.controls.applicantsSorter.value,
+        updatedApplicant: $updatedApplicant,
       },
     });
   }
 
+  // reset filters
   resetFilters() {
     this.form.controls.applicantsGradeEnd.setValue('all');
     this.form.controls.applicantsGradeStart.setValue('all');
@@ -268,22 +277,35 @@ export class ApplicantsStatusComponent implements OnInit {
     this.updateRoute();
   }
 
+  // sync applicants and update the table
   syncApplicantsData() {
     this.loader = true;
     this.AS.syncApplicants(this.tomorrowDate).subscribe((value) => {
-      console.log(value);
+      // console.log(value);
       this.loader = false;
+      this.resetFilters();
     });
   }
 
-  // ! very important
-  // TODO: add attending/ not attending/ No answer/ Maybe buttons
-  // TODO: Make it colorful
-  // TODO: Have a count of all the people that have these statuses
-  // TODO: Have them with color codes
+  // get the number of how many users signed up to the checkin on the platform
+  getCheckInCount() {
+    this.AS.checkInCount().subscribe((val) => {
+      console.log(val);
+      this.registeredToCheckIn = val;
+    });
+  }
 
-  // TODO: Have a mechanisim to update the status of the calls
-  // ! loading time is too long
-  // 1- a table of some sort that has the applicant's data
-  // 2- a crone function that runs on click to synchronize all the data
+  // use to update applicant call
+  updateApplicantStatus(platformId) {
+    this.AS.updateApplicant(platformId).subscribe((val) => {
+      console.log(val);
+      this.updateRoute(platformId);
+    });
+  }
+
+  // update applicant click implementation
+  updateApplicant($event) {
+    console.log($event);
+    this.updateApplicantStatus($event);
+  }
 }
