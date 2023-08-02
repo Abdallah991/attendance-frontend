@@ -120,10 +120,6 @@ export class OverviewComponent implements OnInit {
     this.router.navigateByUrl('/students/view-student/' + id);
   }
 
-  downloadCsv() {
-    this.CSVS.get();
-  }
-
   sortOnLevel(controller) {
     var sortedStudents = [];
     var students = this.students;

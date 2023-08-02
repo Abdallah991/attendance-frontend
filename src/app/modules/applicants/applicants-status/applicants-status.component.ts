@@ -15,6 +15,7 @@ import {
   TableData,
 } from 'src/app/interfaces/interfaces';
 import { ApplicantsService } from '../services/applicants.service';
+import { CsvService } from '../../auth/services/csv.service';
 
 @Component({
   selector: 'app-applicants-status',
@@ -27,7 +28,8 @@ export class ApplicantsStatusComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private AS: ApplicantsService
+    private AS: ApplicantsService,
+    private CS: CsvService
   ) {
     // get a snap shot of the router data
     var snapshot = this.route.snapshot;
@@ -307,5 +309,24 @@ export class ApplicantsStatusComponent implements OnInit {
   updateApplicant($event) {
     console.log($event);
     this.updateApplicantStatus($event);
+  }
+
+  // * Download CSV
+  downloadApplicantsData() {
+    // applicants
+    var applicants: any[] = [];
+    // get only relevant data
+    this.applicants.forEach((applicant) => {
+      var data = {
+        firstName: applicant.firstName,
+        lastName: applicant.lastName,
+        email: applicant.email,
+        phoneNumber: applicant.phone,
+      };
+      // push to custome object
+      applicants.push(data);
+    });
+    // get the csv file from the service
+    this.CS.get(applicants);
   }
 }

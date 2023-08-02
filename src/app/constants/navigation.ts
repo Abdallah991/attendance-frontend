@@ -1,4 +1,3 @@
-
 export const navigationMenu = [
   {
     link: '/overview',
@@ -14,20 +13,6 @@ export const navigationMenu = [
     active: false,
     linkName: 'Students',
   },
-  // {
-  //   link: '/events',
-  //   iconPathInactive: '../../assets/icons/events.svg',
-  //   iconPathActive: '../../assets/icons/events.svg',
-  //   active: false,
-  //   linkName: 'Events',
-  // },
-  {
-    link: '/users',
-    iconPathInactive: '../../assets/icons/users.svg',
-    iconPathActive: '../../assets/icons/users.svg',
-    active: false,
-    linkName: 'Users',
-  },
   {
     link: '/applicants/status',
     iconPathInactive: '../../assets/icons/money.svg',
@@ -35,6 +20,11 @@ export const navigationMenu = [
     active: false,
     linkName: 'Applicants',
   },
+  {
+    link: '/users',
+    iconPathInactive: '../../assets/icons/users.svg',
+    iconPathActive: '../../assets/icons/users.svg',
+    active: false,
+    linkName: 'Users',
+  },
 ];
-
-

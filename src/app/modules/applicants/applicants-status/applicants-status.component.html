@@ -1,16 +1,28 @@
 <div class="p-4">
   <div class="flex flex-row justify-between">
     <h1>Applicants Status</h1>
-    <app-button
-      color="btn-primary"
-      textColor="text-base-100"
-      [small]="true"
-      (onClick)="syncApplicantsData()"
-      text="Sync Applicants Data"
-      class="min-w-[100px]"
-      class="cursor-not-allowed"
-      [loader]="loader"
-    ></app-button>
+    <div class="flex flex-row gap-2">
+      <app-button
+        color="btn-primary"
+        textColor="text-base-100"
+        [small]="true"
+        (onClick)="syncApplicantsData()"
+        text="Sync Applicants Data"
+        class="min-w-[100px]"
+        class="cursor-not-allowed"
+        [loader]="loader"
+      ></app-button>
+      <app-button
+        color="btn-primary"
+        textColor="text-base-100"
+        [small]="true"
+        (onClick)="downloadApplicantsData()"
+        text="Download .csv"
+        class="min-w-[100px]"
+        class="cursor-not-allowed"
+        [loader]="loader"
+      ></app-button>
+    </div>
   </div>
   <div>
     <!-- style this in a better way -->
