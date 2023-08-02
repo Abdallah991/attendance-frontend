@@ -41,6 +41,10 @@ export const APPLICANTS_API = ROOTLINK + '/applicants';
 
 // 14-applicants
 export const APPLICANTS_SYNC_API = ROOTLINK + '/applicants-sync';
+// 15-applicants Check-In
+export const CHECK_IN_API = ROOTLINK + '/applicants-check-in';
+// 15-applicants Update
+export const APPLICANTS_UPDATE_API = ROOTLINK + '/applicants-update';
 
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer
