@@ -70,11 +70,12 @@ export class ApplicantsService {
   }
 
   // get checkin count api
-  updateApplicant(platfromId: string): Observable<any> {
+  updateApplicant(platfromId: string, status: string): Observable<any> {
     try {
       // get the data from the url
       var data = {
         platformId: platfromId,
+        status: status,
       };
       var http = this.http
         .post<any>(APPLICANTS_UPDATE_API, data, { headers: httpOptions })

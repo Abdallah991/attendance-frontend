@@ -6,6 +6,12 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-success-dialog',
@@ -21,21 +27,35 @@ export class SuccessDialogComponent implements OnInit {
   @Input() action: string = 'Confirm';
   // dialog controller
   @Input() twoButtons: boolean = false;
+  // dialog controller
+  @Input() editText: boolean = false;
+
   // message
   @Input() message: string =
     "You've been selected for a chance to get one year of subscription to use Wikipedia for free!";
   //  event emitters
   @Output() dismissed = new EventEmitter<boolean>();
   @Output() confirm = new EventEmitter<boolean>();
+
   // !
 
-  constructor() {}
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      comment: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {}
 
   //  confirm dialog emitter
   confirmClick() {
-    this.confirm.emit(true);
+    if (this.editText) {
+      this.confirm.emit(this.form.controls.comment.value);
+    } else {
+      this.confirm.emit(true);
+    }
   }
 
   // cancel dialog emitter

@@ -305,8 +305,8 @@ export class ApplicantsStatusComponent implements OnInit {
   }
 
   // use to update applicant call
-  updateApplicantStatus(platformId) {
-    this.AS.updateApplicant(platformId).subscribe((val) => {
+  updateApplicantStatus(platformId, status) {
+    this.AS.updateApplicant(platformId, status).subscribe((val) => {
       console.log(val);
       this.updateRoute(platformId);
     });
@@ -344,7 +344,9 @@ export class ApplicantsStatusComponent implements OnInit {
 
   dismiss() {}
 
-  confirmDelete() {
-    this.updateApplicantStatus(this.updatedApplicantId);
+  confirmDelete($event) {
+    console.log($event);
+    var comment = $event ? $event : '-';
+    this.updateApplicantStatus(this.updatedApplicantId, comment);
   }
 }

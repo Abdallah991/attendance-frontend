@@ -126,12 +126,13 @@
 </div>
 
 <app-success-dialog
+  [editText]="true"
   dialogId="dialog"
   [title]="dialogTitle"
   [message]="message"
   [dismiss]="button"
   [action]="button2"
   (dismissed)="dismiss()"
-  (confirm)="confirmDelete()"
+  (confirm)="confirmDelete($event)"
   [twoButtons]="true"
 ></app-success-dialog>

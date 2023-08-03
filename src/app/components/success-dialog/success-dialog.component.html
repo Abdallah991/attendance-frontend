@@ -6,6 +6,16 @@
     <p class="py-4">
       {{ message }}
     </p>
+    <div class="pt-4">
+      <app-text-field
+        *ngIf="editText"
+        [FGN]="form"
+        FCN="comment"
+        prefix="Comment"
+        label="Comment"
+        class="w-full"
+      ></app-text-field>
+    </div>
     <div class="flex flex-row justify-center gap-2">
       <div class="modal-action">
         <label [for]="dialogId" class="btn" (click)="cancelClick()">{{
