@@ -23,6 +23,13 @@ import { CsvService } from '../../auth/services/csv.service';
   styleUrls: ['./applicants-status.component.scss'],
 })
 export class ApplicantsStatusComponent implements OnInit {
+  // confirmation dialog
+  dialogTitle = 'Are you sure you want to update the Applicant as Called?';
+  message = 'This action is permanent';
+  button = 'Dismiss';
+  button2 = 'Confirm';
+  updatedApplicantId = '';
+
   constructor(
     private AR: ActivatedRoute,
     private fb: FormBuilder,
@@ -308,7 +315,8 @@ export class ApplicantsStatusComponent implements OnInit {
   // update applicant click implementation
   updateApplicant($event) {
     console.log($event);
-    this.updateApplicantStatus($event);
+    this.updatedApplicantId = $event;
+    this.showDialog();
   }
 
   // * Download CSV
@@ -328,5 +336,15 @@ export class ApplicantsStatusComponent implements OnInit {
     });
     // get the csv file from the service
     this.CS.get(applicants);
+  }
+
+  async showDialog() {
+    document.querySelector<HTMLElement>('#dialog')?.click();
+  }
+
+  dismiss() {}
+
+  confirmDelete() {
+    this.updateApplicantStatus(this.updatedApplicantId);
   }
 }
