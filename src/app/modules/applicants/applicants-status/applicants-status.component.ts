@@ -99,6 +99,8 @@ export class ApplicantsStatusComponent implements OnInit {
   failed = 0;
   totalApplicants = 0;
   registeredToCheckIn = 0;
+  registeredToSp = 0;
+
   columns = APPLICANTS_STATUS_HEADER;
   // data table
   data: TableData[] = [];
@@ -126,6 +128,7 @@ export class ApplicantsStatusComponent implements OnInit {
     // get the table data
     this.getTableData();
     this.getCheckInCount();
+    this.getSpCount();
   }
 
   getTableData() {
@@ -301,6 +304,14 @@ export class ApplicantsStatusComponent implements OnInit {
     this.AS.checkInCount().subscribe((val) => {
       console.log(val);
       this.registeredToCheckIn = val;
+    });
+  }
+
+  // get the number of how many users signed up to the checkin on the platform
+  getSpCount() {
+    this.AS.spCount().subscribe((val) => {
+      console.log(val);
+      this.registeredToSp = val;
     });
   }
 
