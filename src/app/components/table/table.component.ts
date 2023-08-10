@@ -159,10 +159,10 @@ export class TableComponent implements OnInit {
       case 'At games':
         return 'text-orange';
 
-      case 'Registered to bh-module':
       case 'Registered to bh-piscine':
-      case 'Registered to quad':
-        return 'text-gray-light';
+        return 'bg-green text-white shadow-lg';
+      case 'Registered to bh-module':
+        return 'text-gray';
     }
     return '';
   }

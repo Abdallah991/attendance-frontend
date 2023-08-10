@@ -3,6 +3,7 @@ module.exports = {
   theme: {
     colors: {
       primary: "#1ACFC9",
+      white: "#FFFFFF",
       secondary: "#06002E",
       blue: "#1fb6ff",
       purple: "#7e5bef",
@@ -11,7 +12,7 @@ module.exports = {
       green: "#13ce66",
       yellow: "#ffc82c",
       "gray-dark": "#273444",
-      gray: "#8492a6",
+      gray: "#8492A6",
       "gray-light": "#d3dce6",
     },
     fontFamily: {
