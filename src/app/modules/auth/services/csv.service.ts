@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { formatYYYYDDMM } from 'src/app/constants/globalMethods';
 // import { candidates } from 'src/app/constants/api';
 
 @Injectable({
@@ -23,7 +24,8 @@ export class CsvService {
 
     // Setting the anchor tag attribute for downloading
     // and passing the download file name
-    a.setAttribute('download', 'applicants.csv');
+    var date = formatYYYYDDMM(new Date());
+    a.setAttribute('download', 'applicants ' + date + '.csv');
 
     // Performing a download with click
     a.click();
