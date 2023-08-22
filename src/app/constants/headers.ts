@@ -3,7 +3,7 @@ export const STUDENT_HEADER = [
   'Id',
   'Name',
   'Cohort',
-  'CPR',
+  'Phone',
   'Platform ID',
 ];
 export const USER_HEADER = ['Id', 'Name', 'Join Date', 'Email'];

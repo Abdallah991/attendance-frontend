@@ -98,7 +98,9 @@ export class ApplicantsStatusComponent implements OnInit {
   passed = 0;
   failed = 0;
   totalApplicants = 0;
-  registeredToCheckIn = 0;
+  registeredToCheckIn1 = 0;
+  registeredToCheckIn2 = 0;
+
   registeredToSp = 0;
 
   columns = APPLICANTS_STATUS_HEADER;
@@ -127,7 +129,8 @@ export class ApplicantsStatusComponent implements OnInit {
   ngOnInit(): void {
     // get the table data
     this.getTableData();
-    this.getCheckInCount();
+    this.getCheckInCount1();
+    this.getCheckInCount2();
     this.getSpCount();
   }
 
@@ -300,10 +303,16 @@ export class ApplicantsStatusComponent implements OnInit {
   }
 
   // get the number of how many users signed up to the checkin on the platform
-  getCheckInCount() {
-    this.AS.checkInCount().subscribe((val) => {
-      console.log(val);
-      this.registeredToCheckIn = val;
+  getCheckInCount1() {
+    this.AS.checkInCount(41).subscribe((val) => {
+      this.registeredToCheckIn1 = val;
+    });
+  }
+
+  // get the number of how many users signed up to the checkin on the platform
+  getCheckInCount2() {
+    this.AS.checkInCount(46).subscribe((val) => {
+      this.registeredToCheckIn2 = val;
     });
   }
 

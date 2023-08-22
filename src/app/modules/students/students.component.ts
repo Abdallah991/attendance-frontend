@@ -81,6 +81,7 @@ export class StudentsComponent implements OnInit {
     var sequence = 0;
     return students.map((res) => {
       sequence++;
+      console.log(res);
       return {
         // the id, to return back for edit or delete events
         id: res['id'],
@@ -90,7 +91,7 @@ export class StudentsComponent implements OnInit {
           res['id'],
           res['firstName'] + ' ' + res['lastName'],
           res['cohortId'],
-          res['cpr'],
+          res['phone'],
           res['platformId'],
         ],
         // the action buttons

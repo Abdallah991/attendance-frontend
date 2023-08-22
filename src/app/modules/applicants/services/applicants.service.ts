@@ -55,12 +55,15 @@ export class ApplicantsService {
   }
 
   // get checkin count api
-  checkInCount(): Observable<any> {
+  checkInCount(eventId): Observable<any> {
     try {
       // get the data from the url
+      var data = {
+        eventId: eventId,
+      };
 
       var http = this.http
-        .get<any>(CHECK_IN_API, { headers: httpOptions })
+        .post<any>(CHECK_IN_API, data, { headers: httpOptions })
         .pipe(map((data) => data));
 
       return http;
