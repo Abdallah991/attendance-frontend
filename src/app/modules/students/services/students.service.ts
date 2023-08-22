@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ATTENDNACE_API, SEARCH_API, STUDENT_API } from 'src/app/constants/api';
+import {
+  ATTENDNACE_API,
+  BIRTHDAYS_API,
+  SEARCH_API,
+  STUDENT_API,
+} from 'src/app/constants/api';
 import { httpOptions } from 'src/app/constants/constants';
 
 @Injectable({
@@ -109,6 +114,22 @@ export class StudentsService {
     } catch (err) {
       console.log(err);
       return null;
+    }
+  }
+
+  // get students api
+  getBirthdays(): Observable<any> {
+    try {
+      // get the data from the url
+      var http = this.http
+        .get<any>(BIRTHDAYS_API, { headers: httpOptions })
+        .pipe(map((data) => data));
+      http.subscribe((data) => {});
+      return http;
+    } catch (err) {
+      console.log(err);
+      // disable the loader and return if there is an error
+      return err;
     }
   }
 }

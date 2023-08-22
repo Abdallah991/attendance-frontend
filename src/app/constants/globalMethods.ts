@@ -9,6 +9,9 @@ export const formatYYYYDDMM = (date: Date): string =>
 //  format date
 export const formatYYYYMM = (date: Date): string =>
   formatDate(date, 'yyyy-MM', 'en');
+//  format date
+export const formatYYYY = (date: Date): string =>
+  formatDate(date, 'yyyy', 'en');
 
 export const formatYYYYDDMMHHMM = (date: Date): string =>
   formatDate(date, 'yyyy-MM-dd HH:mm', 'en');

@@ -13,9 +13,10 @@ import { AddStudentComponent } from './add-student/add-student.component';
 import { CohortsService } from '../cohorts/services/cohorts.service';
 import { CohortsResolver } from '../cohorts/services/cohorts.resolver';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { BirthdaysComponent } from './birthdays/birthdays.component';
 
 @NgModule({
-  declarations: [StudentsComponent, ViewStudentComponent, AddStudentComponent],
+  declarations: [StudentsComponent, ViewStudentComponent, AddStudentComponent, BirthdaysComponent],
   imports: [
     CommonModule,
     SharedModule,

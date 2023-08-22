@@ -199,7 +199,9 @@ export class StudentsComponent implements OnInit {
   }
 
   // TODO: Invoke sync attendace api
-  async syncAttendanceData() {}
+  async birthdayPage() {
+    this.router.navigateByUrl('/students/birthdays');
+  }
 
   dismiss() {}
 }

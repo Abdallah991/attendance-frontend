@@ -10,6 +10,8 @@ import { StudentAttendanceResolver } from './services/student-attendance.resolve
 import { AddStudentComponent } from './add-student/add-student.component';
 import { CohortsResolver } from '../cohorts/services/cohorts.resolver';
 import { VacationsResolver } from './services/vacations.resolver';
+import { BirthdaysComponent } from './birthdays/birthdays.component';
+import { BirthdaysResolver } from './services/birthdays.resolver';
 
 const routes: Routes = [
   {
@@ -38,6 +40,15 @@ const routes: Routes = [
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: {
       cohorts: CohortsResolver,
+    },
+  },
+
+  {
+    path: 'birthdays',
+    component: BirthdaysComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    resolve: {
+      birthdays: BirthdaysResolver,
     },
   },
 ];
