@@ -14,11 +14,24 @@ import { ActivatedRoute } from '@angular/router';
 export class BirthdaysComponent implements OnInit {
   constructor(private AR: ActivatedRoute) {}
 
+  // shading the events
+  // TODO: Add different shades
+  // TODO: add the year in the backend of this year
+  // TODO: sort the dates
+  // TODO: you can then do counters and shades
+  previousDate = '';
+  counter = 0;
+  firstShade = '#06005E';
+  secondShade = '#06008E';
+  thirdShade = '#0600AE';
+  fourthShade = '#0600DE';
+
   // Caleder configuration
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     // add interactions plugin to allow click on date
     plugins: [dayGridPlugin, interactionPlugin],
+    // * handle click events
     // handle date click
     // dateClick: this.handleDateClick.bind(this),
     // handle event click
@@ -43,12 +56,13 @@ export class BirthdaysComponent implements OnInit {
         date[0] = formatYYYY(new Date());
         // join the date
         var birthdayDate = date.join('-');
+
         // console.log(birthdayDate);
         // push into the calender
         this.attendanceTable.push({
           date: birthdayDate,
           title: birthday.name,
-          color: '#06002E',
+          color: this.firstShade,
         });
         // one time
         this.calendarOptions.events = this.attendanceTable;

@@ -14,14 +14,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let items of data">
+        <tr *ngFor="let items of data; index as i">
           <td
-            class="text-tertiary text-center"
-            [ngClass]="checkString(item)"
+            class="text-tertiary text-center min-h-[60px]"
+            [ngClass]="customCellStylingClass(item, i)"
             *ngFor="let item of items.data"
             [innerHTML]="item || 'NULL'"
           ></td>
-          <td class="flex justify-evenly items-center" *ngIf="actionButtons">
+          <td
+            class="flex justify-evenly items-center min-h-[60px]"
+            [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
+            *ngIf="actionButtons"
+          >
             <app-button
               color="btn-primary"
               textColor="text-base-100"

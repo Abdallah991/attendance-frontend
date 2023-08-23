@@ -45,6 +45,9 @@ export class TableComponent implements OnInit {
   @Output() forward = new EventEmitter<number>();
   @Output() backward = new EventEmitter<number>();
 
+  // Styling constants
+  cellCounter = 0;
+  index = 0;
   constructor() {}
 
   ngOnInit(): void {}
@@ -150,20 +153,40 @@ export class TableComponent implements OnInit {
     this.showPagination = false;
   }
 
-  checkString(item) {
+  customCellStylingClass(item, i) {
+    // cell counter
+    // TODO: Pass style through configuration
+    // for now we are counting depending on the location of the column
+    // and then if also the value of the level larger than 1
+    if (this.index == i) {
+      this.cellCounter++;
+    } else {
+      this.cellCounter = 1;
+      this.index = i;
+    }
+    // define row class
+    var rowClass = i % 2 == 1 ? ' bg-[#F5F5F5] ' : ' bg-white ';
+    // define levelClass
+    var levelClass = '';
+    if (item > 3 && this.cellCounter == 7) {
+      levelClass = ' text-green ';
+    } else if (item <= 3 && this.cellCounter == 7) {
+      levelClass = ' text-orange ';
+    }
+
     switch (item) {
       case 'Registered to check-in':
-        return 'text-green';
+        return 'text-green' + rowClass;
 
       case 'At administration':
       case 'At games':
-        return 'text-orange';
+        return 'text-orange' + rowClass;
 
       case 'Registered to bh-piscine':
         return 'bg-green text-white shadow-lg';
       case 'Registered to bh-module':
-        return 'text-gray';
+        return 'text-gray' + rowClass;
     }
-    return '';
+    return rowClass + levelClass;
   }
 }

@@ -90,7 +90,8 @@ export class StudentsComponent implements OnInit {
           sequence,
           res['id'],
           res['firstName'] + ' ' + res['lastName'],
-          res['cohortId'],
+          // ! replace it with actual value of cohort
+          'First',
           res['phone'],
           res['platformId'],
         ],

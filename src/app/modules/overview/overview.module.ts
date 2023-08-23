@@ -9,9 +9,10 @@ import { OverviewService } from './services/overview.service';
 import { LastdaySignedResolver } from './services/lastday-signed.resolver';
 import { OverviewResolver } from './services/overview.resolver';
 import { UsersSignedResolver } from './services/users-signed.resolver';
+import { AuditsAndRankingsComponent } from './audits-and-rankings/audits-and-rankings.component';
 
 @NgModule({
-  declarations: [OverviewComponent],
+  declarations: [OverviewComponent, AuditsAndRankingsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
