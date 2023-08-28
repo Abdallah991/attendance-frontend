@@ -176,7 +176,7 @@ export class TableComponent implements OnInit {
 
     switch (item) {
       case 'Registered to check-in':
-        return 'text-green' + rowClass;
+        return 'bg-green';
 
       case 'At administration':
       case 'At games':

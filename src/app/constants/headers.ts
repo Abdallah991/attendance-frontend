@@ -23,7 +23,7 @@ export const APPLICANTS_STATUS_HEADER = [
   'Score',
   'At',
   'Phone Number',
-  'Email',
+  // 'Email',
   'Call Status',
   // 'By Staff',
   'Progress',

@@ -206,7 +206,7 @@ export class ApplicantsStatusComponent implements OnInit {
           res['score'] ? res['score'].toFixed(2) : '0',
           res['lastGameDate'] ? formatYYYYDDMM(res['lastGameDate']) : '0',
           res['phone'],
-          res['email'],
+          // res['email'],
           // These elements to be updated
           res['status'],
           // res['updatedBy'] ? res['updatedBy'] : '-',
@@ -344,12 +344,33 @@ export class ApplicantsStatusComponent implements OnInit {
     // applicants
     var applicants: any[] = [];
     // get only relevant data
+
     this.applicants.forEach((applicant) => {
+      // * get the progress of the applicant
+      // ! make this in a function
+      var progresses = JSON.parse(applicant['progresses'])
+        .pop()
+        ?.path.split('/')
+        .pop();
+      var registration = JSON.parse(applicant['registrations'])
+        .pop()
+        ?.registration?.path.split('/')
+        .pop();
+      var progress = '-';
+      if (registration) {
+        progress = 'Registered to ' + registration;
+      } else if (progresses != undefined) {
+        progress = 'At ' + progresses;
+      } else {
+        progress = '-';
+      }
+      // *
       var data = {
         firstName: applicant.firstName,
         lastName: applicant.lastName,
         email: applicant.email,
         phoneNumber: applicant.phone,
+        progress: progress,
       };
       // push to custome object
       applicants.push(data);

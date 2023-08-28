@@ -16,7 +16,7 @@
       <tbody>
         <tr *ngFor="let items of data; index as i">
           <td
-            class="text-tertiary text-center min-h-[60px]"
+            class="text-tertiary text-center min-h-[60px] max-w-[9rem] overflow-hidden text-ellipsis whitespace-nowrap"
             [ngClass]="customCellStylingClass(item, i)"
             *ngFor="let item of items.data"
             [innerHTML]="item || 'NULL'"
