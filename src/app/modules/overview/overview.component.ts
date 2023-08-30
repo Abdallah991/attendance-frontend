@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CsvService } from '../auth/services/csv.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  SelectData,
-  TableButtonOptions,
-  TableData,
-} from 'src/app/interfaces/interfaces';
+import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
 import { PROGRESS_HEADER } from 'src/app/constants/headers';
-import { FormGroup } from '@angular/forms';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -17,29 +11,18 @@ import Chart from 'chart.js/auto';
 })
 export class OverviewComponent implements OnInit {
   // ! create a CSV service
-  constructor(
-    private CSVS: CsvService,
-    private AR: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private AR: ActivatedRoute, private router: Router) {}
 
-  // charts
-  chart: any = [];
-  // audit Chart
-  auditChart: any = [];
-  // ! find a way to hide and show these charts
-  showCharts: boolean = true;
+  qualificationChart: any = [];
+  ageChart: any = [];
+  nationalityChart: any = [];
   // students
   students: [] = [];
   // table data
   data: TableData[] = [];
   // table columns
   columns: string[] = PROGRESS_HEADER;
-  //  search form
-  searchForm: FormGroup;
-  searchValues: SelectData[] = [];
   // search loader
-  searchLoader: boolean = false;
   showResults: boolean = false;
   // pagination loader
   loader: boolean = false;
@@ -58,14 +41,11 @@ export class OverviewComponent implements OnInit {
   getTableData() {
     this.AR.data.subscribe((response: any) => {
       this.students = response.students;
-
       // sort students on transactions attribute
       try {
         if (this.students.length > 0) {
           this.sortOnAudits(false);
           //  TODO: make a button to switch between this audit with animation
-          this.createChart();
-          this.createAuditChart();
         }
       } catch (e) {
         console.log(e);
@@ -174,102 +154,106 @@ export class OverviewComponent implements OnInit {
   }
 
   // TODO: set up different chart methods here
-  createChart() {
-    var studentsCharts: any = {};
-    this.students.forEach((item) => {
-      // console.log(item['progressAt']);
-      if (!studentsCharts[item['progressAt']]) {
-        studentsCharts[item['progressAt']] = 1;
-      } else {
-        studentsCharts[item['progressAt']]++;
-      }
-    });
-    // get the x-axis labels dynamically
-    var labels = [];
-    for (let label in studentsCharts) {
-      labels.push(label);
-    }
-    var values = [];
-    for (let value in studentsCharts) {
-      values.push(studentsCharts[value]);
-    }
-    console.log(studentsCharts);
-    console.log(labels);
-    console.log(values);
-    // use frequency counter to get to the bottom of these values
-    // export the keys to the chart
-    this.chart = new Chart('canvas', {
-      type: 'bar',
-      data: {
-        // names of projects
-        labels: labels,
-        datasets: [
-          {
-            label: 'Students',
-            data: values,
-            borderWidth: 2,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-          x: {
-            ticks: {
-              autoSkip: false,
-              maxRotation: 90,
-              minRotation: 90,
-            },
-          },
-        },
-      },
-    });
-  }
+  // createChart() {
+  //   var studentsCharts: any = {};
+  //   this.students.forEach((item) => {
+  //     // console.log(item['progressAt']);
+  //     if (!studentsCharts[item['progressAt']]) {
+  //       studentsCharts[item['progressAt']] = 1;
+  //     } else {
+  //       studentsCharts[item['progressAt']]++;
+  //     }
+  //   });
+  //   // get the x-axis labels dynamically
+  //   var labels = [];
+  //   for (let label in studentsCharts) {
+  //     labels.push(label);
+  //   }
+  //   var values = [];
+  //   for (let value in studentsCharts) {
+  //     values.push(studentsCharts[value]);
+  //   }
+  //   console.log(studentsCharts);
+  //   console.log(labels);
+  //   console.log(values);
+  //   // use frequency counter to get to the bottom of these values
+  //   // export the keys to the chart
+  //   this.chart = new Chart('canvas', {
+  //     type: 'bar',
+  //     data: {
+  //       // names of projects
+  //       labels: labels,
+  //       datasets: [
+  //         {
+  //           label: 'Students',
+  //           data: values,
+  //           borderWidth: 2,
+  //         },
+  //       ],
+  //     },
+  //     options: {
+  //       scales: {
+  //         y: {
+  //           beginAtZero: true,
+  //         },
+  //         x: {
+  //           ticks: {
+  //             autoSkip: false,
+  //             maxRotation: 90,
+  //             minRotation: 90,
+  //           },
+  //         },
+  //       },
+  //     },
+  //   });
+  // }
 
-  createAuditChart() {
-    // TODO: Audit Chart
-    var studentsAuditsCharts: any = {
-      aboveFive: 0,
-      aboveOne: 0,
-      zero: 0,
-    };
-    this.students.forEach((item) => {
-      // console.log(item['progressAt']);
-      if (item['transaction'] > 5) {
-        studentsAuditsCharts['aboveFive']++;
-      } else if (item['transaction'] > 1) {
-        studentsAuditsCharts['aboveOne']++;
-      } else {
-        studentsAuditsCharts['zero']++;
-      }
-    });
-    //
-    this.auditChart = new Chart('auditCanvas', {
-      type: 'bar',
-      data: {
-        // names of projects
-        labels: ['More Than 5 Audits', 'More than 1 audit', 'No Audits'],
-        datasets: [
-          {
-            label: 'Audits',
-            data: [
-              studentsAuditsCharts['aboveFive'],
-              studentsAuditsCharts['aboveOne'],
-              studentsAuditsCharts['zero'],
-            ],
-            borderWidth: 2,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
+  // createAuditChart() {
+  //   // TODO: Audit Chart
+  //   var studentsAuditsCharts: any = {
+  //     aboveFive: 0,
+  //     aboveOne: 0,
+  //     zero: 0,
+  //   };
+  //   this.students.forEach((item) => {
+  //     // console.log(item['progressAt']);
+  //     if (item['transaction'] > 5) {
+  //       studentsAuditsCharts['aboveFive']++;
+  //     } else if (item['transaction'] > 1) {
+  //       studentsAuditsCharts['aboveOne']++;
+  //     } else {
+  //       studentsAuditsCharts['zero']++;
+  //     }
+  //   });
+  //   //
+  //   this.auditChart = new Chart('auditCanvas', {
+  //     type: 'bar',
+  //     data: {
+  //       // names of projects
+  //       labels: ['More Than 5 Audits', 'More than 1 audit', 'No Audits'],
+  //       datasets: [
+  //         {
+  //           label: 'Audits',
+  //           data: [
+  //             studentsAuditsCharts['aboveFive'],
+  //             studentsAuditsCharts['aboveOne'],
+  //             studentsAuditsCharts['zero'],
+  //           ],
+  //           borderWidth: 2,
+  //         },
+  //       ],
+  //     },
+  //     options: {
+  //       scales: {
+  //         y: {
+  //           beginAtZero: true,
+  //         },
+  //       },
+  //     },
+  //   });
+  // }
+
+  async navigateToDetails() {
+    this.router.navigate(['overview/cohort-detailed']);
   }
 }

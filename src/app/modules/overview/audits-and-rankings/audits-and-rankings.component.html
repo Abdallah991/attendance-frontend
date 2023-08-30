@@ -1,1 +1,43 @@
-<p>audits-and-rankings works!</p>
+<h1 class="p-4">Cohort Overview</h1>
+
+<div class="flex p-8 justify-start align-middle w-full">
+  <div class="flex-2 w-[25%] h-[50vh]">
+    <h2>Gender</h2>
+    <canvas id="genderCanvas" class="cursor-pointer">{{ genderChart }}</canvas>
+  </div>
+  <div class="h-[50vh] w-[65%]">
+    <h2>Qualification</h2>
+    <canvas id="qualificationCanvas" class="cursor-pointer">{{
+      qualificationChart
+    }}</canvas>
+  </div>
+  <h1
+    class="px-8 underline self-end w-[15%] cursor-pointer"
+    (click)="navigateToDetails()"
+  >
+    More >>>
+  </h1>
+</div>
+
+<div class="flex p-8 gap-4 justify-start">
+  <div class="flex-1 w-[65%] h-[50vh]">
+    <h2>Age</h2>
+    <canvas id="ageCanvas" class="cursor-pointer">{{ ageChart }}</canvas>
+  </div>
+  <div class="flex-2 h-[50vh] w-[25%]">
+    <h2>Nationality</h2>
+    <canvas id="nationalityCanvas" class="cursor-pointer">{{
+      nationalityChart
+    }}</canvas>
+  </div>
+</div>
+<div class="pt-16 flex flex-row justify-between">
+  <h1 class="px-8">Cohort Progress</h1>
+</div>
+
+<div class="p-8">
+  <canvas id="canvas" class="cursor-pointer">{{ chart }}</canvas>
+</div>
+<div class="p-8">
+  <canvas id="auditCanvas" class="cursor-pointer">{{ auditChart }}</canvas>
+</div>
