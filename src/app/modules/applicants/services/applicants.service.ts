@@ -46,7 +46,7 @@ export class ApplicantsService {
       var http = this.http
         .post<any>(APPLICANTS_SYNC_API, data, { headers: httpOptions })
         .pipe(map((data) => data));
-
+      console.log(http);
       return http;
     } catch (err) {
       console.log(err);

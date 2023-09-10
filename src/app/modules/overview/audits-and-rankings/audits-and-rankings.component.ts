@@ -34,11 +34,11 @@ export class AuditsAndRankingsComponent implements OnInit {
       try {
         if (this.students.length > 0) {
           //  TODO: make a button to switch between this audit with animation
+          this.createChart();
           this.createGenderCharts();
           this.createQualificationChart();
           this.createAgeChart();
           this.createNationalityChart();
-          this.createChart();
           this.createAuditChart();
         }
       } catch (e) {
@@ -96,6 +96,10 @@ export class AuditsAndRankingsComponent implements OnInit {
     // get the x-axis labels dynamically
     var labels = [];
     for (let label in qualificationData) {
+      if (label == 'placeholder') {
+        labels.push('Other');
+        continue;
+      }
       labels.push(label);
     }
     var values = [];
@@ -104,11 +108,12 @@ export class AuditsAndRankingsComponent implements OnInit {
     }
     // set up qualifications counts
     this.genderChart = new Chart('qualificationCanvas', {
-      type: 'polarArea',
+      type: 'bar',
       data: {
         labels: labels,
         datasets: [
           {
+            label: 'Qualifications',
             data: values,
             backgroundColor: [
               // TODO: change colors
@@ -130,24 +135,33 @@ export class AuditsAndRankingsComponent implements OnInit {
   }
 
   createAgeChart() {
-    var age18To22 = 0;
-    var age23To27 = 0;
-    var age28To32 = 0;
-    var age33To37 = 0;
+    var age18To20 = 0;
+    var age21To23 = 0;
+    var age24To26 = 0;
+    var age27To29 = 0;
+    var age30To32 = 0;
+    var age33To35 = 0;
+    var age36To38 = 0;
     var ageAbove38 = 0;
     this.students.forEach((student) => {
       var date = Number(formatYYYYDDMM(student['dob']).split('-')[0]);
       var currentYear = Number(formatYYYY(new Date()));
       var age = currentYear - date;
 
-      if (age >= 18 && age <= 22) {
-        age18To22++;
-      } else if (age >= 23 && age <= 27) {
-        age23To27++;
-      } else if (age >= 28 && age <= 32) {
-        age28To32++;
-      } else if (age >= 33 && age <= 37) {
-        age33To37++;
+      if (age >= 18 && age <= 20) {
+        age18To20++;
+      } else if (age >= 21 && age <= 23) {
+        age21To23++;
+      } else if (age >= 24 && age <= 26) {
+        age24To26++;
+      } else if (age >= 27 && age <= 29) {
+        age27To29++;
+      } else if (age >= 30 && age <= 32) {
+        age30To32++;
+      } else if (age >= 33 && age <= 35) {
+        age33To35++;
+      } else if (age >= 36 && age <= 38) {
+        age36To38++;
       } else {
         ageAbove38++;
       }
@@ -157,19 +171,37 @@ export class AuditsAndRankingsComponent implements OnInit {
     this.ageChart = new Chart('ageCanvas', {
       type: 'bar',
       data: {
-        labels: ['18 - 22', '23 - 27', '28 - 32', '33 - 37', '38 and above'],
+        labels: [
+          '18 - 20',
+          '21 - 23',
+          '24 - 26',
+          '27 - 29',
+          '30 - 32',
+          '33 - 35',
+          '36 - 38',
+          'Above 38',
+        ],
         datasets: [
           {
             label: 'Age Distribution',
-            data: [age18To22, age23To27, age28To32, age33To37, ageAbove38],
-            // backgroundColor: [
-            //   // TODO: change colors
-            //   'orange',
-            //   'aqua',
-            //   'pink',
-            //   'gold',
-            //   'rgb(54, 162, 235)',
-            // ],
+            data: [
+              age18To20,
+              age21To23,
+              age24To26,
+              age27To29,
+              age30To32,
+              age33To35,
+              age36To38,
+              ageAbove38,
+            ],
+            backgroundColor: [
+              // TODO: change colors
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'pink',
+              'orange',
+              'aqua',
+            ],
           },
         ],
       },

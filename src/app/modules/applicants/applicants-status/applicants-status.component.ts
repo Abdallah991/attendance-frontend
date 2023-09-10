@@ -137,6 +137,7 @@ export class ApplicantsStatusComponent implements OnInit {
   getTableData() {
     //  enable subscrbtion with router/url change
     this.AR.data.subscribe((response: any) => {
+      // console.log(response);
       // reset applicants
       this.applicants = [];
       // passed and failed within a time period
@@ -178,10 +179,14 @@ export class ApplicantsStatusComponent implements OnInit {
     return applicants.map((res) => {
       sequence++;
       // convert progresses to json // get the last progress //get the last word of that progress
+      console.log(res['progresses']);
+      console.log(res['platformId']);
+
       var progresses = JSON.parse(res['progresses'])
         .pop()
         ?.path.split('/')
         .pop();
+      console.log(progresses);
       var registration = JSON.parse(res['registrations'])
         .pop()
         ?.registration?.path.split('/')

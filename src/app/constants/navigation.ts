@@ -14,11 +14,11 @@ export const navigationMenu = [
     linkName: 'Students',
   },
   {
-    link: '/applicants/status',
-    iconPathInactive: '../../assets/icons/money.svg',
-    iconPathActive: '../../assets/icons/money.svg',
+    link: '/piscine',
+    iconPathInactive: '../../assets/icons/pool1.svg',
+    iconPathActive: '../../assets/icons/pool1.svg',
     active: false,
-    linkName: 'Applicants',
+    linkName: 'Selection Pool',
   },
   {
     link: '/users',

@@ -42,6 +42,14 @@ const routes: Routes = [
           ),
       },
       {
+        // SP routes
+        path: 'piscine',
+        loadChildren: () =>
+          import('./modules/piscine/piscine.module').then(
+            (m) => m.PiscineModule
+          ),
+      },
+      {
         path: 'change-password',
         loadChildren: () =>
           import('./modules/change-password/change-password.module').then(

@@ -29,6 +29,15 @@ export const APPLICANTS_STATUS_HEADER = [
   'Progress',
   // 'Registration',
 ];
+
+export const SELECTION_POOL_HEADER = [
+  'Sequence',
+  'Login',
+  'Name',
+  'Phone',
+  'Progress At',
+  'Last Activity',
+];
 export const PROGRESS_HEADER = [
   'Sequence',
   'Login',

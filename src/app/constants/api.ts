@@ -48,8 +48,11 @@ export const APPLICANTS_UPDATE_API = ROOTLINK + '/applicants-update';
 // 17-applicants SP
 export const SP_API = ROOTLINK + '/applicants-sp';
 
-// 17- Birthdays SP
+// 18- Birthdays SP
 export const BIRTHDAYS_API = ROOTLINK + '/birthdays';
+
+// 18- Birthdays SP
+export const SELECTION_POOL_API = ROOTLINK + '/selection-pool';
 //
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer
