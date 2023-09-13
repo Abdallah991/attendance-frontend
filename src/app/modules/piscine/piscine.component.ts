@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { formatYYYYDDMMHHMM } from 'src/app/constants/globalMethods';
 import { SELECTION_POOL_HEADER } from 'src/app/constants/headers';
@@ -10,7 +11,13 @@ import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
   styleUrls: ['./piscine.component.scss'],
 })
 export class PiscineComponent implements OnInit {
-  constructor(private AR: ActivatedRoute) {}
+  constructor(private AR: ActivatedRoute, private fb: FormBuilder) {
+    // form group
+    this.form = this.fb.group({
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+    });
+  }
 
   columns = SELECTION_POOL_HEADER;
   // data coming from the API
@@ -21,11 +28,13 @@ export class PiscineComponent implements OnInit {
   // Stats:
   lastavtivityIn24 = 0;
   lastavtivityIn48 = 0;
+  // form
+  form: FormGroup;
 
   ngOnInit(): void {
     this.AR.data.subscribe((value) => {
       this.applicants = value.applicants;
-      // console.log(this.applicants);
+      console.log(this.applicants);
       // formate the data for the table
       this.arrangeData(this.applicants);
       // sort the table of the last activity
@@ -50,6 +59,7 @@ export class PiscineComponent implements OnInit {
           res['login'],
           res['name'],
           res['phone'],
+          res['nationality'],
           res['lastProgress'],
           res['date'],
         ],
@@ -100,6 +110,7 @@ export class PiscineComponent implements OnInit {
         login: applicant.login,
         name: applicant.firstName + ' ' + applicant.lastName,
         phone: applicant.phone ? applicant.phone : applicant.phoneNumber,
+        nationality: applicant.nationality,
         lastProgress: lastProgress,
         date: date,
       });
@@ -123,12 +134,21 @@ export class PiscineComponent implements OnInit {
   activeInTheLast24() {
     var nowDate = new Date();
     var yesterday = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
+    var beforeYesterday = new Date(new Date().getTime() - 48 * 60 * 60 * 1000);
 
     this.arrangedApplicants.forEach((applicant) => {
       var lastActivityDate = new Date(applicant.date);
       if (lastActivityDate >= yesterday && lastActivityDate <= nowDate) {
         this.lastavtivityIn24++;
       }
+      if (lastActivityDate >= beforeYesterday && lastActivityDate <= nowDate) {
+        this.lastavtivityIn48++;
+      }
     });
   }
+
+  // TODO: Check last activity by date
+  // TODO: Sort on date.
+  // TODO: search by name or platform id
+  // TODO: Details
 }

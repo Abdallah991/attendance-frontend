@@ -35,6 +35,7 @@ export const SELECTION_POOL_HEADER = [
   'Login',
   'Name',
   'Phone',
+  'Nationality',
   'Progress At',
   'Last Activity',
 ];
