@@ -23,7 +23,7 @@ export class StudentsService {
       var http = this.http
         .get<any>(STUDENT_API, { headers: httpOptions })
         .pipe(map((data) => data));
-      http.subscribe((data) => {});
+      // http.subscribe((data) => {});
       return http;
     } catch (err) {
       console.log(err);

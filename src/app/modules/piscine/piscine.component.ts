@@ -37,6 +37,8 @@ export class PiscineComponent implements OnInit {
       console.log(this.applicants);
       // formate the data for the table
       this.arrangeData(this.applicants);
+
+      console.log(this.arrangedApplicants);
       // sort the table of the last activity
       this.sortOnLastActivity();
       this.activeInTheLast24();
@@ -151,4 +153,5 @@ export class PiscineComponent implements OnInit {
   // TODO: Sort on date.
   // TODO: search by name or platform id
   // TODO: Details
+  // TODO: Frequency done on question, Time spend on it
 }

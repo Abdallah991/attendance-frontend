@@ -58,4 +58,8 @@ export class SideNavComponent implements OnInit {
   async changePassword() {
     this.router.navigateByUrl('/change-password');
   }
+
+  async navigateToHome() {
+    this.router.navigateByUrl('/overview');
+  }
 }

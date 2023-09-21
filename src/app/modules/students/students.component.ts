@@ -67,11 +67,23 @@ export class StudentsComponent implements OnInit {
   // TODO: make sure that this function works properly and loads the data
   getTableData() {
     this.AR.data.subscribe((response: any) => {
-      this.students = response.students.data.students;
-      if (this.students.length > 0) {
-        this.data = this.constructTableData(this.students);
-      } else {
-        this.showAddButton = true;
+      try {
+        this.students = response?.students?.data?.students;
+        if (this.students.length > 0) {
+          this.data = this.constructTableData(this.students);
+        } else {
+          this.showAddButton = true;
+        }
+      } catch (e) {
+        console.log(e);
+        // reload value to refresh the state of the token
+        var reload = this.AR.snapshot.queryParamMap['params']['reload'];
+        if (reload) {
+          window.location.reload();
+        }
+        // params.subscribe((value) => {
+        //   console.log(value);
+        // });
       }
     });
   }
@@ -81,7 +93,7 @@ export class StudentsComponent implements OnInit {
     var sequence = 0;
     return students.map((res) => {
       sequence++;
-      console.log(res);
+      // console.log(res);
       return {
         // the id, to return back for edit or delete events
         id: res['id'],

@@ -4,9 +4,10 @@ import { PiscineComponent } from './piscine.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PiscineRoutingModule } from './piscine-routing.module';
 import { SharedModule } from 'src/app/components/shared.module';
+import { PiscineDetailComponent } from './piscine-detail/piscine-detail.component';
 
 @NgModule({
-  declarations: [PiscineComponent],
+  declarations: [PiscineComponent, PiscineDetailComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

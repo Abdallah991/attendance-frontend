@@ -24,11 +24,11 @@ export class AuditsAndRankingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
-      this.students = response.students.data.students;
-      this.studentsProgress = response.studentsProgress;
+      this.students = response?.students?.data?.students;
+      this.studentsProgress = response?.studentsProgress;
       Chart.register(...registerables);
 
-      console.log(this.students);
+      // console.log(this.students);
 
       // sort students on transactions attribute
       try {
@@ -43,10 +43,11 @@ export class AuditsAndRankingsComponent implements OnInit {
         }
       } catch (e) {
         console.log(e);
-        // handle token not being retrieved
-        // ! this is will trigger crappy behavior when the platform token gets expired
-        // ! This page doesnt work
-        //! window.location.reload();
+        this.router.navigate(['students'], {
+          queryParams: {
+            reload: true,
+          },
+        });
       }
     });
   }
@@ -253,7 +254,23 @@ export class AuditsAndRankingsComponent implements OnInit {
 
   // TODO: set up different chart methods here
   createChart() {
-    var studentsCharts: any = {};
+    var studentsCharts: any = {
+      '-': 0,
+      'go-reloaded': 0,
+      'ascii-art': 0,
+      'ascii-art-color': 0,
+      'ascii-art-fs': 0,
+      'ascii-art-output': 0,
+      'ascii-art-reverse': 0,
+      'ascii-art-justify': 0,
+      'ascii-art-web': 0,
+      'ascii-art-web-stylize': 0,
+      'ascii-art-web-export-file': 0,
+      'ascii-art-web-dockerize': 0,
+      'groupie-tracker': 0,
+      'groupie-tracker-search-bar': 0,
+      'groupie-tracker-filters': 0,
+    };
     this.studentsProgress.forEach((item) => {
       // console.log(item['progressAt']);
       if (!studentsCharts[item['progressAt']]) {
@@ -267,15 +284,19 @@ export class AuditsAndRankingsComponent implements OnInit {
     for (let label in studentsCharts) {
       labels.push(label);
     }
+
     var values = [];
     for (let value in studentsCharts) {
       values.push(studentsCharts[value]);
     }
+    console.log(studentsCharts);
+    console.log(labels);
+    console.log(values);
 
     // use frequency counter to get to the bottom of these values
     // export the keys to the chart
     this.chart = new Chart('canvas', {
-      type: 'bar',
+      type: 'line',
       data: {
         // names of projects
         labels: labels,
@@ -305,7 +326,6 @@ export class AuditsAndRankingsComponent implements OnInit {
   }
 
   createAuditChart() {
-    // TODO: Audit Chart
     var studentsAuditsCharts: any = {
       aboveFive: 0,
       aboveOne: 0,

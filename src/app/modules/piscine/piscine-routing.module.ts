@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { PiscineComponent } from './piscine.component';
 import { PiscineResolver } from './services/piscine.resolver';
+import { PiscineDetailComponent } from './piscine-detail/piscine-detail.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,15 @@ const routes: Routes = [
     resolve: {
       applicants: PiscineResolver,
     },
+  },
+  {
+    path: 'detail',
+    component: PiscineDetailComponent,
+    // to be able to add
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    // resolve: {
+    //   applicants: PiscineResolver,
+    // },
   },
 ];
 

@@ -47,7 +47,7 @@ export class BirthdaysComponent implements OnInit {
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
       // TODO: replace the first part with the date
-      console.log(response.birthdays.data.birthdays);
+      // console.log(response.birthdays.data.birthdays);
 
       response.birthdays.data.birthdays.forEach((birthday) => {
         // split the date
@@ -56,8 +56,6 @@ export class BirthdaysComponent implements OnInit {
         date[0] = formatYYYY(new Date());
         // join the date
         var birthdayDate = date.join('-');
-
-        // console.log(birthdayDate);
         // push into the calender
         this.attendanceTable.push({
           date: birthdayDate,
