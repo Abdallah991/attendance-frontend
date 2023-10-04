@@ -49,18 +49,18 @@ export class AuditsAndRankingsComponent implements OnInit {
       } catch (e) {
         console.log(e);
 
-        this.AS.updateToken()
-          .then((res) => {
-            console.log(res);
-            window.location.reload();
-          })
-          .catch((err) => {
-            console.log(err);
-            window.location.reload();
-          })
-          .finally(() => {
-            console.log('this flow finished');
-          });
+        // this.AS.updateToken()
+        //   .then((res) => {
+        //     console.log(res);
+        //     window.location.reload();
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //     window.location.reload();
+        //   })
+        //   .finally(() => {
+        //     console.log('this flow finished');
+        //   });
       }
     });
   }
