@@ -23,37 +23,32 @@ export const ATTENDNACE_API = ROOTLINK + '/attendance';
 export const CANDIDATE_API = ROOTLINK + '/candidate';
 // 9- Candidate Info API
 export const CANDIDATE_INFO_API = ROOTLINK + '/candidate-info';
-
-// 9- Search API
+// 10- Search API
 export const SEARCH_API = ROOTLINK + '/search';
-
-// 10-Change Passowrd
+// 11-Change Passowrd
 export const PASSWORD_API = ROOTLINK + '/password';
-
-// 11-Vacations
+// 12-Vacations
 export const VACATION_API = ROOTLINK + '/vacations';
-// 12-statistics
+// 13-statistics
 export const STATISTICS_API = ROOTLINK + '/students-progress';
-// 13-roles
+// 14-roles
 export const ROLES_API = ROOTLINK + '/roles';
-// 14-applicants
+// 15-applicants
 export const APPLICANTS_API = ROOTLINK + '/applicants';
-
-// 14-applicants
+// 16-applicants
 export const APPLICANTS_SYNC_API = ROOTLINK + '/applicants-sync';
-// 15-applicants Check-In
+// 17-applicants Check-In
 export const CHECK_IN_API = ROOTLINK + '/applicants-check-in';
-// 16-applicants Update
+// 18-applicants Update
 export const APPLICANTS_UPDATE_API = ROOTLINK + '/applicants-update';
-// 17-applicants SP
+// 19-applicants SP
 export const SP_API = ROOTLINK + '/applicants-sp';
-
-// 18- Birthdays SP
+// 20- Birthdays SP
 export const BIRTHDAYS_API = ROOTLINK + '/birthdays';
-
-// 18- Birthdays SP
+// 21- Birthdays SP
 export const SELECTION_POOL_API = ROOTLINK + '/selection-pool';
-//
+// 22- Update Token
+export const UPDATE_TOKEN_API = ROOTLINK + '/getToken';
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer
 export const BIO_ATTENDANCE_API = 'http://10.1.50.4:80';

@@ -1,6 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LOGIN_API, LOGOUT_API, PASSWORD_API } from 'src/app/constants/api';
+import {
+  LOGIN_API,
+  LOGOUT_API,
+  PASSWORD_API,
+  UPDATE_TOKEN_API,
+} from 'src/app/constants/api';
 import { httpOptions } from 'src/app/constants/constants';
 import { getUser } from 'src/app/constants/globalMethods';
 
@@ -76,5 +81,17 @@ export class AuthService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  // update token if expired api call to the backend
+  public async updateToken(): Promise<any> {
+    return new Promise<any>(async (resolve, reject) => {
+      this.http.get(UPDATE_TOKEN_API, { headers: httpOptions }).subscribe(
+        (response) => {
+          resolve(response);
+        },
+        (error) => reject(error)
+      );
+    });
   }
 }

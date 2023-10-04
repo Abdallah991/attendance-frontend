@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { formatYYYY, formatYYYYDDMM } from 'src/app/constants/globalMethods';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-audits-and-rankings',
@@ -20,7 +21,11 @@ export class AuditsAndRankingsComponent implements OnInit {
   chart: any = [];
   auditChart: any = [];
 
-  constructor(private AR: ActivatedRoute, private router: Router) {}
+  constructor(
+    private AR: ActivatedRoute,
+    private router: Router,
+    private AS: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
@@ -43,11 +48,19 @@ export class AuditsAndRankingsComponent implements OnInit {
         }
       } catch (e) {
         console.log(e);
-        this.router.navigate(['students'], {
-          queryParams: {
-            reload: true,
-          },
-        });
+
+        this.AS.updateToken()
+          .then((res) => {
+            console.log(res);
+            window.location.reload();
+          })
+          .catch((err) => {
+            console.log(err);
+            window.location.reload();
+          })
+          .finally(() => {
+            console.log('this flow finished');
+          });
       }
     });
   }
@@ -252,7 +265,7 @@ export class AuditsAndRankingsComponent implements OnInit {
     });
   }
 
-  // TODO: set up different chart methods here
+  // TODO: set up a chart with the number of student who finished each project
   createChart() {
     var studentsCharts: any = {
       '-': 0,
