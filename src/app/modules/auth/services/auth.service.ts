@@ -27,6 +27,7 @@ export class AuthService {
     let promise = new Promise<any>(async (resolve, reject) => {
       this.http.post(LOGIN_API, data, { headers: httpOptions }).subscribe(
         (response) => {
+          console.log(response); //! save this value locally then use it, the laravel generated token
           resolve(response);
         },
         (error) => {
@@ -85,6 +86,7 @@ export class AuthService {
 
   // update token if expired api call to the backend
   public async updateToken(): Promise<any> {
+    console.log(httpOptions);
     return new Promise<any>(async (resolve, reject) => {
       this.http.get(UPDATE_TOKEN_API, { headers: httpOptions }).subscribe(
         (response) => {

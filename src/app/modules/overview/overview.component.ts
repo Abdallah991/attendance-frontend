@@ -51,7 +51,7 @@ export class OverviewComponent implements OnInit {
         console.log(e);
         // handle token not being retrieved
         // ! this is will trigger crappy behavior when the platform token gets expired
-        window.location.reload();
+        // window.location.reload();
       }
     });
   }
