@@ -48,7 +48,8 @@ export class AuditsAndRankingsComponent implements OnInit {
         }
       } catch (e) {
         console.log(e);
-
+        window.location.reload();
+        // ! creates a problem in .env file
         // this.AS.updateToken()
         //   .then((res) => {
         //     console.log(res);
@@ -61,6 +62,7 @@ export class AuditsAndRankingsComponent implements OnInit {
         //   .finally(() => {
         //     console.log('this flow finished');
         //   });
+      } finally {
       }
     });
   }
