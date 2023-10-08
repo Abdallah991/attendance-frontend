@@ -46,5 +46,7 @@ export const PROGRESS_HEADER = [
   'Project At',
   'Audits Given',
   'Audits Received',
+  'Last Activity',
   'Level',
+  //
 ];

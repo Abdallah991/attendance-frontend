@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { STATISTICS_API } from 'src/app/constants/api';
-import { httpOptions } from 'src/app/constants/constants';
+import { getToken } from 'src/app/constants/globalMethods';
 // import { GET_USERS, GET_USERS_SIGNED_RANGED } from 'src/app/constants/queries';
 
 @Injectable({
@@ -12,12 +12,17 @@ import { httpOptions } from 'src/app/constants/constants';
 export class OverviewService {
   constructor(private http: HttpClient) {}
 
+  httpOptions = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken(),
+  });
+
   // return an observable of students progress
   public getStudentsProgress(): Observable<any> {
     try {
       // get the data from the url
       var http = this.http
-        .get<any>(STATISTICS_API, { headers: httpOptions })
+        .get<any>(STATISTICS_API, { headers: this.httpOptions })
         .pipe(map((data) => data));
       // http.subscribe((data) => {});
       return http;

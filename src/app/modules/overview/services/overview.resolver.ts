@@ -3,7 +3,6 @@ import { Resolve } from '@angular/router';
 import { OverviewService } from './overview.service';
 import { Observable, of } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
-import { httpOptions } from 'src/app/constants/constants';
 
 @Injectable({
   providedIn: 'root',

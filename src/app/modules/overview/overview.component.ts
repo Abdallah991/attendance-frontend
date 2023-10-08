@@ -41,6 +41,7 @@ export class OverviewComponent implements OnInit {
   getTableData() {
     this.AR.data.subscribe((response: any) => {
       this.students = response.students;
+      // console.log(this.students);
       // sort students on transactions attribute
       try {
         if (this.students.length > 0) {
@@ -72,6 +73,7 @@ export class OverviewComponent implements OnInit {
           res['progressAt'],
           res['up'] ? res['up'] : '0',
           res['down'] ? res['down'] : '0',
+          res['auditDate'],
           res['level'] ? res['level'] : '0',
         ],
         // the action buttons

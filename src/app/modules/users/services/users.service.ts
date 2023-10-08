@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { REGISTER_API, ROLES_API, USER_API } from 'src/app/constants/api';
-import { httpOptions } from 'src/app/constants/constants';
+import { getToken } from 'src/app/constants/globalMethods';
 import { User } from 'src/app/models/User';
 
 @Injectable({
@@ -12,14 +12,20 @@ import { User } from 'src/app/models/User';
 export class UsersService {
   constructor(private http: HttpClient) {}
 
+  httpOptions = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken(),
+  });
   //  get users API call
   private getUsersApi(): Observable<User[]> {
     try {
       // get the data from the url
-      return this.http.get<User[]>(USER_API, { headers: httpOptions }).pipe(
-        // access the JSON 'data'
-        map((data) => data['data']['users'].map((user) => new User(user)))
-      );
+      return this.http
+        .get<User[]>(USER_API, { headers: this.httpOptions })
+        .pipe(
+          // access the JSON 'data'
+          map((data) => data['data']['users'].map((user) => new User(user)))
+        );
     } catch (err) {
       console.log(err);
       return null;
@@ -56,7 +62,7 @@ export class UsersService {
     try {
       // get the data from the url
       return this.http
-        .get<User>(USER_API + '/' + id, { headers: httpOptions })
+        .get<User>(USER_API + '/' + id, { headers: this.httpOptions })
         .pipe(
           // access the JSON 'data'
           map((data) => new User(data['data']['user']))
@@ -99,7 +105,7 @@ export class UsersService {
     var url = USER_API + '/' + id;
     // call the api
     var newPost = await this.http
-      .delete<any>(url, { headers: httpOptions })
+      .delete<any>(url, { headers: this.httpOptions })
       .subscribe(
         (value) => {
           return value;
@@ -117,7 +123,7 @@ export class UsersService {
     // load the api
     var url = USER_API + '/' + user.id;
     // call the api
-    this.http.put<any>(url, user, { headers: httpOptions }).subscribe(
+    this.http.put<any>(url, user, { headers: this.httpOptions }).subscribe(
       (value) => {
         return value;
       },
@@ -132,18 +138,20 @@ export class UsersService {
 
   // Add user
   async addUser(user: any): Promise<any> {
-    this.http.post<any>(REGISTER_API, user, { headers: httpOptions }).subscribe(
-      (value) => {
-        console.log('the value of the register is ', value);
-        return value;
-      },
-      (error) => {
-        // console log the error
-        console.log(error);
+    this.http
+      .post<any>(REGISTER_API, user, { headers: this.httpOptions })
+      .subscribe(
+        (value) => {
+          console.log('the value of the register is ', value);
+          return value;
+        },
+        (error) => {
+          // console log the error
+          console.log(error);
 
-        return null;
-      }
-    );
+          return null;
+        }
+      );
     return null;
   }
 
@@ -152,7 +160,7 @@ export class UsersService {
     try {
       // get the data from the url
       var http = this.http
-        .get<any>(ROLES_API, { headers: httpOptions })
+        .get<any>(ROLES_API, { headers: this.httpOptions })
         .pipe(map((data) => data));
       http.subscribe((val) => {
         console.log(val);

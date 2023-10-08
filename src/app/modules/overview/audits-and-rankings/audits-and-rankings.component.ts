@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
-import { formatYYYY, formatYYYYDDMM } from 'src/app/constants/globalMethods';
+import {
+  formatYYYY,
+  formatYYYYDDMM,
+  getToken,
+} from 'src/app/constants/globalMethods';
 import { AuthService } from '../../auth/services/auth.service';
+import { TOKENSUBJECT } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-audits-and-rankings',
@@ -47,21 +52,34 @@ export class AuditsAndRankingsComponent implements OnInit {
           this.createAuditChart();
         }
       } catch (e) {
+        // TODO: We have two problems now
+        // * We should have a way to have the SIS token on hand [DONE]
+        // * We should tend to navigate to students when the token is expired [NO NEED]
+        // * We should update the PLATFORM token when its expired   ///////
         console.log(e);
-        window.location.reload();
+
+        TOKENSUBJECT.subscribe((token) => {
+          // Use the token value here
+          console.log(token);
+        });
+
+        console.log(TOKENSUBJECT.getValue(), 'well');
+        console.log(getToken());
+
+        // window.location.reload();
         // ! creates a problem in .env file
-        // this.AS.updateToken()
-        //   .then((res) => {
-        //     console.log(res);
-        //     window.location.reload();
-        //   })
-        //   .catch((err) => {
-        //     console.log(err);
-        //     window.location.reload();
-        //   })
-        //   .finally(() => {
-        //     console.log('this flow finished');
-        //   });
+        this.AS.updateToken()
+          .then((res) => {
+            console.log(res);
+            window.location.reload();
+          })
+          .catch((err) => {
+            console.log(err);
+            window.location.reload();
+          })
+          .finally(() => {
+            console.log('this flow finished');
+          });
       } finally {
       }
     });

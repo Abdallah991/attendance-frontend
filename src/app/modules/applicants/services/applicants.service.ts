@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -9,14 +9,17 @@ import {
   CHECK_IN_API,
   SP_API,
 } from 'src/app/constants/api';
-import { httpOptions } from 'src/app/constants/constants';
+import { getToken } from 'src/app/constants/globalMethods';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApplicantsService {
   constructor(private http: HttpClient) {}
-
+  httpOptions = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken(),
+  });
   // get applicants api
   getApplicants(data: any): Observable<any> {
     try {
@@ -24,7 +27,7 @@ export class ApplicantsService {
 
       console.log(data);
       var http = this.http
-        .post<any>(APPLICANTS_API, data, { headers: httpOptions })
+        .post<any>(APPLICANTS_API, data, { headers: this.httpOptions })
         .pipe(map((data) => data));
 
       return http;
@@ -44,7 +47,7 @@ export class ApplicantsService {
       };
       console.log(data);
       var http = this.http
-        .post<any>(APPLICANTS_SYNC_API, data, { headers: httpOptions })
+        .post<any>(APPLICANTS_SYNC_API, data, { headers: this.httpOptions })
         .pipe(map((data) => data));
       console.log(http);
       return http;
@@ -63,7 +66,7 @@ export class ApplicantsService {
       };
 
       var http = this.http
-        .post<any>(CHECK_IN_API, data, { headers: httpOptions })
+        .post<any>(CHECK_IN_API, data, { headers: this.httpOptions })
         .pipe(map((data) => data));
 
       return http;
@@ -82,7 +85,7 @@ export class ApplicantsService {
         status: status,
       };
       var http = this.http
-        .post<any>(APPLICANTS_UPDATE_API, data, { headers: httpOptions })
+        .post<any>(APPLICANTS_UPDATE_API, data, { headers: this.httpOptions })
         .pipe(map((data) => data));
       return http;
     } catch (err) {
@@ -96,7 +99,7 @@ export class ApplicantsService {
     try {
       // get the data from the url
       var http = this.http
-        .get<any>(SP_API, { headers: httpOptions })
+        .get<any>(SP_API, { headers: this.httpOptions })
         .pipe(map((data) => data));
       return http;
     } catch (err) {

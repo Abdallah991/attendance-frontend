@@ -6,8 +6,8 @@ import {
   PASSWORD_API,
   UPDATE_TOKEN_API,
 } from 'src/app/constants/api';
-import { httpOptions } from 'src/app/constants/constants';
-import { getUser } from 'src/app/constants/globalMethods';
+import { TOKENSUBJECT } from 'src/app/constants/constants';
+import { getToken, getUser } from 'src/app/constants/globalMethods';
 
 @Injectable({
   providedIn: 'root',
@@ -15,19 +15,23 @@ import { getUser } from 'src/app/constants/globalMethods';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
+  httpOptions = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken(),
+  });
   // retrieves email and password then sends a http request if successful
   // returns a token
   public async login(email, password): Promise<any> {
-    var token;
     var data = {
       email: email,
       password: password,
     };
 
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.http.post(LOGIN_API, data, { headers: httpOptions }).subscribe(
+      this.http.post(LOGIN_API, data).subscribe(
         (response) => {
-          console.log(response); //! save this value locally then use it, the laravel generated token
+          TOKENSUBJECT.next(response['data']['token']);
+          // console.log(response); //! save this value locally then use it, the laravel generated token
           resolve(response);
         },
         (error) => {
@@ -49,12 +53,14 @@ export class AuthService {
     };
 
     let promise = new Promise<any>(async (resolve, reject) => {
-      this.http.post(PASSWORD_API, data, { headers: httpOptions }).subscribe(
-        (response) => {
-          resolve(response);
-        },
-        (error) => reject(error)
-      );
+      this.http
+        .post(PASSWORD_API, data, { headers: this.httpOptions })
+        .subscribe(
+          (response) => {
+            resolve(response);
+          },
+          (error) => reject(error)
+        );
     });
 
     return promise;
@@ -64,7 +70,7 @@ export class AuthService {
   public async logout(): Promise<any> {
     try {
       let promise = new Promise<any>(async (resolve, reject) => {
-        this.http.post(LOGOUT_API, { headers: httpOptions }).subscribe(
+        this.http.post(LOGOUT_API, { headers: this.httpOptions }).subscribe(
           (response) => {
             resolve(response);
           },
@@ -86,9 +92,8 @@ export class AuthService {
 
   // update token if expired api call to the backend
   public async updateToken(): Promise<any> {
-    console.log(httpOptions);
     return new Promise<any>(async (resolve, reject) => {
-      this.http.get(UPDATE_TOKEN_API, { headers: httpOptions }).subscribe(
+      this.http.get(UPDATE_TOKEN_API, { headers: this.httpOptions }).subscribe(
         (response) => {
           resolve(response);
         },
@@ -96,4 +101,8 @@ export class AuthService {
       );
     });
   }
+
+  // public getToken(): string {
+  //   return TOKEN.value;
+  // }
 }

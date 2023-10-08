@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import {
   SEARCH_API,
   STUDENT_API,
 } from 'src/app/constants/api';
-import { httpOptions } from 'src/app/constants/constants';
+import { getToken } from 'src/app/constants/globalMethods';
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +16,17 @@ import { httpOptions } from 'src/app/constants/constants';
 export class StudentsService {
   constructor(private http: HttpClient) {}
 
+  httpOptions = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken(),
+  });
   // get students api
   getStudents(): Observable<any> {
+    console.log(this.httpOptions);
     try {
       // get the data from the url
       var http = this.http
-        .get<any>(STUDENT_API, { headers: httpOptions })
+        .get<any>(STUDENT_API, { headers: this.httpOptions })
         .pipe(map((data) => data));
       // http.subscribe((data) => {});
       return http;
@@ -36,7 +41,7 @@ export class StudentsService {
   public deleteStudent(id: number): Promise<any> {
     let promise = new Promise<any>(async (resolve, reject) => {
       this.http
-        .delete<any>(STUDENT_API + '/' + id, { headers: httpOptions })
+        .delete<any>(STUDENT_API + '/' + id, { headers: this.httpOptions })
         .subscribe(
           (value) => {
             resolve(value);
@@ -54,7 +59,7 @@ export class StudentsService {
   public async addStudent(student: any): Promise<any> {
     let promise = new Promise<any>(async (resolve, reject) => {
       this.http
-        .post<any>(STUDENT_API, student, { headers: httpOptions })
+        .post<any>(STUDENT_API, student, { headers: this.httpOptions })
         .subscribe(
           (value) => {
             resolve(value);
@@ -74,7 +79,7 @@ export class StudentsService {
     try {
       // get the data from the url
       var response = this.http
-        .get<any>(STUDENT_API + '/' + id, { headers: httpOptions })
+        .get<any>(STUDENT_API + '/' + id, { headers: this.httpOptions })
         .pipe(map((data) => data));
       return response;
     } catch (err) {
@@ -87,7 +92,7 @@ export class StudentsService {
   async searchStudent(searchValue): Promise<any> {
     let promise = new Promise<any>(async (resolve, reject) => {
       this.http
-        .post<any>(SEARCH_API, searchValue, { headers: httpOptions })
+        .post<any>(SEARCH_API, searchValue, { headers: this.httpOptions })
         .subscribe(
           (value) => {
             resolve(value);
@@ -108,7 +113,7 @@ export class StudentsService {
     try {
       // get the data from the url
       var response = this.http
-        .get<any>(ATTENDNACE_API + '/' + id, { headers: httpOptions })
+        .get<any>(ATTENDNACE_API + '/' + id, { headers: this.httpOptions })
         .pipe(map((data) => data));
       return response;
     } catch (err) {
@@ -122,7 +127,7 @@ export class StudentsService {
     try {
       // get the data from the url
       var http = this.http
-        .get<any>(BIRTHDAYS_API, { headers: httpOptions })
+        .get<any>(BIRTHDAYS_API, { headers: this.httpOptions })
         .pipe(map((data) => data));
       http.subscribe((data) => {});
       return http;

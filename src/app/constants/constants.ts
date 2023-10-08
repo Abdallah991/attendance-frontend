@@ -1,14 +1,16 @@
 import { HttpHeaders } from '@angular/common/http';
 import { SelectData } from '../interfaces/interfaces';
 import { getToken } from './globalMethods';
+import { BehaviorSubject } from 'rxjs';
 
-export const httpOptions = new HttpHeaders({
-  'Content-Type': 'application/json',
-  Authorization: 'Bearer ' + getToken(),
-  // 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
-  // 'Access-Control-Allow-Methods': 'POST',
-  // 'Access-Control-Allow-Origin': '*',
-});
+export const TOKENSUBJECT = new BehaviorSubject<string>(null);
+
+// ! causing loading token problems after login
+// * problem solved by creating object locally in each service
+// export const httpOptions = new HttpHeaders({
+//   'Content-Type': 'application/json',
+//   Authorization: 'Bearer ' + getToken(),
+// });
 
 export const GENDERS: SelectData[] = [
   { id: 'Male', text: 'Male' },

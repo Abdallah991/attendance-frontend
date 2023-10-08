@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { VACATION_API } from 'src/app/constants/api';
-import { httpOptions } from 'src/app/constants/constants';
+import { getToken } from 'src/app/constants/globalMethods';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +11,16 @@ import { httpOptions } from 'src/app/constants/constants';
 export class VacationsService {
   constructor(private http: HttpClient) {}
 
+  httpOptions = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getToken(),
+  });
   // get Vacations api
   getVacations(): Observable<any> {
     try {
       // get the data from the url
       var http = this.http
-        .get<any>(VACATION_API, { headers: httpOptions })
+        .get<any>(VACATION_API, { headers: this.httpOptions })
         .pipe(map((data) => data));
       http.subscribe((data) => {});
       return http;
@@ -29,7 +33,7 @@ export class VacationsService {
   public deleteVacation(id: number): Promise<any> {
     let promise = new Promise<any>(async (resolve, reject) => {
       this.http
-        .delete<any>(VACATION_API + '/' + id, { headers: httpOptions })
+        .delete<any>(VACATION_API + '/' + id, { headers: this.httpOptions })
         .subscribe(
           (value) => {
             resolve(value);
@@ -46,7 +50,7 @@ export class VacationsService {
   public async addVacation(vacation: any): Promise<any> {
     let promise = new Promise<any>(async (resolve, reject) => {
       this.http
-        .post<any>(VACATION_API, vacation, { headers: httpOptions })
+        .post<any>(VACATION_API, vacation, { headers: this.httpOptions })
         .subscribe(
           (value) => {
             resolve(value);
@@ -66,7 +70,7 @@ export class VacationsService {
     try {
       // get the data from the url
       var response = this.http
-        .get<any>(VACATION_API + '/' + id, { headers: httpOptions })
+        .get<any>(VACATION_API + '/' + id, { headers: this.httpOptions })
         .pipe(map((data) => data));
       return response;
     } catch (err) {
@@ -79,7 +83,7 @@ export class VacationsService {
     let promise = new Promise<any>(async (resolve, reject) => {
       this.http
         .put<any>(VACATION_API + '/' + vacation['id'], vacation, {
-          headers: httpOptions,
+          headers: this.httpOptions,
         })
         .subscribe(
           (value) => {
