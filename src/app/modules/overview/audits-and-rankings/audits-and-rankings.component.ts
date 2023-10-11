@@ -38,6 +38,7 @@ export class AuditsAndRankingsComponent implements OnInit {
       this.studentsProgress = response?.studentsProgress;
       Chart.register(...registerables);
 
+      console.log(response);
       // console.log(this.students);
 
       // sort students on transactions attribute
@@ -52,35 +53,8 @@ export class AuditsAndRankingsComponent implements OnInit {
           this.createAuditChart();
         }
       } catch (e) {
-        // TODO: We have two problems now
-        // * We should have a way to have the SIS token on hand [DONE]
-        // * We should tend to navigate to students when the token is expired [NO NEED]
-        // * We should update the PLATFORM token when its expired   ///////
         console.log(e);
-
-        TOKENSUBJECT.subscribe((token) => {
-          // Use the token value here
-          console.log(token);
-        });
-
-        console.log(TOKENSUBJECT.getValue(), 'well');
-        console.log(getToken());
-
-        // window.location.reload();
-        // ! creates a problem in .env file
-        this.AS.updateToken()
-          .then((res) => {
-            console.log(res);
-            window.location.reload();
-          })
-          .catch((err) => {
-            console.log(err);
-            window.location.reload();
-          })
-          .finally(() => {
-            console.log('this flow finished');
-          });
-      } finally {
+        this.router.navigateByUrl('/students');
       }
     });
   }
