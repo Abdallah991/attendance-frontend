@@ -14,12 +14,19 @@ export const navigationMenu = [
     linkName: 'Students',
   },
   {
-    link: '/piscine',
-    iconPathInactive: '../../assets/icons/pool1.svg',
-    iconPathActive: '../../assets/icons/pool1.svg',
+    link: '/applicants/status',
+    iconPathInactive: '../../assets/icons/money.svg',
+    iconPathActive: '../../assets/icons/money.svg',
     active: false,
-    linkName: 'Selection Pool',
+    linkName: 'Applicants',
   },
+  // {
+  //   link: '/piscine',
+  //   iconPathInactive: '../../assets/icons/pool1.svg',
+  //   iconPathActive: '../../assets/icons/pool1.svg',
+  //   active: false,
+  //   linkName: 'Selection Pool',
+  // },
   {
     link: '/users',
     iconPathInactive: '../../assets/icons/users.svg',

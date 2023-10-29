@@ -49,7 +49,7 @@ export class ApplicantsStatusComponent implements OnInit {
     // if there is a start date in the url, its it, if not its may 14th
     var startDate = snapshot.queryParamMap.get('startDate')
       ? snapshot.queryParamMap.get('startDate')
-      : '2023-05-14';
+      : '2023-09-03';
     // if there is a end date in the url, its it, if not its tomorrow
     var endDate = snapshot.queryParamMap.get('endDate')
       ? snapshot.queryParamMap.get('endDate')
