@@ -99,7 +99,7 @@ export class ApplicantsStatusComponent implements OnInit {
   failed = 0;
   totalApplicants = 0;
   registeredToCheckIn1 = 0;
-  registeredToCheckIn2 = 0;
+  // registeredToCheckIn2 = 0;
 
   registeredToSp = 0;
 
@@ -127,10 +127,11 @@ export class ApplicantsStatusComponent implements OnInit {
   tomorrowDate = formatYYYYDDMM(new Date());
 
   ngOnInit(): void {
+    // * events counts
     // get the table data
     this.getTableData();
     this.getCheckInCount1();
-    this.getCheckInCount2();
+    // this.getCheckInCount2();
     this.getSpCount();
   }
 
@@ -179,14 +180,14 @@ export class ApplicantsStatusComponent implements OnInit {
     return applicants.map((res) => {
       sequence++;
       // convert progresses to json // get the last progress //get the last word of that progress
-      console.log(res['progresses']);
-      console.log(res['platformId']);
+      // console.log(res['progresses']);
+      // console.log(res['platformId']);
 
       var progresses = JSON.parse(res['progresses'])
         .pop()
         ?.path.split('/')
         .pop();
-      console.log(progresses);
+      // console.log(progresses);
       var registration = JSON.parse(res['registrations'])
         .pop()
         ?.registration?.path.split('/')
@@ -290,7 +291,7 @@ export class ApplicantsStatusComponent implements OnInit {
   resetFilters() {
     this.form.controls.applicantsGradeEnd.setValue('all');
     this.form.controls.applicantsGradeStart.setValue('all');
-    this.form.controls.startDate.setValue('2023-05-14');
+    this.form.controls.startDate.setValue('2023-09-03');
     this.form.controls.endDate.setValue(this.tomorrowDate);
     this.form.controls.applicantsSorter.setValue('descending');
     this.form.controls.applicantsStatus.setValue('all');
@@ -307,24 +308,25 @@ export class ApplicantsStatusComponent implements OnInit {
     });
   }
 
+  // * check-ins counts
   // get the number of how many users signed up to the checkin on the platform
   getCheckInCount1() {
-    this.AS.checkInCount(41).subscribe((val) => {
+    this.AS.checkInCount(76).subscribe((val) => {
       this.registeredToCheckIn1 = val;
     });
   }
 
   // get the number of how many users signed up to the checkin on the platform
-  getCheckInCount2() {
-    this.AS.checkInCount(46).subscribe((val) => {
-      this.registeredToCheckIn2 = val;
-    });
-  }
+  // getCheckInCount2() {
+  //   this.AS.checkInCount(46).subscribe((val) => {
+  //     this.registeredToCheckIn2 = val;
+  //   });
+  // }
 
+  // * SP  count
   // get the number of how many users signed up to the checkin on the platform
   getSpCount() {
     this.AS.spCount().subscribe((val) => {
-      console.log(val);
       this.registeredToSp = val;
     });
   }

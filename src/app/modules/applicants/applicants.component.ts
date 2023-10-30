@@ -26,7 +26,7 @@ export class ApplicantsComponent implements OnInit {
     var tomorrowDate = formatYYYYDDMM(todayDate);
     // TODO: set the date in the form
     this.form = this.fb.group({
-      startDate: ['2023-05-14', Validators.required],
+      startDate: ['2023-09-03', Validators.required],
       endDate: [tomorrowDate, Validators.required],
     });
   }
@@ -45,7 +45,6 @@ export class ApplicantsComponent implements OnInit {
   form: FormGroup;
   // chart js
   chart: any = [];
-
 
   // TODO: in this component we should have
   // 2- ability to update the live data by running the resolvers such as calling them

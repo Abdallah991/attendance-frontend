@@ -22,7 +22,6 @@ export class StudentsService {
   });
   // get students api
   getStudents(): Observable<any> {
-    console.log(this.httpOptions);
     try {
       // get the data from the url
       var http = this.http

@@ -34,11 +34,11 @@ export class PiscineComponent implements OnInit {
   ngOnInit(): void {
     this.AR.data.subscribe((value) => {
       this.applicants = value.applicants;
-      console.log(this.applicants);
+      // console.log(this.applicants);
       // formate the data for the table
       this.arrangeData(this.applicants);
 
-      console.log(this.arrangedApplicants);
+      // console.log(this.arrangedApplicants);
       // sort the table of the last activity
       this.sortOnLastActivity();
       this.activeInTheLast24();

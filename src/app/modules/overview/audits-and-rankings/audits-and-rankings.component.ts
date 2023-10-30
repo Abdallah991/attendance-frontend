@@ -38,7 +38,6 @@ export class AuditsAndRankingsComponent implements OnInit {
       this.studentsProgress = response?.studentsProgress;
       Chart.register(...registerables);
 
-      console.log(response);
       // console.log(this.students);
 
       // sort students on transactions attribute
@@ -54,7 +53,7 @@ export class AuditsAndRankingsComponent implements OnInit {
         }
       } catch (e) {
         console.log(e);
-        this.router.navigateByUrl('/students');
+        // this.router.navigateByUrl('/students');
       }
     });
   }
@@ -296,9 +295,9 @@ export class AuditsAndRankingsComponent implements OnInit {
     for (let value in studentsCharts) {
       values.push(studentsCharts[value]);
     }
-    console.log(studentsCharts);
-    console.log(labels);
-    console.log(values);
+    // console.log(studentsCharts);
+    // console.log(labels);
+    // console.log(values);
 
     // use frequency counter to get to the bottom of these values
     // export the keys to the chart
