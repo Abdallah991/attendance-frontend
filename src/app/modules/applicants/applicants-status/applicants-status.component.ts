@@ -378,6 +378,7 @@ export class ApplicantsStatusComponent implements OnInit {
         email: applicant.email,
         phoneNumber: applicant.phone,
         progress: progress,
+        score: applicant.score,
       };
       // push to custome object
       applicants.push(data);
