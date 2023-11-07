@@ -15,18 +15,18 @@ export const navigationMenu = [
   },
   {
     link: '/applicants/status',
-    iconPathInactive: '../../assets/icons/money.svg',
-    iconPathActive: '../../assets/icons/money.svg',
+    iconPathInactive: '../../assets/icons/applicants.svg',
+    iconPathActive: '../../assets/icons/applicants.svg',
     active: false,
     linkName: 'Applicants',
   },
-  // {
-  //   link: '/piscine',
-  //   iconPathInactive: '../../assets/icons/pool1.svg',
-  //   iconPathActive: '../../assets/icons/pool1.svg',
-  //   active: false,
-  //   linkName: 'Selection Pool',
-  // },
+  {
+    link: '/piscine',
+    iconPathInactive: '../../assets/icons/pool1.svg',
+    iconPathActive: '../../assets/icons/pool1.svg',
+    active: false,
+    linkName: 'Selection Pool',
+  },
   {
     link: '/users',
     iconPathInactive: '../../assets/icons/users.svg',

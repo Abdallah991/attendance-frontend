@@ -326,7 +326,7 @@ export class ApplicantsStatusComponent implements OnInit {
   // * SP  count
   // get the number of how many users signed up to the checkin on the platform
   getSpCount() {
-    this.AS.spCount().subscribe((val) => {
+    this.AS.spCount(78).subscribe((val) => {
       this.registeredToSp = val;
     });
   }

@@ -95,11 +95,14 @@ export class ApplicantsService {
   }
 
   // get checkin count api
-  spCount(): Observable<any> {
+  spCount(eventId): Observable<any> {
     try {
+      var data = {
+        eventId: eventId,
+      };
       // get the data from the url
       var http = this.http
-        .get<any>(SP_API, { headers: this.httpOptions })
+        .post<any>(SP_API, data, { headers: this.httpOptions })
         .pipe(map((data) => data));
       return http;
     } catch (err) {
