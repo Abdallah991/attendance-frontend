@@ -216,5 +216,20 @@ export class StudentsComponent implements OnInit {
     this.router.navigateByUrl('/students/birthdays');
   }
 
+  // sync applicants and update the table
+  syncStudentsData() {
+    // this.loader = true;
+    this.SS.syncStudents().subscribe((value) => {
+      //   // console.log(value);
+      //   this.loader = false;
+      //   this.resetFilters();
+      this.router.navigate([], {
+        queryParams: {
+          syncStudents: Math.random(),
+        },
+      });
+    });
+  }
+
   dismiss() {}
 }

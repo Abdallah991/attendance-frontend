@@ -7,6 +7,7 @@ import {
   BIRTHDAYS_API,
   SEARCH_API,
   STUDENT_API,
+  SYNC_STUDENTS_API,
 } from 'src/app/constants/api';
 import { getToken } from 'src/app/constants/globalMethods';
 
@@ -133,6 +134,19 @@ export class StudentsService {
     } catch (err) {
       console.log(err);
       // disable the loader and return if there is an error
+      return err;
+    }
+  }
+
+  // sync student api
+  syncStudents(): Observable<any> {
+    try {
+      var http = this.http
+        .get<any>(SYNC_STUDENTS_API, { headers: this.httpOptions })
+        .pipe(map((data) => data));
+      return http;
+    } catch (err) {
+      console.log(err);
       return err;
     }
   }

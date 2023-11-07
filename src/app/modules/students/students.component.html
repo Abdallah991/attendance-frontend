@@ -13,6 +13,16 @@
       color="btn-primary"
       textColor="text-base-100"
       [small]="true"
+      (onClick)="syncStudentsData()"
+      text="Sync Applicants Data"
+      class="min-w-[100px]"
+      class="cursor-not-allowed"
+      [loader]="loader"
+    ></app-button>
+    <app-button
+      color="btn-primary"
+      textColor="text-base-100"
+      [small]="true"
       text="Edit"
       (onClick)="addStudents()"
       text="Add Student"
