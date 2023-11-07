@@ -49,6 +49,8 @@ export const BIRTHDAYS_API = ROOTLINK + '/birthdays';
 export const SELECTION_POOL_API = ROOTLINK + '/selection-pool';
 // 22- Update Token
 export const UPDATE_TOKEN_API = ROOTLINK + '/getToken';
+// 23- Sync students
+export const SYNC_STUDENTS_API = ROOTLINK + '/students-sync';
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer
 export const BIO_ATTENDANCE_API = 'http://10.1.50.4:80';
