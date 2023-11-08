@@ -168,9 +168,9 @@ export class TableComponent implements OnInit {
     var rowClass = i % 2 == 1 ? ' bg-[#F5F5F5] ' : ' bg-white ';
     // define levelClass
     var levelClass = '';
-    if (item > 3 && this.cellCounter == 7) {
+    if (item > 3 && this.cellCounter == 8) {
       levelClass = ' text-green ';
-    } else if (item <= 3 && this.cellCounter == 7) {
+    } else if (item <= 3 && this.cellCounter == 8) {
       levelClass = ' text-orange ';
     }
 

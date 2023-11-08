@@ -24,7 +24,7 @@ import { CsvService } from '../../auth/services/csv.service';
 })
 export class ApplicantsStatusComponent implements OnInit {
   // confirmation dialog
-  dialogTitle = 'Are you sure you want to update the Applicant as Called?';
+  dialogTitle = 'Are you sure you want to update the applicant status?';
   message = 'This action is permanent';
   button = 'Dismiss';
   button2 = 'Confirm';
@@ -99,7 +99,7 @@ export class ApplicantsStatusComponent implements OnInit {
   failed = 0;
   totalApplicants = 0;
   registeredToCheckIn1 = 0;
-  // registeredToCheckIn2 = 0;
+  registeredToCheckIn2 = 0;
 
   registeredToSp = 0;
 
@@ -131,7 +131,7 @@ export class ApplicantsStatusComponent implements OnInit {
     // get the table data
     this.getTableData();
     this.getCheckInCount1();
-    // this.getCheckInCount2();
+    this.getCheckInCount2();
     this.getSpCount();
   }
 
@@ -317,11 +317,11 @@ export class ApplicantsStatusComponent implements OnInit {
   }
 
   // get the number of how many users signed up to the checkin on the platform
-  // getCheckInCount2() {
-  //   this.AS.checkInCount(46).subscribe((val) => {
-  //     this.registeredToCheckIn2 = val;
-  //   });
-  // }
+  getCheckInCount2() {
+    this.AS.checkInCount(79).subscribe((val) => {
+      this.registeredToCheckIn2 = val;
+    });
+  }
 
   // * SP  count
   // get the number of how many users signed up to the checkin on the platform
