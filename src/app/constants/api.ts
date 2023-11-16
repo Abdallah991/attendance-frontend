@@ -51,6 +51,8 @@ export const SELECTION_POOL_API = ROOTLINK + '/selection-pool';
 export const UPDATE_TOKEN_API = ROOTLINK + '/getToken';
 // 23- Sync students
 export const SYNC_STUDENTS_API = ROOTLINK + '/students-sync';
+// 24- get specific student SP info including image
+export const SP_APPLICANT_API = ROOTLINK + '/sp-applicant';
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer
 export const BIO_ATTENDANCE_API = 'http://10.1.50.4:80';
