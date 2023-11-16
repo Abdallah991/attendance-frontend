@@ -1,1 +1,26 @@
-<p>piscine-detail works!</p>
+<div class="p-4">
+  <h2>{{ applicant.firstName }} {{ applicant.lastName }}</h2>
+</div>
+<div class="flex flex-row gap-8 p-4">
+  <div class="basis-1/4 flex justify-start">
+    <img [src]="profilePicture" alt="N/A" class="bg-cover h-72 rounded-md" />
+  </div>
+  <div class="basis-3/4 flex flex-row">
+    <div class="basis-1/2">
+      <h2>Gender</h2>
+      <h3>{{ gender }}</h3>
+      <h2>Phone Number</h2>
+      <h3>{{ phone }}</h3>
+      <h2>Email</h2>
+      <h3>{{ email }}</h3>
+    </div>
+    <div class="basis-1/2">
+      <h2>Nationality</h2>
+      <h3>{{ nationality }}</h3>
+      <h2>Qualification</h2>
+      <h3>{{ qualification }}</h3>
+      <h2>Specilization</h2>
+      <h3>{{ specialization }}</h3>
+    </div>
+  </div>
+</div>

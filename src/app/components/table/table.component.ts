@@ -40,6 +40,8 @@ export class TableComponent implements OnInit {
   @Input() currentPage: number = 1;
   // pagination laoder
   @Input() loader: boolean = false;
+  // Image
+  @Input() image: boolean = false;
 
   // ?  pagination
   @Output() forward = new EventEmitter<number>();

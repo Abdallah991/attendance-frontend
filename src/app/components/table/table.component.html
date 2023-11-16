@@ -15,6 +15,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let items of data; index as i">
+          <!-- [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'" -->
+
+          <td
+            class="text-tertiary text-center min-h-[60px] max-w-[9rem] overflow-hidden text-ellipsis whitespace-nowrap"
+            *ngIf="image"
+            [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
+          >
+            <div>
+              <img class="bg-cover" [src]="items.profileImage" alt="N/A" />
+            </div>
+          </td>
           <td
             class="text-tertiary text-center min-h-[60px] max-w-[9rem] overflow-hidden text-ellipsis whitespace-nowrap"
             [ngClass]="customCellStylingClass(item, i)"
@@ -22,9 +33,34 @@
             [innerHTML]="item || 'NULL'"
           ></td>
           <td
-            class="flex justify-evenly items-center min-h-[60px]"
+            class="flex justify-evenly items-center"
             [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
-            *ngIf="actionButtons"
+            *ngIf="actionButtons && !image"
+          >
+            <app-button
+              color="btn-primary"
+              textColor="text-base-100"
+              *ngIf="items.actionButtons?.edit?.isActive"
+              [xSmall]="true"
+              text="Edit"
+              (onClick)="clickEdit(items.id)"
+              [text]="items.actionButtons?.edit.text"
+              class="min-w-[80px]"
+            ></app-button>
+            <app-button
+              color="btn-primary"
+              textColor="text-base-100"
+              *ngIf="items.actionButtons?.delete?.isActive"
+              [xSmall]="true"
+              text="Delete"
+              (onClick)="clickDelete(items.id)"
+              [text]="items.actionButtons?.delete.text"
+              class="min-w-[80px]"
+            ></app-button>
+          </td>
+          <td
+            [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
+            *ngIf="actionButtons && image"
           >
             <app-button
               color="btn-primary"

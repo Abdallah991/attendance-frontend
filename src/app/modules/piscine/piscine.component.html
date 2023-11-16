@@ -15,9 +15,11 @@
     <app-table
       [columns]="columns"
       [data]="data"
+      [image]="true"
       [actionButtons]="true"
       [showPagination]="false"
       [showPagination]="false"
+      (editClicked)="navigateToCandidate($event)"
     ></app-table>
   </div>
 </div>

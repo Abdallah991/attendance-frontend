@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SELECTION_POOL_API } from 'src/app/constants/api';
+import { SELECTION_POOL_API, SP_APPLICANT_API } from 'src/app/constants/api';
 import { getToken } from 'src/app/constants/globalMethods';
 
 @Injectable({
@@ -26,6 +26,24 @@ export class PiscineService {
     } catch (err) {
       console.log(err);
       // disable the loader and return if there is an error
+      return err;
+    }
+  }
+
+  // get specific applicant by
+  getSpApplicant(platformId): Observable<any> {
+    try {
+      // add the platform id
+      var http = this.http
+        .get<any>(SP_APPLICANT_API + '?platformId=' + platformId, {
+          headers: this.httpOptions,
+        })
+        .pipe(map((data) => data));
+      return http;
+    } catch (err) {
+      console.log(err);
+      // disable the loader and return if there is an error
+      console.log(err);
       return err;
     }
   }

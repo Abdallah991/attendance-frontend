@@ -2,6 +2,7 @@ export type TableData = {
   id: string | number;
   data: any[];
   actionButtons?: TableButtonOptions;
+  profileImage?: string;
   rowStyle?: string[];
 };
 

@@ -31,7 +31,7 @@ export const APPLICANTS_STATUS_HEADER = [
 ];
 
 export const SELECTION_POOL_HEADER = [
-  'Sequence',
+  'Profile',
   'Login',
   'Name',
   'Phone',

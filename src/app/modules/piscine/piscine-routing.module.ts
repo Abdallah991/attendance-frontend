@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PiscineComponent } from './piscine.component';
 import { PiscineResolver } from './services/piscine.resolver';
 import { PiscineDetailComponent } from './piscine-detail/piscine-detail.component';
+import { PiscineCandidateResolver } from './services/piscine-candidate.resolver';
 
 const routes: Routes = [
   {
@@ -17,13 +18,12 @@ const routes: Routes = [
     },
   },
   {
-    path: 'detail',
+    path: 'view-candidate/:candidateId',
     component: PiscineDetailComponent,
-    // to be able to add
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
-    // resolve: {
-    //   applicants: PiscineResolver,
-    // },
+    resolve: {
+      candidate: PiscineCandidateResolver,
+    },
   },
 ];
 

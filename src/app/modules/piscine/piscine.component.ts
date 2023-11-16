@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { formatYYYYDDMMHHMM } from 'src/app/constants/globalMethods';
 import { SELECTION_POOL_HEADER } from 'src/app/constants/headers';
 import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
@@ -11,7 +11,11 @@ import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
   styleUrls: ['./piscine.component.scss'],
 })
 export class PiscineComponent implements OnInit {
-  constructor(private AR: ActivatedRoute, private fb: FormBuilder) {
+  constructor(
+    private AR: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     // form group
     this.form = this.fb.group({
       startDate: ['', Validators.required],
@@ -34,6 +38,7 @@ export class PiscineComponent implements OnInit {
   ngOnInit(): void {
     this.AR.data.subscribe((value) => {
       this.applicants = value.applicants;
+      console.log(this.applicants);
       // console.log(this.applicants);
       // formate the data for the table
       this.arrangeData(this.applicants);
@@ -48,16 +53,15 @@ export class PiscineComponent implements OnInit {
 
   // make table data
   constructTableData(applicants: any[]): TableData[] {
-    var sequence = 0;
     return applicants.map((res) => {
-      sequence++;
-
+      console.log(res['profileImage']);
       return {
         // the id, to return back for edit or delete events
         id: res['login'],
         // the data displayed in each row
         data: [
-          sequence,
+          // sequence,
+          // res['profileImage'],
           res['login'],
           res['name'],
           res['phone'],
@@ -66,6 +70,7 @@ export class PiscineComponent implements OnInit {
           res['date'],
         ],
         // the action buttons
+        profileImage: res['profileImage'],
         actionButtons: this.constructTableButton(),
       };
     });
@@ -115,6 +120,7 @@ export class PiscineComponent implements OnInit {
         nationality: applicant.nationality,
         lastProgress: lastProgress,
         date: date,
+        profileImage: applicant.profileImage,
       });
     });
   }
@@ -154,4 +160,8 @@ export class PiscineComponent implements OnInit {
   // TODO: search by name or platform id
   // TODO: Details
   // TODO: Frequency done on question, Time spend on it
+
+  navigateToCandidate(candidate) {
+    this.router.navigateByUrl('/piscine/view-candidate/' + candidate);
+  }
 }
