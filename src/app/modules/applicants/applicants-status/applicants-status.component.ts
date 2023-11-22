@@ -149,6 +149,8 @@ export class ApplicantsStatusComponent implements OnInit {
       this.latestApplicants = [];
       // * get the applicants from the resolver call
       this.applicants = response.applicants;
+
+      // console.log(this.applicants);
       // get the keys of the object passed
       var objectKeys = Object.keys(this.applicants);
       // for each object
@@ -373,6 +375,7 @@ export class ApplicantsStatusComponent implements OnInit {
       }
       // *
       var data = {
+        login: applicant.platformId,
         firstName: applicant.firstName,
         lastName: applicant.lastName,
         email: applicant.email,

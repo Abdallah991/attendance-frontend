@@ -34,17 +34,25 @@ export class PiscineComponent implements OnInit {
   lastavtivityIn48 = 0;
   // form
   form: FormGroup;
+  // * html constants
+  htmlExpression = '';
+  break = '<br/>';
+  sytleName = '<h5>';
+  styleNameEnd = '</h5>';
+
+  // * Comments
+  Yanal = '';
+  Tech = '';
+  Operations = '';
+  Marketing = '';
+  Assistants = '';
 
   ngOnInit(): void {
     this.AR.data.subscribe((value) => {
       this.applicants = value.applicants;
-      console.log(this.applicants);
-      // console.log(this.applicants);
-      // formate the data for the table
+      //
       this.arrangeData(this.applicants);
-
-      // console.log(this.arrangedApplicants);
-      // sort the table of the last activity
+      // sort last activity
       this.sortOnLastActivity();
       this.activeInTheLast24();
       this.data = this.constructTableData(this.arrangedApplicants);
@@ -54,7 +62,6 @@ export class PiscineComponent implements OnInit {
   // make table data
   constructTableData(applicants: any[]): TableData[] {
     return applicants.map((res) => {
-      console.log(res['profileImage']);
       return {
         // the id, to return back for edit or delete events
         id: res['login'],
@@ -67,6 +74,20 @@ export class PiscineComponent implements OnInit {
           res['phone'],
           res['nationality'],
           res['lastProgress'],
+          // ! This should be crafted as comments here for each cell
+          this.sytleName +
+            'YN:' +
+            // this.break +
+            'Comments dhcjhckjb kwlscnl awsdkjcnb wkcjnwe ' +
+            this.styleNameEnd +
+            this.break +
+            this.sytleName +
+            'YN:' +
+            // this.break +
+            'Comments dhcjhckjb kwlscnl awsdkjcnb wkcjnwe ' +
+            this.styleNameEnd,
+          // Adding five comments
+          // Yanal,Tech, Operation, Marketing, Students
           res['date'],
         ],
         // the action buttons
@@ -86,8 +107,8 @@ export class PiscineComponent implements OnInit {
       },
       // delete button
       delete: {
-        isActive: false,
-        text: 'Not Attending',
+        isActive: true,
+        text: 'Comment',
       },
     };
   }

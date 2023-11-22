@@ -18,16 +18,21 @@
           <!-- [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'" -->
 
           <td
-            class="text-tertiary text-center min-h-[60px] max-w-[9rem] overflow-hidden text-ellipsis whitespace-nowrap"
+            class="text-tertiary text-center max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap"
             *ngIf="image"
             [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
           >
             <div>
-              <img class="bg-cover" [src]="items.profileImage" alt="N/A" />
+              <!-- ! Add image button to add image easily -->
+              <img
+                class="bg-cover h-[200px] w-[200px]"
+                [src]="items.profileImage"
+                alt="N/A"
+              />
             </div>
           </td>
           <td
-            class="text-tertiary text-center min-h-[60px] max-w-[9rem] overflow-hidden text-ellipsis whitespace-nowrap"
+            class="text-tertiary text-center min-h-[60px] max-w-[9rem] overflow-hidden text-ellipsis whitespace-break-spaces"
             [ngClass]="customCellStylingClass(item, i)"
             *ngFor="let item of items.data"
             [innerHTML]="item || 'NULL'"
@@ -58,7 +63,9 @@
               class="min-w-[80px]"
             ></app-button>
           </td>
+          <!-- Make the hight constant of 256px incase of profile image attached -->
           <td
+            class="flex h-[256px] justify-evenly items-center"
             [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
             *ngIf="actionButtons && image"
           >

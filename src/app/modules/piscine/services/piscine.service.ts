@@ -39,11 +39,14 @@ export class PiscineService {
           headers: this.httpOptions,
         })
         .pipe(map((data) => data));
+
+      http.subscribe((data) => {
+        console.log(data);
+      });
       return http;
     } catch (err) {
       console.log(err);
       // disable the loader and return if there is an error
-      console.log(err);
       return err;
     }
   }

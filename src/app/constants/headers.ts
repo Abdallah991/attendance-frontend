@@ -37,6 +37,8 @@ export const SELECTION_POOL_HEADER = [
   'Phone',
   'Nationality',
   'Progress At',
+  'Comments',
+  // Yanal,Tech, Operation, Marketing, Students
   'Last Activity',
 ];
 export const PROGRESS_HEADER = [
