@@ -32,7 +32,7 @@
             </div>
           </td>
           <td
-            class="text-tertiary text-center min-h-[60px] max-w-[9rem] overflow-hidden text-ellipsis whitespace-break-spaces"
+            class="text-tertiary text-center min-h-[60px] min-w-[10rem] max-w-[20rem] overflow-hidden text-ellipsis whitespace-break-spaces"
             [ngClass]="customCellStylingClass(item, i)"
             *ngFor="let item of items.data"
             [innerHTML]="item || 'NULL'"
@@ -65,7 +65,7 @@
           </td>
           <!-- Make the hight constant of 256px incase of profile image attached -->
           <td
-            class="flex h-[256px] justify-evenly items-center"
+            class="flex h-[256px] justify-evenly items-center gap-2"
             [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
             *ngIf="actionButtons && image"
           >

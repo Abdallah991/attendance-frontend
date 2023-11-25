@@ -36,9 +36,12 @@ export const SELECTION_POOL_HEADER = [
   'Name',
   'Phone',
   'Nationality',
+  'Managing Director',
+  'Tech',
+  'Operations',
+  'Marketing',
+  // ! put back when the chance allows it
   'Progress At',
-  'Comments',
-  // Yanal,Tech, Operation, Marketing, Students
   'Last Activity',
 ];
 export const PROGRESS_HEADER = [
@@ -50,5 +53,9 @@ export const PROGRESS_HEADER = [
   'Audits Received',
   'Last Activity',
   'Level',
-  //
 ];
+
+export const PISCINE4 = {
+  spId: 57,
+  spConstant: 'SP4',
+};

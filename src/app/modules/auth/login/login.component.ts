@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
       .then((val) => {
         token = val.data['token'];
         // setting the user value
+        console.log(val);
         sessionStorage.setItem('user', JSON.stringify(val.data.users));
         // setting the user id
         sessionStorage.setItem('userID', val.data.users.id);

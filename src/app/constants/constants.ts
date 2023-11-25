@@ -79,3 +79,13 @@ export const APPLICANTS_SORT: SelectData[] = [
   { id: 'ascending', text: 'ascending' },
   { id: 'descending', text: 'descending' },
 ];
+// team constants
+// ? migh be updated to json
+export const TECH_TEAM = [
+  'Ebrahim Hassan',
+  'Abdallah Alathamneh',
+  'Yaman Almasri',
+];
+export const OP_TEAM = ['Seham Yateem', 'Sarah Alhaffar', 'Melvis Silveira'];
+export const MARKETING_TEAM = ['Donya Ali'];
+export const BOSS = ['Yanal Jallad'];

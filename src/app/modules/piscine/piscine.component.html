@@ -1,14 +1,26 @@
 <div class="p-4">
   <h1>Piscine Details:</h1>
-  <div class="flex flex-row gap-12">
-    <div class="flex flex-col">
-      <h3>Active last 24 hours</h3>
-      <h1 class="text-green">{{ lastavtivityIn24 }}</h1>
+  <div class="flex flex-row justify-between">
+    <div class="flex flex-row gap-12">
+      <div class="flex flex-col">
+        <h3>Active last 24 hours</h3>
+        <h1 class="text-green">{{ lastavtivityIn24 }}</h1>
+      </div>
+      <div class="flex flex-col">
+        <h3>Active last 48 hours</h3>
+        <h1 class="text-green">{{ lastavtivityIn48 }}</h1>
+      </div>
     </div>
-    <div class="flex flex-col">
-      <h3>Active last 48 hours</h3>
-      <h1 class="text-green">{{ lastavtivityIn48 }}</h1>
-    </div>
+    <app-button
+      color="btn-primary"
+      textColor="text-base-100"
+      [small]="true"
+      (onClick)="syncApplicantsData()"
+      text="Sync SP Data"
+      class="min-w-[100px]"
+      class="cursor-not-allowed"
+      [loader]="loader"
+    ></app-button>
   </div>
 
   <div>

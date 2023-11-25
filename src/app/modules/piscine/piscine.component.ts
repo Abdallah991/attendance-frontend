@@ -4,10 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   formatYYYYDDMM,
   formatYYYYDDMMHHMM,
+  getUser,
 } from 'src/app/constants/globalMethods';
-import { SELECTION_POOL_HEADER } from 'src/app/constants/headers';
+import { PISCINE4, SELECTION_POOL_HEADER } from 'src/app/constants/headers';
 import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
 import { CommentService } from './services/comment.service';
+import { PiscineService } from './services/piscine.service';
+import {
+  BOSS,
+  MARKETING_TEAM,
+  OP_TEAM,
+  TECH_TEAM,
+} from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-piscine',
@@ -19,7 +27,8 @@ export class PiscineComponent implements OnInit {
     private AR: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
-    private CS: CommentService
+    private CS: CommentService,
+    private PS: PiscineService
   ) {
     // form group
     this.form = this.fb.group({
@@ -57,6 +66,8 @@ export class PiscineComponent implements OnInit {
   button = 'Dismiss';
   button2 = 'Confirm';
   updatedApplicantId = '';
+  // loader
+  loader = false;
 
   ngOnInit(): void {
     this.AR.data.subscribe((value) => {
@@ -73,6 +84,8 @@ export class PiscineComponent implements OnInit {
   // make table data
   constructTableData(applicants: any[]): TableData[] {
     return applicants.map((res) => {
+      var comments = this.formulateComment(res['comments']);
+
       return {
         // the id, to return back for edit or delete events
         id: res['login'],
@@ -84,21 +97,17 @@ export class PiscineComponent implements OnInit {
           res['name'],
           res['phone'],
           res['nationality'],
-          res['lastProgress'],
           // ! This should be crafted as comments here for each cell
-          this.sytleName +
-            'YN:' +
-            // this.break +
-            'Comments dhcjhckjb kwlscnl awsdkjcnb wkcjnwe ' +
-            this.styleNameEnd +
-            this.break +
-            this.sytleName +
-            'YN:' +
-            // this.break +
-            'Comments dhcjhckjb kwlscnl awsdkjcnb wkcjnwe ' +
-            this.styleNameEnd,
+          // ? managing director, Tech, Operations, Marketing
+          comments['boss'],
+          comments['TT'],
+          comments['OT'],
+          comments['MT'],
           // Adding five comments
           // Yanal,Tech, Operation, Marketing, Students
+          // ! put back if the chance allows you too
+          res['lastProgress'],
+
           res['date'],
         ],
         // the action buttons
@@ -124,35 +133,92 @@ export class PiscineComponent implements OnInit {
     };
   }
 
+  // formulate comments
+  formulateComment(comments): any {
+    var TT = '';
+    var boss = this.sytleName;
+    var OT = '';
+    var MT = '';
+    comments.forEach((comment) => {
+      TECH_TEAM.forEach((member) => {
+        if (member == comment.commentedBy) {
+          var author =
+            member == TECH_TEAM[0]
+              ? 'EH: '
+              : member == TECH_TEAM[1]
+              ? 'AA: '
+              : 'YA: ';
+          TT =
+            TT + this.sytleName + author + comment.comment + this.styleNameEnd;
+        }
+      });
+      OP_TEAM.forEach((member) => {
+        if (member == comment.commentedBy) {
+          var author =
+            member == OP_TEAM[0]
+              ? 'SY: '
+              : member == OP_TEAM[1]
+              ? 'SH: '
+              : 'MS: ';
+          OT =
+            OT + this.sytleName + author + comment.comment + this.styleNameEnd;
+        }
+      });
+      MARKETING_TEAM.forEach((member) => {
+        if (member == comment.commentedBy) {
+          var author = member == MARKETING_TEAM[0] ? 'DA: ' : 'DA: ';
+          MT =
+            MT + this.sytleName + author + comment.comment + this.styleNameEnd;
+        }
+      });
+      if (BOSS[0] == comment.commentedBy) {
+        boss = boss + 'YJ: ' + comment.comment + this.styleNameEnd;
+      }
+    });
+
+    TT = TT ? TT : '-';
+    OT = OT ? OT : '-';
+    MT = MT ? MT : '-';
+
+    return {
+      TT: TT,
+      boss: boss,
+      OT: OT,
+      MT: MT,
+    };
+  }
+
   // arrange data for the table
   async arrangeData(applicants) {
+    this.arrangedApplicants = [];
     applicants.forEach((applicant) => {
-      var length = applicant['progresses']?.length
-        ? applicant['progresses']?.length
-        : 0;
+      // console.log(JSON.parse(applicant['progresses']));
+      var length = JSON.parse(applicant['progresses']).length;
       // console.log(res['progresses']?.length ? res['progresses']?.length : 0);
       var lastProgress = 'No Activity';
       var date = '2023-09-03 10:00';
       if (length > 0) {
-        lastProgress = applicant['progresses'][length - 1]['path']
+        lastProgress = JSON.parse(applicant['progresses']);
+        lastProgress = lastProgress[length - 1]['path']
           .split('/')
           .slice(-2)
           .join('/');
         date = formatYYYYDDMMHHMM(
-          applicant['progresses'][length - 1]['updatedAt']
+          JSON.parse(applicant['progresses'])[length - 1]['updatedAt']
         );
       }
 
       // console.log(lastProgress);
       // console.log(date);
       this.arrangedApplicants.push({
-        login: applicant.login,
+        login: applicant.platformId,
         name: applicant.firstName + ' ' + applicant.lastName,
         phone: applicant.phone ? applicant.phone : applicant.phoneNumber,
         nationality: applicant.nationality,
         lastProgress: lastProgress,
         date: date,
-        profileImage: applicant.profileImage,
+        profileImage: applicant.profilePicture,
+        comments: applicant.comments,
       });
     });
   }
@@ -172,6 +238,8 @@ export class PiscineComponent implements OnInit {
   }
 
   activeInTheLast24() {
+    this.lastavtivityIn24 = 0;
+    this.lastavtivityIn48 = 0;
     var nowDate = new Date();
     var yesterday = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
     var beforeYesterday = new Date(new Date().getTime() - 48 * 60 * 60 * 1000);
@@ -187,23 +255,36 @@ export class PiscineComponent implements OnInit {
     });
   }
 
-  // TODO: Create a comment bu user signed in
+  // TODO: Create a comment by user signed in
   // TODO: Show comment by user signed in
   // TODO: Add comment spaces
 
   // click event on applicant
-  commentCandidate($event) {}
+  commentCandidate($event) {
+    console.log($event);
+    this.updatedApplicantId = $event;
+    // add information about the dialog appearing
+    this.showDialog();
+  }
 
   // dismiss dialog
   dismiss() {}
 
   // confirm deleting the applicant comment
   confirmDelete($event) {
-    console.log($event);
     var comment = $event ? $event : '-';
     // TODO: formulate the object needed
-    var data = {};
+    var data = {
+      platformId: this.updatedApplicantId,
+      comment: comment,
+      commentedBy: getUser()['firstName'] + ' ' + getUser()['lastName'],
+    };
     this.updateApplicantComment(data);
+  }
+
+  // show dialog
+  async showDialog() {
+    document.querySelector<HTMLElement>('#dialog')?.click();
   }
 
   // use to update applicant call
@@ -217,18 +298,39 @@ export class PiscineComponent implements OnInit {
   updateRoute($updatedApplicant?) {
     this.router.navigate([], {
       queryParams: {
-        startDate: formatYYYYDDMM(this.form.controls.startDate.value),
-        endDate: formatYYYYDDMM(this.form.controls.endDate.value),
-        status: this.form.controls.applicantsStatus.value,
-        gradeStart: this.form.controls.applicantsGradeStart.value,
-        gradeEnd: this.form.controls.applicantsGradeEnd.value,
-        sort: this.form.controls.applicantsSorter.value,
-        updatedApplicant: $updatedApplicant,
+        rand: Math.random(),
+        // startDate: formatYYYYDDMM(this.form.controls.startDate.value),
+        // endDate: formatYYYYDDMM(this.form.controls.endDate.value),
+        // status: this.form.controls.applicantsStatus.value,
+        // gradeStart: this.form.controls.applicantsGradeStart.value,
+        // gradeEnd: this.form.controls.applicantsGradeEnd.value,
+        // sort: this.form.controls.applicantsSorter.value,
+        // updatedApplicant: $updatedApplicant,
       },
     });
   }
 
   navigateToCandidate(candidate) {
     this.router.navigateByUrl('/piscine/view-candidate/' + candidate);
+  }
+
+  syncApplicantsData() {
+    this.loader = true;
+    var data = PISCINE4;
+    this.PS.syncSPApplicants(data).subscribe((value) => {
+      console.log(value);
+      this.loader = false;
+      this.resetFilters();
+    });
+  }
+  // reset filters
+  resetFilters() {
+    // this.form.controls.applicantsGradeEnd.setValue('all');
+    // this.form.controls.applicantsGradeStart.setValue('all');
+    // this.form.controls.startDate.setValue('2023-09-03');
+    // this.form.controls.applicantsSorter.setValue('descending');
+    // this.form.controls.applicantsStatus.setValue('all');
+    // ! uncomment this later
+    this.updateRoute();
   }
 }

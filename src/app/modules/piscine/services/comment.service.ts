@@ -2,7 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SELECTION_POOL_API } from 'src/app/constants/api';
+import {
+  SELECTION_POOL_API,
+  SP_APPLICANT_COMMENT_API,
+} from 'src/app/constants/api';
 import { getToken } from 'src/app/constants/globalMethods';
 
 @Injectable({
@@ -17,10 +20,12 @@ export class CommentService {
   });
   updateApplicantsComment(data): Observable<any> {
     try {
-      console.log(this.httpOptions);
       // get the data from the url
+      console.log(this.httpOptions);
       var http = this.http
-        .get<any>(SELECTION_POOL_API, { headers: this.httpOptions })
+        .post<any>(SP_APPLICANT_COMMENT_API, data, {
+          headers: this.httpOptions,
+        })
         .pipe(map((data) => data));
       return http;
     } catch (err) {
