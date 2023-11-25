@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { formatYYYYDDMMHHMM } from 'src/app/constants/globalMethods';
+import {
+  formatYYYYDDMM,
+  formatYYYYDDMMHHMM,
+} from 'src/app/constants/globalMethods';
 import { SELECTION_POOL_HEADER } from 'src/app/constants/headers';
 import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
+import { CommentService } from './services/comment.service';
 
 @Component({
   selector: 'app-piscine',
@@ -14,7 +18,8 @@ export class PiscineComponent implements OnInit {
   constructor(
     private AR: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private CS: CommentService
   ) {
     // form group
     this.form = this.fb.group({
@@ -46,6 +51,12 @@ export class PiscineComponent implements OnInit {
   Operations = '';
   Marketing = '';
   Assistants = '';
+  // confirmation dialog
+  dialogTitle = 'Are you sure you want to update the applicant status?';
+  message = 'This action is permanent';
+  button = 'Dismiss';
+  button2 = 'Confirm';
+  updatedApplicantId = '';
 
   ngOnInit(): void {
     this.AR.data.subscribe((value) => {
@@ -176,11 +187,46 @@ export class PiscineComponent implements OnInit {
     });
   }
 
-  // TODO: Check last activity by date
-  // TODO: Sort on date.
-  // TODO: search by name or platform id
-  // TODO: Details
-  // TODO: Frequency done on question, Time spend on it
+  // TODO: Create a comment bu user signed in
+  // TODO: Show comment by user signed in
+  // TODO: Add comment spaces
+
+  // click event on applicant
+  commentCandidate($event) {}
+
+  // dismiss dialog
+  dismiss() {}
+
+  // confirm deleting the applicant comment
+  confirmDelete($event) {
+    console.log($event);
+    var comment = $event ? $event : '-';
+    // TODO: formulate the object needed
+    var data = {};
+    this.updateApplicantComment(data);
+  }
+
+  // use to update applicant call
+  updateApplicantComment(data) {
+    this.CS.updateApplicantsComment(data).subscribe((val) => {
+      console.log(val);
+      this.updateRoute(data);
+    });
+  }
+  // update route whenevr you are doing anything
+  updateRoute($updatedApplicant?) {
+    this.router.navigate([], {
+      queryParams: {
+        startDate: formatYYYYDDMM(this.form.controls.startDate.value),
+        endDate: formatYYYYDDMM(this.form.controls.endDate.value),
+        status: this.form.controls.applicantsStatus.value,
+        gradeStart: this.form.controls.applicantsGradeStart.value,
+        gradeEnd: this.form.controls.applicantsGradeEnd.value,
+        sort: this.form.controls.applicantsSorter.value,
+        updatedApplicant: $updatedApplicant,
+      },
+    });
+  }
 
   navigateToCandidate(candidate) {
     this.router.navigateByUrl('/piscine/view-candidate/' + candidate);

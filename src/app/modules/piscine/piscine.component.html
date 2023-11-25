@@ -20,6 +20,19 @@
       [showPagination]="false"
       [showPagination]="false"
       (editClicked)="navigateToCandidate($event)"
+      (deleteClicked)="commentCandidate($event)"
     ></app-table>
   </div>
 </div>
+
+<app-success-dialog
+  [editText]="true"
+  dialogId="dialog"
+  [title]="dialogTitle"
+  [message]="message"
+  [dismiss]="button"
+  [action]="button2"
+  (dismissed)="dismiss()"
+  (confirm)="confirmDelete($event)"
+  [twoButtons]="true"
+></app-success-dialog>
