@@ -82,7 +82,7 @@ export const APPLICANTS_SORT: SelectData[] = [
 // team constants
 // ? migh be updated to json
 export const TECH_TEAM = [
-  'Ebrahim Hassan',
+  'Ebrahim Hasan',
   'Abdallah Alathamneh',
   'Yaman Almasri',
 ];
