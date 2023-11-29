@@ -34,6 +34,7 @@ export class PiscineComponent implements OnInit {
     this.form = this.fb.group({
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
+      thumbnail: [''],
     });
   }
 
@@ -68,6 +69,8 @@ export class PiscineComponent implements OnInit {
   updatedApplicantId = '';
   // loader
   loader = false;
+  // image
+  thumbnail: File;
 
   ngOnInit(): void {
     this.AR.data.subscribe((value) => {
@@ -84,6 +87,7 @@ export class PiscineComponent implements OnInit {
   // make table data
   constructTableData(applicants: any[]): TableData[] {
     return applicants.map((res) => {
+      console.log(res['comments']);
       var comments = this.formulateComment(res['comments']);
 
       return {
@@ -107,6 +111,8 @@ export class PiscineComponent implements OnInit {
           // Yanal,Tech, Operation, Marketing, Students
           // ! put back if the chance allows you too
           res['lastProgress'],
+          res['level'],
+          res['xp'],
 
           res['date'],
         ],
@@ -171,14 +177,23 @@ export class PiscineComponent implements OnInit {
             MT + this.sytleName + author + comment.comment + this.styleNameEnd;
         }
       });
-      if (BOSS[0] == comment.commentedBy) {
-        boss = boss + 'YJ: ' + comment.comment + this.styleNameEnd;
-      }
+      BOSS.forEach((member) => {
+        if (member == comment.commentedBy) {
+          var author = member == BOSS[0] ? 'YJ: ' : 'YJ: ';
+          boss =
+            boss +
+            this.sytleName +
+            author +
+            comment.comment +
+            this.styleNameEnd;
+        }
+      });
     });
 
     TT = TT ? TT : '-';
     OT = OT ? OT : '-';
     MT = MT ? MT : '-';
+    boss = boss ? boss : '-';
 
     return {
       TT: TT,
@@ -219,6 +234,8 @@ export class PiscineComponent implements OnInit {
         date: date,
         profileImage: applicant.profilePicture,
         comments: applicant.comments,
+        level: applicant.level,
+        xp: applicant.xp,
       });
     });
   }
@@ -266,6 +283,12 @@ export class PiscineComponent implements OnInit {
     // add information about the dialog appearing
     this.showDialog();
   }
+  imageClicked($event) {
+    console.log($event);
+    this.updatedApplicantId = $event;
+    // add information about the dialog appearing
+    this.uploadPicture();
+  }
 
   // dismiss dialog
   dismiss() {}
@@ -282,9 +305,27 @@ export class PiscineComponent implements OnInit {
     this.updateApplicantComment(data);
   }
 
+  // confirm deleting the applicant comment
+  uploadDialogClick($event) {
+    // var comment = $event ? $event : '-';
+    console.log($event);
+    // TODO: formulate the object needed
+    // var data = {
+    //   platformId: this.updatedApplicantId,
+    //   comment: comment,
+    //   commentedBy: getUser()['firstName'] + ' ' + getUser()['lastName'],
+    // };
+    // this.updateApplicantComment(data);
+  }
+
   // show dialog
   async showDialog() {
     document.querySelector<HTMLElement>('#dialog')?.click();
+  }
+
+  // show uploadPicture
+  async uploadPicture() {
+    document.querySelector<HTMLElement>('#uploadImage')?.click();
   }
 
   // use to update applicant call
@@ -333,4 +374,23 @@ export class PiscineComponent implements OnInit {
     // ! uncomment this later
     this.updateRoute();
   }
+
+  getAddedFile = (file) => {
+    console.log(file.name);
+
+    const formData = new FormData();
+    formData.append('image', file, this.updatedApplicantId);
+    this.CS.uploadImage(formData).subscribe((data) => {
+      console.log(data);
+      this.updateRoute();
+    });
+    // What it does:
+    // Emits the image from app-upload-file-dragdrop component
+    if (file.size > 1000024) {
+      // this.errorMsg = 'Image is above 1 MB limit';
+    } else {
+      // this.errorMsg = null;
+    }
+    // this.thumbnail = data;
+  };
 }

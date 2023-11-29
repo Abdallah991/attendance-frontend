@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { SorterButtonComponent } from './sorter-button/sorter-button.component';
+import { SingleFileUploadDragdropComponent } from './single-file-upload-dragdrop/single-file-upload-dragdrop.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SorterButtonComponent } from './sorter-button/sorter-button.component';
     VacationComponent,
     DatePickerComponent,
     SorterButtonComponent,
+    SingleFileUploadDragdropComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +52,7 @@ import { SorterButtonComponent } from './sorter-button/sorter-button.component';
     SearchDropDownComponent,
     DatePickerComponent,
     SorterButtonComponent,
+    SingleFileUploadDragdropComponent,
   ],
 })
 export class SharedModule {}

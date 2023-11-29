@@ -33,6 +33,7 @@
       [showPagination]="false"
       (editClicked)="navigateToCandidate($event)"
       (deleteClicked)="commentCandidate($event)"
+      (imageClicked)="imageClicked($event)"
     ></app-table>
   </div>
 </div>
@@ -48,3 +49,12 @@
   (confirm)="confirmDelete($event)"
   [twoButtons]="true"
 ></app-success-dialog>
+
+<app-single-file-upload-dragdrop
+  dialogId="uploadImage"
+  (file)="getAddedFile($event)"
+  [FGN]="form"
+  FCN="thumbnail"
+  (dismissed)="dismiss()"
+  (confirm)="uploadDialogClick($event)"
+></app-single-file-upload-dragdrop>

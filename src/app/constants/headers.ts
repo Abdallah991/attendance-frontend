@@ -42,6 +42,8 @@ export const SELECTION_POOL_HEADER = [
   'Marketing',
   // ! put back when the chance allows it
   'Progress At',
+  'level',
+  'XP',
   'Last Activity',
 ];
 export const PROGRESS_HEADER = [

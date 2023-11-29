@@ -57,6 +57,8 @@ export const SP_APPLICANT_API = ROOTLINK + '/sp-applicant';
 export const SP_APPLICANT_COMMENT_API = ROOTLINK + '/sp-comment';
 // 26- sync sp
 export const SP_SYNC_API = ROOTLINK + '/sync-sp';
+// 27- upload image
+export const UPLOAD_IMAGE = ROOTLINK + '/upload-image';
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer
 export const BIO_ATTENDANCE_API = 'http://10.1.50.4:80';

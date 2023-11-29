@@ -25,7 +25,9 @@ export class TableComponent implements OnInit {
   ];
   // edit and delete emitters
   @Output() editClicked = new EventEmitter<string>();
+  @Output() imageClicked = new EventEmitter<string>();
   @Output() deleteClicked = new EventEmitter<string>();
+
   //  search value
   @Input() searchValue: string;
   // number of pages
@@ -56,6 +58,8 @@ export class TableComponent implements OnInit {
 
   // edit click implementation
   clickEdit = (id) => this.editClicked.emit(id);
+  // edit click implementation
+  imageClick = (id) => this.imageClicked.emit(id);
 
   // delete click implementation
   clickDelete = (id) => this.deleteClicked.emit(id);

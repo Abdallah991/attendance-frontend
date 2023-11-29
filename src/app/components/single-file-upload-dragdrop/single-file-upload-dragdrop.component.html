@@ -1,0 +1,40 @@
+<input type="checkbox" [id]="dialogId" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box">
+    <div class="h-[300px]" *ngIf="!(Image | async)">
+      <div class="upload-container">
+        <input type="file" (change)="addImage($event)" />
+        <div class="upload-floating">
+          <h2>+</h2>
+          <h2>Upload Images</h2>
+        </div>
+      </div>
+    </div>
+    <div class="uploaded-container" *ngIf="Image | async">
+      <div
+        class="uploaded-single-image relative p-2 bg-youmi-white shadow-lg rounded-xl"
+      >
+        <img [src]="imageUrl" alt="" class="rounded-xl w-full" />
+        <button
+          (click)="removeImage()"
+          class="absolute top-3 right-3 bg-youmi-black rounded-xl p-2 bg-opacity-80 shadow-lg"
+        >
+          <img src="../../../../../assets/icons/trash.svg" alt="" />
+        </button>
+      </div>
+    </div>
+    <div class="flex flex-row justify-center gap-2">
+      <div class="modal-action">
+        <label [for]="dialogId" class="btn" (click)="cancelClick()"
+          >Dismiss</label
+        >
+        <!-- <div class="modal-action" *ngIf="twoButtons"> -->
+        <label [for]="dialogId" class="btn" (click)="confirmClick()"
+          >Upload</label
+        >
+      </div>
+
+      <!-- </div> -->
+    </div>
+  </div>
+</div>

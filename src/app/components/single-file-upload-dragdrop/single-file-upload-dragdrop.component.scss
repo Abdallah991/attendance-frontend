@@ -1,0 +1,39 @@
+.uploaded-container {
+  @apply flex flex-row flex-wrap justify-center mt-4;
+  .uploaded-single-image {
+    width: 48%;
+    @apply mb-4 h-52;
+    input {
+      @apply hidden;
+    }
+    img {
+      @apply object-cover w-full h-full;
+    }
+    .upload-container {
+      @apply relative w-full h-full;
+      input {
+        @apply absolute block w-full h-full border-2 border-dashed border-gray rounded-lg text-transparent file:hidden cursor-pointer;
+      }
+      .upload-floating {
+        @apply my-auto h-full w-full flex flex-col justify-center items-center;
+
+        h2 {
+          @apply text-center text-opacity-40 text-gray;
+        }
+      }
+    }
+  }
+}
+.upload-container {
+  @apply relative w-full h-full;
+  input {
+    @apply absolute block w-full h-full border-2 border-dashed border-gray rounded-lg text-transparent file:hidden cursor-pointer;
+  }
+  .upload-floating {
+    @apply my-auto h-full w-full flex flex-col justify-center items-center;
+
+    h2 {
+      @apply text-center text-opacity-40 text-gray;
+    }
+  }
+}
