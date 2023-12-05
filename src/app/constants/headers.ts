@@ -40,6 +40,8 @@ export const SELECTION_POOL_HEADER = [
   'Tech',
   'Operations',
   'Marketing',
+  'Tech Assistans',
+
   // ! put back when the chance allows it
   'Progress At',
   'level',

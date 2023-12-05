@@ -84,6 +84,7 @@ export class EditUserComponent implements OnInit {
       phone: this.usersForm.controls.phone.value,
       gender: this.usersForm.controls.gender.value,
       position: this.usersForm.controls.position.value,
+      roleId: 1,
     };
     this.US.addUser(userInput)
       .then((val) => {

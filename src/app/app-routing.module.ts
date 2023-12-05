@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AssistantGuard } from './guards/assistant.guard';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
         path: 'users',
         loadChildren: () =>
           import('./modules/users/users.module').then((m) => m.UsersModule),
+        canActivate: [AssistantGuard],
       },
       {
         // overview routes
@@ -23,6 +25,7 @@ const routes: Routes = [
           import('./modules/overview/overview.module').then(
             (m) => m.OverviewModule
           ),
+        canActivate: [AssistantGuard],
       },
 
       {
@@ -32,6 +35,7 @@ const routes: Routes = [
           import('./modules/students/students.module').then(
             (m) => m.StudentsModule
           ),
+        canActivate: [AssistantGuard],
       },
       {
         // APPLICANTS routes
@@ -40,6 +44,7 @@ const routes: Routes = [
           import('./modules/applicants/applicants.module').then(
             (m) => m.ApplicantsModule
           ),
+        canActivate: [AssistantGuard],
       },
       {
         // SP routes

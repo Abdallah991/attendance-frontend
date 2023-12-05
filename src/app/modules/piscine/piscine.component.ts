@@ -14,6 +14,8 @@ import {
   BOSS,
   MARKETING_TEAM,
   OP_TEAM,
+  TEAM,
+  TECH_ASSISTANCE,
   TECH_TEAM,
 } from 'src/app/constants/constants';
 
@@ -71,8 +73,18 @@ export class PiscineComponent implements OnInit {
   loader = false;
   // image
   thumbnail: File;
+  //
+  isAllowed = false;
 
   ngOnInit(): void {
+    // check permissions
+    TEAM.forEach((element) => {
+      // set to true only if logged in user is part of the team
+      if (element === getUser().email) {
+        this.isAllowed = true;
+      }
+    });
+
     this.AR.data.subscribe((value) => {
       this.applicants = value.applicants;
       //
@@ -107,6 +119,7 @@ export class PiscineComponent implements OnInit {
           comments['TT'],
           comments['OT'],
           comments['MT'],
+          comments['TA'],
           // Adding five comments
           // Yanal,Tech, Operation, Marketing, Students
           // ! put back if the chance allows you too
@@ -145,6 +158,8 @@ export class PiscineComponent implements OnInit {
     var boss = this.sytleName;
     var OT = '';
     var MT = '';
+    var TA = '';
+
     comments.forEach((comment) => {
       TECH_TEAM.forEach((member) => {
         if (member == comment.commentedBy) {
@@ -156,6 +171,18 @@ export class PiscineComponent implements OnInit {
               : 'YA: ';
           TT =
             TT + this.sytleName + author + comment.comment + this.styleNameEnd;
+        }
+      });
+      TECH_ASSISTANCE.forEach((member) => {
+        if (member == comment.commentedBy) {
+          var author =
+            member == TECH_ASSISTANCE[0]
+              ? 'Amgad: '
+              : member == TECH_ASSISTANCE[1]
+              ? 'Hawra: '
+              : 'Abdeen: ';
+          TA =
+            TA + this.sytleName + author + comment.comment + this.styleNameEnd;
         }
       });
       OP_TEAM.forEach((member) => {
@@ -190,16 +217,18 @@ export class PiscineComponent implements OnInit {
       });
     });
 
-    TT = TT ? TT : '-';
-    OT = OT ? OT : '-';
-    MT = MT ? MT : '-';
-    boss = boss ? boss : '-';
+    TT = TT && this.isAllowed ? TT : '-';
+    OT = OT && this.isAllowed ? OT : '-';
+    MT = MT && this.isAllowed ? MT : '-';
+    boss = boss && this.isAllowed ? boss : '-';
+    TA = TA ? TA : '-';
 
     return {
       TT: TT,
       boss: boss,
       OT: OT,
       MT: MT,
+      TA: TA,
     };
   }
 
@@ -382,7 +411,7 @@ export class PiscineComponent implements OnInit {
     formData.append('image', file, this.updatedApplicantId);
     this.CS.uploadImage(formData).subscribe((data) => {
       console.log(data);
-      this.updateRoute();
+      // this.updateRoute();
     });
     // What it does:
     // Emits the image from app-upload-file-dragdrop component

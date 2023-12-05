@@ -18,6 +18,7 @@ transition('open <=> closed', [animate('1.5s')]);
 })
 export class SideNavComponent implements OnInit {
   // loader, navigation, and logo
+
   navigationMenu = navigationMenu;
   loading = false;
   userImageUrl: string = '../../../assets/icons/logo.svg';
