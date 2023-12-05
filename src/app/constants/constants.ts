@@ -89,7 +89,7 @@ export const TECH_TEAM = [
 export const OP_TEAM = ['Seham Yateem', 'Sarah Alhaffar', 'Melvis Silveira'];
 export const MARKETING_TEAM = ['Donya Ali'];
 export const BOSS = ['Yanal Jallad'];
-export const TECH_ASSISTANCE = ['Amjad Ali', 'Hawra Faraj'];
+export const TECH_ASSISTANCE = ['Amgad Ali', 'Hawra Faraj'];
 
 export const TEAM = [
   'abdallah.alathamneh@reboot01.com',
