@@ -22,7 +22,17 @@
       [loader]="loader"
     ></app-button>
   </div>
-
+  <div class="mb-4">
+    <search-drop-down
+      [FGN]="form"
+      FCN="searchInput"
+      (itemClicked)="navigateToCandidate($event)"
+      (searchClicked)="search()"
+      [loader]="searchLoader"
+      [results]="searchValues"
+      (cancel)="cancelSearch()"
+    ></search-drop-down>
+  </div>
   <div>
     <app-table
       [columns]="columns"

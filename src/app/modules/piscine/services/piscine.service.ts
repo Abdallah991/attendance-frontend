@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
+  SEARCH_APPLICANTS_API,
   SELECTION_POOL_API,
   SP_APPLICANT_API,
   SP_SYNC_API,
@@ -78,5 +79,26 @@ export class PiscineService {
       // disable the loader and return if there is an error
       return err;
     }
+  }
+
+  // search students
+  async searchApplicants(searchValue): Promise<any> {
+    let promise = new Promise<any>(async (resolve, reject) => {
+      this.http
+        .post<any>(SEARCH_APPLICANTS_API, searchValue, {
+          headers: this.httpOptions,
+        })
+        .subscribe(
+          (value) => {
+            resolve(value);
+          },
+          (error) => {
+            console.log('the api call failed: ', error);
+            reject(error);
+          }
+        );
+    });
+    // return promise
+    return promise;
   }
 }

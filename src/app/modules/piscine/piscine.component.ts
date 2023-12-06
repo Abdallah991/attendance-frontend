@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  formatYYYYDDMM,
-  formatYYYYDDMMHHMM,
-  getUser,
-} from 'src/app/constants/globalMethods';
+import { formatYYYYDDMMHHMM, getUser } from 'src/app/constants/globalMethods';
 import { PISCINE4, SELECTION_POOL_HEADER } from 'src/app/constants/headers';
-import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
+import {
+  SelectData,
+  TableButtonOptions,
+  TableData,
+} from 'src/app/interfaces/interfaces';
 import { CommentService } from './services/comment.service';
 import { PiscineService } from './services/piscine.service';
 import {
@@ -34,9 +34,7 @@ export class PiscineComponent implements OnInit {
   ) {
     // form group
     this.form = this.fb.group({
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
-      thumbnail: [''],
+      searchInput: ['', Validators.required],
     });
   }
 
@@ -73,8 +71,14 @@ export class PiscineComponent implements OnInit {
   loader = false;
   // image
   thumbnail: File;
-  //
+  // show team comments control
   isAllowed = false;
+  // * search controlls
+  // search loader
+  searchValues: SelectData[] = [];
+  // search loader
+  searchLoader: boolean = false;
+  showResults: boolean = false;
 
   ngOnInit(): void {
     // check permissions
@@ -84,7 +88,10 @@ export class PiscineComponent implements OnInit {
         this.isAllowed = true;
       }
     });
+    this.getTableData();
+  }
 
+  getTableData() {
     this.AR.data.subscribe((value) => {
       this.applicants = value.applicants;
       //
@@ -422,4 +429,40 @@ export class PiscineComponent implements OnInit {
     }
     // this.thumbnail = data;
   };
+
+  // search button implementation
+  search() {
+    this.searchLoader = true;
+    this.searchValues = [];
+    var searchValue = this.form.controls.searchInput.value;
+    if (searchValue != undefined && searchValue != '' && searchValue != null) {
+      // TODO: put back like promise syntax
+      // TODO: show no results when there is no results
+      var searchInput = {
+        searchValue: searchValue,
+      };
+      this.PS.searchApplicants(searchInput)
+        .then((applicants) => {
+          this.applicants = applicants;
+          this.arrangeData(this.applicants);
+          this.data = this.constructTableData(this.arrangedApplicants);
+        })
+        .catch((err) => {
+          console.log('Erro response :', err);
+        })
+        .finally(() => {
+          this.searchLoader = false;
+        });
+    } else {
+      this.getTableData();
+      this.searchLoader = false;
+    }
+  }
+
+  cancelSearch() {
+    this.getTableData();
+    this.searchLoader = false;
+    this.showResults = false;
+    this.form.controls.searchInput.setValue(null);
+  }
 }
