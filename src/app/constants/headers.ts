@@ -47,6 +47,7 @@ export const SELECTION_POOL_HEADER = [
   'level',
   'XP',
   'Last Activity',
+  'Checkpoints',
 ];
 export const PROGRESS_HEADER = [
   'Sequence',

@@ -64,7 +64,35 @@
               class="min-w-[80px]"
             ></app-button>
           </td>
-          <!-- Make the hight constant of 256px incase of profile image attached -->
+          <!-- Check points indicator -->
+          <td
+            class="text-tertiary text-center min-h-[60px] min-w-[10rem] max-w-[20rem] overflow-hidden text-ellipsis whitespace-break-spaces"
+            *ngIf="actionButtons && image"
+            [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
+          >
+            <!-- add the title and the loop -->
+            <div class="flex flex-row justify-start gap-4">
+              <!-- The loop is here -->
+              <div
+                class="flex flex-col gap-1"
+                *ngFor="let check of items.checkpoint"
+              >
+                <span
+                  *ngFor="let e of [].constructor(check); let i = index"
+                  [ngClass]="check == 0 ? 'gray-dot' : 'dot'"
+                ></span>
+                <span
+                  *ngIf="check == 0"
+                  [ngClass]="check == 0 ? 'gray-dot' : 'dot'"
+                ></span>
+
+                <!-- <span class="dot"></span> -->
+                <!-- <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span> -->
+              </div>
+            </div>
+          </td>
           <td
             class="flex h-[256px] justify-evenly items-center gap-2"
             [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"

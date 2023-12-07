@@ -106,8 +106,10 @@ export class PiscineComponent implements OnInit {
   // make table data
   constructTableData(applicants: any[]): TableData[] {
     return applicants.map((res) => {
-      console.log(res['comments']);
+      // console.log(res['comments']);
       var comments = this.formulateComment(res['comments']);
+      var checkpoints = this.checkpointsCount(JSON.parse(res['checkpoints']));
+      console.log(checkpoints);
 
       return {
         // the id, to return back for edit or delete events
@@ -139,6 +141,7 @@ export class PiscineComponent implements OnInit {
         // the action buttons
         profileImage: res['profileImage'],
         actionButtons: this.constructTableButton(),
+        checkpoint: checkpoints,
       };
     });
   }
@@ -159,6 +162,27 @@ export class PiscineComponent implements OnInit {
     };
   }
 
+  checkpointsCount(checkpoints): number[] {
+    var checkpoint1 = 0;
+    var checkpoint2 = 0;
+    var checkpoint3 = 0;
+    const regex1 = /checkpoint-01.+/;
+    const regex2 = /checkpoint-02.+/;
+    const regex3 = /checkpoint-03.+/;
+
+    console.log(checkpoints);
+    checkpoints.forEach((checkpoint) => {
+      if (regex1.test(checkpoint['path'])) {
+        checkpoint1++;
+      } else if (regex2.test(checkpoint['path'])) {
+        checkpoint2++;
+      } else if (regex3.test(checkpoint['path'])) {
+        checkpoint3++;
+      }
+    });
+
+    return [checkpoint1, checkpoint2, checkpoint3];
+  }
   // formulate comments
   formulateComment(comments): any {
     var TT = '';
@@ -272,6 +296,7 @@ export class PiscineComponent implements OnInit {
         comments: applicant.comments,
         level: applicant.level,
         xp: applicant.xp,
+        checkpoints: applicant.checkpoints,
       });
     });
   }
@@ -314,13 +339,13 @@ export class PiscineComponent implements OnInit {
 
   // click event on applicant
   commentCandidate($event) {
-    console.log($event);
+    // console.log($event);
     this.updatedApplicantId = $event;
     // add information about the dialog appearing
     this.showDialog();
   }
   imageClicked($event) {
-    console.log($event);
+    // console.log($event);
     this.updatedApplicantId = $event;
     // add information about the dialog appearing
     this.uploadPicture();
@@ -344,7 +369,7 @@ export class PiscineComponent implements OnInit {
   // confirm deleting the applicant comment
   uploadDialogClick($event) {
     // var comment = $event ? $event : '-';
-    console.log($event);
+    // console.log($event);
     // TODO: formulate the object needed
     // var data = {
     //   platformId: this.updatedApplicantId,
@@ -367,7 +392,7 @@ export class PiscineComponent implements OnInit {
   // use to update applicant call
   updateApplicantComment(data) {
     this.CS.updateApplicantsComment(data).subscribe((val) => {
-      console.log(val);
+      // console.log(val);
       this.updateRoute(data);
     });
   }
@@ -395,7 +420,7 @@ export class PiscineComponent implements OnInit {
     this.loader = true;
     var data = PISCINE4;
     this.PS.syncSPApplicants(data).subscribe((value) => {
-      console.log(value);
+      // console.log(value);
       this.loader = false;
       this.resetFilters();
     });

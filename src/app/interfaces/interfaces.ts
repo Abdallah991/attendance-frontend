@@ -3,6 +3,7 @@ export type TableData = {
   data: any[];
   actionButtons?: TableButtonOptions;
   profileImage?: string;
+  checkpoint?: any[];
   rowStyle?: string[];
 };
 
@@ -21,4 +22,10 @@ export type TableButtonOptions = {
 export type ButtonsParams = {
   isActive: boolean;
   text?: string;
+};
+
+export type Checkpoint = {
+  checkPoint1: number | string;
+  checkPoint2: number | string;
+  checkPoint3: number | string;
 };

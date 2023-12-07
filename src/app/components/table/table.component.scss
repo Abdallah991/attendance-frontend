@@ -5,3 +5,19 @@
 h1 {
     @apply text-purple
 }
+
+.dot {
+    height: 20px;
+    width: 20px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .gray-dot {
+    height: 20px;
+    width: 20px;
+    background-color: gray;
+    border-radius: 50%;
+    display: inline-block;
+  }
