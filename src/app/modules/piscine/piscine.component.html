@@ -26,12 +26,12 @@
     <search-drop-down
       [FGN]="form"
       FCN="searchInput"
-      (itemClicked)="navigateToCandidate($event)"
       (searchClicked)="search()"
       [loader]="searchLoader"
       [results]="searchValues"
       (cancel)="cancelSearch()"
     ></search-drop-down>
+    <!-- (itemClicked)="navigateToCandidate($event)" -->
   </div>
   <div>
     <app-table
@@ -41,7 +41,7 @@
       [actionButtons]="true"
       [showPagination]="false"
       [showPagination]="false"
-      (editClicked)="navigateToCandidate($event)"
+      (editClicked)="decisionDialog($event)"
       (deleteClicked)="commentCandidate($event)"
       (imageClicked)="imageClicked($event)"
     ></app-table>
@@ -68,3 +68,14 @@
   (dismissed)="dismiss()"
   (confirm)="uploadDialogClick($event)"
 ></app-single-file-upload-dragdrop>
+<app-decision-dialog
+  [editText]="true"
+  dialogId="decisionDialog"
+  [title]="dialogTitle"
+  [message]="message"
+  [dismiss]="button"
+  [action]="button2"
+  (dismissed)="dismiss()"
+  (confirm)="confirmDecision($event)"
+  [twoButtons]="true"
+></app-decision-dialog>

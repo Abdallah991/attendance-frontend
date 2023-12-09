@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  SELECTION_POOL_API,
   SP_APPLICANT_COMMENT_API,
+  SP_DECISION_API,
   UPLOAD_IMAGE,
 } from 'src/app/constants/api';
 import { getToken } from 'src/app/constants/globalMethods';
@@ -30,6 +30,22 @@ export class CommentService {
       // get the data from the url
       var http = this.http
         .post<any>(SP_APPLICANT_COMMENT_API, data, {
+          headers: this.httpOptions,
+        })
+        .pipe(map((data) => data));
+      return http;
+    } catch (err) {
+      console.log(err);
+      // disable the loader and return if there is an error
+      return err;
+    }
+  }
+
+  updateApplicantDecision(data): Observable<any> {
+    try {
+      // get the data from the url
+      var http = this.http
+        .post<any>(SP_DECISION_API, data, {
           headers: this.httpOptions,
         })
         .pipe(map((data) => data));

@@ -61,6 +61,8 @@ export const SP_SYNC_API = ROOTLINK + '/sync-sp';
 export const UPLOAD_IMAGE = ROOTLINK + '/upload-image';
 // 28- search applicants
 export const SEARCH_APPLICANTS_API = ROOTLINK + '/search-applicants';
+// 29- selection pool comment
+export const SP_DECISION_API = ROOTLINK + '/sp-decision';
 
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer

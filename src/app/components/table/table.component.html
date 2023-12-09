@@ -94,30 +94,31 @@
             </div>
           </td>
           <td
-            class="flex h-[256px] justify-evenly items-center gap-2"
-            [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
             *ngIf="actionButtons && image"
+            [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
           >
-            <app-button
-              color="btn-primary"
-              textColor="text-base-100"
-              *ngIf="items.actionButtons?.edit?.isActive"
-              [xSmall]="true"
-              text="Edit"
-              (onClick)="clickEdit(items.id)"
-              [text]="items.actionButtons?.edit.text"
-              class="min-w-[80px]"
-            ></app-button>
-            <app-button
-              color="btn-primary"
-              textColor="text-base-100"
-              *ngIf="items.actionButtons?.delete?.isActive"
-              [xSmall]="true"
-              text="Delete"
-              (onClick)="clickDelete(items.id)"
-              [text]="items.actionButtons?.delete.text"
-              class="min-w-[80px]"
-            ></app-button>
+            <div class="flex justify-evenly items-center gap-2">
+              <app-button
+                color="btn-primary"
+                textColor="text-base-100"
+                *ngIf="items.actionButtons?.edit?.isActive"
+                [xSmall]="true"
+                text="Edit"
+                (onClick)="clickEdit(items.id)"
+                [text]="items.actionButtons?.edit.text"
+                class="min-w-[80px]"
+              ></app-button>
+              <app-button
+                color="btn-primary"
+                textColor="text-base-100"
+                *ngIf="items.actionButtons?.delete?.isActive"
+                [xSmall]="true"
+                text="Delete"
+                (onClick)="clickDelete(items.id)"
+                [text]="items.actionButtons?.delete.text"
+                class="min-w-[80px]"
+              ></app-button>
+            </div>
           </td>
         </tr>
       </tbody>

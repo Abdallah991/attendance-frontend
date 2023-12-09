@@ -41,12 +41,13 @@ export const SELECTION_POOL_HEADER = [
   'Operations',
   'Marketing',
   'Tech Assistans',
-
   // ! put back when the chance allows it
   'Progress At',
   'level',
   'XP',
   'Last Activity',
+  'Decision',
+  'Final Comments',
   'Checkpoints',
 ];
 export const PROGRESS_HEADER = [

@@ -12,6 +12,7 @@ import { CommentService } from './services/comment.service';
 import { PiscineService } from './services/piscine.service';
 import {
   BOSS,
+  DECISION_MAKER,
   MARKETING_TEAM,
   OP_TEAM,
   TEAM,
@@ -79,6 +80,8 @@ export class PiscineComponent implements OnInit {
   // search loader
   searchLoader: boolean = false;
   showResults: boolean = false;
+  // Decision maker
+  decisionMaker: boolean = false;
 
   ngOnInit(): void {
     // check permissions
@@ -86,6 +89,13 @@ export class PiscineComponent implements OnInit {
       // set to true only if logged in user is part of the team
       if (element === getUser().email) {
         this.isAllowed = true;
+      }
+    });
+
+    DECISION_MAKER.forEach((element) => {
+      // set decision maker only if user is in the group
+      if (element === getUser().email) {
+        this.decisionMaker = true;
       }
     });
     this.getTableData();
@@ -137,6 +147,8 @@ export class PiscineComponent implements OnInit {
           res['xp'],
 
           res['date'],
+          res['decision'],
+          res['finalComment'],
         ],
         // the action buttons
         profileImage: res['profileImage'],
@@ -151,8 +163,8 @@ export class PiscineComponent implements OnInit {
     return {
       // edit button
       edit: {
-        isActive: true,
-        text: 'Details',
+        isActive: this.decisionMaker,
+        text: 'Decision',
       },
       // delete button
       delete: {
@@ -297,6 +309,10 @@ export class PiscineComponent implements OnInit {
         level: applicant.level,
         xp: applicant.xp,
         checkpoints: applicant.checkpoints,
+        decision: applicant.decision
+          ? '<h2>' + applicant.decision + '</h2>'
+          : '<h2>Maybe</h2>',
+        finalComment: applicant.finalComment ?? '-',
       });
     });
   }
@@ -412,8 +428,32 @@ export class PiscineComponent implements OnInit {
     });
   }
 
-  navigateToCandidate(candidate) {
-    this.router.navigateByUrl('/piscine/view-candidate/' + candidate);
+  // TODO: show dialog to make decision
+  decisionDialog(candidate) {
+    // console.log(candidate);
+    this.updatedApplicantId = candidate;
+    document.querySelector<HTMLElement>('#decisionDialog')?.click();
+    // this.router.navigateByUrl('/piscine/view-candidate/' + candidate);
+  }
+
+  // TODO: after closing the dialog, update the decison, comment
+
+  // confirm deleting the applicant comment
+  confirmDecision($event) {
+    var comment = $event['comment'] ? $event['comment'] : '-';
+    var decision = $event['decision'] ? $event['decision'] : '-';
+    var data = {
+      decision: decision,
+      comment: comment,
+      platformId: this.updatedApplicantId,
+    };
+
+    this.CS.updateApplicantDecision(data).subscribe((val) => {
+      console.log(val);
+      this.updateRoute();
+    });
+    // console.log(data);
+    // TODO: update the decision of the student using platform Id
   }
 
   syncApplicantsData() {

@@ -1,0 +1,88 @@
+<!-- Put this part before </body> tag -->
+<input type="checkbox" [id]="dialogId" class="modal-toggle" />
+<div class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">{{ title }}</h3>
+    <p class="py-4">
+      {{ message }}
+    </p>
+    <div class="pt-4">
+      <div class="gap-4 mb-4">
+        <div
+          class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700"
+        >
+          <input
+            [checked]="false"
+            id="bordered-radio-1"
+            type="radio"
+            value="No"
+            (change)="radioClicked($event)"
+            name="bordered-radio"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label
+            for="bordered-radio-1"
+            class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >No</label
+          >
+        </div>
+        <div
+          class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700"
+        >
+          <input
+            [checked]="false"
+            id="bordered-radio-2"
+            type="radio"
+            value="Yes"
+            (change)="radioClicked($event)"
+            name="bordered-radio"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label
+            for="bordered-radio-2"
+            class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >Yes</label
+          >
+        </div>
+        <div
+          class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700"
+        >
+          <input
+            [checked]="false"
+            id="bordered-radio-3"
+            type="radio"
+            value="Maybe"
+            (change)="radioClicked($event)"
+            name="bordered-radio"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label
+            for="bordered-radio-3"
+            class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >Maybe</label
+          >
+        </div>
+      </div>
+      <app-text-field
+        *ngIf="editText"
+        [FGN]="form"
+        FCN="comment"
+        prefix="Comment"
+        label="Comment"
+        class="w-full"
+      ></app-text-field>
+    </div>
+    <div class="flex flex-row justify-center gap-2">
+      <div class="modal-action">
+        <label [for]="dialogId" class="btn" (click)="cancelClick()">{{
+          dismiss
+        }}</label>
+      </div>
+      <div class="modal-action" *ngIf="twoButtons">
+        <label [for]="dialogId" class="btn" (click)="confirmClick()">{{
+          action
+        }}</label>
+      </div>
+    </div>
+  </div>
+</div>
