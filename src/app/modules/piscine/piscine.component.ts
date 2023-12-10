@@ -223,7 +223,9 @@ export class PiscineComponent implements OnInit {
               ? 'Amgad: '
               : member == TECH_ASSISTANCE[1]
               ? 'Hawra: '
-              : 'Abdeen: ';
+              : member == TECH_ASSISTANCE[2]
+              ? 'Abdeen: '
+              : 'unknown';
           TA =
             TA + this.sytleName + author + comment.comment + this.styleNameEnd;
         }
