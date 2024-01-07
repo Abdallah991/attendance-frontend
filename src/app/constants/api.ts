@@ -63,6 +63,10 @@ export const UPLOAD_IMAGE = ROOTLINK + '/upload-image';
 export const SEARCH_APPLICANTS_API = ROOTLINK + '/search-applicants';
 // 29- selection pool comment
 export const SP_DECISION_API = ROOTLINK + '/sp-decision';
+// 30- Code Wars user API
+export const CODE_WARS_API = 'https://www.codewars.com/api/v1/users/';
+// 31- Code Wars user API
+export const ADD_WARRIOR_API = ROOTLINK + '/warriors';
 
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer

@@ -106,3 +106,12 @@ export const TEAM = [
   'yaman.almasri@reboot01.com',
   'melvis.silveira@reboot01.com',
 ];
+
+export const CODE_WARS = [
+  'SameerAhmed',
+  'iSolate77',
+  'husainkarim',
+  'Exortix',
+  'Emahfoodh',
+  'Abdallah991',
+];

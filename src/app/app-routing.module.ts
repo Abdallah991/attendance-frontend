@@ -55,6 +55,14 @@ const routes: Routes = [
           ),
       },
       {
+        // CW routes
+        path: 'code-wars',
+        loadChildren: () =>
+          import('./modules/code-wars/code-wars.module').then(
+            (m) => m.CodeWarsModule
+          ),
+      },
+      {
         path: 'change-password',
         loadChildren: () =>
           import('./modules/change-password/change-password.module').then(

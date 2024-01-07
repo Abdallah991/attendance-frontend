@@ -1,0 +1,45 @@
+<div class="p-4">
+  <h1>Add Warrior</h1>
+  <div class="flex mt-8 w-full gap-4">
+    <div class="w-1/2 flex flex-col gap-4">
+      <app-text-field
+        prefix="Platform ID"
+        label="Platform ID"
+        [FGN]="warriorForm"
+        FCN="platformId"
+        inputType="text"
+      ></app-text-field>
+      <app-text-field
+        prefix="Name"
+        label="Name"
+        [FGN]="warriorForm"
+        FCN="name"
+        inputType="text"
+      ></app-text-field>
+      <app-text-field
+        prefix="Code Wars ID"
+        label="Code Wars ID"
+        [FGN]="warriorForm"
+        FCN="codeWarsId"
+        inputType="text"
+      ></app-text-field>
+    </div>
+  </div>
+
+  <div class="action-buttons gap-2 mt-6 w-full flex justify-center">
+    <app-button
+      text="Add Warrior"
+      [medium]="true"
+      class="min-w-[100px]"
+      (onClick)="addWarrior()"
+      [loader]="addLoader"
+      [disabled]="!warriorForm.valid"
+    ></app-button>
+    <app-button
+      text="Cancel"
+      [medium]="true"
+      class="min-w-[100px]"
+      (onClick)="navigateBack()"
+    ></app-button>
+  </div>
+</div>

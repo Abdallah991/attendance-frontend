@@ -42,10 +42,10 @@ export const SELECTION_POOL_HEADER = [
   'Marketing',
   'Tech Assistans',
   // ! put back when the chance allows it
-  'Progress At',
+  // 'Progress At',
   'level',
   'XP',
-  'Last Activity',
+  // 'Last Activity',
   'Decision',
   'Final Comments',
   'Checkpoints',

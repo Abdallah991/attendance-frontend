@@ -27,6 +27,13 @@ export const navigationMenu = [
     active: false,
     linkName: 'Selection Pool',
   },
+  // {
+  //   link: '/code-wars',
+  //   iconPathInactive: '../../assets/icons/pool1.svg',
+  //   iconPathActive: '../../assets/icons/pool1.svg',
+  //   active: false,
+  //   linkName: 'Code Wars',
+  // },
   {
     link: '/users',
     iconPathInactive: '../../assets/icons/users.svg',

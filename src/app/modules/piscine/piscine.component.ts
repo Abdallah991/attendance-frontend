@@ -11,6 +11,7 @@ import {
 import { CommentService } from './services/comment.service';
 import { PiscineService } from './services/piscine.service';
 import {
+  APPLICANTS_SORT,
   BOSS,
   DECISION_MAKER,
   MARKETING_TEAM,
@@ -31,12 +32,20 @@ export class PiscineComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private CS: CommentService,
-    private PS: PiscineService
+    private PS: PiscineService,
+    private route: ActivatedRoute
   ) {
     // form group
     this.form = this.fb.group({
       searchInput: ['', Validators.required],
+      applicantsSorter: [sort, Validators.required],
     });
+    var snapshot = this.route.snapshot;
+
+    var sort = snapshot.queryParamMap.get('sort')
+      ? snapshot.queryParamMap.get('sort')
+      : 'descending';
+    // ?rand=0.9183806577894089&sort=descending
   }
 
   columns = SELECTION_POOL_HEADER;
@@ -82,6 +91,9 @@ export class PiscineComponent implements OnInit {
   showResults: boolean = false;
   // Decision maker
   decisionMaker: boolean = false;
+  // sorter
+  applicantsSorter: SelectData[] = APPLICANTS_SORT;
+  sortPreSet = 'descending';
 
   ngOnInit(): void {
     // check permissions
@@ -142,11 +154,11 @@ export class PiscineComponent implements OnInit {
           // Adding five comments
           // Yanal,Tech, Operation, Marketing, Students
           // ! put back if the chance allows you too
-          res['lastProgress'],
+          // res['lastProgress'],
           res['level'],
           res['xp'],
 
-          res['date'],
+          // res['date'],
           res['decision'],
           res['finalComment'],
         ],
@@ -424,7 +436,7 @@ export class PiscineComponent implements OnInit {
         // status: this.form.controls.applicantsStatus.value,
         // gradeStart: this.form.controls.applicantsGradeStart.value,
         // gradeEnd: this.form.controls.applicantsGradeEnd.value,
-        // sort: this.form.controls.applicantsSorter.value,
+        sort: this.form.controls.applicantsSorter.value,
         // updatedApplicant: $updatedApplicant,
       },
     });
@@ -472,7 +484,7 @@ export class PiscineComponent implements OnInit {
     // this.form.controls.applicantsGradeEnd.setValue('all');
     // this.form.controls.applicantsGradeStart.setValue('all');
     // this.form.controls.startDate.setValue('2023-09-03');
-    // this.form.controls.applicantsSorter.setValue('descending');
+    this.form.controls.applicantsSorter.setValue('descending');
     // this.form.controls.applicantsStatus.setValue('all');
     // ! uncomment this later
     this.updateRoute();
@@ -531,5 +543,10 @@ export class PiscineComponent implements OnInit {
     this.searchLoader = false;
     this.showResults = false;
     this.form.controls.searchInput.setValue(null);
+  }
+
+  sort($event) {
+    this.form.controls.applicantsSorter.setValue($event);
+    this.updateRoute();
   }
 }

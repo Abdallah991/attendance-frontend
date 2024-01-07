@@ -22,6 +22,28 @@
       [loader]="loader"
     ></app-button>
   </div>
+  <div class="flex w-full felx-col justify-start gap-4 flex-wrap mt-4 mb-4">
+    <app-single-select
+      [FGN]="form"
+      FCN="applicantsSorter"
+      [data]="applicantsSorter"
+      placeholder="sort"
+      prefix="Sort"
+      (changed)="sort($event)"
+      class="basis-1/8"
+      [preSetValue]="sortPreSet"
+    ></app-single-select>
+    <app-button
+      color="btn-primary"
+      textColor="text-base-100"
+      [medium]="true"
+      (onClick)="resetFilters()"
+      text="Reset Filters"
+      class="min-w-[100px]"
+      [loader]="loader"
+      class="basis-1/8 self-end"
+    ></app-button>
+  </div>
   <div class="mb-4">
     <search-drop-down
       [FGN]="form"
