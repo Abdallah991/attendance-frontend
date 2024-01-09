@@ -1,1 +1,53 @@
-<p>code-wars works!</p>
+<div class="p-4">
+  <div class="flex w-full justify-between">
+    <h1>Warriors</h1>
+    <app-button
+      text="Add Warrior"
+      [medium]="true"
+      class="min-w-[100px]"
+      (onClick)="addWarrior()"
+    ></app-button>
+  </div>
+  <div class="flex flex-row flex-wrap gap-2 my-4">
+    <div
+      *ngFor="let warrior of warriors"
+      class="rounded-[20px] border p-2"
+      (click)="selected(warrior)"
+      [ngClass]="[
+        warrior['selected'] ? 'border-purple border-[3px]' : 'border'
+      ]"
+    >
+      <h2 class="!mb-0">{{ warrior.name }}</h2>
+      <p>{{ warrior.codeWarsId }}</p>
+    </div>
+  </div>
+  <div class="flex flex-row gap-2 w-full">
+    <app-text-field
+      prefix="Name"
+      label="Name"
+      [FGN]="battleForm"
+      FCN="battleName"
+      inputType="text"
+    ></app-text-field>
+    <app-button
+      text="Let's Battle"
+      [medium]="true"
+      class="min-w-[100px] self-end"
+      (onClick)="createBattle()"
+      [loader]="battleLoader"
+      [disabled]="battleLoader"
+    ></app-button>
+  </div>
+  <!-- previous battles -->
+  <div class="flex flex-row flex-wrap gap-2 my-4">
+    <div
+      *ngFor="let battle of battles"
+      class="rounded-[20px] border-[2px] p-4 min-w-[200px]"
+      (click)="battleClicked(battle)"
+    >
+      <h1>{{ battle.name }}</h1>
+      <h3>{{ formulateDate(battle.created_at) }}</h3>
+      <p>{{ battle.warriors.length }} Participants</p>
+    </div>
+  </div>
+</div>

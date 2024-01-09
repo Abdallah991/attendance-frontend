@@ -31,7 +31,6 @@ export class AddWarriorComponent implements OnInit {
     let warriorId = this.warriorForm.controls.codeWarsId.value;
     this.CWS.getWarriorData(warriorId).subscribe(
       (data) => {
-        console.log(data);
         data = {
           name: this.warriorForm.controls.name.value,
           oldScore: data['honor'],
@@ -39,7 +38,6 @@ export class AddWarriorComponent implements OnInit {
           platformId: this.warriorForm.controls.platformId.value,
           codeWarsId: this.warriorForm.controls.codeWarsId.value,
         };
-        console.log(data);
         this.CWS.addWarrior(data).subscribe((data) => {
           console.log(data);
           this.addLoader = false;

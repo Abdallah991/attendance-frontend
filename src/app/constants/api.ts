@@ -66,7 +66,20 @@ export const SP_DECISION_API = ROOTLINK + '/sp-decision';
 // 30- Code Wars user API
 export const CODE_WARS_API = 'https://www.codewars.com/api/v1/users/';
 // 31- Code Wars user API
-export const ADD_WARRIOR_API = ROOTLINK + '/warriors';
+export const ADD_WARRIOR_API = ROOTLINK + '/warrior';
+// 32- get warriors api
+export const GET_WARRIORS_API = ROOTLINK + '/warriors';
+// 33- create battle api
+export const CREATE_BATTLE_API = ROOTLINK + '/create-battle';
+// 34- get battle or battles api
+export const GET_BATTLE_API = ROOTLINK + '/battles';
+// 35- edit battle api
+export const EDIT_BATTLE_API = ROOTLINK + '/edit-battle';
+// 36- add warriors to battle
+export const ADD_WARRIOR_BATTLE_API = ROOTLINK + '/add-warriors-battle';
+// 37- start battle
+export const START_BATTLE_API = ROOTLINK + '/start-battle';
+// 38 - edit battle
 
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer

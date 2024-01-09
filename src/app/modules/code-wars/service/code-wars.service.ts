@@ -6,7 +6,16 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { forkJoin } from 'rxjs';
-import { ADD_WARRIOR_API, CODE_WARS_API } from 'src/app/constants/api';
+import {
+  ADD_WARRIOR_API,
+  ADD_WARRIOR_BATTLE_API,
+  CODE_WARS_API,
+  CREATE_BATTLE_API,
+  EDIT_BATTLE_API,
+  GET_BATTLE_API,
+  GET_WARRIORS_API,
+  START_BATTLE_API,
+} from 'src/app/constants/api';
 import { catchError, map } from 'rxjs/operators';
 import { getToken } from 'src/app/constants/globalMethods';
 
@@ -29,10 +38,22 @@ export class CodeWarsService {
           headers: this.httpOptions,
         })
         .pipe(map((data) => data));
+      return http;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
 
-      http.subscribe((data) => {
-        console.log(data);
-      });
+  // * get Warriors
+  getWarriors(): Observable<any> {
+    try {
+      var http = this.http
+        .get<any>(GET_WARRIORS_API, {
+          headers: this.httpOptions,
+        })
+        .pipe(map((data) => data));
+
       return http;
     } catch (err) {
       console.log(err);
@@ -57,6 +78,100 @@ export class CodeWarsService {
     return forkJoin(observables);
   }
 
+  // create battle
+  createBattle(data): Observable<any> {
+    try {
+      var http = this.http
+        .post<any>(CREATE_BATTLE_API, data, {
+          headers: this.httpOptions,
+        })
+        .pipe(map((data) => data));
+      return http;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  // add warriors to battle
+  addWarriorsTBattle(data) {
+    try {
+      var http = this.http
+        .post<any>(ADD_WARRIOR_BATTLE_API, data, {
+          headers: this.httpOptions,
+        })
+        .pipe(map((data) => data));
+      return http;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  // get all battles
+  getBattles(): Observable<any> {
+    try {
+      var http = this.http
+        .get<any>(GET_BATTLE_API, {
+          headers: this.httpOptions,
+        })
+        .pipe(map((data) => data));
+
+      return http;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  // get battle by id
+  getBattleById(id): Observable<any> {
+    try {
+      var http = this.http
+        .get<any>(GET_BATTLE_API + '/' + id, {
+          headers: this.httpOptions,
+        })
+        .pipe(map((data) => data));
+
+      return http;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  // end battle
+  // get battle by id
+  updateBattle(id, data): Observable<any> {
+    try {
+      var http = this.http
+        .put<any>(EDIT_BATTLE_API + '/' + id, data, {
+          headers: this.httpOptions,
+        })
+        .pipe(map((data) => data));
+      return http;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  // start battle
+  startBattle(data): Observable<any> {
+    try {
+      var http = this.http
+        .post<any>(START_BATTLE_API, data, {
+          headers: this.httpOptions,
+        })
+        .pipe(map((data) => data));
+
+      return http;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+  // * handle error
   // handle error if user does not exisit
   private handleError(error: HttpErrorResponse): Observable<any> {
     if (error.error instanceof ErrorEvent) {
