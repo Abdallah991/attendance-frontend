@@ -1,40 +1,6 @@
 <div class="p-4">
-  <h1>Overview:</h1>
-
-  <!-- <div class="px-4">
-    <canvas id="canvas">{{ chart }}</canvas>
-  </div> -->
-
-  <div class="p-4 mt-8">
-    <h1 (click)="navigateToDetails()">More Details:</h1>
-  </div>
-  <div class="p-4 flex flex-row gap-2">
-    <!-- ! check if I can add change button as sortable and NOT create a new one -->
-    <app-sorter-button
-      color="'btn-primary'"
-      textColor="text-base-100"
-      [small]="true"
-      (onClick)="sortOnLogin($event)"
-      text="Platform ID"
-      class="min-w-[100px]"
-    ></app-sorter-button>
-    <app-sorter-button
-      color="btn-primary"
-      textColor="text-base-100"
-      [small]="true"
-      (onClick)="sortOnLevel($event)"
-      text="Level"
-      class="min-w-[100px]"
-    ></app-sorter-button>
-    <app-sorter-button
-      color="btn-primary"
-      textColor="text-base-100"
-      [small]="true"
-      (onClick)="sortOnAudits($event)"
-      text="Audits"
-      class="min-w-[100px]"
-      [show]="true"
-    ></app-sorter-button>
+  <div class="mt-8">
+    <h1>More Details:</h1>
   </div>
   <div class="p-6 flex flex-col">
     <app-table
@@ -42,13 +8,8 @@
       [columns]="columns"
       [data]="data"
       [actionButtons]="false"
-      (editClicked)="viewCandidate($event)"
       [showPagination]="false"
       [loader]="loader"
     ></app-table>
-  </div>
-
-  <div class="p-4 mt-8">
-    <h1>Audits:</h1>
   </div>
 </div>

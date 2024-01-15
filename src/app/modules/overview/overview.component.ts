@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableButtonOptions, TableData } from 'src/app/interfaces/interfaces';
 import { PROGRESS_HEADER } from 'src/app/constants/headers';
-import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-overview',
@@ -45,7 +44,7 @@ export class OverviewComponent implements OnInit {
       // sort students on transactions attribute
       try {
         if (this.students.length > 0) {
-          this.sortOnAudits(false);
+          this.sortOnLevel(false);
           //  TODO: make a button to switch between this audit with animation
         }
       } catch (e) {
@@ -98,10 +97,7 @@ export class OverviewComponent implements OnInit {
     };
   }
 
-  viewCandidate(id) {
-    this.router.navigateByUrl('/students/view-student/' + id);
-  }
-
+  // sort on level
   sortOnLevel(controller) {
     var sortedStudents = [];
     var students = this.students;
@@ -113,6 +109,7 @@ export class OverviewComponent implements OnInit {
     this.data = this.constructTableData(sortedStudents);
   }
 
+  // sort on login
   sortOnLogin(controller) {
     var sortedStudents = [];
     var students = this.students;
@@ -140,6 +137,7 @@ export class OverviewComponent implements OnInit {
     this.data = this.constructTableData(sortedStudents);
   }
 
+  // sort on audits
   sortOnAudits(controller) {
     var sortedStudents = [];
     var students = this.students;
@@ -155,107 +153,5 @@ export class OverviewComponent implements OnInit {
     this.data = this.constructTableData(sortedStudents);
   }
 
-  // TODO: set up different chart methods here
-  // createChart() {
-  //   var studentsCharts: any = {};
-  //   this.students.forEach((item) => {
-  //     // console.log(item['progressAt']);
-  //     if (!studentsCharts[item['progressAt']]) {
-  //       studentsCharts[item['progressAt']] = 1;
-  //     } else {
-  //       studentsCharts[item['progressAt']]++;
-  //     }
-  //   });
-  //   // get the x-axis labels dynamically
-  //   var labels = [];
-  //   for (let label in studentsCharts) {
-  //     labels.push(label);
-  //   }
-  //   var values = [];
-  //   for (let value in studentsCharts) {
-  //     values.push(studentsCharts[value]);
-  //   }
-  //   console.log(studentsCharts);
-  //   console.log(labels);
-  //   console.log(values);
-  //   // use frequency counter to get to the bottom of these values
-  //   // export the keys to the chart
-  //   this.chart = new Chart('canvas', {
-  //     type: 'bar',
-  //     data: {
-  //       // names of projects
-  //       labels: labels,
-  //       datasets: [
-  //         {
-  //           label: 'Students',
-  //           data: values,
-  //           borderWidth: 2,
-  //         },
-  //       ],
-  //     },
-  //     options: {
-  //       scales: {
-  //         y: {
-  //           beginAtZero: true,
-  //         },
-  //         x: {
-  //           ticks: {
-  //             autoSkip: false,
-  //             maxRotation: 90,
-  //             minRotation: 90,
-  //           },
-  //         },
-  //       },
-  //     },
-  //   });
-  // }
-
-  // createAuditChart() {
-  //   // TODO: Audit Chart
-  //   var studentsAuditsCharts: any = {
-  //     aboveFive: 0,
-  //     aboveOne: 0,
-  //     zero: 0,
-  //   };
-  //   this.students.forEach((item) => {
-  //     // console.log(item['progressAt']);
-  //     if (item['transaction'] > 5) {
-  //       studentsAuditsCharts['aboveFive']++;
-  //     } else if (item['transaction'] > 1) {
-  //       studentsAuditsCharts['aboveOne']++;
-  //     } else {
-  //       studentsAuditsCharts['zero']++;
-  //     }
-  //   });
-  //   //
-  //   this.auditChart = new Chart('auditCanvas', {
-  //     type: 'bar',
-  //     data: {
-  //       // names of projects
-  //       labels: ['More Than 5 Audits', 'More than 1 audit', 'No Audits'],
-  //       datasets: [
-  //         {
-  //           label: 'Audits',
-  //           data: [
-  //             studentsAuditsCharts['aboveFive'],
-  //             studentsAuditsCharts['aboveOne'],
-  //             studentsAuditsCharts['zero'],
-  //           ],
-  //           borderWidth: 2,
-  //         },
-  //       ],
-  //     },
-  //     options: {
-  //       scales: {
-  //         y: {
-  //           beginAtZero: true,
-  //         },
-  //       },
-  //     },
-  //   });
-  // }
-
-  async navigateToDetails() {
-    this.router.navigate(['overview/cohort-detailed']);
-  }
+  // sort on date as well
 }
