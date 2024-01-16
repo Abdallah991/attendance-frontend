@@ -1,10 +1,13 @@
 export const STUDENT_HEADER = [
-  'Sequence',
+  // 'Sequence',
   'ID',
   'Name',
   'Cohort',
   'Phone',
   'Platform ID',
+  'Level',
+  'Progress At',
+  'Last Activity',
 ];
 export const USER_HEADER = ['Id', 'Name', 'Join Date', 'Email'];
 export const APPLICANTS_HEADER = [
