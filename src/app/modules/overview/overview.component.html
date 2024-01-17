@@ -11,33 +11,17 @@
       qualificationChart
     }}</canvas>
   </div>
-  <h1
-    class="px-8 underline self-end w-[15%] cursor-pointer"
-    (click)="navigateToDetails()"
-  >
-    More >>>
-  </h1>
 </div>
 
 <div class="flex p-8 gap-4 justify-start">
   <div class="flex-1 w-[65%] h-[50vh]">
     <h2>Age</h2>
-    <canvas id="ageCanvas" class="cursor-pointer">{{ ageChart }}</canvas>
+    <canvas id="ageCanvas" class="cursor-pointer mb-4">{{ ageChart }}</canvas>
   </div>
   <div class="flex-2 h-[50vh] w-[25%]">
     <h2>Nationality</h2>
-    <canvas id="nationalityCanvas" class="cursor-pointer">{{
+    <canvas id="nationalityCanvas" class="cursor-pointer mb-4">{{
       nationalityChart
     }}</canvas>
   </div>
-</div>
-<div class="pt-16 flex flex-row justify-between">
-  <h1 class="px-8">Cohort Progress</h1>
-</div>
-
-<div class="p-8">
-  <canvas id="canvas" class="cursor-pointer">{{ chart }}</canvas>
-</div>
-<div class="p-8">
-  <canvas id="auditCanvas" class="cursor-pointer">{{ auditChart }}</canvas>
 </div>

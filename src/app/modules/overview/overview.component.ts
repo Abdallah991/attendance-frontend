@@ -39,7 +39,6 @@ export class OverviewComponent implements OnInit {
           this.createQualificationChart();
           this.createAgeChart();
           this.createNationalityChart();
-          this.createAuditChart();
         }
       } catch (e) {
         console.log(e);
@@ -315,52 +314,5 @@ export class OverviewComponent implements OnInit {
         },
       },
     });
-  }
-
-  createAuditChart() {
-    var studentsAuditsCharts: any = {
-      aboveFive: 0,
-      aboveOne: 0,
-      zero: 0,
-    };
-    this.studentsProgress.forEach((item) => {
-      if (item['transaction'] > 5) {
-        studentsAuditsCharts['aboveFive']++;
-      } else if (item['transaction'] > 1) {
-        studentsAuditsCharts['aboveOne']++;
-      } else {
-        studentsAuditsCharts['zero']++;
-      }
-    });
-    //
-    this.auditChart = new Chart('auditCanvas', {
-      type: 'bar',
-      data: {
-        // names of projects
-        labels: ['More Than 5 Audits', 'More than 1 audit', 'No Audits'],
-        datasets: [
-          {
-            label: 'Audits',
-            data: [
-              studentsAuditsCharts['aboveFive'],
-              studentsAuditsCharts['aboveOne'],
-              studentsAuditsCharts['zero'],
-            ],
-            borderWidth: 2,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
-  }
-
-  async navigateToDetails() {
-    this.router.navigate(['overview/cohort-detailed']);
   }
 }
