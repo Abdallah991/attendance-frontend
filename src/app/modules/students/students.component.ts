@@ -82,9 +82,6 @@ export class StudentsComponent implements OnInit {
         if (reload) {
           window.location.reload();
         }
-        // params.subscribe((value) => {
-        //   console.log(value);
-        // });
       }
     });
   }

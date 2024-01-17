@@ -6,6 +6,7 @@ import {
   ATTENDNACE_API,
   BIRTHDAYS_API,
   SEARCH_API,
+  STATISTICS_API,
   STUDENT_API,
   SYNC_STUDENTS_API,
 } from 'src/app/constants/api';
@@ -144,6 +145,24 @@ export class StudentsService {
       var http = this.http
         .get<any>(SYNC_STUDENTS_API, { headers: this.httpOptions })
         .pipe(map((data) => data));
+      return http;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+
+  // return an observable of students progress
+  public syncStudentsProgress(): Observable<any> {
+    try {
+      // get the data from the url
+      var http = this.http
+        .get<any>(STATISTICS_API, { headers: this.httpOptions })
+        .pipe(map((data) => data));
+      http.subscribe((val) => {
+        console.log(val);
+      });
+
       return http;
     } catch (err) {
       console.log(err);

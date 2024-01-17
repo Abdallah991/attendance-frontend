@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { OverviewService } from './overview.service';
 import { Observable, of } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
+import { StudentsService } from '../../students/services/students.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OverviewResolver implements Resolve<any> {
-  constructor(private OS: OverviewService) {}
+  constructor(private SS: StudentsService) {}
 
   resolve(): Observable<any> {
     // get all students progress
-    return this.OS.getStudentsProgress().pipe(
+    return this.SS.getStudents().pipe(
       catchError((error) => {
-        //! test this on production
         return of('No data');
       }),
       first()
