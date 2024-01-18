@@ -20,8 +20,6 @@ export class AssistantGuard implements CanActivate {
   ): boolean {
     // Implement your logic to check if the user is allowed to access the page
     // For example, you can check the user's role or any other condition
-
-    console.log(getUser());
     // Assume is allowed is false
     var isAllowed = false;
     TEAM.forEach((element) => {

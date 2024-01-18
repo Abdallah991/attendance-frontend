@@ -70,7 +70,6 @@ export class StudentsComponent implements OnInit {
       try {
         this.students = response?.students?.data?.students;
         if (this.students.length > 0) {
-          console.log(this.students);
           this.data = this.constructTableData(this.students);
         } else {
           this.showAddButton = true;
@@ -216,15 +215,19 @@ export class StudentsComponent implements OnInit {
 
   // sync applicants and update the table
   syncStudentsData() {
-    // this.loader = true;
-    this.SS.syncStudents().subscribe((value) => {
-      //   // console.log(value);
-      //   this.loader = false;
-      //   this.resetFilters();
-      this.router.navigate([], {
-        queryParams: {
-          syncStudents: Math.random(),
-        },
+    this.loader = true;
+    // sync students progress with platform
+    this.SS.syncStudentsProgress().subscribe((value) => {
+      console.log(value);
+      // sync students data with platform
+      this.SS.syncStudents().subscribe((val) => {
+        console.log(val);
+        this.loader = false;
+        this.router.navigate([], {
+          queryParams: {
+            syncStudents: Math.random(),
+          },
+        });
       });
     });
   }

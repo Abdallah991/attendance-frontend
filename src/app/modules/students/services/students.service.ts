@@ -159,9 +159,6 @@ export class StudentsService {
       var http = this.http
         .get<any>(STATISTICS_API, { headers: this.httpOptions })
         .pipe(map((data) => data));
-      http.subscribe((val) => {
-        console.log(val);
-      });
 
       return http;
     } catch (err) {

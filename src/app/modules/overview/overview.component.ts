@@ -28,8 +28,6 @@ export class OverviewComponent implements OnInit {
       // this.studentsProgress = response?.studentsProgress;
       Chart.register(...registerables);
 
-      console.log(this.students);
-
       // sort students on transactions attribute
       try {
         if (this.students.length > 0) {

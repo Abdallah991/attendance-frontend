@@ -52,6 +52,7 @@ export class AddStudentComponent implements OnInit {
     // get cohort data from resolver
     this.AR.data.subscribe((data) => {
       this.cohorts = data.cohorts.data.cohorts;
+      console.log(this.cohorts);
       // map cohort object to drop down list
       this.cohortsSelectedData = this.cohorts.map((cohort) => {
         return {
