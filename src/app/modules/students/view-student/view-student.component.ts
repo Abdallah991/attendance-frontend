@@ -67,6 +67,7 @@ export class ViewStudentComponent implements OnInit {
       this.cohort = response.cohorts.data.cohorts[0];
       // Attendnace data
       this.attendance = response.attendance.data;
+      console.log(this.attendance);
       // frequency counter to see how many times the students punches
       // TODO:add the time when there is multiple occurences
       // TODO: set a default time when there is on occurance

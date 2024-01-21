@@ -49,7 +49,7 @@ export class ApplicantsStatusComponent implements OnInit {
     // if there is a start date in the url, its it, if not its may 14th
     var startDate = snapshot.queryParamMap.get('startDate')
       ? snapshot.queryParamMap.get('startDate')
-      : '2023-09-03';
+      : '2023-11-19';
     // if there is a end date in the url, its it, if not its tomorrow
     var endDate = snapshot.queryParamMap.get('endDate')
       ? snapshot.queryParamMap.get('endDate')
@@ -182,9 +182,6 @@ export class ApplicantsStatusComponent implements OnInit {
     return applicants.map((res) => {
       sequence++;
       // convert progresses to json // get the last progress //get the last word of that progress
-      // console.log(res['progresses']);
-      // console.log(res['platformId']);
-
       var progresses = JSON.parse(res['progresses'])
         .pop()
         ?.path.split('/')
@@ -285,6 +282,7 @@ export class ApplicantsStatusComponent implements OnInit {
         gradeEnd: this.form.controls.applicantsGradeEnd.value,
         sort: this.form.controls.applicantsSorter.value,
         updatedApplicant: $updatedApplicant,
+        rand: Math.random(),
       },
     });
   }
@@ -293,7 +291,7 @@ export class ApplicantsStatusComponent implements OnInit {
   resetFilters() {
     this.form.controls.applicantsGradeEnd.setValue('all');
     this.form.controls.applicantsGradeStart.setValue('all');
-    this.form.controls.startDate.setValue('2023-09-03');
+    this.form.controls.startDate.setValue('2023-11-19');
     this.form.controls.endDate.setValue(this.tomorrowDate);
     this.form.controls.applicantsSorter.setValue('descending');
     this.form.controls.applicantsStatus.setValue('all');

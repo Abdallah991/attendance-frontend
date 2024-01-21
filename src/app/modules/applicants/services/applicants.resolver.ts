@@ -20,7 +20,7 @@ export class ApplicantsResolver implements Resolve<any> {
     // if there is a start date, its it, if not its may 14th
     var startDate = route.queryParamMap.get('startDate')
       ? route.queryParamMap.get('startDate')
-      : '2023-09-03';
+      : '2023-11-19';
     // if there is a end date, its it, if not its tomorrow
     var endDate = route.queryParamMap.get('endDate')
       ? route.queryParamMap.get('endDate')

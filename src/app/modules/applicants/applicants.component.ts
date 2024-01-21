@@ -26,7 +26,7 @@ export class ApplicantsComponent implements OnInit {
     var tomorrowDate = formatYYYYDDMM(todayDate);
     // TODO: set the date in the form
     this.form = this.fb.group({
-      startDate: ['2023-09-03', Validators.required],
+      startDate: ['2023-11-19', Validators.required],
       endDate: [tomorrowDate, Validators.required],
     });
   }
