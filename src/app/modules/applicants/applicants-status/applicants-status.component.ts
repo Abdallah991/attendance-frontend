@@ -311,7 +311,7 @@ export class ApplicantsStatusComponent implements OnInit {
   // * check-ins counts
   // get the number of how many users signed up to the checkin on the platform
   getCheckInCount1() {
-    this.AS.checkInCount(96).subscribe((val) => {
+    this.AS.checkInCount(111).subscribe((val) => {
       this.registeredToCheckIn1 = val;
     });
   }
