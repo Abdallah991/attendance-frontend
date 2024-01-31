@@ -2,7 +2,7 @@
   <h1>{{ title }}</h1>
 
   <div class="flex mt-8 w-full gap-4">
-    <div class="w-1/2 flex flex-col gap-4">
+    <div class="w-1/2 flex flex-col gap-2">
       <app-text-field
         prefix="Student ID"
         label="Student ID"
@@ -47,10 +47,31 @@
         please fill CPR number containing at least 9 digits
       </div>
       <app-text-field
-        prefix="Acadamic Specilaization"
-        label="Acadamic Specilaization"
+        prefix="Academic Specilaization"
+        label="Academic Specilaization"
         [FGN]="studentForm"
-        FCN="acadamicSpecialization"
+        FCN="academicSpecialization"
+        inputType="text"
+      ></app-text-field>
+      <app-text-field
+        prefix="Acadamic Institute"
+        label="Acadamic Institute"
+        [FGN]="studentForm"
+        FCN="academicInstitute"
+        inputType="text"
+      ></app-text-field>
+      <app-text-field
+        prefix="Current Job Title"
+        label="Current Job Title"
+        [FGN]="studentForm"
+        FCN="currentJobTitle"
+        inputType="text"
+      ></app-text-field>
+      <app-text-field
+        prefix="Company name & CR"
+        label="Company Name & CR"
+        [FGN]="studentForm"
+        FCN="companyNameAndCr"
         inputType="text"
       ></app-text-field>
       <app-single-select
@@ -63,8 +84,92 @@
         preSetValue="2"
         [disabled]="true"
       ></app-single-select>
+      <app-single-select
+        prefix="SP"
+        label="SP"
+        [FGN]="studentForm"
+        FCN="sp"
+        placeholder="Select SP"
+        [data]="spSelectedData"
+        (changed)="spOnChange($event)"
+      ></app-single-select>
     </div>
-    <div class="col-span-1 w-1/2 flex flex-col">
+    <div class="col-span-1 w-1/2 gap-2 flex flex-col">
+      <app-single-select
+        prefix="Marital Status"
+        label="Marital Status"
+        [FGN]="studentForm"
+        FCN="maritalStatus"
+        placeholder="Select status"
+        [data]="maritalStatusSelectedData"
+        (changed)="maritalStatusChange($event)"
+      ></app-single-select>
+      <app-single-select
+        prefix="Occupation"
+        label="Occupation"
+        [FGN]="studentForm"
+        FCN="occupation"
+        placeholder="Select occupation"
+        [data]="occupationSelectedData"
+        (changed)="occupationChange($event)"
+      ></app-single-select>
+      <app-single-select
+        prefix="Highest Degree"
+        label="Highest Degree"
+        [FGN]="studentForm"
+        FCN="highestDegree"
+        placeholder="Select degree"
+        [data]="highestDegreeSelectedData"
+        (changed)="degreeChange($event)"
+      ></app-single-select>
+
+      <app-single-select
+        prefix="Sponsorship"
+        label="Sponsorship"
+        [FGN]="studentForm"
+        FCN="sponsorship"
+        placeholder="Select sponsorship"
+        [data]="sponsorshipSelectedData"
+        (changed)="sponsorshipChange($event)"
+      ></app-single-select>
+      <app-single-select
+        prefix="Unipal"
+        label="Unipal"
+        [FGN]="studentForm"
+        FCN="unipal"
+        placeholder="Select enrollment"
+        [data]="yesNoSelectedData"
+        (changed)="unipalChange($event)"
+      ></app-single-select>
+      <app-single-select
+        prefix="Discord"
+        label="Discord"
+        [FGN]="studentForm"
+        FCN="discord"
+        placeholder="Select enrollment"
+        [data]="yesNoSelectedData"
+        (changed)="discordChange($event)"
+      ></app-single-select>
+      <app-single-select
+        prefix="Train me"
+        label="Train me"
+        [FGN]="studentForm"
+        FCN="trainMe"
+        placeholder="Select enrollment"
+        [data]="yesNoSelectedData"
+        (changed)="trainMeChange($event)"
+      ></app-single-select>
+      <div>
+        <span class="font-semibold text-sm text-[#848484]">
+          Graduation Date
+        </span>
+        <app-date-picker
+          label="Graduation date"
+          [FGN]="studentForm"
+          FCN="graduationDate"
+          (onChange)="graduationDataSelected($event)"
+        ></app-date-picker>
+      </div>
       <b
         >Please Add the students who enrolled in the cohort only, follow these
         please:</b
@@ -90,8 +195,9 @@
       class="min-w-[100px]"
       (onClick)="addStudent()"
       [loader]="addLoader"
-      [disabled]="!studentForm.valid"
     ></app-button>
+    <!-- [disabled]="!studentForm.valid" -->
+
     <app-button
       text="Cancel"
       [medium]="true"

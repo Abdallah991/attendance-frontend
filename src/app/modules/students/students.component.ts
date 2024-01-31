@@ -69,6 +69,7 @@ export class StudentsComponent implements OnInit {
     this.AR.data.subscribe((response: any) => {
       try {
         this.students = response?.students?.data?.students;
+        console.log(this.students);
         if (this.students.length > 0) {
           this.data = this.constructTableData(this.students);
         } else {

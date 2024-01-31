@@ -115,3 +115,47 @@ export const CODE_WARS = [
   'Emahfoodh',
   'Abdallah991',
 ];
+
+export const MARITAL_STATUS: SelectData[] = [
+  { id: 1, text: 'Single' },
+  { id: 2, text: 'Married' },
+  { id: 3, text: 'Widow' },
+  { id: 4, text: 'Divorced' },
+];
+
+export const HIGHEST_DEGREE: SelectData[] = [
+  { id: 1, text: 'High School' },
+  { id: 2, text: 'Bachelors' },
+  { id: 3, text: 'Diploma' },
+  { id: 4, text: 'Masters' },
+  { id: 5, text: 'Phd' },
+  { id: 6, text: 'Others' },
+];
+
+export const OCCUPATION: SelectData[] = [
+  { id: 1, text: 'Student' },
+  { id: 2, text: 'Employed' },
+  { id: 3, text: 'Internship' },
+  { id: 4, text: 'Job Seeker' },
+  { id: 5, text: 'Entrepreneur' },
+  { id: 6, text: 'Others' },
+];
+
+export const SPONSORSHIP: SelectData[] = [
+  { id: 1, text: 'Tamkeen' },
+  { id: 2, text: 'Personal' },
+  { id: 3, text: 'Corporate' },
+  { id: 4, text: 'Scholarship' },
+];
+
+export const YESNO: SelectData[] = [
+  { id: 1, text: 'Yes' },
+  { id: 2, text: 'No' },
+];
+
+export const SP: SelectData[] = [
+  { id: 1, text: 'SP1' },
+  { id: 2, text: 'SP2' },
+  { id: 3, text: 'SP3' },
+  { id: 4, text: 'SP4' },
+];

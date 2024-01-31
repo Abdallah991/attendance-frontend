@@ -131,7 +131,7 @@ export class ApplicantsStatusComponent implements OnInit {
     // get the table data
     this.getTableData();
     this.getCheckInCount1();
-    // this.getCheckInCount2();
+    this.getCheckInCount2();
     this.getSpCount();
   }
 
@@ -317,11 +317,11 @@ export class ApplicantsStatusComponent implements OnInit {
   }
 
   // get the number of how many users signed up to the checkin on the platform
-  // getCheckInCount2() {
-  //   this.AS.checkInCount(79).subscribe((val) => {
-  //     this.registeredToCheckIn2 = val;
-  //   });
-  // }
+  getCheckInCount2() {
+    this.AS.checkInCount(119).subscribe((val) => {
+      this.registeredToCheckIn2 = val;
+    });
+  }
 
   // * SP  count
   // get the number of how many users signed up to the checkin on the platform
