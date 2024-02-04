@@ -35,11 +35,24 @@ const routes: Routes = [
     },
   },
   {
+    // add student
     path: 'add-student',
     component: AddStudentComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     resolve: {
+      type: () => 'create',
       cohorts: CohortsResolver,
+    },
+  },
+  {
+    // edit student
+    path: 'edit-student/:studentId',
+    component: AddStudentComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    resolve: {
+      type: () => 'edit',
+      cohorts: CohortsResolver,
+      student: ViewStudentResolver,
     },
   },
 

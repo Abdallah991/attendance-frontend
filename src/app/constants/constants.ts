@@ -150,7 +150,7 @@ export const SPONSORSHIP: SelectData[] = [
 
 export const YESNO: SelectData[] = [
   { id: 1, text: 'Yes' },
-  { id: 2, text: 'No' },
+  { id: 0, text: 'No' },
 ];
 
 export const SP: SelectData[] = [

@@ -12,7 +12,6 @@ export class ViewStudentResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     let studentId = route.params.studentId;
-
     // get candidate by Id
     return this.SS.getStudentById(studentId).pipe(
       catchError((error) => {

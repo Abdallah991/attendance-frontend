@@ -2,23 +2,23 @@
   <div class="flex flex-row justify-between">
     <h1>{{ student.firstName }} {{ student.lastName }}</h1>
     <div class="flex flex-row gap-4">
-      <!-- <app-button
+      <!-- * Depending on the row -->
+      <app-button
         color="btn-primary"
         textColor="text-base-100"
         [small]="true"
-        (onClick)="copyEmail()"
-        text="Copy Email"
+        text="Edit"
         class="min-w-[100px]"
-        class="cursor-not-allowed"
+        (onClick)="editStudent()"
       ></app-button>
       <app-button
         color="btn-primary"
         textColor="text-base-100"
         [small]="true"
-        (onClick)="copyPlatformId()"
-        text="Copy Platform ID"
+        text="Delete"
         class="min-w-[100px]"
-      ></app-button> -->
+        (onClick)="deleteStudent()"
+      ></app-button>
     </div>
   </div>
   <div class="data-container">

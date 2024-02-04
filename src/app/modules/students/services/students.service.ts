@@ -75,6 +75,26 @@ export class StudentsService {
     return promise;
   }
 
+  public async updateStudent(student: any): Promise<any> {
+    let promise = new Promise<any>(async (resolve, reject) => {
+      this.http
+        .put<any>(STUDENT_API + '/' + student.id, student, {
+          headers: this.httpOptions,
+        })
+        .subscribe(
+          (value) => {
+            resolve(value);
+          },
+          (error) => {
+            console.log('the api call failed: ', error);
+            reject(error);
+          }
+        );
+    });
+    // deactivate the loader
+    return promise;
+  }
+
   // get candidate by id api
   getStudentById(id): Observable<any> {
     try {

@@ -81,8 +81,8 @@
         FCN="cohortId"
         placeholder="Select Cohort"
         [data]="cohortsSelectedData"
-        preSetValue="2"
-        [disabled]="true"
+        [preSetValue]="cohortPreSetValue"
+        (changed)="cohortOnChange($event)"
       ></app-single-select>
       <app-single-select
         prefix="SP"
@@ -92,6 +92,7 @@
         placeholder="Select SP"
         [data]="spSelectedData"
         (changed)="spOnChange($event)"
+        [preSetValue]="spValue"
       ></app-single-select>
     </div>
     <div class="col-span-1 w-1/2 gap-2 flex flex-col">
@@ -103,6 +104,7 @@
         placeholder="Select status"
         [data]="maritalStatusSelectedData"
         (changed)="maritalStatusChange($event)"
+        [preSetValue]="maritalStatusPreSetValue"
       ></app-single-select>
       <app-single-select
         prefix="Occupation"
@@ -112,6 +114,7 @@
         placeholder="Select occupation"
         [data]="occupationSelectedData"
         (changed)="occupationChange($event)"
+        [preSetValue]="occupationPreSetValue"
       ></app-single-select>
       <app-single-select
         prefix="Highest Degree"
@@ -121,6 +124,7 @@
         placeholder="Select degree"
         [data]="highestDegreeSelectedData"
         (changed)="degreeChange($event)"
+        [preSetValue]="degreePreSetValue"
       ></app-single-select>
 
       <app-single-select
@@ -131,6 +135,7 @@
         placeholder="Select sponsorship"
         [data]="sponsorshipSelectedData"
         (changed)="sponsorshipChange($event)"
+        [preSetValue]="sponsorshipPreSetValue"
       ></app-single-select>
       <app-single-select
         prefix="Unipal"
@@ -140,6 +145,7 @@
         placeholder="Select enrollment"
         [data]="yesNoSelectedData"
         (changed)="unipalChange($event)"
+        [preSetValue]="unipalPreSetValue"
       ></app-single-select>
       <app-single-select
         prefix="Discord"
@@ -149,6 +155,7 @@
         placeholder="Select enrollment"
         [data]="yesNoSelectedData"
         (changed)="discordChange($event)"
+        [preSetValue]="discordPreSetValue"
       ></app-single-select>
       <app-single-select
         prefix="Train me"
@@ -158,6 +165,7 @@
         placeholder="Select enrollment"
         [data]="yesNoSelectedData"
         (changed)="trainMeChange($event)"
+        [preSetValue]="trainMePreSetValue"
       ></app-single-select>
       <div>
         <span class="font-semibold text-sm text-[#848484]">
@@ -193,7 +201,7 @@
       [text]="title"
       [medium]="true"
       class="min-w-[100px]"
-      (onClick)="addStudent()"
+      (onClick)="mutateStudent()"
       [loader]="addLoader"
     ></app-button>
     <!-- [disabled]="!studentForm.valid" -->

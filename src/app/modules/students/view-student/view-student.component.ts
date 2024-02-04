@@ -232,4 +232,12 @@ export class ViewStudentComponent implements OnInit {
         });
     }
   }
+
+  // edit student
+  editStudent() {
+    // edit student
+    this.router.navigateByUrl('/students/edit-student/' + this.student.id);
+  }
+  // delete student
+  deleteStudent() {}
 }
