@@ -92,7 +92,7 @@ export class AddStudentComponent implements OnInit {
       graduationDate: ['', Validators.required],
       academicInstitute: ['', Validators.required],
       currentJobTitle: ['', Validators.required],
-      companyNameAndCr: ['', Validators.required],
+      companyNameAndCR: ['', Validators.required],
       sp: ['', Validators.required],
     });
 
@@ -146,7 +146,7 @@ export class AddStudentComponent implements OnInit {
       graduationDate: this.graduationDate,
       academicInstitute: this.studentForm.controls.academicInstitute.value,
       currentJobTitle: this.studentForm.controls.currentJobTitle.value,
-      companyNameAndCr: this.studentForm.controls.companyNameAndCr.value,
+      companyNameAndCR: this.studentForm.controls.companyNameAndCR.value,
       sp: this.spValue,
     };
     console.log(studentInput);
@@ -177,6 +177,7 @@ export class AddStudentComponent implements OnInit {
     } else {
       await this.SS.updateStudent(studentInput)
         .then((student) => {
+          console.log(student);
           // if the api call is successful
           this.student = new Student(student.data.student);
           this.studentForm.reset();
@@ -184,7 +185,8 @@ export class AddStudentComponent implements OnInit {
             this.student.firstName +
             ' ' +
             this.student?.lastName +
-            ' Has been Added!';
+            ' Has been Edited!';
+          this.message = 'WoOoOw what a nice SIS-tem!!';
         })
         .catch((err) => {
           console.log('the error value is ', err);
@@ -269,6 +271,9 @@ export class AddStudentComponent implements OnInit {
     ).text;
     console.log(this.discordValue);
   }
+  // discordValue = 'Yes';
+  // unipalValue = 'Yes';
+  // trainMeValue = 'Yes';
 
   trainMeChange($event) {
     this.trainMeValue = this.yesNoSelectedData.find(
@@ -305,7 +310,11 @@ export class AddStudentComponent implements OnInit {
     );
     this.studentForm.controls.currentJobTitle.setValue(data.currentJobTitle);
     this.studentForm.controls.graduationDate.setValue(data.graduationDate);
-
+    if (data.companyNameAndCR) {
+      this.studentForm.controls.companyNameAndCR.setValue(
+        data.companyNameAndCR
+      );
+    }
     // get the sp value
     if (data.sp != null) {
       var sp = this.spSelectedData.find(

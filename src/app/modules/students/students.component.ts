@@ -8,6 +8,8 @@ import {
 } from 'src/app/interfaces/interfaces';
 import { StudentsService } from './services/students.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { getUser } from 'src/app/constants/globalMethods';
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
   selector: 'app-candidates',
@@ -19,7 +21,8 @@ export class StudentsComponent implements OnInit {
     private AR: ActivatedRoute,
     private SS: StudentsService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private AS: AuthService
   ) {
     this.searchForm = this.fb.group({
       searchInput: ['', Validators.required],
@@ -59,12 +62,37 @@ export class StudentsComponent implements OnInit {
   button2 = 'Confirm';
   // delete student id
   deleteId = null;
+  // admin view
+  adminView: boolean = false;
 
+  // get the roles and permissions
   ngOnInit(): void {
-    this.getTableData();
+    this.AS.roles()
+      .then((res) => {
+        res.forEach((element) => {
+          if (element.id === getUser().roleId) {
+            if (element.name === 'Admin') {
+              this.adminView = true;
+            }
+            if (element.name === 'User') {
+              this.adminView = false;
+            }
+          }
+        });
+        this.getTableData();
+      })
+      .catch((err) => {
+        console.log(err);
+        this.getTableData();
+      });
   }
 
-  // TODO: make sure that this function works properly and loads the data
+  // TODO: depending on admin view value
+  // * data will look different for user and Admin.
+  // * Admin will show all values and will have add notes button.
+  // * images can be added or retrived from platform.
+  // * apply pagination
+  // * a big number of columns
   getTableData() {
     this.AR.data.subscribe((response: any) => {
       try {
@@ -121,7 +149,7 @@ export class StudentsComponent implements OnInit {
       },
       // delete button
       delete: {
-        isActive: true,
+        isActive: this.adminView,
         text: 'Delete',
       },
     };
