@@ -4,6 +4,7 @@ import {
   LOGIN_API,
   LOGOUT_API,
   PASSWORD_API,
+  ROLES_API,
   UPDATE_TOKEN_API,
 } from 'src/app/constants/api';
 import { TOKENSUBJECT } from 'src/app/constants/constants';
@@ -101,6 +102,19 @@ export class AuthService {
       );
     });
   }
+
+  public async roles(): Promise<any> {
+    return new Promise<any>(async (resolve, reject) => {
+      this.http.get(ROLES_API, { headers: this.httpOptions }).subscribe(
+        (response) => {
+          resolve(response);
+        },
+        (error) => reject(error)
+      );
+    });
+  }
+
+  // public update
 
   // public getToken(): string {
   //   return TOKEN.value;
