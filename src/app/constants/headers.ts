@@ -1,5 +1,5 @@
 export const STUDENT_HEADER = [
-  // 'Sequence',
+  'Profile',
   'ID',
   'Name',
   'Cohort',

@@ -64,15 +64,13 @@
               class="min-w-[80px]"
             ></app-button>
           </td>
-          <!-- Check points indicator -->
-          <td
+          <!-- ! Check points indicator, only for SP table  -->
+          <!-- <td
             class="text-tertiary text-center min-h-[60px] min-w-[10rem] max-w-[20rem] overflow-hidden text-ellipsis whitespace-break-spaces"
             *ngIf="actionButtons && image"
             [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
           >
-            <!-- add the title and the loop -->
             <div class="flex flex-row justify-start gap-4">
-              <!-- The loop is here -->
               <div
                 class="flex flex-col gap-1"
                 *ngFor="let check of items.checkpoint"
@@ -85,14 +83,9 @@
                   *ngIf="check == 0"
                   [ngClass]="check == 0 ? 'gray-dot' : 'dot'"
                 ></span>
-
-                <!-- <span class="dot"></span> -->
-                <!-- <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span> -->
               </div>
             </div>
-          </td>
+          </td> -->
           <td
             *ngIf="actionButtons && image"
             [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"

@@ -6,6 +6,7 @@ import {
   SP_APPLICANT_COMMENT_API,
   SP_DECISION_API,
   UPLOAD_IMAGE,
+  UPLOAD_STUDENT,
 } from 'src/app/constants/api';
 import { getToken } from 'src/app/constants/globalMethods';
 
@@ -62,6 +63,26 @@ export class CommentService {
       // get the data from the url
       var http = this.http
         .post<any>(UPLOAD_IMAGE, file, {
+          headers: this.httpOptionsImage,
+        })
+        .pipe(map((data) => data));
+
+      http.subscribe((data) => {
+        console.log(data);
+      });
+      return http;
+    } catch (err) {
+      console.log(err);
+      // disable the loader and return if there is an error
+      return err;
+    }
+  }
+
+  uploadStudentImage(file): Observable<any> {
+    try {
+      // get the data from the url
+      var http = this.http
+        .post<any>(UPLOAD_STUDENT, file, {
           headers: this.httpOptionsImage,
         })
         .pipe(map((data) => data));

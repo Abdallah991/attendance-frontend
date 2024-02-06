@@ -10,6 +10,7 @@ import { StudentsService } from './services/students.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { getUser } from 'src/app/constants/globalMethods';
 import { AuthService } from '../auth/services/auth.service';
+import { CommentService } from '../piscine/services/comment.service';
 
 @Component({
   selector: 'app-candidates',
@@ -22,7 +23,8 @@ export class StudentsComponent implements OnInit {
     private SS: StudentsService,
     private router: Router,
     private fb: FormBuilder,
-    private AS: AuthService
+    private AS: AuthService,
+    private CS: CommentService
   ) {
     this.searchForm = this.fb.group({
       searchInput: ['', Validators.required],
@@ -64,6 +66,8 @@ export class StudentsComponent implements OnInit {
   deleteId = null;
   // admin view
   adminView: boolean = false;
+  // student id
+  studentId = '';
 
   // get the roles and permissions
   ngOnInit(): void {
@@ -133,6 +137,7 @@ export class StudentsComponent implements OnInit {
           res['progressAt'],
           res['auditDate'],
         ],
+        profileImage: res['profilePicture'],
         // the action buttons
         actionButtons: this.constructTableButton(),
       };
@@ -259,6 +264,39 @@ export class StudentsComponent implements OnInit {
         });
       });
     });
+  }
+
+  imageClicked($event) {
+    // console.log($event);
+    this.studentId = $event;
+    console.log(this.studentId);
+    // add information about the dialog appearing
+    this.uploadPicture();
+  }
+
+  // show uploadPicture
+  async uploadPicture() {
+    document.querySelector<HTMLElement>('#uploadImage')?.click();
+  }
+
+  getAddedFile = (file) => {
+    console.log(file.name);
+
+    const formData = new FormData();
+    formData.append('image', file, this.studentId);
+    this.CS.uploadStudentImage(formData).subscribe((data) => {
+      console.log(data);
+      // * lets see if we need to update route
+      // this.updateRoute();
+    });
+    // What it does:
+    // Emits the image from app-upload-file-dragdrop component
+    if (file.size > 1000024) {
+      // this.errorMsg = 'Image is above 1 MB limit';
+    }
+  };
+  uploadDialogClick($event) {
+    console.log('upload dialog click: ', $event);
   }
 
   dismiss() {}

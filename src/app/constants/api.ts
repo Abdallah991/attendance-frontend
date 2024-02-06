@@ -79,8 +79,8 @@ export const EDIT_BATTLE_API = ROOTLINK + '/edit-battle';
 export const ADD_WARRIOR_BATTLE_API = ROOTLINK + '/add-warriors-battle';
 // 37- start battle
 export const START_BATTLE_API = ROOTLINK + '/start-battle';
-// 38 - edit battle
-
+// 38- upload image
+export const UPLOAD_STUDENT = ROOTLINK + '/upload-student';
 // TODO: Remove API and TOKEN
 // Bio time transactions and punch in data Ebrahim's Computer
 export const BIO_ATTENDANCE_API = 'http://10.1.50.4:80';
