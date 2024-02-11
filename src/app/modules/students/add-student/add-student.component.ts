@@ -207,7 +207,17 @@ export class AddStudentComponent implements OnInit {
     this.router.navigateByUrl('/students');
   }
 
-  async dismiss() {}
+  async dismiss() {
+    this.updateRoute();
+  }
+
+  updateRoute() {
+    this.router.navigate([], {
+      queryParams: {
+        rand: Math.random(),
+      },
+    });
+  }
 
   // set the gender value to the form when selected
   cohortSelected(event: number) {
@@ -310,6 +320,8 @@ export class AddStudentComponent implements OnInit {
     );
     this.studentForm.controls.currentJobTitle.setValue(data.currentJobTitle);
     this.studentForm.controls.graduationDate.setValue(data.graduationDate);
+    this.graduationDate = data.graduationDate;
+
     if (data.companyNameAndCR) {
       this.studentForm.controls.companyNameAndCR.setValue(
         data.companyNameAndCR
@@ -330,33 +342,47 @@ export class AddStudentComponent implements OnInit {
         (option) => option.text === data.maritalStatus
       ).id;
       this.maritalStatusPreSetValue = Number(maritalStatus);
+      this.maritalStatusValue = data.maritalStatus;
     }
     if (data.occupation != null) {
       var occupation = this.occupationSelectedData.find(
         (option) => option.text === data.occupation
       ).id;
       this.occupationPreSetValue = Number(occupation);
+      this.occuppationValue = data.occupation;
     }
     if (data.highestDegree != null) {
       var highestDegree = this.highestDegreeSelectedData.find(
         (option) => option.text === data.highestDegree
       ).id;
       this.degreePreSetValue = Number(highestDegree);
+      this.degreeValue = data.highestDegree;
     }
     if (data.sponsorship != null) {
       var sponsorship = this.sponsorshipSelectedData.find(
         (option) => option.text === data.sponsorship
       ).id;
       this.sponsorshipPreSetValue = Number(sponsorship);
+      this.sponsorshipValue = data.sponsorship;
     }
     if (data.unipal != null) {
       this.unipalPreSetValue = data.unipal;
+      this.unipalValue = this.yesNoSelectedData.filter(
+        (x) => x.id == data.unipal
+      )[0].text;
     }
     if (data.discord != null) {
       this.discordPreSetValue = data.discord;
+      this.discordValue = this.yesNoSelectedData.filter(
+        (x) => x.id == data.discord
+      )[0].text;
     }
     if (data.trainMe != null) {
+      console.log('data coming is ', data.trainMe);
       this.trainMePreSetValue = data.trainMe;
+      this.trainMeValue = this.yesNoSelectedData.filter(
+        (x) => x.id == data.trainMe
+      )[0].text;
     }
   }
 }
