@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatYYYYDDMMHHMM, getUser } from 'src/app/constants/globalMethods';
-import { PISCINE4, SELECTION_POOL_HEADER } from 'src/app/constants/headers';
+import {
+  // PISCINE4,
+  PISCINE5,
+  SELECTION_POOL_HEADER,
+} from 'src/app/constants/headers';
 import {
   SelectData,
   TableButtonOptions,
@@ -131,7 +135,7 @@ export class PiscineComponent implements OnInit {
       // console.log(res['comments']);
       var comments = this.formulateComment(res['comments']);
       var checkpoints = this.checkpointsCount(JSON.parse(res['checkpoints']));
-      console.log(checkpoints);
+      // console.log(checkpoints);
 
       return {
         // the id, to return back for edit or delete events
@@ -194,7 +198,7 @@ export class PiscineComponent implements OnInit {
     const regex2 = /checkpoint-02.+/;
     const regex3 = /checkpoint-03.+/;
 
-    console.log(checkpoints);
+    // console.log(checkpoints);
     checkpoints.forEach((checkpoint) => {
       if (regex1.test(checkpoint['path'])) {
         checkpoint1++;
@@ -472,7 +476,7 @@ export class PiscineComponent implements OnInit {
 
   syncApplicantsData() {
     this.loader = true;
-    var data = PISCINE4;
+    var data = PISCINE5;
     this.PS.syncSPApplicants(data).subscribe((value) => {
       // console.log(value);
       this.loader = false;

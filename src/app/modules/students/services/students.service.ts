@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -23,13 +23,23 @@ export class StudentsService {
     Authorization: 'Bearer ' + getToken(),
   });
   // get students api
-  getStudents(): Observable<any> {
+  getStudents(data?): Observable<any> {
     try {
+      let httpParams = new HttpParams();
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          httpParams = httpParams.set(key, data[key]);
+        }
+      }
+      console.log(data);
       // get the data from the url
       var http = this.http
-        .get<any>(STUDENT_API, { headers: this.httpOptions })
+        .get<any>(STUDENT_API, {
+          headers: this.httpOptions,
+          params: httpParams,
+        })
         .pipe(map((data) => data));
-      // http.subscribe((data) => {});
+
       return http;
     } catch (err) {
       console.log(err);

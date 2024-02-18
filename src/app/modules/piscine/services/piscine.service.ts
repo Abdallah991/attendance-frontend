@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -21,12 +21,20 @@ export class PiscineService {
     Authorization: 'Bearer ' + getToken(),
   });
   // get applicants api
-  getSPApplicants(): Observable<any> {
+  getSPApplicants(data): Observable<any> {
     try {
-      console.log(this.httpOptions);
+      let httpParams = new HttpParams();
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          httpParams = httpParams.set(key, data[key]);
+        }
+      }
       // get the data from the url
       var http = this.http
-        .get<any>(SELECTION_POOL_API, { headers: this.httpOptions })
+        .get<any>(SELECTION_POOL_API, {
+          headers: this.httpOptions,
+          params: httpParams,
+        })
         .pipe(map((data) => data));
 
       http.subscribe((data) => {

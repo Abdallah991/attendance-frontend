@@ -15,7 +15,7 @@
       textColor="text-base-100"
       [small]="true"
       (onClick)="syncStudentsData()"
-      text="Sync Applicants Data"
+      text="Sync Students Data"
       class="min-w-[100px]"
       class="cursor-not-allowed"
       [loader]="loader"
@@ -46,13 +46,65 @@
       (cancel)="cancelSearch()"
     ></search-drop-down>
   </div>
+  <div class="flex w-full felx-col justify-start gap-4 flex-wrap mt-4 mb-4">
+    <app-single-select
+      [FGN]="searchForm"
+      FCN="sp"
+      [data]="sp"
+      placeholder="SP"
+      prefix="SP"
+      (changed)="spSelected($event)"
+      class="basis-1/8"
+      [preSetValue]="spPreSet"
+    ></app-single-select>
+    <app-single-select
+      [FGN]="searchForm"
+      FCN="cohort"
+      [data]="cohorts"
+      placeholder="Cohort"
+      prefix="Cohorts"
+      (changed)="cohortSelected($event)"
+      class="basis-1/8"
+      [preSetValue]="cohortIdPreSet"
+    ></app-single-select>
+    <!-- <app-single-select
+      [FGN]="searchForm"
+      FCN="applicantsGradeEnd"
+      [data]="applicantsGradeEnd"
+      placeholder="grade range"
+      prefix="End Grade"
+      (changed)="gradeEnd($event)"
+      class="basis-1/8"
+      [preSetValue]="gradeEndPreSet"
+    ></app-single-select>
+    <app-single-select
+      [FGN]="searchForm"
+      FCN="applicantsSorter"
+      [data]="applicantsSorter"
+      placeholder="sort"
+      prefix="Sort"
+      (changed)="sort($event)"
+      class="basis-1/8"
+      [preSetValue]="sortPreSet"
+    ></app-single-select> -->
+    <app-button
+      color="btn-primary"
+      textColor="text-base-100"
+      [medium]="true"
+      (onClick)="resetFilters()"
+      text="Reset Filters"
+      class="min-w-[100px]"
+      [loader]="loader"
+      class="basis-1/8 self-end"
+    ></app-button>
+  </div>
   <app-table
     *ngIf="!showResults && !showAddButton"
     [columns]="columns"
     [data]="data"
     [actionButtons]="true"
     (editClicked)="viewCandidate($event)"
-    (deleteClicked)="deleteStudent($event)"
+    (deleteClicked)="addNote($event)"
     [numberOfPages]="numberOfPages"
     [showPagination]="false"
     [currentPage]="currentPage"
@@ -86,8 +138,9 @@
   [message]="message"
   [dismiss]="button"
   [action]="button2"
+  [editText]="true"
   (dismissed)="dismiss()"
-  (confirm)="confirmDelete()"
+  (confirm)="addNotes($event)"
   [twoButtons]="true"
 ></app-success-dialog>
 

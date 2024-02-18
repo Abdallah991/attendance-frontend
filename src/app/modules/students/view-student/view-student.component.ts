@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { VacationComponent } from 'src/app/components/vacation/vacation.component';
 import { VacationsService } from '../services/vacations.service';
 import { ADD, EDIT } from 'src/app/constants/constants';
+import { StudentsService } from '../services/students.service';
 
 @Component({
   selector: 'app-view-candidate',
@@ -38,7 +39,8 @@ export class ViewStudentComponent implements OnInit {
     private AR: ActivatedRoute,
     public dialog: MatDialog,
     private VS: VacationsService,
-    private router: Router
+    private router: Router,
+    private SS: StudentsService
   ) {}
 
   // student data
@@ -57,6 +59,11 @@ export class ViewStudentComponent implements OnInit {
   toaster = false;
   // vacation taken by students
   vacations: [] = [];
+  // confirmation dialog
+  dialogTitle = 'Updating the student status ...';
+  message = 'Add your notes';
+  button = 'Dismiss';
+  button2 = 'Confirm';
 
   ngOnInit(): void {
     this.AR.data.subscribe((response: any) => {
@@ -238,6 +245,22 @@ export class ViewStudentComponent implements OnInit {
     // edit student
     this.router.navigateByUrl('/students/edit-student/' + this.student.id);
   }
-  // delete student
-  deleteStudent() {}
+  // delete student //* show dialog
+  deleteStudent() {
+    document.querySelector<HTMLElement>('#dialog')?.click();
+  }
+
+  dismiss() {}
+
+  confirmDelete() {
+    // this.loader = true;
+    this.SS.deleteStudent(this.student.id)
+      .then((res) => {
+        // this.loader = false;
+        this.router.navigateByUrl('/students');
+      })
+      .catch((err) => {
+        console.log('the api failed :', err);
+      });
+  }
 }

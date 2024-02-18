@@ -9,6 +9,34 @@ export const STUDENT_HEADER = [
   'Progress At',
   'Last Activity',
 ];
+// !
+export const STUDENT_ADMIN_HEADER = [
+  'Profile',
+  'ID',
+  'Name',
+  'Cohort',
+  'Phone',
+  'Platform ID',
+  'Email',
+  'Gender',
+  'DOB',
+  'CPR',
+  'Nationality',
+  'Maritial Status',
+  'Highest Degree',
+  'Academic Institute',
+  'Graduation Date',
+  'Occupation',
+  'Current Job',
+  'Company',
+  'SP',
+  'Sponsorship',
+  'Unipal',
+  'Discord',
+  'Train Me',
+  'Notes',
+];
+
 export const USER_HEADER = ['Id', 'Name', 'Join Date', 'Email'];
 export const APPLICANTS_HEADER = [
   'Sequence',
@@ -67,4 +95,9 @@ export const PROGRESS_HEADER = [
 export const PISCINE4 = {
   spId: 57,
   spConstant: 'SP4',
+};
+
+export const PISCINE5 = {
+  spId: 114,
+  spConstant: 'SP5',
 };

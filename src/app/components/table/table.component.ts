@@ -44,6 +44,8 @@ export class TableComponent implements OnInit {
   @Input() loader: boolean = false;
   // Image
   @Input() image: boolean = false;
+  // Image
+  @Input() piscine: boolean = false;
 
   // ?  pagination
   @Output() forward = new EventEmitter<number>();

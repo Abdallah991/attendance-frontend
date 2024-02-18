@@ -158,4 +158,12 @@ export const SP: SelectData[] = [
   { id: 2, text: 'SP2' },
   { id: 3, text: 'SP3' },
   { id: 4, text: 'SP4' },
+  { id: 5, text: 'SP5' },
+  { id: 'all', text: 'all' },
+];
+
+export const COHORTS: SelectData[] = [
+  { id: 1, text: '1' },
+  { id: 2, text: '2' },
+  { id: 'all', text: 'all' },
 ];

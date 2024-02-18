@@ -65,9 +65,9 @@
             ></app-button>
           </td>
           <!-- ! Check points indicator, only for SP table  -->
-          <!-- <td
+          <td
             class="text-tertiary text-center min-h-[60px] min-w-[10rem] max-w-[20rem] overflow-hidden text-ellipsis whitespace-break-spaces"
-            *ngIf="actionButtons && image"
+            *ngIf="actionButtons && image && piscine"
             [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"
           >
             <div class="flex flex-row justify-start gap-4">
@@ -85,7 +85,7 @@
                 ></span>
               </div>
             </div>
-          </td> -->
+          </td>
           <td
             *ngIf="actionButtons && image"
             [ngClass]="i % 2 == 1 ? 'bg-[#F5F5F5]' : 'bg-white'"

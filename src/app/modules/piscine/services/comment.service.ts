@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import {
   SP_APPLICANT_COMMENT_API,
   SP_DECISION_API,
+  UPDATE_STUDENT_COMMENT,
   UPLOAD_IMAGE,
   UPLOAD_STUDENT,
 } from 'src/app/constants/api';
@@ -90,6 +91,22 @@ export class CommentService {
       http.subscribe((data) => {
         console.log(data);
       });
+      return http;
+    } catch (err) {
+      console.log(err);
+      // disable the loader and return if there is an error
+      return err;
+    }
+  }
+
+  updateStudentComment(data): Observable<any> {
+    try {
+      // get the data from the url
+      var http = this.http
+        .post<any>(UPDATE_STUDENT_COMMENT, data, {
+          headers: this.httpOptions,
+        })
+        .pipe(map((data) => data));
       return http;
     } catch (err) {
       console.log(err);

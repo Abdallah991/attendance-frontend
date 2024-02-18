@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  Resolve,
+} from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { StudentsService } from './students.service';
 import { catchError, first } from 'rxjs/operators';
@@ -10,9 +14,19 @@ import { catchError, first } from 'rxjs/operators';
 export class StudentsResolver implements Resolve<any> {
   constructor(private SS: StudentsService) {}
 
-  resolve(): Observable<any> {
-    // get all students
-    return this.SS.getStudents().pipe(
+  resolve(AR: ActivatedRouteSnapshot): Observable<any> {
+    // get url paramters
+    var sp = AR.queryParamMap.get('sp') ? AR.queryParamMap.get('sp') : 'all';
+    var cohortId = AR.queryParamMap.get('cohortId')
+      ? AR.queryParamMap.get('cohortId')
+      : 'all';
+
+    var data = {
+      sp: sp,
+      cohortId: cohortId,
+    };
+
+    return this.SS.getStudents(data).pipe(
       catchError((error) => {
         return of('No data');
       }),
