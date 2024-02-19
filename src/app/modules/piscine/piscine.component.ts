@@ -150,19 +150,19 @@ export class PiscineComponent implements OnInit {
           res['nationality'],
           // ! This should be crafted as comments here for each cell
           // ? managing director, Tech, Operations, Marketing
-          comments['boss'],
-          comments['TT'],
-          comments['OT'],
-          comments['MT'],
-          comments['TA'],
+          // comments['boss'],
+          // comments['TT'],
+          // comments['OT'],
+          // comments['MT'],
+          // comments['TA'],
           // Adding five comments
           // Yanal,Tech, Operation, Marketing, Students
           // ! put back if the chance allows you too
-          // res['lastProgress'],
+          res['lastProgress'],
           res['level'],
           res['xp'],
 
-          // res['date'],
+          res['date'],
           res['decision'],
           res['finalComment'],
         ],
