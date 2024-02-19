@@ -27,13 +27,13 @@ export const navigationMenu = [
     active: false,
     linkName: 'Selection Pool',
   },
-  // {
-  //   link: '/code-wars',
-  //   iconPathInactive: '../../assets/icons/sword.svg',
-  //   iconPathActive: '../../assets/icons/sword.svg',
-  //   active: false,
-  //   linkName: 'Code Wars',
-  // },
+  {
+    link: '/code-wars',
+    iconPathInactive: '../../assets/icons/sword.svg',
+    iconPathActive: '../../assets/icons/sword.svg',
+    active: false,
+    linkName: 'Code Wars',
+  },
   {
     link: '/users',
     iconPathInactive: '../../assets/icons/users.svg',
