@@ -202,6 +202,10 @@ export class StudentsComponent implements OnInit {
           res['cohortId'],
           res['phone'],
           res['platformId'],
+          //
+          res['level'],
+          res['progressAt'],
+          res['auditDate'],
           // new entries
           res['email'],
           res['gender'],
@@ -220,11 +224,6 @@ export class StudentsComponent implements OnInit {
           res['unipal'] == 1 ? 'Yes' : 'No',
           res['discord'] == 1 ? 'Yes' : 'No',
           res['trainMe'] == 1 ? 'Yes' : 'No',
-          //
-          // res['level'],
-          // res['progressAt'],
-          // res['auditDate'],
-          //
           res['notes'],
         ],
         profileImage: res['profilePicture'],
