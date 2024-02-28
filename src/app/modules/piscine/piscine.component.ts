@@ -236,12 +236,12 @@ export class PiscineComponent implements OnInit {
         if (member == comment.commentedBy) {
           var author =
             member == TECH_ASSISTANCE[0]
-              ? 'Amgad: '
+              ? 'Eman: '
               : member == TECH_ASSISTANCE[1]
-              ? 'Hawra: '
+              ? 'Bucheeri: '
               : member == TECH_ASSISTANCE[2]
               ? 'Abdeen: '
-              : 'unknown';
+              : 'Fatima';
           TA =
             TA + this.sytleName + author + comment.comment + this.styleNameEnd;
         }
