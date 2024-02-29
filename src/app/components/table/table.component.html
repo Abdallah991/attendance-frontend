@@ -2,7 +2,7 @@
   <div class="overflow-x-auto shadow-lg rounded-xl">
     <table class="table w-full">
       <thead>
-        <tr>
+        <tr class="sticky">
           <th
             class="bg-primary text-base-100 normal-case font-normal rounded-none text-center"
             *ngFor="let column of columns"
@@ -33,7 +33,7 @@
             </div>
           </td>
           <td
-            class="text-tertiary text-center min-h-[60px] min-w-[10rem] max-w-[20rem] overflow-hidden text-ellipsis"
+            class="text-tertiary text-center min-h-[60px] min-w-[10rem] max-w-[20rem] overflow-hidden text-ellipsis break-words whitespace-pre-wrap"
             [ngClass]="customCellStylingClass(item, i)"
             *ngFor="let item of items.data"
             [innerHTML]="item || 'NULL'"
